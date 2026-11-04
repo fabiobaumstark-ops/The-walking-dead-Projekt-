@@ -341,3 +341,16 @@
 ## Phase 3 – Start (2026-11-04)
 - Phase 2/2b freigegeben („Gut weiter“). AUFTRAG ergänzt um 5.8 Qualitätsrunde nach Phase 5.
 - Arbeitsweise Phase 3: allein (kostensparend, einheitlicher Look).
+- 3.1.0/3.2 Recherche: recherche/fahrzeuge.md (Maß-Spannen A–H, Sonderfahrzeuge, Epochen, Farben, Alterung), recherche/militaer.md (Kampfpanzer, Hubschrauber, Militär-Lkw).
+  - Korrekturen am Auftrag:
+    - unbunte Farben ca. 75–80 % statt 60 % (gewählt 70 %)
+    - Kastenwagen klassisch 2,15 m statt 2,50 m
+    - Militär-Lkw 7,3 m statt 6,7 m
+- Neue CC0-Texturen (Poly Haven): poly_wool_herringbone (Sitzstoff), brown_leather (Leder/Kunststoff-Narbung), rusty_metal_04 (Rostblech), rusty_metal_sheet (Rostflecken-Maske).
+- Fahrzeug-Baukasten v1 (scripts/phase3/):
+  - Karosserie als Loft aus Querschnitt-Ringen (Profile in fahrzeuge.json)
+  - Flächen werden per Regel Bauteilen zugeordnet
+  - 5-mm-Spalte zwischen verschiedenen Bauteilen
+  - Scheiben 5 mm, Türen mit Scharnier-Drehpunkt
+  - Leuchten/Grill per Raycast-Patch auf der Oberfläche
+  - Testläufe: Kappen-Normalen waren invertiert (schwarze Front), Scheinwerfer-Oberkante falsch, Spiegel innen → behoben

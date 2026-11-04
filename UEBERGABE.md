@@ -1,6 +1,6 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 3 – Schritt 3.1.0/3.2 Recherche Fahrzeuge + Militär (läuft)
+- **Aktuelle Phase:** Phase 3 – 3.1.11 Fahrzeug-Baukasten (8 Grundmodelle) – Vorschau läuft, danach ZWISCHEN-STOPP
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** `viertel_v03.blend` (Phase 2b, 30,6 MB); Vorversion `viertel_v02.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
@@ -31,6 +31,17 @@
 - Varianten für Frage 4: scripts/configs/platzierung_varianten.json
 
 ## Halb fertig / fehlt
+- Phase 3 (läuft):
+  - fertig: 3.1.0 Recherche → recherche/fahrzeuge.md, 3.2 → recherche/militaer.md
+  - fertig: 4 neue CC0-Texturen (Sitzstoff, Leder, Rostblech, Blech mit Rostflecken)
+  - Baukasten, Grundmodelle A–H (Profile + Maße in scripts/configs/fahrzeuge.json):
+    - scripts/phase3/fz_karosserie.py: Loft, Bauteile, 5-mm-Spalte, Scheiben
+    - fz_teile.py: Räder, Leuchten, Grill, Spiegel, Griffe, Innenraum, Unterboden, Pritsche
+    - fz_material.py: Lack mit Alterung, Chrom, Glas, Reifen …
+    - fahrzeug.py: Generator `bauen(typ, farbe, felge, seed, alter)`
+    - vorschau_grundmodelle.py: Vorschau-Renders
+    - kontaktbogen.py: Übersicht (braucht Pillow)
+  - offen nach Zwischen-Stopp: Front-/Heck-Varianten (2–3 je Typ), Schadenskatalog, ausgebrannte Fahrzeuge, LOD, Flotte + Anordnung, Sonderfahrzeuge, Panzer A/B, Hubschrauber, Figuren, Konsistenz-Test
 - Phase 2 komplett:
   - 2.1/2.2 Gebäude: scripts/phase2/gebaeude2.py
   - 2.3 Straßenraum: strassenraum.py
@@ -97,3 +108,5 @@
 8. `blender -b viertel_v02.blend --python scripts/phase1/render_blockout.py -- --prefix phase2`
 9. Phase 2b: `blender -b --factory-startup --python scripts/phase2/build_phase2.py -- --version 03`
 10. `blender -b viertel_v03.blend --python scripts/phase1/render_blockout.py -- --prefix phase2b`
+11. Phase 3: `python3 scripts/phase1/make_manifest.py && python3 download_assets.py --nur-basis && python3 scripts/phase1/make_lizenzen.py` (neue Fahrzeug-Texturen)
+12. `blender -b --factory-startup --python scripts/phase3/vorschau_grundmodelle.py` → renders/test/phase3_grund_*.png, dann `python3 scripts/phase3/kontaktbogen.py`
