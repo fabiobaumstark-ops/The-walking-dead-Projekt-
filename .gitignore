@@ -1,0 +1,14 @@
+# Große Assets (werden mit download_assets.py geladen)
+assets/
+renders/final/
+
+# Große Einzelteile paralleler Agenten
+teile/*.blend
+teile/**/*.blend1
+
+# Blender-Backups und Caches
+*.blend1
+*.blend2
+__pycache__/
+*.pyc
+.DS_Store
