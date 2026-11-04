@@ -1,6 +1,6 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 2b abgeschlossen (Renders laufen/fertig) → **wartet auf Freigabe Phase 2 (Fragen 1–3, STOPP)**
+- **Aktuelle Phase:** Phase 3 – Schritt 3.1.0/3.2 Recherche Fahrzeuge + Militär (läuft)
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** `viertel_v03.blend` (Phase 2b, 30,6 MB); Vorversion `viertel_v02.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
@@ -54,10 +54,7 @@
    - dann 8 Grundmodelle bauen und ZWISCHEN-STOPP zur Freigabe
 
 ## Offene Fragen an den Nutzer
-- Phase-2-Freigabe erneut (nach Phase 2b):
-  1. Gebäude und Straßen glaubwürdig?
-  2. Detailmenge?
-  3. Checkpoint und Barrikaden?
+- keine (Phase 3 läuft)
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL
@@ -84,6 +81,8 @@
   - Pflanzen müssen realistisch und detailreich sein
   - Verzierte Fassaden und hohe Hintergrundgebäude nicht ausdrücklich gewählt (angeboten)
 - Dichte: Antwort C (Viertel verdichten, keine Hochhaus-Skyline) → umgesetzt in v03
+- Phase 2/2b freigegeben („Gut weiter“, 2026-11-04). Qualitätsrunde nach Phase 5 vereinbart (AUFTRAG 5.8).
+- Phase 3: allein (ohne parallele Agenten, wie Phase 2)
 - Neu: A13 Hintergrund-Ring (AUFTRAG.md). Silhouetten und Gelände in Phase 2, Bäume in Phase 4, Dunst in Phase 5.
   Nach Phase 2 mit CAM_Hero_02 auf leere Horizontstellen prüfen
 

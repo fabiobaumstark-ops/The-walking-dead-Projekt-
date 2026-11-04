@@ -337,3 +337,7 @@
 | Licht & Stimmung | 4 | Ohne warmes Gegenlicht, Dunst und Grading noch flach (Phase 5) |
 | Komposition | 6 | Die Straßenschluchten wirken jetzt (CAM 1/3). Hauptmotive (Panzer, Hubschrauber, Stau) fehlen noch |
 | Glaubwürdigkeit der Geschichte | 7 | Checkpoint mit Lager-Spuren, Barrikaden, Plünderung, Zettel „MISSING“, Such-Markierungen |
+
+## Phase 3 – Start (2026-11-04)
+- Phase 2/2b freigegeben („Gut weiter“). AUFTRAG ergänzt um 5.8 Qualitätsrunde nach Phase 5.
+- Arbeitsweise Phase 3: allein (kostensparend, einheitlicher Look).

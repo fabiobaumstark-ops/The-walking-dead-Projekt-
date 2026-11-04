@@ -1118,6 +1118,11 @@ FREIGABE-FRAGEN PHASE 5:
  4. Animation vorbereiten: ja / nein?
 → STOPP
 
+5.8 QUALITÄTSRUNDE (Ergänzung vom 2026-11-04)
+- Nach Phase 5 und vor dem finalen Render auf dem Mac: jeden Hero-Shot einzeln
+  mit echten Fotos vergleichen und gezielt das nachbessern, was am meisten
+  als CGI auffällt. Ziel 8–9/10 je Kriterium (D2).
+
 ======================================================================
 TEIL C – PERFORMANCE
 ======================================================================
