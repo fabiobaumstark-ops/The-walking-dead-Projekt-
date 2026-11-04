@@ -972,12 +972,15 @@ def mat_variante(basis, idx, tint=None):
     return m
 
 
-def text_mesh(bm, text, groesse, matrix, mat, extrude=0.01, font=None):
-    """Text als Mesh in ein bmesh einfuegen (lokal: x = Leserichtung, y = Hoehe, z = Dicke)."""
+def text_mesh(bm, text, groesse, matrix, mat, extrude=0.01, font=None, aufloesung=None):
+    """Text als Mesh in ein bmesh einfuegen (lokal: x = Leserichtung, y = Hoehe, z = Dicke).
+    aufloesung: Kurven-Aufloesung der Buchstaben (kleiner = weniger Punkte, z. B. 2 fuer kleine Schrift)."""
     cu = bpy.data.curves.new("tmp_txt", "FONT")
     cu.body = text
     cu.size = groesse
     cu.extrude = extrude
+    if aufloesung:
+        cu.resolution_u = aufloesung
     cu.align_x = "CENTER"
     cu.align_y = "CENTER"
     if font:

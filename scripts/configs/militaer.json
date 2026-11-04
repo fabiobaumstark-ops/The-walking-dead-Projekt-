@@ -1,0 +1,21 @@
+{
+ "_info": "Phase 3.3-3.5 – Militaer (generisch modern, eigenes Design; Masse nach recherche/militaer.md). Koordinaten Welt: x Ost, y Nord, richtung in Grad (0 = Osten).",
+ "panzer_masse": {
+  "wanne_l": 7.75, "wanne_b": 3.50, "deck_z": 1.64, "schuerze_b": 3.58, "turm_dach_z": 2.48,
+  "laufrollen_x": [2.72, 1.82, 0.92, 0.02, -0.88, -1.78, -2.68], "laufrolle_r": 0.35, "laufrolle_z": 0.43,
+  "leitrad": [3.40, 0.62, 0.30], "triebrad": [-3.40, 0.66, 0.36], "stuetzrollen_x": [1.35, -1.35], "stuetzrolle": [0.88, 0.10],
+  "kette_b": 0.63, "kette_teilung": 0.17, "kette_y": 1.43, "rohr_l": 5.3, "turm_x": 0.25
+ },
+ "panzer_a": {
+  "pos": [-3.6, 3.35], "richtung": 180, "turm_grad": 22, "rohr_grad": -3,
+  "kette_ab": "r", "kette_ab_laenge": 6.5,
+  "schuerzen_fehlen": [["l", 2], ["r", 4], ["r", 5]], "schuerzen_verbogen": [["l", 0, 9], ["l", 5, -6]],
+  "werkzeug_fehlt": ["axt"], "nummer": "K-37", "busch_staukorb": true, "pfuetze": true
+ },
+ "panzer_b": {
+  "pos": [65.6, 12.2], "richtung": 63, "nick_grad": 7, "turm_grad": -12, "rohr_grad": 24,
+  "kette_ab": null, "schuerzen_fehlen": [["l", 0], ["l", 1], ["l", 2], ["l", 3], ["l", 4], ["l", 5], ["r", 1], ["r", 3]],
+  "werkzeug_fehlt": ["schaufel", "axt", "brechstange"], "nummer": "K-41", "busch_staukorb": false,
+  "schutt": {"mitte_lokal": [2.6, 0.0], "radius": 3.6, "hoehe": 1.9, "teile": 900}, "wand_loch": {"objekt": "BLD_Wohnhaus_Ziegel_04", "mitte": [66.8, 11.35, 1.6], "groesse": [4.2, 1.6, 3.4]}
+ }
+}

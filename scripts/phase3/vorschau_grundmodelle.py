@@ -76,7 +76,7 @@ if __name__ == "__main__":
         zeiten[f"bau_{t}"] = round(time.time() - t0, 1)
         abstand += 7.0
     bpy.context.view_layer.update()
-    breite, hoehe, samples = (480, 270, 16) if schnell else (960, 540, 40)
+    breite, hoehe, samples = (480, 270, 16) if schnell else (960, 540, int(args[args.index("--samples") + 1]) if "--samples" in args else 28)
     for t, r in roots.items():
         T = C["typen"][t]
         P = K.Profil(T)
@@ -102,7 +102,7 @@ if __name__ == "__main__":
             if tuer is not None:
                 tuer.rotation_euler.z = math.radians(-75) if n == "innen" else 0.0
             t0 = time.time()
-            V.vorschau_render(sc, os.path.join(ausgabe, f"phase3_grund_{t}_{n}.png"), samples=samples * (2 if n == "innen" else 1),
+            V.vorschau_render(sc, os.path.join(ausgabe, f"phase3_grund_{t}_{n}.png"), samples=int(samples * (1.7 if n == "innen" else 1)),
                               breite=breite, hoehe=hoehe)
             zeiten[f"{t}_{n}"] = round(time.time() - t0, 1)
     if "--ohne-reihe" not in args and len(roots) > 1:

@@ -180,7 +180,7 @@ def rad_mesh(typ, T, felge, mats):
         pr += [(R, (a - 0.005) * w), (R - 0.008, a * w), (R - 0.008, b * w), (R, (b + 0.005) * w)]
     pr += [(R, w * 0.38), (R - 0.025, w * 0.44), (R - 0.16 * h, w * 0.48), (R - 0.0 * h - 0.45 * h, w * 0.50),
            (rr + 0.22 * h, w * 0.47), (rr - 0.004, w * 0.40)]
-    bm = rotation_um_y(pr, 72, 0)
+    bm = rotation_um_y(pr, 60, 0)
     # Flankenbeschriftung (erfundener Name + Groesse), erhaben
     txt = f"{REIFEN_NAME.get(typ, 'ORVANE')}   P{T['reifen'][1]}/{T['reifen'][2]}R{T['reifen'][0]}   M+S   "
     gr = min(0.026, h * 0.22)
@@ -198,7 +198,7 @@ def rad_mesh(typ, T, felge, mats):
             normal = Vector((0, seite, 0))
             mx = Matrix((tang, radial, normal)).transposed().to_4x4()
             mx.translation = pos
-            V.text_mesh(bm, ch, gr, mx, 0, extrude=0.0012)
+            V.text_mesh(bm, ch, gr, mx, 0, extrude=0.0012, aufloesung=2)
     # Felge: Bett + Horn
     pf = [(rr + 0.010, -w * 0.47), (rr - 0.006, -w * 0.45), (rr - 0.014, -w * 0.38), (rr - 0.014, w * 0.30),
           (rr - 0.006, w * 0.44), (rr + 0.010, w * 0.465), (rr + 0.004, w * 0.495), (rr - 0.012, w * 0.49)]
@@ -439,9 +439,9 @@ def leuchten(lo, T, mats, col, root, cid, bvh_heck=None):
         pl = [(u * s, v) for u, v in poly]
         if s < 0:
             pl = list(reversed(pl))
-        bm, _ = patch(lo.bvh, pl, "x", -1, xf, 0.0015, 0.01)
+        bm, _ = patch(lo.bvh, pl, "x", -1, xf, 0.0015, 0.016)
         ob = objekt(f"{cid}_Scheinwerfer_Gehaeuse_{'l' if s > 0 else 'r'}", bm, col, [mats["reflektor"]], root, glatt=True)
-        bm2, _ = patch(lo.bvh, pl, "x", -1, xf, 0.008, 0.01)
+        bm2, _ = patch(lo.bvh, pl, "x", -1, xf, 0.008, 0.016)
         ob2 = objekt(f"{cid}_Scheinwerfer_Glas_{'l' if s > 0 else 'r'}", bm2, col, [mats["scheinwerfer"]], root, glatt=True)
         _verdicken(ob2, 0.004)
         # Reflektor-Schalen + Blinker
@@ -466,7 +466,7 @@ def leuchten(lo, T, mats, col, root, cid, bvh_heck=None):
         bp = [(u * s, v) for u, v in bp]
         if s < 0:
             bp = list(reversed(bp))
-        bm4, fl4 = patch(lo.bvh, bp, "x", -1, xf, 0.004, 0.008)
+        bm4, fl4 = patch(lo.bvh, bp, "x", -1, xf, 0.004, 0.014)
         if fl4:
             ob4 = objekt(f"{cid}_Blinker_v{'l' if s > 0 else 'r'}", bm4, col, [mats["blinker"]], root, glatt=True)
             _verdicken(ob4, 0.004)
@@ -482,7 +482,7 @@ def leuchten(lo, T, mats, col, root, cid, bvh_heck=None):
         gpoly = [(-gy, gz0), (gy, gz0), (gy - 0.04, gz1), (-gy + 0.04, gz1)]
     else:
         gpoly = _rund((-gy, gz0, gy, gz1), 0.03)
-    bmg, _ = patch(lo.bvh, gpoly, "x", -1, xf, 0.001, 0.012)
+    bmg, _ = patch(lo.bvh, gpoly, "x", -1, xf, 0.001, 0.03)
     gmat = mats["chrom"] if gr["stil"] == "quer_gross" else mats["schwarz"]
     objekt(f"{cid}_Grill_Grund", bmg, col, [mats["dunkel"]], root)
     if gr["stil"] == "gitter":
@@ -491,7 +491,7 @@ def leuchten(lo, T, mats, col, root, cid, bvh_heck=None):
         muster = lambda i, j, nu, nv: (j % 4) < 2 or i in (0, nu - 1) or i == nu // 2  # noqa: E731
     else:
         muster = lambda i, j, nu, nv: (j % 3) == 0 or i in (0, nu - 1)  # noqa: E731
-    bmb, flb = patch(lo.bvh, gpoly, "x", -1, xf, 0.014, 0.012, muster)
+    bmb, flb = patch(lo.bvh, gpoly, "x", -1, xf, 0.014, 0.016, muster)
     obg = objekt(f"{cid}_Grill", bmb, col, [gmat], root)
     _verdicken(obg, 0.014)
     if gr.get("unten"):
@@ -499,13 +499,15 @@ def leuchten(lo, T, mats, col, root, cid, bvh_heck=None):
         zu1 = bl - 0.05
         if zu1 - zu0 > 0.05:
             up = _rund((-hw_f * 0.5, zu0, hw_f * 0.5, zu1), 0.03)
-            bmu, _ = patch(lo.bvh, up, "x", -1, xf, 0.001, 0.012)
+            bmu, _ = patch(lo.bvh, up, "x", -1, xf, 0.001, 0.03)
             objekt(f"{cid}_Lufteinlass_Grund", bmu, col, [mats["dunkel"]], root)
-            bmu2, _ = patch(lo.bvh, up, "x", -1, xf, 0.01, 0.012, lambda i, j, nu, nv: (i + j) % 2 == 0)
+            bmu2, _ = patch(lo.bvh, up, "x", -1, xf, 0.01, 0.018, lambda i, j, nu, nv: (i + j) % 2 == 0)
             o = objekt(f"{cid}_Lufteinlass", bmu2, col, [mats["schwarz"]], root)
             _verdicken(o, 0.01)
     # Ruecklichter
     lh = T["licht_h"]
+    if lh.get("stil") == "keine":
+        return obs
     hw_r = P.hw(L - 0.10) if T["heck"] != "pritsche" else P.B / 2
     bvh = bvh_heck or lo.bvh
     if lh["stil"] == "quer":
@@ -530,12 +532,12 @@ def leuchten(lo, T, mats, col, root, cid, bvh_heck=None):
         pl = [(u * s, v) for u, v in rpoly]
         if s > 0:
             pl = list(reversed(pl))
-        bm, fl = patch(bvh, pl, "x", 1, xr, 0.0015, 0.01)
+        bm, fl = patch(bvh, pl, "x", 1, xr, 0.0015, 0.016)
         if not fl:
             bm.free()
             continue
         objekt(f"{cid}_Ruecklicht_Gehaeuse_{'l' if s > 0 else 'r'}", bm, col, [mats["reflektor"]], root, glatt=True)
-        bm2, _ = patch(bvh, pl, "x", 1, xr, 0.007, 0.01)
+        bm2, _ = patch(bvh, pl, "x", 1, xr, 0.007, 0.016)
         o = objekt(f"{cid}_Ruecklicht_{'l' if s > 0 else 'r'}", bm2, col, [mats["ruecklicht"]], root, glatt=True)
         _verdicken(o, 0.004)
         # Rueckfahrlicht (weiss) als kleiner Einsatz
@@ -547,7 +549,7 @@ def leuchten(lo, T, mats, col, root, cid, bvh_heck=None):
             wp = [(u * s, v) for u, v in wp]
             if s > 0:
                 wp = list(reversed(wp))
-            bm5, fl5 = patch(bvh, wp, "x", 1, xr, 0.0095, 0.008)
+            bm5, fl5 = patch(bvh, wp, "x", 1, xr, 0.0095, 0.014)
             if fl5:
                 o5 = objekt(f"{cid}_Rueckfahrlicht_{'l' if s > 0 else 'r'}", bm5, col, [mats["scheinwerfer"]], root, glatt=True)
                 _verdicken(o5, 0.002)
@@ -581,7 +583,7 @@ def kennzeichen(lo, T, mats, col, root, cid, rnd, bvh=None):
     nummer = f"{buch} {rnd.randint(1000, 9999)}"
     mx = qr.to_4x4()
     mx.translation = c + n * 0.0016 + qr @ Vector((0, -0.008, 0))
-    V.text_mesh(bm, nummer, 0.07, mx, 1, extrude=0.0012)
+    V.text_mesh(bm, nummer, 0.07, mx, 1, extrude=0.0012, aufloesung=3)
     # schmaler Rand oben/unten
     for dv in (0.064, -0.064):
         mx2 = qr.to_4x4()
@@ -908,8 +910,25 @@ def innenraum(lo, T, mats, col, root, cid, rnd):
         return ob
 
     hz = I["sitz"]
-    for s in (1, -1):
-        obs.append(sitz(f"{cid}_Sitz_v{'l' if s > 0 else 'r'}", I["sitz_v"], s * 0.37, 0.52, hz))
+    sy = I.get("sitz_y", 0.37)
+    for s in ((1,) if I.get("bus_reihen") else (1, -1)):
+        obs.append(sitz(f"{cid}_Sitz_v{'l' if s > 0 else 'r'}", I["sitz_v"], s * sy, 0.52, hz))
+    if I.get("bus_reihen"):  # Sitzbaenke links/rechts, Gang in der Mitte (Kunstleder gruen)
+        d0r, d1r, teil = I["bus_reihen"]
+        bank = V.material("MAT_Kunstleder_Gruen")
+        bmb = bmesh.new()
+        d = d0r
+        while d < d1r:
+            for s in (1, -1):
+                yb = s * (P.hw(d) - 0.08 - 0.47)
+                polster(bmb, (P.x(d) + 0.18, yb, hz - 0.06), (0.40, 0.94, 0.12), None, "z", 0.0, 0.01, cuts=2)
+                rot = Matrix.Rotation(math.radians(-10), 3, "Y")
+                polster(bmb, Vector((P.x(d) - 0.04, yb, hz + 0.30)), (0.09, 0.94, 0.70), rot, "x", 0.0, 0.01, cuts=2)
+                quader(bmb, (P.x(d) + 0.18, yb, (boden + hz - 0.12) / 2), (0.05, 0.85, hz - 0.12 - boden), 1)
+            d += teil
+        o = objekt(f"{cid}_Sitzbaenke", bmb, col, [bank, mats["dunkel"]], root)
+        mm = o.modifiers.new("Rund", "SUBSURF")
+        mm.levels = mm.render_levels = 1
     if I.get("sitz_h"):
         bw = 2 * (P.hw(I["sitz_h"]) - 0.12)
         obs.append(sitz(f"{cid}_Rueckbank", I["sitz_h"], 0, bw, hz - 0.03, 0.60, False, 22))
@@ -941,7 +960,7 @@ def innenraum(lo, T, mats, col, root, cid, rnd):
     profil_zug(bm, pts, [(a, b) for a, b in reversed(prof)], mat=0)
     # Instrumententraeger vor dem Fahrer, Mittelkonsole, Display, Duesen
     lz = I["lenkrad"]
-    polster(bm, (P.x(d1 - 0.10), 0.37, zb_ + 0.06), (0.18, 0.40, 0.08), None, "z", 0.0, 0.0, cuts=2)
+    polster(bm, (P.x(d1 - 0.10), I.get("lenkrad_y", 0.37), zb_ + 0.06), (0.18, 0.40, 0.08), None, "z", 0.0, 0.0, cuts=2)
     quader(bm, (P.x(d1 - 0.02), 0, P.T["innen"]["boden"] + 0.42), (0.08, 0.30, 0.30), 0)
     quader(bm, (P.x(d1 + 0.021), 0, zb_ - 0.12), (0.004, 0.22, 0.13), 1)
     sv = I["sitz_v"]
@@ -967,7 +986,7 @@ def innenraum(lo, T, mats, col, root, cid, rnd):
     obs.append(o)
     # Lenkrad (US: links = +y)
     bm = bmesh.new()
-    c = Vector((P.x(lz[0]), 0.37, lz[1]))
+    c = Vector((P.x(lz[0]), I.get("lenkrad_y", 0.37), lz[1]))
     neig = Matrix.Rotation(math.radians(-25), 3, "Y")
     achse = neig @ Vector((1, 0, 0))
     bmesh.ops.create_circle(bm, cap_ends=False, segments=32, radius=0.185)
@@ -1172,21 +1191,22 @@ def pritsche(lo, T, mats, col, root, cid):
     m.segments = 3
     # Stufen-Stossstange hinten + Rahmen + Ersatzrad
     bm = bmesh.new()
-    quader(bm, (P.x(P.L - 0.06), 0, 0.56), (0.12, P.B - 0.12, 0.17), 0)
-    o = objekt(f"{cid}_Stossstange_h", bm, col, [mats["chrom"]], root)
+    sz, rz = pr.get("stoss_z", 0.56), pr.get("rahmen_z", 0.52)
+    quader(bm, (P.x(P.L - 0.06), 0, sz), (0.12, P.B - 0.12, 0.17), 0)
+    o = objekt(f"{cid}_Stossstange_h", bm, col, [mats[pr.get("stoss_mat", "chrom")]], root)
     m = o.modifiers.new("Fase", "BEVEL")
     m.width = 0.02
     m.segments = 3
     bm = bmesh.new()
     for s in (1, -1):
-        quader(bm, (P.x((P.ende + P.L) / 2), s * 0.45, 0.52), (P.L - P.ende, 0.08, 0.14), 0)
-    quader(bm, (P.x(P.L - 0.03), 0, 0.42), (0.18, 0.06, 0.06), 0)
+        quader(bm, (P.x((P.ende + P.L) / 2), s * 0.45, rz), (P.L - P.ende, 0.08, 0.14), 0)
+    quader(bm, (P.x(P.L - 0.03), 0, rz - 0.1), (0.18, 0.06, 0.06), 0)
     objekt(f"{cid}_Rahmen_h", bm, col, [mats["unterboden"]], root)
     # BVH fuer Ruecklichter/Kennzeichen am Heck
     bm_all = bmesh.new()
     for o in (ob,):
         bm_all.from_mesh(o.data)
-    quader(bm_all, (P.x(P.L - 0.06), 0, 0.56), (0.12, P.B - 0.12, 0.17), 0)
+    quader(bm_all, (P.x(P.L - 0.06), 0, sz), (0.12, P.B - 0.12, 0.17), 0)
     return BVHTree.FromBMesh(bm_all)
 
 
@@ -1253,3 +1273,173 @@ def fenster_patch(bvh, poly, richtung, ursprung, mats, col, eltern, name, versat
         _verdicken(ob, dicke)
         out.append(ob)
     return out
+
+
+# ---------------------------------------------------------------- Sonderfahrzeuge: Leisten, Streifen, Schrift, Sattel, Plane, Lichter
+def _seiten_pfad(lo, T, z, s, d0, d1, abstand, n=80, luecken=()):
+    pts, alle = [], []
+    for k in range(n):
+        d = d0 + (d1 - d0) * k / (n - 1)
+        if any(a <= d <= b for a, b in luecken):
+            if len(pts) > 2:
+                alle.append(pts)
+            pts = []
+            continue
+        p, _ = oberflaeche_seite(lo, d, z, s, abstand)
+        if p is not None and (not pts or (p - pts[-1]).length < 0.4):
+            pts.append(p)
+    if len(pts) > 2:
+        alle.append(pts)
+    for pp in alle:
+        if s < 0:
+            pp.reverse()
+    return alle
+
+
+def _text_auf(bm, bvh, text, gr, start, richtung, mat, aufl=3):
+    hit = bvh.ray_cast(Vector(start), Vector(richtung).normalized(), 6.0)
+    if hit[0] is None:
+        return False
+    n = hit[1] if hit[1].dot(Vector(richtung)) < 0 else -hit[1]
+    up = (Vector((0, 0, 1)) - n * n.z).normalized()
+    lese = up.cross(n).normalized()
+    mx = Matrix((lese, up, n)).transposed().to_4x4()
+    mx.translation = hit[0] + n * 0.003
+    V.text_mesh(bm, text, gr, mx, mat, extrude=0.001, aufloesung=aufl)
+    return True
+
+
+def leisten_streifen_schrift(lo, T, mats, col, root, cid, rnd, teil_obs):
+    P = lo.P
+    tueren = {s: [(t[0] - 0.05, t[1] + 0.05) for t in T["tueren"] if s in K.tuer_seiten(t)] for s in ("l", "r")}
+    if T.get("seitenleisten"):
+        bm = bmesh.new()
+        for z in T["seitenleisten"]:
+            for s in (1, -1):
+                for pts in _seiten_pfad(lo, T, z, s, T["front_seite"] + 0.2, P.L - 0.15, 0.006, 90,
+                                        tueren["l" if s > 0 else "r"]):
+                    profil_zug(bm, pts, rrechteck(0.012, 0.05, 0.005, 2))
+        objekt(f"{cid}_Rammleisten", bm, col, [mats["schwarz"]], root)
+    if T.get("streifen"):
+        st = T["streifen"]
+        m = FM_lack("Streifen", st["farbe"])
+        bm = bmesh.new()
+        z0, z1 = st["z"]
+        for s in (1, -1):
+            for pts in _seiten_pfad(lo, T, (z0 + z1) / 2, s, 0.15, P.L - 0.05, 0.0025, 90, tueren["l" if s > 0 else "r"]):
+                profil_zug(bm, pts, [(-0.001, -(z1 - z0) / 2), (0.001, -(z1 - z0) / 2), (0.001, (z1 - z0) / 2), (-0.001, (z1 - z0) / 2)])
+        objekt(f"{cid}_Streifen", bm, col, [m], root)
+    schrift = mats["dunkel"]
+    if T.get("aufschrift"):
+        a = T["aufschrift"]
+        bm = bmesh.new()
+        for s in (1, -1):
+            _text_auf(bm, lo.bvh, a["text"], a["groesse"], (P.x(P.L * 0.55), s * 4, a["z"]), (0, -s, 0), 0)
+        _text_auf(bm, lo.bvh, a["text"], a["groesse"] * 0.8, (P.L / 2 + 3, 0, a["z"]), (-1, 0, 0), 0)
+        _text_auf(bm, lo.bvh, a["text"], a["groesse"] * 0.8, (-P.L / 2 - 3, 0, a["z"]), (1, 0, 0), 0)
+        nr = f"{rnd.randint(11, 64)}"
+        _text_auf(bm, lo.bvh, nr, 0.16, (P.x(P.L * 0.2), 4, a["z"] - 0.35), (0, -1, 0), 0)
+        objekt(f"{cid}_Aufschrift", bm, col, [schrift], root)
+    if T.get("schablone"):
+        sb = T["schablone"]
+        bm = bmesh.new()
+        _text_auf(bm, lo.bvh, sb["text"], 0.09, (P.L / 2 + 3, -0.55, sb["z"]), (-1, 0, 0), 0)
+        for s in (1, -1):
+            _text_auf(bm, lo.bvh, sb["text"], 0.11, (P.x(0.55), s * 4, sb["z"] + 0.1), (0, -s, 0), 0)
+        objekt(f"{cid}_Schablone", bm, col, [V.material("MAT_Lack_Schwarz")], root)
+
+
+def FM_lack(name, hexf):
+    import fz_material as FM
+    return FM.lack(name, hexf, 0.0)
+
+
+def sattel_rahmen(lo, T, mats, col, root, cid):
+    """Sattelzugmaschine hinter der Kabine: Rahmen, Sattelplatte, Tanks, Auspuff-Rohre, Kotflügel."""
+    P = lo.P
+    sa = T["sattel"]
+    d0, d1 = sa["d"]
+    rz = sa["rahmen_z"]
+    bm = bmesh.new()
+    for s in (1, -1):
+        quader(bm, (P.x((P.ende - 0.3 + P.L) / 2), s * 0.43, rz), (P.L - P.ende + 0.3, 0.09, 0.26), 0)
+    quader(bm, (P.x(P.L - 0.65), 0, rz + 0.20), (0.95, 0.95, 0.10), 0)
+    quader(bm, (P.x(P.L - 0.65), 0, rz + 0.12), (0.5, 0.7, 0.10), 0)
+    quader(bm, (P.x(P.L - 0.02), 0, rz - 0.05), (0.06, 2.0, 0.18), 0)
+    obr = objekt(f"{cid}_Rahmen", bm, col, [mats["unterboden"]], root)
+    bm = bmesh.new()
+    for s in (1, -1):
+        y = s * (P.B / 2 - 0.33)
+        zylinder(bm, (P.x(P.ende - 1.45), y, 0.72), (P.x(P.ende - 0.35), y, 0.72), 0.29, 24, 0)
+        x = P.x(P.ende + 0.12)
+        zylinder(bm, (x, s * 1.0, 1.25), (x, s * 1.0, 3.65), 0.065, 14, 0)
+        zylinder(bm, (x, s * 1.0, 2.0), (x, s * 1.0, 3.1), 0.085, 14, 1)
+    objekt(f"{cid}_Tanks_Auspuff", bm, col, [mats["chrom"], mats["felge_stahl"]], root, glatt=True)
+    bm = bmesh.new()
+    for a in P.achsen[1:]:
+        for s in (1, -1):
+            quader(bm, (P.x(a), s * (P.B / 2 - 0.30), P.R * 2 + 0.06), (1.15, 0.62, 0.02), 0)
+            quader(bm, (P.x(a + 0.62), s * (P.B / 2 - 0.30), P.R * 1.2), (0.01, 0.62, 0.62), 0)
+    objekt(f"{cid}_Kotfluegel_hinten", bm, col, [mats["schwarz"]], root)
+
+
+def plane(lo, T, mats, col, root, cid, rnd):
+    """Plane ueber der Ladeflaeche (Spriegel + Stoff), durchhaengend und an einer Stelle zerrissen."""
+    P = lo.P
+    pr = T["pritsche"]
+    d0, d1 = pr["d"]
+    top, rund = pr["plane"]
+    zr = pr["rand_z"]
+    w = P.B / 2 - 0.02
+    profil = [(-w, zr), (-w, top - rund)]
+    for k in range(1, 5):
+        a = math.radians(180 - 90 * k / 5)
+        profil.append((-w + rund + rund * math.cos(a), top - rund + rund * math.sin(a)))
+    profil += [(-w + rund, top), (0.0, top + 0.02), (w - rund, top)]
+    for k in range(1, 5):
+        a = math.radians(90 - 90 * k / 5)
+        profil.append((w - rund + rund * math.cos(a), top - rund + rund * math.sin(a)))
+    profil += [(w, top - rund), (w, zr)]
+    boegen = [d0 + 0.12 + (d1 - d0 - 0.24) * k / 4 for k in range(5)]
+    bm = bmesh.new()
+    for d in boegen:
+        pts = [Vector((P.x(d), y, z - 0.02)) for y, z in profil]
+        for a, b in zip(pts, pts[1:]):
+            zylinder(bm, a, b, 0.018, 6, 0)
+    objekt(f"{cid}_Spriegel", bm, col, [mats["unterboden"]], root)
+    from mathutils import noise
+    bm = bmesh.new()
+    n = 46
+    reihen = []
+    riss_d = d0 + (d1 - d0) * rnd.uniform(0.45, 0.75)
+    for i in range(n + 1):
+        d = d0 + 0.04 + (d1 - d0 - 0.08) * i / n
+        t = min(abs(d - b) for b in boegen) / ((d1 - d0) / 8)
+        sack = 0.07 * min(t, 1.0) ** 0.8
+        r = []
+        for y, z in profil:
+            oben = 1.0 if z > top - rund * 0.5 else max(0.0, (z - zr) / (top - zr))
+            zz = z - sack * oben + 0.012 * noise.noise(Vector((d * 3, y * 3, z * 3)))
+            yy = y * (1 - 0.015 * sack / 0.07) if abs(y) > w - 0.01 else y
+            r.append(bm.verts.new((P.x(d), yy, zz)))
+        reihen.append(r)
+    for i in range(n):
+        for k in range(len(profil) - 1):
+            ca = reihen[i][k].co
+            if abs(P.L / 2 - ca.x - riss_d) < 0.45 and ca.z > top - 0.25 and noise.noise(ca * 4) > -0.1:
+                continue  # Riss
+            f = bm.faces.new((reihen[i][k], reihen[i + 1][k], reihen[i + 1][k + 1], reihen[i][k + 1]))
+            f.smooth = True
+    o = objekt(f"{cid}_Plane", bm, col, [V.material("MAT_Plane_Oliv")], root)
+    _verdicken(o, 0.004, 0.0)
+
+
+def lichter_kasten(lo, T, mats, col, root, cid):
+    """Warnleuchten an den oberen Ecken des Kastenaufbaus (Rettungswagen)."""
+    P = lo.P
+    bm = bmesh.new()
+    for d in (2.50, P.L - 0.08):
+        for s in (1, -1):
+            for k, dy in enumerate((0.0, 0.25)):
+                quader(bm, (P.x(d), s * (P.B / 2 - 0.12 - dy), P.top(d) - 0.07), (0.06, 0.18, 0.10), 0 if k == 0 else 1)
+    objekt(f"{cid}_Warnleuchten", bm, col, [mats["ruecklicht"], mats["blinker"]], root)

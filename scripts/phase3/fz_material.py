@@ -45,8 +45,9 @@ def _ende(nt, b, farbe, rau, normal, lokal, kante):
     return grp
 
 
-def lack(name, hexf, metallic=0.0):
-    """Autolack nach ca. 12 Jahren: ausgeblichen (waagerecht staerker), Klarlack fleckig abgeloest, Rostflecken unten."""
+def lack(name, hexf, metallic=0.0, matt=False):
+    """Autolack nach ca. 12 Jahren: ausgeblichen (waagerecht staerker), Klarlack fleckig abgeloest, Rostflecken unten.
+    matt=True: Tarnlack/Nutzfahrzeug ohne Klarlack (raue, kreidige Oberflaeche)."""
     mn = f"MAT_Autolack_{name}"
     if mn in bpy.data.materials:
         return bpy.data.materials[mn]
@@ -85,6 +86,9 @@ def lack(name, hexf, metallic=0.0):
     # Klarlack-Schicht: weg bei Schaden und Rost, sonst stumpfer
     coat = _m(nt, "MULTIPLY", _m(nt, "SUBTRACT", 1.0, _m(nt, "MAXIMUM", kl, rmask)),
               _m(nt, "SUBTRACT", 1.0, _m(nt, "MULTIPLY", _m(nt, "MULTIPLY", alter, oben), 0.55)), clamp=True)
+    if matt:
+        coat = 0.0
+        rau = _m(nt, "ADD", rau, 0.38, clamp=True)
     _l(nt, coat, b.inputs["Coat Weight"])
     _l(nt, _m(nt, "ADD", 0.06, _m(nt, "MULTIPLY", alter, 0.3)), b.inputs["Coat Roughness"])
     met = _m(nt, "MULTIPLY", metallic, _m(nt, "SUBTRACT", 1.0, _m(nt, "MAXIMUM", rmask, _m(nt, "MULTIPLY", kl, 0.6))), clamp=True)
@@ -254,9 +258,10 @@ def text_mat(name, hexf, rau=0.6):
 
 def satz(farbname, farben):
     """Alle Materialien eines Fahrzeugs (Name -> Material)."""
-    hexf, met = farben[farbname]
+    eintrag = farben[farbname]
+    hexf, met = eintrag[0], eintrag[1]
     return {
-        "lack": lack(farbname, hexf, met),
+        "lack": lack(farbname, hexf, met, matt=len(eintrag) > 2 and eintrag[2] == "matt"),
         "schwarz": V.material("MAT_Kunststoff_Schwarz"),
         "verkleidung": V.material("MAT_Kunststoff_Schwarz"),
         "grau": V.material("MAT_Kunststoff_Grau"),

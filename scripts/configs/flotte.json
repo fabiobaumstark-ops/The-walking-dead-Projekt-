@@ -1,0 +1,504 @@
+{
+ "_info": "Phase 3.1.7 - Fahrzeuge im Strassenbild (Variante A). x = Ost, y = Nord, richtung in Grad (0 = Osten, 90 = Norden). Reihen: Fahrzeuge hintereinander ab x_vorne nach Westen, Luecken 0,5-2 m. zustand ueberschreibt die Wuerfel-Schaeden (fz_schaden.wuerfeln). LOD nach Abstand zur naechsten Hero-Kamera: < 20 m nah, < 60 m mittel, sonst fern.",
+ "seed": 303,
+ "lod_m": [
+  20,
+  60
+ ],
+ "gruppen": {
+  "Stau": {
+   "info": "Stau am Ortsausgang Ost vor dem Checkpoint: alle Spuren dicht, teils schraeg, viele Tueren offen -> Flucht zu Fuss",
+   "tueren_offen_anteil": 0.65,
+   "reihen": [
+    {
+     "y": -5.25,
+     "x_vorne": 61.3,
+     "typen": [
+      "A",
+      "D",
+      "G",
+      "B"
+     ],
+     "richtung": 0
+    },
+    {
+     "y": -1.75,
+     "x_vorne": 61.6,
+     "typen": [
+      "C",
+      "F",
+      "A",
+      "E"
+     ],
+     "richtung": 0
+    },
+    {
+     "y": 1.75,
+     "x_vorne": 61.0,
+     "typen": [
+      "H",
+      "A",
+      "B"
+     ],
+     "richtung": 0
+    },
+    {
+     "y": 5.25,
+     "x_vorne": 60.6,
+     "typen": [
+      "F",
+      "G"
+     ],
+     "richtung": 0
+    }
+   ],
+   "einzeln": [
+    {
+     "typ": "A",
+     "pos": [
+      48.5,
+      7.6
+     ],
+     "richtung": 12,
+     "info": "mit zwei Raedern auf dem Gehweg"
+    }
+   ],
+   "luecke": [
+    0.5,
+    2.0
+   ],
+   "schraeg_grad": 7,
+   "quer_m": 0.4,
+   "brand_anteil": 0.35
+  },
+  "Unfallkette": {
+   "info": "Kreuzung Querstrasse Ost: SUV rammt Limousine in die Seite, Pickup faehrt auf, ein Auto ausgebrannt, eines auf der Seite, eines auf dem Dach",
+   "fahrzeuge": [
+    {
+     "typ": "A",
+     "pos": [
+      19.6,
+      -2.3
+     ],
+     "richtung": 18,
+     "zustand": {
+      "seite": [
+       -1,
+       0.9
+      ],
+      "heck": 0.7,
+      "tueren": {
+       "Tuer_vl": 55
+      }
+     }
+    },
+    {
+     "typ": "C",
+     "pos": [
+      18.2,
+      -6.4
+     ],
+     "richtung": 78,
+     "zustand": {
+      "front": 1.0,
+      "haube": 0
+     }
+    },
+    {
+     "typ": "D",
+     "pos": [
+      13.7,
+      -3.1
+     ],
+     "richtung": 6,
+     "zustand": {
+      "front": 0.8,
+      "tueren": {
+       "Tuer_vl": 65
+      }
+     }
+    },
+    {
+     "typ": "E",
+     "pos": [
+      15.2,
+      3.4
+     ],
+     "richtung": 168,
+     "zustand": {
+      "ausgebrannt": true
+     }
+    },
+    {
+     "typ": "F",
+     "pos": [
+      23.2,
+      3.9
+     ],
+     "richtung": 205,
+     "lage": "seite"
+    },
+    {
+     "typ": "A",
+     "pos": [
+      4.6,
+      -3.6
+     ],
+     "richtung": 32,
+     "lage": "dach",
+     "zustand": {
+      "ausgebrannt": false
+     }
+    }
+   ]
+  },
+  "Mast": {
+   "info": "Kompakt-SUV frontal gegen den umgeknickten Strommast (Nordseite, vor CAM_Hero_01)",
+   "fahrzeuge": [
+    {
+     "typ": "B",
+     "pos": [
+      -26.0,
+      5.1
+     ],
+     "richtung": 72,
+     "zustand": {
+      "front": 1.0,
+      "haube": 22,
+      "tueren": {
+       "Tuer_vl": 48
+      },
+      "glas": {
+       "Frontscheibe": "gesprungen"
+      }
+     }
+    }
+   ]
+  },
+  "Geparkt": {
+   "info": "Querstrassen: 20-30 cm vom Bordstein, platte Reifen, seit Jahren unberuehrt (Vegetation in Phase 4)",
+   "fahrzeuge": [
+    {
+     "typ": "A",
+     "pos": [
+      15.17,
+      24.0
+     ],
+     "richtung": 270
+    },
+    {
+     "typ": "E",
+     "pos": [
+      15.17,
+      36.5
+     ],
+     "richtung": 268
+    },
+    {
+     "typ": "F",
+     "pos": [
+      20.83,
+      27.6
+     ],
+     "richtung": 90
+    },
+    {
+     "typ": "G",
+     "pos": [
+      20.83,
+      41.0
+     ],
+     "richtung": 91
+    },
+    {
+     "typ": "B",
+     "pos": [
+      20.83,
+      -19.0
+     ],
+     "richtung": 90
+    },
+    {
+     "typ": "A",
+     "pos": [
+      15.17,
+      -27.0
+     ],
+     "richtung": 271
+    },
+    {
+     "typ": "F",
+     "pos": [
+      -47.17,
+      -17.0
+     ],
+     "richtung": 90
+    },
+    {
+     "typ": "D",
+     "pos": [
+      -52.83,
+      -24.0
+     ],
+     "richtung": 270
+    }
+   ],
+   "zustand": {
+    "tueren": {},
+    "haube": 0,
+    "klappe": 0,
+    "front": 0,
+    "heck": 0,
+    "seite": null,
+    "platt_alle": true
+   },
+   "brand_anteil": 0.12
+  },
+  "Pluenderung": {
+   "info": "Vor der Apotheke (B04): Kombi mit offener Heckklappe und Kartons, Limousine ohne Raeder auf Ziegeln",
+   "fahrzeuge": [
+    {
+     "typ": "E",
+     "pos": [
+      -20.2,
+      5.85
+     ],
+     "richtung": 181,
+     "zustand": {
+      "klappe": 78,
+      "tueren": {
+       "Tuer_hr": 60
+      },
+      "ausgebrannt": false
+     },
+     "kartons": 4
+    },
+    {
+     "typ": "A",
+     "pos": [
+      -12.8,
+      5.8
+     ],
+     "richtung": 179,
+     "zustand": {
+      "rad_fehlt": [
+       "vl",
+       "vr",
+       "hl",
+       "hr"
+      ],
+      "ausgebrannt": false,
+      "haube": 55
+     },
+     "unterlage": "ziegel"
+    }
+   ]
+  },
+  "Tankstelle": {
+   "info": "B34: Autos an den Zapfsaeulen, Tankdeckel offen",
+   "fahrzeuge": [
+    {
+     "typ": "G",
+     "pos": [
+      -63.7,
+      -22.0
+     ],
+     "richtung": 90,
+     "zustand": {
+      "ausgebrannt": false
+     }
+    },
+    {
+     "typ": "A",
+     "pos": [
+      -74.8,
+      -22.6
+     ],
+     "richtung": 270,
+     "zustand": {
+      "ausgebrannt": false,
+      "tueren": {
+       "Tuer_vl": 40
+      }
+     }
+    },
+    {
+     "typ": "D",
+     "pos": [
+      -81.7,
+      -21.8
+     ],
+     "richtung": 92
+    }
+   ]
+  },
+  "Polizeisperre": {
+   "info": "Verlassene Sperre am Eingang der Querstrasse Ost (Nord): 2 Streifenwagen (Typ A, schwarz-weiss, Lichtbalken, generische Aufschrift), schraeg, Tueren offen",
+   "fahrzeuge": [
+    {
+     "typ": "A",
+     "pos": [
+      16.4,
+      13.8
+     ],
+     "richtung": 24,
+     "polizei": true,
+     "zustand": {
+      "tueren": {
+       "Tuer_vl": 62,
+       "Tuer_vr": 45
+      },
+      "ausgebrannt": false
+     }
+    },
+    {
+     "typ": "A",
+     "pos": [
+      20.0,
+      15.2
+     ],
+     "richtung": 152,
+     "polizei": true,
+     "zustand": {
+      "tueren": {
+       "Tuer_vr": 58
+      },
+      "ausgebrannt": false
+     }
+    }
+   ]
+  },
+  "Barrikade1": {
+   "info": "Ersetzt die Platzhalter der Barrikade 1 (Hauptstrasse West, x = -59,5)",
+   "fahrzeuge": [
+    {
+     "typ": "E",
+     "pos": [
+      -59.5,
+      -4.6
+     ],
+     "richtung": 90,
+     "zustand": {
+      "rad_fehlt": [],
+      "tueren": {},
+      "ausgebrannt": false
+     }
+    },
+    {
+     "typ": "A",
+     "pos": [
+      -59.15,
+      0.3
+     ],
+     "richtung": 84,
+     "zustand": {
+      "tueren": {},
+      "ausgebrannt": true
+     }
+    }
+   ]
+  },
+  "Sonder": {
+   "info": "Sonderfahrzeuge (3.1.10): Schulbus quer im Stau, eingeknickter Sattelzug (Auflieger umgekippt) Richtung Hochstrasse, Rettungswagen vor dem Krankenhaus, 2 Militaer-Lkw am Checkpoint",
+   "fahrzeuge": [
+    {
+     "typ": "S",
+     "pos": [
+      31.5,
+      -0.6
+     ],
+     "richtung": 28,
+     "farbe": "Schulbus_Gelb",
+     "zustand": {
+      "tueren": {
+       "Tuer_vr": 70
+      },
+      "ausgebrannt": false,
+      "glas": {
+       "Frontscheibe": "gesprungen",
+       "seiten_bruch": 0.6,
+       "Heck": "intakt"
+      },
+      "hecktuer": 95
+     }
+    },
+    {
+     "typ": "Z",
+     "pos": [
+      93.0,
+      -2.6
+     ],
+     "richtung": 140,
+     "farbe": "Sattel_Rot",
+     "zustand": {
+      "ausgebrannt": false,
+      "tueren": {
+       "Tuer_vl": 50
+      }
+     },
+     "auflieger": {
+      "pos": [
+       101.5,
+       2.6
+      ],
+      "richtung": 192,
+      "kipp": -90,
+      "ladung": 26
+     }
+    },
+    {
+     "typ": "R",
+     "pos": [
+      -18.0,
+      69.0
+     ],
+     "richtung": 186,
+     "farbe": "Weiss",
+     "zustand": {
+      "ausgebrannt": false,
+      "tueren": {
+       "Hecktuer_l": 100,
+       "Hecktuer_r": 105
+      }
+     },
+     "trage": true
+    },
+    {
+     "typ": "M",
+     "pos": [
+      80.5,
+      5.6
+     ],
+     "richtung": 183,
+     "farbe": "Militaer_Oliv",
+     "zustand": {
+      "ausgebrannt": false,
+      "platt_alle": true,
+      "tueren": {
+       "Tuer_vl": 45
+      }
+     }
+    },
+    {
+     "typ": "M",
+     "pos": [
+      88.6,
+      -6.4
+     ],
+     "richtung": 172,
+     "farbe": "Militaer_Oliv",
+     "zustand": {
+      "ausgebrannt": false,
+      "platt_alle": true
+     }
+    }
+   ]
+  }
+ },
+ "polizei": {
+  "farbe": "Schwarz",
+  "tueren_farbe": "Weiss",
+  "aufschrift": "POLICE",
+  "nummer_praefix": "UNIT"
+ }
+}

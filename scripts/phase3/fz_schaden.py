@@ -90,7 +90,11 @@ def klappe_auf(ob, grad):
         ob.rotation_euler.y = math.radians(grad)
 
 
+_CACHE = {}
+
+
 def _mesh_kopie(ob, suffix):
+    """Kopie des Meshes fuer einen Schaden; gleiche Schaeden an gleichen Raedern teilen sich ein Mesh."""
     me = ob.data.copy()
     me.name = f"{ob.data.name}_{suffix}"
     ob.data = me
@@ -100,7 +104,14 @@ def _mesh_kopie(ob, suffix):
 def reifen_platt(rad, staerke=1.0):
     """Reifen unten eingedrueckt, Flanke gewoelbt (eigene Mesh-Kopie)."""
     R = rad["reifen_r"]
+    flach = R * (1 - 0.22 * staerke)
+    key = (rad.data.name, "platt", staerke)
+    if key in _CACHE and _CACHE[key].name in bpy.data.meshes:
+        rad.data = _CACHE[key]
+        rad["platt"] = staerke
+        return R - flach - (R - flach) * 0.12
     me = _mesh_kopie(rad, "platt")
+    _CACHE[key] = me
     bm = bmesh.new()
     bm.from_mesh(me)
     flach = R * (1 - 0.22 * staerke)
@@ -207,7 +218,14 @@ def ausbrennen(root, T):
 
 
 def _rad_ohne_reifen(rad):
+    key = (rad.data.name.replace("_platt", ""), "verbrannt")
+    if key in _CACHE and _CACHE[key].name in bpy.data.meshes:
+        rad.data = _CACHE[key]
+        rad["platt"] = 1.0
+        rad["ohne_reifen"] = True
+        return
     me = _mesh_kopie(rad, "verbrannt")
+    _CACHE[key] = me
     bm = bmesh.new()
     bm.from_mesh(me)
     weg = [f for f in bm.faces if f.material_index == 0]

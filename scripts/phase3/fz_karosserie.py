@@ -97,7 +97,9 @@ class Profil:
         self.R = reifen_radius(T["reifen"])
         self.Ra = self.R + T.get("radlauf_plus", 0.04)
         self.bw = T["reifen"][1] / 1000.0
-        self.achsen = [T["ueberhang_v"], T["ueberhang_v"] + T["radstand"]]
+        self.achsen = [T["ueberhang_v"], T["ueberhang_v"] + T["radstand"]] + list(T.get("achsen_extra", []))
+        self.zwilling = bool(T.get("zwilling_hinten"))
+        self.bw_radhaus = 2 * self.bw + 0.03 if self.zwilling else self.bw
         self.dachbreite = T["dachbreite"]
         cr, rr = T["woelbung"], T["dachradius"]
         self.gh_max = max(self.top(d) - cr - rr - self.belt(d) for d in [i * self.L / 200 for i in range(201)])
@@ -143,7 +145,7 @@ class Profil:
             return hw * v
 
         za = self.radlauf(d)
-        y_in = max(hw - (self.bw + 0.085), 0.12)
+        y_in = max(hw - (self.bw_radhaus + 0.085), 0.12)
         P = [(0.0, zb), (y_in * 0.5, zb), (y_in, zb)]
         if za is not None and za > zb + 0.01:
             zA = zR = za
@@ -259,7 +261,7 @@ def regeln(T, L):
             for s in tuer_seiten(t):
                 r(f"GLAS_{tuer_name(k, s)}", fe[0], fe[1], "glas0", "glas1", s)
     for k, fe in enumerate(T.get("fenster_fest", [])):
-        for s in ("l", "r"):
+        for s in (fe[2:3] or ("l", "r")):
             r(f"GLAS_Fest{k}{s}", fe[0], fe[1], "glas0", "glas1", s)
     r("Boden", 0, L, "mitte_u", "boden_e")
     r("Radhaus", 0, L, "boden_e", "radhaus_e")
@@ -293,7 +295,7 @@ def schnitte_kanten(T):
         if fe:
             kan += list(fe)
     for fe in T.get("fenster_fest", []):
-        kan += list(fe)
+        kan += list(fe[:2])
     if T["heck"] == "stufe":
         sch += list(T["kofferraum"])
         kan += [T["heckscheibe"][0] + 0.02, T["heckscheibe"][1] - 0.025]
@@ -368,7 +370,11 @@ class Loft:
                 reihen.append([R_, L_] if k < HALB else [L_])
                 continue
             x, z = L_.co.x, L_.co.z
-            ys = [-(a - g), -g / 2, g / 2, a - g]
+            hb = self.P.T.get("hecktuer_b", 0.0)
+            if art == "h" and self.P.T["heck"] == "bus" and a > hb + 4 * g:
+                ys = [-(a - g), -(hb + g), -hb, hb, hb + g, a - g]
+            else:
+                ys = [-(a - g), -g / 2, g / 2, a - g]
             mitte = [self.bm.verts.new((x, y, z)) for y in ys]
             reihen.append([R_] + mitte + [L_])
         for k in range(len(reihen) - 1):
@@ -378,9 +384,10 @@ class Loft:
                 f = self.bm.faces.new((u[0], u[-1], o[0]))
                 self.info[f] = ("kappe", art, "haupt", zmid, 0)
                 continue
-            if len(u) == len(o) == 6:
-                spalten = ["rand_r", "haupt_r", "mitte", "haupt_l", "rand_l"]
-                for c in range(5):
+            if len(u) == len(o) and len(u) in (6, 8):
+                spalten = (["rand_r", "haupt_r", "mitte", "haupt_l", "rand_l"] if len(u) == 6 else
+                           ["rand_r", "haupt_r", "spalt_r", "tuer", "spalt_l", "haupt_l", "rand_l"])
+                for c in range(len(spalten)):
                     f = self.bm.faces.new((u[c], u[c + 1], o[c + 1], o[c]))
                     self.info[f] = ("kappe", art, spalten[c], zmid, k)
             else:
@@ -445,9 +452,22 @@ class Loft:
             elif zmid < bl - 0.0025:
                 n = "Heck"
             elif abs(zmid - bl) <= 0.0026:
-                n = "SPALT" if T["heck"] in ("klappe", "kasten") else "Karosserie"
+                if T["heck"] == "bus":
+                    n = "SPALT" if spalte in ("tuer", "spalt_r", "spalt_l") else "Karosserie"
+                else:
+                    n = "SPALT" if T["heck"] in ("klappe", "kasten") else "Karosserie"
             elif T["heck"] == "stufe":
                 n = "Karosserie"
+            elif T["heck"] == "bus":
+                ring_i = k + M["boden_e"]
+                if ring_i >= M["sch1"]:
+                    n = "Karosserie"
+                elif spalte == "tuer":
+                    n = "SPALT" if ring_i == M["sch0"] else "Hecktuer_m"
+                elif spalte.startswith("spalt"):
+                    n = "SPALT"
+                else:
+                    n = "Karosserie"
             elif T["heck"] == "klappe":
                 n = "SPALT" if spalte.startswith("rand") else "Heckklappe"
             else:  # kasten: zwei Hecktueren

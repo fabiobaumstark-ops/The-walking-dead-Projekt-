@@ -49,6 +49,9 @@ def _drehpunkt(name, P, T):
     if name == "Heckklappe":
         d = T["heckklappe"] + 0.01
         return Vector((P.x(d), 0, P.top(d) - 0.01)), "y"
+    if name == "Hecktuer_m":
+        hb = T.get("hecktuer_b", 0.45)
+        return Vector((-P.L / 2, hb, (T["stossf_linie"] + P.top(P.L)) / 2)), "z"
     if name.startswith("Hecktuer_"):
         s = 1 if name.endswith("l") else -1
         return Vector((-P.L / 2, s * P.hw(P.L) * 0.98, 1.0)), "z"
@@ -70,7 +73,7 @@ def _gewichte_tuer(ob, P, piv):
 
 def bauen(typ, farbe="Silber", felge=None, seed=1, alter=0.8, col=None, cid=None, innen=True, variante=0):
     C = cfg()
-    T = dict(C["typen"][typ])
+    T = dict(C["typen"].get(typ) or C["sondertypen"][typ])
     vs = T.get("varianten") or [{}]
     T.update(vs[variante % len(vs)])  # Front-/Heck-Variante (Leuchten, Grill, Stossstange)
     rnd = random.Random(seed)
@@ -153,22 +156,31 @@ def bauen(typ, farbe="Silber", felge=None, seed=1, alter=0.8, col=None, cid=None
     # Raeder
     me = FT.rad_mesh(typ, T, felge, mats)
     spur = {}
+    n_ach = len(P.achsen)
     for ai, a in enumerate(P.achsen):
+        an = "v" if ai == 0 else ("h" if ai == 1 and n_ach == 2 else ("h" if ai == n_ach - 1 else f"m{ai}"))
+        if n_ach == 3 and ai == 1:
+            an = "m"
         for s in (1, -1):
             y = s * (P.hw(a) - P.bw / 2 - 0.035)
-            ob = bpy.data.objects.new(f"{cid}_Rad_{'v' if ai == 0 else 'h'}{'l' if s > 0 else 'r'}", me)
-            ob.location = (P.x(a), y, P.R)
-            ob.rotation_euler = (0, 0, 0 if s > 0 else math.pi)
-            ob.parent = root
-            col.objects.link(ob)
-            ob["reifen_r"] = P.R
-            spur[(ai, s)] = ob
+            lagen = [(y, "")]
+            if P.zwilling and ai > 0:
+                lagen.append((y - s * (P.bw + 0.025), "i"))
+            for yy, zus in lagen:
+                ob = bpy.data.objects.new(f"{cid}_Rad_{an}{'l' if s > 0 else 'r'}{zus}", me)
+                ob.location = (P.x(a), yy, P.R)
+                ob.rotation_euler = (0, 0, 0 if s > 0 else math.pi)
+                ob.parent = root
+                col.objects.link(ob)
+                ob["reifen_r"] = P.R
+                spur[(ai, s, zus)] = ob
     # Anbauteile
     bvh_heck = None
-    if T["heck"] == "pritsche":
+    if T.get("pritsche"):
         bvh_heck = FT.pritsche(lo, T, mats, col, root, cid)
     FT.leuchten(lo, T, mats, col, root, cid, bvh_heck)
-    FT.kennzeichen(lo, T, mats, col, root, cid, rnd, bvh_heck)
+    if T.get("kennzeichen"):
+        FT.kennzeichen(lo, T, mats, col, root, cid, rnd, bvh_heck)
     tueren = {n: o for n, o in teil_obs.items() if n.startswith("Tuer_")}
     FT.spiegel(lo, T, mats, col, tueren, cid)
     FT.griffe(lo, T, mats, col, tueren, cid)
@@ -179,6 +191,13 @@ def bauen(typ, farbe="Silber", felge=None, seed=1, alter=0.8, col=None, cid=None
     FT.stossfaenger_extra(lo, T, mats, col, root, cid)
     FT.schiebetuer_schiene(lo, T, mats, col, root, cid)
     FT.radlaufleisten(lo, T, mats, col, root, cid)
+    FT.leisten_streifen_schrift(lo, T, mats, col, root, cid, rnd, teil_obs)
+    if T.get("sattel"):
+        FT.sattel_rahmen(lo, T, mats, col, root, cid)
+    if T.get("pritsche", {}).get("plane"):
+        FT.plane(lo, T, mats, col, root, cid, rnd)
+    if T.get("lichtbalken_box"):
+        FT.lichter_kasten(lo, T, mats, col, root, cid)
     if T.get("kabinenfenster"):
         de = P.ende
         z0, z1 = P.belt(de) + 0.10, P.top(de) - T["woelbung"] - 0.13
