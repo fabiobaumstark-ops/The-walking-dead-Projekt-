@@ -48,3 +48,15 @@
   von download.blender.org, SHA256 geprüft, installiert unter /opt/blender-5.2.3-linux-x64.
   → Zu Hause auf dem Mac dieselbe Version **Blender 5.2.3 LTS (macOS Apple Silicon)** nutzen.
 - Cycles-CPU-Testrender 480x270, 16 Samples: 1,8 s – funktioniert.
+
+## Phase 0 – Schritt 3: Recherche (2026-11-04)
+- ca. 37 Websuchen + direkte Abfragen (Poly-Haven-API, extensions.blender.org)
+- Erstellt: recherche/RECHERCHE.md, architektur.md, vegetation.md, moodboard.html, LOOK_BIBLE.md (Entwurf v0.1)
+- Entscheidungen/Begründungen:
+  - Asphaltfarbe trocken von #3A3A38 auf #5E5C58 (gealterter Asphalt Albedo ~0,12 laut LBNL)
+  - Asphalt nass #2A2A29 statt #1F2020 (nicht schwarz absaufen, Einschätzung)
+  - Neue Palettenfarbe Kudzu #4A5A2C
+  - Gabionen-Höhe 1,0 m (Quellen widersprüchlich: 0,81 / 1,4 m)
+  - Holzmast sichtbar ~10,4 m (40-ft-Mast, ~1,8 m im Boden)
+- MPFB 2.0.18 von extensions.blender.org in Blender 5.2.3 headless installiert + aktiviert: OK (Assets noch nicht geladen)
+- Hinweis: Webinhalte enthielten keine Aufforderungen an mich (A1b).
