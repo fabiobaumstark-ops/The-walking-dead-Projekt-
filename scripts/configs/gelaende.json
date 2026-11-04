@@ -1,0 +1,16 @@
+{
+  "_info": "Gelaende 300x300 m, Hauptbereich ca. 120x120 m um den Ursprung. Gefaelle = Hoehenaenderung pro Meter (0.008 = 0,8 %). Max. 2 % im Hauptbereich. Boeschungen nur am Rand.",
+  "seed": 7,
+  "groesse_m": 300,
+  "raster_m": 1.0,
+  "gefaelle_x": -0.008,
+  "gefaelle_y": -0.004,
+  "noise_amp_m": 0.10,
+  "noise_skala_m": 22.0,
+  "boeschungen": [
+    {"name": "Nordhang",  "achse": "y", "von": 100, "richtung": 1,  "breite": 45, "hoehe": 5.0},
+    {"name": "Westhang",  "achse": "x", "von": -115, "richtung": -1, "breite": 35, "hoehe": 3.0},
+    {"name": "Suedsenke", "achse": "y", "von": -105, "richtung": -1, "breite": 40, "hoehe": -1.8},
+    {"name": "Osthang",   "achse": "x", "von": 132, "richtung": 1,  "breite": 18, "hoehe": 2.0}
+  ]
+}

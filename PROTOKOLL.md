@@ -70,3 +70,24 @@
 - Selbst zu bauen (kein passendes Modell): Betontrümmer, Ziegelhaufen, Bretter, Paletten.
 - ambientCG liefert keine Maße per API → Skalierung von WoodSiding009/Moss002 wird in Blender kalibriert.
 - download_assets.py in der Cloud getestet: 335 Dateien, 1,17 GB in 1:58 min, zweiter Lauf überspringt alles.
+
+## Phase 1.2 – Material-Bibliothek + MAT_Verwitterung (2026-11-04)
+- 35 MAT_-Materialien. Jedes hat 4 Ebenen: Fototextur → Farb- und Helligkeitsvariation → Rauheitsvariation → MAT_Verwitterung.
+  - UV-Box-Projektion in Metern, Kachelgröße = reale Maße aus dem Manifest
+  - Normal Map + Bump
+- MAT_Verwitterung (Shader-Gruppe), Ebenen:
+  - Ausbleichen (zur Sonne 265°/28° stärker)
+  - Wasserläufe (gestreckter Noise, oben beginnend)
+  - Schmutz unten 0–80 cm + in Vertiefungen (AO)
+  - Kanten (Bevel-Node)
+  - Staub oben
+  - Moos (oben + schattig über AO)
+- Zentrale Regler als Szenen-Eigenschaften: verw_master (Standard 0,7) sowie verw_staub, verw_schmutz, verw_kanten, verw_wasser, verw_moos und verw_bleich.
+  Pro Material gibt es den Eingang „Lokal“, pro Objekt die Eigenschaft verw_korrektur (−1 = aus).
+- Heruntergeladene Modelle: Ihre Materialien laufen automatisch durch HSV-Angleichung (Sättigung 0,65, Helligkeit 0,88) und MAT_Verwitterung.
+- Anpassungen nach Test:
+  - Asphalt dunkler (Wert 0,62), Lokal 0,5
+  - Staub auf max. 55 % Deckung
+  - Kanten, Wasserläufe und Moos verstärkt
+- Renderzeiten Testreihe (960×540, 64 Samples, CPU 4 Kerne): 0 % 29 s, 50 % 57 s, 100 % 56 s.
+- Bekannt: Auf runden Formen (Kugel) erzeugt die Box-Projektion sichtbare Nähte. Bei Architektur ist das unkritisch, Nachbesserung in Phase 4.
