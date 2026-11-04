@@ -393,8 +393,12 @@ def material(name):
         return bpy.data.materials[name]
     cfg = config("materialien.json")
     std = dict(cfg["standard"])
-    std.update(cfg["materialien"].get(name, {}))
-    eintrag = next(a for a in manifest()["assets"] if a["name"] == name)
+    eigen = cfg["materialien"].get(name) or cfg.get("abgeleitet", {}).get(name, {})
+    basis = eigen.get("basis")
+    if basis:
+        std.update(cfg["materialien"].get(basis, {}))
+    std.update(eigen)
+    eintrag = next(a for a in manifest()["assets"] if a["name"] == (basis or name))
     ordner = os.path.join(ROOT, eintrag["zielpfad"])
     groesse = std.get("groesse_m") or eintrag.get("masse_m") or [2, 2]
 
@@ -431,10 +435,15 @@ def material(name):
     for i, k in enumerate(("Hue", "Saturation", "Value")):
         hsv.inputs[k].default_value = std["hsv"][i]
     _link(nt, col, hsv.inputs["Color"])
+    hsv_out = hsv.outputs["Color"]
+    if std.get("farbe"):  # Umfaerben: Helligkeit der Fototextur x Zielfarbe (Lack, Schilder, Planen ...)
+        hsv.inputs["Saturation"].default_value = 0.0
+        hsv.inputs["Value"].default_value = std.get("farbe_gain", 2.2)
+        hsv_out = _mix_rgb(nt, 1.0, hsv.outputs["Color"], hex_lin(std["farbe"]), "MULTIPLY")
     geo = nt.nodes.new("ShaderNodeNewGeometry")
     var = _maprange(nt, _noise(nt, geo.outputs["Position"], 0.12, 3.0, 0.5), 0.3, 0.7,
                     1.0 - std["variation"], 1.0 + std["variation"])
-    farbe = _mix_rgb(nt, 1.0, hsv.outputs["Color"], (1, 1, 1, 1), "MULTIPLY")
+    farbe = hsv_out
     vmul = nt.nodes.new("ShaderNodeMix")
     vmul.data_type = "RGBA"
     vmul.blend_type = "MULTIPLY"
@@ -503,7 +512,9 @@ def _fugen(nt, P, raster):
 def bibliothek():
     """Alle Bibliotheks-Materialien erzeugen (mit Fake-User, damit sie in der .blend bleiben)."""
     cfg = config("materialien.json")
-    return {n: material(n) for n in cfg["materialien"]}
+    out = {n: material(n) for n in cfg["materialien"]}
+    out.update({n: material(n) for n in cfg.get("abgeleitet", {}) if not n.startswith("_")})
+    return out
 
 
 def material_einfaerben(mat, hsv=None):
@@ -660,3 +671,320 @@ def blockout_mat(zone):
 def smooth(t):
     t = max(0.0, min(1.0, t))
     return t * t * (3 - 2 * t)
+
+
+
+# ---------------------------------------------------------------- Phase 2: Spezial-Materialien
+def _grunge(nt, asset_mat, skala=1.0):
+    """Graustufen-Maske aus einer Fototextur (Rauheitskarte) – Fotobasis fuer Staub, Abplatzer usw."""
+    eintrag = next(a for a in manifest()["assets"] if a["name"] == asset_mat)
+    pfad = _karte(os.path.join(ROOT, eintrag["zielpfad"]), "_rough_", "_roughness")
+    uv = nt.nodes.new("ShaderNodeUVMap")
+    mp = nt.nodes.new("ShaderNodeMapping")
+    mp.inputs["Scale"].default_value = (skala, skala, 1)
+    nt.links.new(uv.outputs["UV"], mp.inputs["Vector"])
+    t = nt.nodes.new("ShaderNodeTexImage")
+    t.image = _bild(pfad, True)
+    nt.links.new(mp.outputs["Vector"], t.inputs["Vector"])
+    return t.outputs["Color"]
+
+
+def _verw_anschluss(nt, farbe, rau, normal, lokal=1.0, kante="#A9A398"):
+    grp = nt.nodes.new("ShaderNodeGroup")
+    grp.node_tree = verwitterung_gruppe()
+    _link(nt, farbe, grp.inputs["Farbe"])
+    _link(nt, rau, grp.inputs["Rauheit"])
+    if normal is None:
+        normal = nt.nodes.new("ShaderNodeNewGeometry").outputs["Normal"]
+    nt.links.new(normal, grp.inputs["Normale"])
+    grp.inputs["Kantenfarbe"].default_value = hex_lin(kante)
+    grp.inputs["Lokal"].default_value = lokal
+    return grp
+
+
+def _neues_mat(name):
+    m = bpy.data.materials.new(name)
+    m.use_fake_user = True
+    nt = m.node_tree
+    nt.nodes.clear()
+    out = nt.nodes.new("ShaderNodeOutputMaterial")
+    bsdf = nt.nodes.new("ShaderNodeBsdfPrincipled")
+    nt.links.new(bsdf.outputs[0], out.inputs["Surface"])
+    return m, nt, bsdf
+
+
+def mat_glas(name="MAT_Glas_Staubig", staub=1.0):
+    """Fensterglas (Thin Wall), Staub/Wasserflecken aus Fotomaske dirty_concrete, laeuft durch MAT_Verwitterung."""
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    m, nt, b = _neues_mat(name)
+    g = _grunge(nt, "MAT_Beton_Grob", 0.7)
+    b.inputs["Transmission Weight"].default_value = 1.0
+    b.inputs["Thin Wall"].default_value = True
+    b.inputs["IOR"].default_value = 1.5
+    rau = _maprange(nt, g, 0.2, 0.9, 0.04, 0.12 + 0.3 * staub, smooth=False)
+    farbe = _mix_rgb(nt, _maprange(nt, g, 0.3, 0.9, 0.0, 0.35 * staub), hex_lin("#D9DED9"), hex_lin("#8F8878"))
+    grp = _verw_anschluss(nt, farbe, rau, None, lokal=0.6)
+    nt.links.new(grp.outputs["Farbe"], b.inputs["Base Color"])
+    nt.links.new(grp.outputs["Rauheit"], b.inputs["Roughness"])
+    nt.links.new(grp.outputs["Normale"], b.inputs["Normal"])
+    return m
+
+
+def mat_wasser(name="MAT_Wasser_Pfuetze", oel=False):
+    """Pfuetzenwasser: Rauheit 0.0-0.05 (einziges Material mit ~0), optional Oel-Schlieren (Thin Film)."""
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    m, nt, b = _neues_mat(name)
+    geo = nt.nodes.new("ShaderNodeNewGeometry")
+    b.inputs["Base Color"].default_value = hex_lin("#1E1B17")
+    b.inputs["Roughness"].default_value = 0.02
+    b.inputs["IOR"].default_value = 1.33
+    b.inputs["Transmission Weight"].default_value = 0.0
+    b.inputs["Specular IOR Level"].default_value = 0.5
+    bump = nt.nodes.new("ShaderNodeBump")
+    bump.inputs["Strength"].default_value = 0.05
+    nt.links.new(_noise(nt, geo.outputs["Position"], 6.0, 2.0), bump.inputs["Height"])
+    nt.links.new(bump.outputs["Normal"], b.inputs["Normal"])
+    if oel:
+        dicke = _maprange(nt, _noise(nt, geo.outputs["Position"], 1.2, 3.0, 0.6, 2.0), 0.35, 0.75, 0.0, 650.0)
+        nt.links.new(dicke, b.inputs["Thin Film Thickness"])
+        b.inputs["Thin Film IOR"].default_value = 1.45
+    return m
+
+
+def mat_farbe(name, hexfarbe, abplatzer=0.5, unterlage="MAT_Asphalt_Rissig", rau=0.6, lokal=0.8):
+    """Farbschicht (Fahrbahnmarkierung, Graffiti, Schilderlack) mit Abplatzern aus Fotomaske (Alpha)."""
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    m, nt, b = _neues_mat(name)
+    g = _grunge(nt, unterlage, 0.5)
+    geo = nt.nodes.new("ShaderNodeNewGeometry")
+    alpha = _maprange(nt, _math(nt, "ADD", _math(nt, "MULTIPLY", g, 0.7), _math(nt, "MULTIPLY", _noise(nt, geo.outputs["Position"], 1.4, 4.0), 0.5)),
+                      0.25 + 0.45 * abplatzer, 0.32 + 0.45 * abplatzer, 1.0, 0.0)
+    farbe = _mix_rgb(nt, _maprange(nt, g, 0.2, 0.9, 0.0, 0.45), hex_lin(hexfarbe), hex_lin("#8A8478"))
+    grp = _verw_anschluss(nt, farbe, rau, None, lokal=lokal)
+    nt.links.new(grp.outputs["Farbe"], b.inputs["Base Color"])
+    nt.links.new(grp.outputs["Rauheit"], b.inputs["Roughness"])
+    nt.links.new(grp.outputs["Normale"], b.inputs["Normal"])
+    nt.links.new(alpha, b.inputs["Alpha"])
+    return m
+
+
+def mat_russ(name="MAT_Russ"):
+    """Russfahne ueber Fenstern: nach oben ausfransend (Alpha aus Gradient x Noise x Fotomaske). UV: v=0 unten, v=1 oben."""
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    m, nt, b = _neues_mat(name)
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    sep = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(tc.outputs["UV"], sep.inputs[0])  # Decal-UV 0..1 (u quer, v nach oben)
+    g = _grunge(nt, "MAT_Beton_Grob", 0.4)
+    rand = _math(nt, "MULTIPLY", _maprange(nt, sep.outputs["X"], 0.0, 0.25), _maprange(nt, sep.outputs["X"], 1.0, 0.75))
+    hoch = _maprange(nt, _math(nt, "ADD", sep.outputs["Y"], _math(nt, "MULTIPLY", _math(nt, "SUBTRACT", _noise(nt, tc.outputs["UV"], 4.0, 6.0), 0.5), 0.6)), 1.0, 0.05)
+    alpha = _math(nt, "MULTIPLY", _math(nt, "MULTIPLY", hoch, rand), _maprange(nt, g, 0.1, 0.8, 0.55, 1.0), clamp=True)
+    b.inputs["Base Color"].default_value = hex_lin("#141210")
+    b.inputs["Roughness"].default_value = 0.95
+    nt.links.new(alpha, b.inputs["Alpha"])
+    return m
+
+
+def mat_schindeln(name="MAT_Dachschindeln"):
+    """Asphaltschindeln (selbst gebaut, keine CC0-Fototextur gefunden): Fotobasis tarred_gravel + Laschenraster."""
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    m, nt, b = _neues_mat(name)
+    eintrag = next(a for a in manifest()["assets"] if a["name"] == "MAT_Asphalt_Geflickt")
+    ordner = os.path.join(ROOT, eintrag["zielpfad"])
+    uv = nt.nodes.new("ShaderNodeUVMap")
+    mp = nt.nodes.new("ShaderNodeMapping")
+    mp.inputs["Scale"].default_value = (0.9, 0.9, 1)
+    nt.links.new(uv.outputs["UV"], mp.inputs["Vector"])
+    t = nt.nodes.new("ShaderNodeTexImage")
+    t.image = _bild(_karte(ordner, "_diff_"), False)
+    nt.links.new(mp.outputs["Vector"], t.inputs["Vector"])
+    br = nt.nodes.new("ShaderNodeTexBrick")  # Laschen 1,0 x 0,14 m sichtbar, versetzt
+    br.offset = 0.5
+    br.inputs["Scale"].default_value = 1.0
+    br.inputs["Brick Width"].default_value = 0.33
+    br.inputs["Row Height"].default_value = 0.14
+    br.inputs["Mortar Size"].default_value = 0.008
+    br.inputs["Color1"].default_value = (1, 1, 1, 1)
+    br.inputs["Color2"].default_value = (0.75, 0.75, 0.75, 1)
+    br.inputs["Mortar"].default_value = (0.25, 0.25, 0.25, 1)
+    nt.links.new(uv.outputs["UV"], br.inputs["Vector"])
+    hsv = nt.nodes.new("ShaderNodeHueSaturation")
+    hsv.inputs["Saturation"].default_value = 0.35
+    hsv.inputs["Value"].default_value = 0.85
+    nt.links.new(t.outputs["Color"], hsv.inputs["Color"])
+    farbe = _mix_rgb(nt, 1.0, hsv.outputs["Color"], br.outputs["Color"], "MULTIPLY")
+    bump = nt.nodes.new("ShaderNodeBump")
+    bump.inputs["Strength"].default_value = 0.4
+    nt.links.new(br.outputs["Fac"], bump.inputs["Height"])
+    grp = _verw_anschluss(nt, farbe, 0.85, bump.outputs["Normal"], lokal=1.0, kante="#6A665E")
+    nt.links.new(grp.outputs["Farbe"], b.inputs["Base Color"])
+    nt.links.new(grp.outputs["Rauheit"], b.inputs["Roughness"])
+    nt.links.new(grp.outputs["Normale"], b.inputs["Normal"])
+    return m
+
+
+# ---------------------------------------------------------------- Phase 2: Instanzen (A9)
+def gn_instanzen():
+    """GN-Gruppe: setzt Instanzen einer Collection auf die Punkte eines Mesh (Attribute rot, skal, idx)."""
+    if "GN_Instanzen_Punkte" in bpy.data.node_groups:
+        return bpy.data.node_groups["GN_Instanzen_Punkte"]
+    ng = bpy.data.node_groups.new("GN_Instanzen_Punkte", "GeometryNodeTree")
+    ng.interface.new_socket("Geometry", in_out="INPUT", socket_type="NodeSocketGeometry")
+    ng.interface.new_socket("Sammlung", in_out="INPUT", socket_type="NodeSocketCollection")
+    ng.interface.new_socket("Geometry", in_out="OUTPUT", socket_type="NodeSocketGeometry")
+    gi, go = ng.nodes.new("NodeGroupInput"), ng.nodes.new("NodeGroupOutput")
+    m2p = ng.nodes.new("GeometryNodeMeshToPoints")
+    ci = ng.nodes.new("GeometryNodeCollectionInfo")
+    ci.transform_space = "ORIGINAL"
+    ci.inputs["Separate Children"].default_value = True
+    ci.inputs["Reset Children"].default_value = True
+    iop = ng.nodes.new("GeometryNodeInstanceOnPoints")
+    iop.inputs["Pick Instance"].default_value = True
+    def attr(name, typ):
+        a = ng.nodes.new("GeometryNodeInputNamedAttribute")
+        a.data_type = typ
+        a.inputs["Name"].default_value = name
+        return a.outputs["Attribute"]
+    ng.links.new(gi.outputs["Geometry"], m2p.inputs["Mesh"])
+    ng.links.new(gi.outputs["Sammlung"], ci.inputs["Collection"])
+    ng.links.new(m2p.outputs["Points"], iop.inputs["Points"])
+    ng.links.new(ci.outputs[0], iop.inputs["Instance"])
+    ng.links.new(attr("idx", "INT"), iop.inputs["Instance Index"])
+    e2r = ng.nodes.new("FunctionNodeEulerToRotation")
+    ng.links.new(attr("rot", "FLOAT_VECTOR"), e2r.inputs[0])
+    ng.links.new(e2r.outputs[0], iop.inputs["Rotation"])
+    ng.links.new(attr("skal", "FLOAT_VECTOR"), iop.inputs["Scale"])
+    ng.links.new(iop.outputs["Instances"], go.inputs["Geometry"])
+    return ng
+
+
+def prototypen(name):
+    """Collection fuer Vorlage-Objekte (aus der View-Layer ausgeschlossen, nur als Instanzquelle)."""
+    col = collection(f"00_Prototypen/{name}")
+    def _excl(lc):
+        for c in lc.children:
+            if c.name == "00_Prototypen":
+                c.exclude = True
+            _excl(c)
+    _excl(bpy.context.view_layer.layer_collection)
+    return col
+
+
+def instanzen(name, punkte, quelle_col, ziel_col):
+    """punkte: Liste (pos, rot_euler, skal, idx). Erzeugt ein Punkt-Mesh mit GN_Instanzen_Punkte."""
+    me = bpy.data.meshes.new(name)
+    me.vertices.add(len(punkte))
+    me.vertices.foreach_set("co", [c for p in punkte for c in p[0]])
+    for an, typ, k in (("rot", "FLOAT_VECTOR", 1), ("skal", "FLOAT_VECTOR", 2), ("idx", "INT", 3)):
+        a = me.attributes.new(an, typ, "POINT")
+        if typ == "INT":
+            a.data.foreach_set("value", [int(p[k]) for p in punkte])
+        else:
+            a.data.foreach_set("vector", [c for p in punkte for c in p[k]])
+    ob = bpy.data.objects.new(name, me)
+    ziel_col.objects.link(ob)
+    mod = ob.modifiers.new("GN_Instanzen", "NODES")
+    mod.node_group = gn_instanzen()
+    sock = next(s for s in mod.node_group.interface.items_tree if getattr(s, "name", "") == "Sammlung")
+    mod[sock.identifier] = quelle_col
+    return ob
+
+
+
+def mat_variante(basis, idx, tint=None):
+    """Farbvariante eines Bibliotheks-Materials (Fassaden: keine zwei Nachbarn gleich). idx 0 = Original."""
+    m0 = material(basis)
+    if idx == 0 and not tint:
+        return m0
+    name = f"{basis}_V{idx}"
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    m = m0.copy()
+    m.name = name
+    m.use_fake_user = True
+    nt = m.node_tree
+    hsv = next(n for n in nt.nodes if n.type == "HUE_SAT" and n.inputs["Color"].is_linked
+               and n.inputs["Color"].links[0].from_node.type == "TEX_IMAGE")
+    dh = [0, 0.012, -0.012, 0.025][idx % 4]
+    ds = [1, 0.85, 1.1, 0.75][idx % 4]
+    dv = [1, 0.9, 1.07, 0.82][idx % 4]
+    hsv.inputs["Hue"].default_value = 0.5 + dh
+    hsv.inputs["Saturation"].default_value *= ds
+    hsv.inputs["Value"].default_value *= dv
+    if tint:
+        ziel = hsv.outputs["Color"].links[0].to_socket
+        mx = nt.nodes.new("ShaderNodeMix")
+        mx.data_type = "RGBA"
+        mx.blend_type = "MULTIPLY"
+        _sock(mx.inputs, "Factor_Float").default_value = 1.0
+        nt.links.new(hsv.outputs["Color"], _sock(mx.inputs, "A_Color"))
+        _sock(mx.inputs, "B_Color").default_value = hex_lin(tint)
+        nt.links.new(_sock(mx.outputs, "Result_Color"), ziel)
+    return m
+
+
+def text_mesh(bm, text, groesse, matrix, mat, extrude=0.01, font=None):
+    """Text als Mesh in ein bmesh einfuegen (lokal: x = Leserichtung, y = Hoehe, z = Dicke)."""
+    cu = bpy.data.curves.new("tmp_txt", "FONT")
+    cu.body = text
+    cu.size = groesse
+    cu.extrude = extrude
+    cu.align_x = "CENTER"
+    cu.align_y = "CENTER"
+    if font:
+        cu.font = font
+    ob = bpy.data.objects.new("tmp_txt", cu)
+    bpy.context.scene.collection.objects.link(ob)
+    dg = bpy.context.evaluated_depsgraph_get()
+    me = ob.evaluated_get(dg).to_mesh()
+    n0 = len(bm.faces)
+    tmp = bmesh.new()
+    tmp.from_mesh(me)
+    bmesh.ops.transform(tmp, matrix=matrix, verts=tmp.verts)
+    me2 = bpy.data.meshes.new("tmp_txt2")
+    tmp.to_mesh(me2)
+    tmp.free()
+    bm.from_mesh(me2)
+    ob.evaluated_get(dg).to_mesh_clear()
+    bpy.data.objects.remove(ob)
+    bpy.data.curves.remove(cu)
+    bpy.data.meshes.remove(me2)
+    bm.faces.ensure_lookup_table()
+    for f in list(bm.faces)[n0:]:
+        f.material_index = mat
+
+
+
+def mat_maschendraht(name="MAT_Maschendraht"):
+    """Maschendrahtzaun: verzinkter Draht (Fotobasis rusty_metal_02), Rautenmuster 5 cm als Alpha."""
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    m, nt, b = _neues_mat(name)
+    uv = nt.nodes.new("ShaderNodeUVMap")
+    alph = []
+    for rot in (0.785, -0.785):
+        mp = nt.nodes.new("ShaderNodeMapping")
+        mp.inputs["Rotation"].default_value = (0, 0, rot)
+        nt.links.new(uv.outputs["UV"], mp.inputs["Vector"])
+        wv = nt.nodes.new("ShaderNodeTexWave")
+        wv.wave_profile = "SAW"
+        wv.inputs["Scale"].default_value = 1.0 / 0.05 / 6.283
+        wv.inputs["Distortion"].default_value = 0.0
+        nt.links.new(mp.outputs["Vector"], wv.inputs["Vector"])
+        alph.append(_maprange(nt, wv.outputs["Fac"], 0.86, 0.93, 0.0, 1.0))
+    alpha = _math(nt, "MAXIMUM", alph[0], alph[1])
+    eintrag = next(a for a in manifest()["assets"] if a["name"] == "MAT_Rost_Hell")
+    t = nt.nodes.new("ShaderNodeTexImage")
+    t.image = _bild(_karte(os.path.join(ROOT, eintrag["zielpfad"]), "_diff_"), False)
+    nt.links.new(uv.outputs["UV"], t.inputs["Vector"])
+    b.inputs["Metallic"].default_value = 0.6
+    grp = _verw_anschluss(nt, t.outputs["Color"], 0.55, None, lokal=0.7)
+    nt.links.new(grp.outputs["Farbe"], b.inputs["Base Color"])
+    nt.links.new(grp.outputs["Rauheit"], b.inputs["Roughness"])
+    nt.links.new(alpha, b.inputs["Alpha"])
+    return m

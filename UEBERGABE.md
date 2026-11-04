@@ -1,6 +1,6 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 1 freigegeben → **wartet auf „weiter“ für Phase 2 (STOPP)**
+- **Aktuelle Phase:** Phase 2 läuft (allein, ohne parallele Agenten). 2.1/2.2 Gebäude fertig, als Nächstes 2.3 Straßenraum
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** `viertel_v01.blend` (Blockout, 7,6 MB, Texturpfade relativ)
 - **Branch:** `claude/zen-meitner-53hxe1`
@@ -31,7 +31,10 @@
 - Varianten für Frage 4: scripts/configs/platzierung_varianten.json
 
 ## Halb fertig / fehlt
-- Nichts halb fertig. Phase 2 beginnt erst nach Freigabe.
+- Phase 2:
+  - fertig: 2.1/2.2 Gebäude (scripts/phase2/gebaeude2.py, Baukasten scripts/lib/fassade.py)
+  - offen: 2.3 Straßenraum (scripts/phase2/strassenraum.py), 2.4 Schutt (schutt.py), 2.5 Checkpoint (checkpoint.py), 2.6 Barrikaden (barrikaden.py), A13 Hintergrund-Ring (hintergrund_ring.py)
+  - build_phase2.py lädt diese Module automatisch, sobald die Datei existiert
 
 ## Nächster konkreter Schritt
 1. Neue Sitzung:
@@ -41,7 +44,7 @@
 3. Neu bauen (Befehle unten), Version hochzählen (v02), dann Phase 2 laut AUFTRAG.md.
 
 ## Offene Fragen an den Nutzer
-- Start von Phase 2 („weiter“)
+- keine (Phase 2 läuft)
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL
@@ -53,6 +56,7 @@
   4A Platzierung Variante A (platzierung_varianten.json → "gewaehlt": "A"),
   5B Verwitterung stärker (verw_master 0,85, verw_kanten 1,3 in materialien.json)
 - Bäume (Phase 4): freie Baum-Modelle aus anderen Quellen, nur eindeutig freie Lizenz, echte Modelle vor selbst erzeugten
+- Phase 2 gestartet: Option A (allein, keine parallelen Agenten)
 - Neu: A13 Hintergrund-Ring (AUFTRAG.md). Silhouetten und Gelände in Phase 2, Bäume in Phase 4, Dunst in Phase 5.
   Nach Phase 2 mit CAM_Hero_02 auf leere Horizontstellen prüfen
 
@@ -63,3 +67,4 @@
 4. `blender -b --factory-startup --python scripts/phase1/materialtest.py`
 5. `blender -b --factory-startup --python scripts/phase1/build_blockout.py -- --version 01`
 6. `blender -b viertel_v01.blend --python scripts/phase1/render_blockout.py`
+7. Phase 2: `blender -b --factory-startup --python scripts/phase2/build_phase2.py -- --version 02` (Test: --version 02test, Datei danach löschen)

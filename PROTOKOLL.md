@@ -156,3 +156,33 @@
 - Antworten: 1A, 2A, 3A, 4A (Variante A: Checkpoint am Ortsausgang Ost), 5B (Verwitterung stärker).
 - Umgesetzt: verw_master 0,7 → 0,85, verw_kanten 1,0 → 1,3, Variante A als „gewaehlt“ festgeschrieben.
 - AUFTRAG.md ergänzt: A13 Hintergrund-Ring und eine Baum-Regel in 4.1 (freie echte Modelle vor selbst erzeugten).
+
+## Phase 2.1/2.2 – Gebäude-Details + Schadenskatalog (2026-11-04)
+- Arbeitsweise: allein, ohne parallele Agenten (Freigabe A).
+- Neue Bibliothek scripts/lib/fassade.py:
+  - Wandscheiben mit echten Öffnungen, Laibungen durch die ganze Wand, leichter Unebenheit (±8–12 mm) und Bruchkanten
+  - Fenster: Rahmen 7 cm, 15 cm zurückgesetzt, Kämpfer, Fensterbank mit 5 cm Überstand und Tropfkante
+  - Fensterzustände nach Schadenskatalog: intakt / gesprungen / zerbrochen (Restsplitter) / fehlt / vernagelt (schiefe Bretter) / ausgebrannt
+  - Klimageräte (20 % bei Typ 1, 15 % davon heruntergefallen), Vorhänge
+- Innenräume: Geschossdecken (Boden Holz, Teppich oder Fliesen), Decken, Kern als Raum-Rückwand. Läden geplündert: Regale teils umgekippt, Theke, hängende Lampen, Ware am Boden.
+- Typ 3:
+  - Schaufenster mit Metallrahmen, Pfosten ~1,6 m, Kämpfer, Oberlicht, Sockelpaneel, Glastür
+  - Sperrholzplatten bei 35 % der „mittel“-Läden
+  - Schildband mit erfundenen Namen; 22 % der Buchstaben fehlen und liegen auf dem Gehweg
+  - zerrissene Markisen mit hängenden Bahnen, Feuertreppen an der Gassenseite
+- Typ 2:
+  - Wände mit Fenstern und Läden, Satteldach als echte Schindel-Flächen mit Löchern und sichtbaren Sparren
+  - Dachrinnen teils abgerissen, Fallrohre Ø 10 cm, Kriechraum mit Pfeilern und Lattengitter
+  - Veranda mit Dielen, Pfosten, Geländerstäben, durchhängendem Dach, Fliegengittertür und Hollywoodschaukel
+  - Lattenzaun (teils umgedrückt) + Maschendraht (Alpha-Material), Einfahrt, Briefkasten
+- Typ 5:
+  - Bandfassade bzw. Glas-Vorhangfassade im 1,5-m-Raster, 25–85 % der Scheiben fehlen, Jalousien hängen heraus
+  - B19 mit Ruß über den 3 oberen Etagen
+- Typ 6: Lochfenster, Notaufnahme-Vordach mit „EMERGENCY“, Landeplatz-Ring + „H“, Zelte, Absperrgitter.
+- Typ 8: Schule und Feuerwache mit Öffnungen (Rolltore teils offen); Kirche und Lagerhalle noch mit Phase-1-Geometrie und echten Materialien.
+- Typ 4: Marke „HARLAN FUEL“ (erfunden), Preisschild mit fehlenden Ziffern, Zapfschläuche. Typ 7: „PARKING“ und Bewehrung an der eingestürzten Ecke.
+- Graffiti nur mit erfundenen allgemeinen Texten (STAY OUT, NO WATER, DEAD INSIDE …) und Ruß als Decals.
+- Dachtechnik: Klimageräte mit Lüfter, Lüftungsrohre mit Kappe, Antennen, Satellitenschüsseln, Schornsteine.
+- Selbst gebaut: MAT_Dachschindeln (Fotobasis tarred_gravel + Laschenraster), MAT_Maschendraht (Fotobasis rusty_metal_02).
+- Aufbauzeit gesamt: 15 s, .blend ~12,7 MB.
+- Bekannt / offen: Ladeninnenräume eher dunkel (Innenmaterialien aufgehellt), Markisenbahnen noch flach, Kirche und Lagerhalle ohne echte Öffnungen.

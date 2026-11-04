@@ -1,49 +1,466 @@
 {
-  "_info": "Parameter der Material-Bibliothek. groesse_m = reale Kachelgroesse (leer = aus assets_manifest.json). hsv = [Farbton 0.5=neutral, Saettigung, Helligkeit]. variation = grossflaechige Helligkeitsschwankung (0.08 = +-8 %). bump = Staerke der Hoehenkarte. kantenfarbe = Farbe abgenutzter Kanten. lokal = Verwitterungs-Faktor dieses Materials.",
-  "standard": {"hsv": [0.5, 0.85, 1.0], "variation": 0.08, "bump": 0.35, "normal": 0.8, "rauheit_min": 0.35, "rauheit_max": 1.0, "kantenfarbe": "#A9A398", "lokal": 1.0},
-  "materialien": {
-    "MAT_Asphalt_Alt":          {"hsv": [0.5, 0.5, 0.62], "rauheit_min": 0.7, "lokal": 0.5, "kantenfarbe": "#8C8A84"},
-    "MAT_Asphalt_Rissig":       {"hsv": [0.5, 0.55, 1.0],  "rauheit_min": 0.7, "lokal": 0.5, "kantenfarbe": "#8C8A84"},
-    "MAT_Asphalt_Geflickt":     {"hsv": [0.5, 0.5, 0.85],  "rauheit_min": 0.65},
-    "MAT_Beton_Glatt":          {"hsv": [0.5, 0.75, 1.0],  "rauheit_min": 0.8},
-    "MAT_Beton_Grob":           {"hsv": [0.5, 0.75, 1.0],  "rauheit_min": 0.8},
-    "MAT_Ziegel_Rot":           {"hsv": [0.5, 0.8, 0.95],  "kantenfarbe": "#B08A74"},
-    "MAT_Ziegel_Verblasst":     {"hsv": [0.5, 0.8, 1.0],   "kantenfarbe": "#B08A74"},
-    "MAT_Ziegel_Gestrichen":    {"hsv": [0.5, 0.8, 1.0],   "kantenfarbe": "#9C6B55"},
-    "MAT_Putz":                 {"hsv": [0.5, 0.8, 1.0]},
-    "MAT_Putz_Beschaedigt":     {"hsv": [0.5, 0.8, 1.0]},
-    "MAT_Holz_Verkleidung":     {"groesse_m": [1.6, 1.6], "hsv": [0.5, 0.7, 0.95], "kantenfarbe": "#8B8478"},
-    "MAT_Holz_Verkleidung_Roh": {"hsv": [0.5, 0.6, 1.05], "kantenfarbe": "#9A9284"},
-    "MAT_Holz_Planken":         {"hsv": [0.5, 0.7, 1.0]},
-    "MAT_Holz_Bretter_Alt":     {"hsv": [0.5, 0.7, 1.0]},
-    "MAT_Sperrholz":            {"hsv": [0.5, 0.6, 0.9]},
-    "MAT_OSB":                  {"hsv": [0.5, 0.6, 0.9]},
-    "MAT_Flachdach_Bitumen":    {"hsv": [0.5, 0.6, 1.1], "rauheit_min": 0.6},
-    "MAT_Gehweg_Beton":         {"hsv": [0.5, 0.7, 1.0], "rauheit_min": 0.8, "fugen_m": 1.5},
-    "MAT_Gehwegplatten":        {"hsv": [0.5, 0.7, 1.0], "rauheit_min": 0.8},
-    "MAT_Bordstein":            {"hsv": [0.5, 0.7, 1.0], "rauheit_min": 0.8},
-    "MAT_Rost_Hell":            {"hsv": [0.5, 0.85, 0.95], "rauheit_min": 0.6, "kantenfarbe": "#A0522D"},
-    "MAT_Rost_Dunkel":          {"hsv": [0.5, 0.85, 0.9],  "rauheit_min": 0.6, "kantenfarbe": "#4A2A18"},
-    "MAT_Metall_Lackiert":      {"hsv": [0.5, 0.6, 1.0],   "rauheit_min": 0.45, "kantenfarbe": "#7A4A30"},
-    "MAT_Wellblech":            {"hsv": [0.5, 0.8, 0.95],  "rauheit_min": 0.45, "kantenfarbe": "#8C6A50"},
-    "MAT_Erde":                 {"hsv": [0.5, 0.75, 1.0],  "rauheit_min": 0.85, "lokal": 0.3},
-    "MAT_Matsch_Laub":          {"hsv": [0.5, 0.75, 1.0],  "rauheit_min": 0.6, "lokal": 0.3},
-    "MAT_Kies":                 {"hsv": [0.5, 0.75, 1.0],  "rauheit_min": 0.8, "lokal": 0.4},
-    "MAT_Sand":                 {"hsv": [0.5, 0.75, 1.0],  "rauheit_min": 0.85, "lokal": 0.3},
-    "MAT_Moos":                 {"hsv": [0.5, 0.7, 0.9],   "rauheit_min": 0.9, "lokal": 0.0},
-    "MAT_Laub_Boden":           {"hsv": [0.5, 0.8, 1.0],   "rauheit_min": 0.7, "lokal": 0.2},
-    "MAT_Gras_Boden":           {"hsv": [0.5, 0.75, 1.0],  "rauheit_min": 0.8, "lokal": 0.2},
-    "MAT_Sackleinen":           {"hsv": [0.5, 0.6, 1.0],   "rauheit_min": 0.9},
-    "MAT_Stoff_Plane":          {"hsv": [0.5, 0.6, 1.0],   "rauheit_min": 0.85},
-    "MAT_Teppich":              {"hsv": [0.5, 0.7, 1.0],   "rauheit_min": 0.9},
-    "MAT_Fliesen":              {"hsv": [0.5, 0.8, 1.0],   "rauheit_min": 0.3}
+ "_info": "Parameter der Material-Bibliothek. groesse_m = reale Kachelgroesse (leer = aus assets_manifest.json). hsv = [Farbton 0.5=neutral, Saettigung, Helligkeit]. variation = grossflaechige Helligkeitsschwankung (0.08 = +-8 %). bump = Staerke der Hoehenkarte. kantenfarbe = Farbe abgenutzter Kanten. lokal = Verwitterungs-Faktor dieses Materials.",
+ "standard": {
+  "hsv": [
+   0.5,
+   0.85,
+   1.0
+  ],
+  "variation": 0.08,
+  "bump": 0.35,
+  "normal": 0.8,
+  "rauheit_min": 0.35,
+  "rauheit_max": 1.0,
+  "kantenfarbe": "#A9A398",
+  "lokal": 1.0
+ },
+ "materialien": {
+  "MAT_Asphalt_Alt": {
+   "hsv": [
+    0.5,
+    0.5,
+    0.62
+   ],
+   "rauheit_min": 0.7,
+   "lokal": 0.5,
+   "kantenfarbe": "#8C8A84"
   },
-  "verwitterung": {
-    "_info": "Zentrale Regler (werden als Szenen-Eigenschaften verw_* angelegt, aendern: Szene > Benutzerdefinierte Eigenschaften).",
-    "verw_master": 0.85, "verw_staub": 1.0, "verw_schmutz": 1.0, "verw_kanten": 1.3,
-    "verw_wasser": 1.0, "verw_moos": 1.0, "verw_bleich": 1.0,
-    "staubfarbe": "#9A9284", "schmutzfarbe": "#4A3B2C", "moosfarbe": "#4F5A2A",
-    "sonne_azimut_grad": 265, "sonne_hoehe_grad": 28,
-    "heruntergeladen_hsv": [0.5, 0.65, 0.88]
+  "MAT_Asphalt_Rissig": {
+   "hsv": [
+    0.5,
+    0.55,
+    1.0
+   ],
+   "rauheit_min": 0.7,
+   "lokal": 0.5,
+   "kantenfarbe": "#8C8A84"
+  },
+  "MAT_Asphalt_Geflickt": {
+   "hsv": [
+    0.5,
+    0.5,
+    0.85
+   ],
+   "rauheit_min": 0.65
+  },
+  "MAT_Beton_Glatt": {
+   "hsv": [
+    0.5,
+    0.75,
+    1.0
+   ],
+   "rauheit_min": 0.8
+  },
+  "MAT_Beton_Grob": {
+   "hsv": [
+    0.5,
+    0.75,
+    1.0
+   ],
+   "rauheit_min": 0.8
+  },
+  "MAT_Ziegel_Rot": {
+   "hsv": [
+    0.5,
+    0.8,
+    0.95
+   ],
+   "kantenfarbe": "#B08A74"
+  },
+  "MAT_Ziegel_Verblasst": {
+   "hsv": [
+    0.5,
+    0.8,
+    1.0
+   ],
+   "kantenfarbe": "#B08A74"
+  },
+  "MAT_Ziegel_Gestrichen": {
+   "hsv": [
+    0.5,
+    0.8,
+    1.0
+   ],
+   "kantenfarbe": "#9C6B55"
+  },
+  "MAT_Putz": {
+   "hsv": [
+    0.5,
+    0.8,
+    1.0
+   ]
+  },
+  "MAT_Putz_Beschaedigt": {
+   "hsv": [
+    0.5,
+    0.8,
+    1.0
+   ]
+  },
+  "MAT_Holz_Verkleidung": {
+   "groesse_m": [
+    1.6,
+    1.6
+   ],
+   "hsv": [
+    0.5,
+    0.7,
+    0.95
+   ],
+   "kantenfarbe": "#8B8478"
+  },
+  "MAT_Holz_Verkleidung_Roh": {
+   "hsv": [
+    0.5,
+    0.6,
+    1.05
+   ],
+   "kantenfarbe": "#9A9284"
+  },
+  "MAT_Holz_Planken": {
+   "hsv": [
+    0.5,
+    0.7,
+    1.0
+   ]
+  },
+  "MAT_Holz_Bretter_Alt": {
+   "hsv": [
+    0.5,
+    0.7,
+    1.0
+   ]
+  },
+  "MAT_Sperrholz": {
+   "hsv": [
+    0.5,
+    0.6,
+    0.9
+   ]
+  },
+  "MAT_OSB": {
+   "hsv": [
+    0.5,
+    0.6,
+    0.9
+   ]
+  },
+  "MAT_Flachdach_Bitumen": {
+   "hsv": [
+    0.5,
+    0.6,
+    1.1
+   ],
+   "rauheit_min": 0.6
+  },
+  "MAT_Gehweg_Beton": {
+   "hsv": [
+    0.5,
+    0.7,
+    1.0
+   ],
+   "rauheit_min": 0.8,
+   "fugen_m": 1.5
+  },
+  "MAT_Gehwegplatten": {
+   "hsv": [
+    0.5,
+    0.7,
+    1.0
+   ],
+   "rauheit_min": 0.8
+  },
+  "MAT_Bordstein": {
+   "hsv": [
+    0.5,
+    0.7,
+    1.0
+   ],
+   "rauheit_min": 0.8
+  },
+  "MAT_Rost_Hell": {
+   "hsv": [
+    0.5,
+    0.85,
+    0.95
+   ],
+   "rauheit_min": 0.6,
+   "kantenfarbe": "#A0522D"
+  },
+  "MAT_Rost_Dunkel": {
+   "hsv": [
+    0.5,
+    0.85,
+    0.9
+   ],
+   "rauheit_min": 0.6,
+   "kantenfarbe": "#4A2A18"
+  },
+  "MAT_Metall_Lackiert": {
+   "hsv": [
+    0.5,
+    0.6,
+    1.0
+   ],
+   "rauheit_min": 0.45,
+   "kantenfarbe": "#7A4A30"
+  },
+  "MAT_Wellblech": {
+   "hsv": [
+    0.5,
+    0.8,
+    0.95
+   ],
+   "rauheit_min": 0.45,
+   "kantenfarbe": "#8C6A50"
+  },
+  "MAT_Erde": {
+   "hsv": [
+    0.5,
+    0.75,
+    1.0
+   ],
+   "rauheit_min": 0.85,
+   "lokal": 0.3
+  },
+  "MAT_Matsch_Laub": {
+   "hsv": [
+    0.5,
+    0.75,
+    1.0
+   ],
+   "rauheit_min": 0.6,
+   "lokal": 0.3
+  },
+  "MAT_Kies": {
+   "hsv": [
+    0.5,
+    0.75,
+    1.0
+   ],
+   "rauheit_min": 0.8,
+   "lokal": 0.4
+  },
+  "MAT_Sand": {
+   "hsv": [
+    0.5,
+    0.75,
+    1.0
+   ],
+   "rauheit_min": 0.85,
+   "lokal": 0.3
+  },
+  "MAT_Moos": {
+   "hsv": [
+    0.5,
+    0.7,
+    0.9
+   ],
+   "rauheit_min": 0.9,
+   "lokal": 0.0
+  },
+  "MAT_Laub_Boden": {
+   "hsv": [
+    0.5,
+    0.8,
+    1.0
+   ],
+   "rauheit_min": 0.7,
+   "lokal": 0.2
+  },
+  "MAT_Gras_Boden": {
+   "hsv": [
+    0.5,
+    0.75,
+    1.0
+   ],
+   "rauheit_min": 0.8,
+   "lokal": 0.2
+  },
+  "MAT_Sackleinen": {
+   "hsv": [
+    0.5,
+    0.6,
+    1.0
+   ],
+   "rauheit_min": 0.9
+  },
+  "MAT_Stoff_Plane": {
+   "hsv": [
+    0.5,
+    0.6,
+    1.0
+   ],
+   "rauheit_min": 0.85
+  },
+  "MAT_Teppich": {
+   "hsv": [
+    0.5,
+    0.7,
+    1.0
+   ],
+   "rauheit_min": 0.9
+  },
+  "MAT_Fliesen": {
+   "hsv": [
+    0.5,
+    0.8,
+    1.0
+   ],
+   "rauheit_min": 0.3
   }
+ },
+ "verwitterung": {
+  "_info": "Zentrale Regler (werden als Szenen-Eigenschaften verw_* angelegt, aendern: Szene > Benutzerdefinierte Eigenschaften).",
+  "verw_master": 0.85,
+  "verw_staub": 1.0,
+  "verw_schmutz": 1.0,
+  "verw_kanten": 1.3,
+  "verw_wasser": 1.0,
+  "verw_moos": 1.0,
+  "verw_bleich": 1.0,
+  "staubfarbe": "#9A9284",
+  "schmutzfarbe": "#4A3B2C",
+  "moosfarbe": "#4F5A2A",
+  "sonne_azimut_grad": 265,
+  "sonne_hoehe_grad": 28,
+  "heruntergeladen_hsv": [
+   0.5,
+   0.65,
+   0.88
+  ]
+ },
+ "abgeleitet": {
+  "_info": "Abgeleitete Materialien: basis = Fototextur eines Bibliotheks-Materials, farbe = Umfaerben (Helligkeit der Fototextur x Farbe), farbe_gain = Helligkeit.",
+  "MAT_Fensterrahmen_Holz": {
+   "basis": "MAT_Holz_Verkleidung",
+   "hsv": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "kantenfarbe": "#8B8478"
+  },
+  "MAT_Fensterrahmen_Dunkel": {
+   "basis": "MAT_Holz_Bretter_Alt",
+   "farbe": "#3B3A36",
+   "farbe_gain": 2.0
+  },
+  "MAT_Metall_Rahmen": {
+   "basis": "MAT_Rost_Hell",
+   "farbe": "#7A7A74",
+   "farbe_gain": 1.6,
+   "rauheit_min": 0.4
+  },
+  "MAT_Stahl_Verzinkt": {
+   "basis": "MAT_Rost_Hell",
+   "hsv": [
+    0.5,
+    0.35,
+    0.95
+   ],
+   "rauheit_min": 0.4
+  },
+  "MAT_Mast_Holz": {
+   "basis": "MAT_Holz_Planken",
+   "farbe": "#5B4A3B",
+   "farbe_gain": 2.3,
+   "groesse_m": [
+    0.8,
+    3.0
+   ]
+  },
+  "MAT_Lack_Rot": {
+   "basis": "MAT_Metall_Lackiert",
+   "farbe": "#8E2A22",
+   "farbe_gain": 2.4,
+   "kantenfarbe": "#A0522D"
+  },
+  "MAT_Lack_Weiss": {
+   "basis": "MAT_Metall_Lackiert",
+   "farbe": "#D8D4CA",
+   "farbe_gain": 2.6,
+   "kantenfarbe": "#8C6A50"
+  },
+  "MAT_Lack_Gelb": {
+   "basis": "MAT_Metall_Lackiert",
+   "farbe": "#C29A2E",
+   "farbe_gain": 2.5,
+   "kantenfarbe": "#7A4A30"
+  },
+  "MAT_Lack_Gruen": {
+   "basis": "MAT_Metall_Lackiert",
+   "farbe": "#2F5A3A",
+   "farbe_gain": 2.4,
+   "kantenfarbe": "#7A4A30"
+  },
+  "MAT_Lack_Schwarz": {
+   "basis": "MAT_Metall_Lackiert",
+   "farbe": "#2A2A28",
+   "farbe_gain": 2.2,
+   "kantenfarbe": "#6E5040"
+  },
+  "MAT_Lack_Oliv": {
+   "basis": "MAT_Metall_Lackiert",
+   "farbe": "#5C5F45",
+   "farbe_gain": 2.4,
+   "kantenfarbe": "#6E5A40"
+  },
+  "MAT_Lack_Blau": {
+   "basis": "MAT_Metall_Lackiert",
+   "farbe": "#2E4560",
+   "farbe_gain": 2.4,
+   "kantenfarbe": "#7A4A30"
+  },
+  "MAT_Gummi": {
+   "basis": "MAT_Beton_Grob",
+   "farbe": "#262624",
+   "farbe_gain": 1.8,
+   "rauheit_min": 0.75,
+   "bump": 0.1
+  },
+  "MAT_Plane_Oliv": {
+   "basis": "MAT_Stoff_Plane",
+   "farbe": "#5F6148",
+   "farbe_gain": 2.0
+  },
+  "MAT_Markise_Gruen": {
+   "basis": "MAT_Stoff_Plane",
+   "farbe": "#3E5A45",
+   "farbe_gain": 2.0
+  },
+  "MAT_Markise_Rot": {
+   "basis": "MAT_Stoff_Plane",
+   "farbe": "#7A3A30",
+   "farbe_gain": 2.0
+  },
+  "MAT_Innen_Wand": {
+   "basis": "MAT_Putz",
+   "farbe": "#B9AE98",
+   "farbe_gain": 1.7,
+   "lokal": 0.25
+  },
+  "MAT_Innen_Wand_Gruen": {
+   "basis": "MAT_Putz",
+   "farbe": "#8E9A84",
+   "farbe_gain": 1.7,
+   "lokal": 0.25
+  },
+  "MAT_Innen_Decke": {
+   "basis": "MAT_Putz",
+   "farbe": "#C9C3B4",
+   "farbe_gain": 1.6,
+   "lokal": 0.1
+  },
+  "MAT_Container": {
+   "basis": "MAT_Wellblech",
+   "farbe": "#4E5A48",
+   "farbe_gain": 2.3,
+   "kantenfarbe": "#7A4A30"
+  },
+  "MAT_Mauer_Innen": {
+   "basis": "MAT_Ziegel_Verblasst",
+   "lokal": 0.4
+  }
+ }
 }
