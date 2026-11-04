@@ -236,3 +236,9 @@
 - Schilder „CHECKPOINT“, „STOP“, „QUARANTINE ZONE / NO ENTRY“.
 - Poly Haven: Militärkiste, Holzkiste, 2 Kanister, 2 Fässer (eines als spätere Feuertonne für Phase 5).
 - Hinweis für Phase 5: Der Fokus von CAM_Hero_03 sollte auf ~2,5 m (Sandsäcke) statt 4 m liegen.
+
+## Phase 2.6 – Barrikaden (2026-11-04)
+- scripts/phase2/barrikaden.py + scripts/configs/barrikaden.json.
+- Barrikade 1 (Hauptstraße West, x = −59,5): 2 quergestellte Autos (Platzhalter mit Typ-A-Maßen, werden in Phase 3 ersetzt), Bus-Seitenteil, angelehnte Wellblechtafeln, Paletten, Ketten, halb offenes Maschendraht-Tor.
+- Barrikade 2 (Querstraße West, y = −33,5): 45 Teile (Schränke, Türen, Matratzen, Reifenstapel, Bretter, Tische, Sofas), teils eingestürzt, Stacheldraht-Spirale mit Riss.
+- Barrikade 3 (Gasse, x = −42,5): Palisade aus Brettern (2,05–2,35 m mit Spitzen), 2 Riegel, 3 Stützbalken mit Keilen, 6 angespitzte Pfähle davor.
