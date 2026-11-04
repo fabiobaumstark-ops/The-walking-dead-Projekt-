@@ -1,6 +1,6 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 0 – Look-Bible v1.0 fertig, warte auf zweite Bestätigung (STOPP)
+- **Aktuelle Phase:** Phase 1 – Schritt 1.1 (Assets) fertig, als Nächstes 1.2 Material-Bibliothek
 - **Blender-Version:** 5.2.3 LTS (Linux, /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** noch keine
 - **Branch:** `claude/zen-meitner-53hxe1`
@@ -14,20 +14,19 @@
 - recherche/RECHERCHE.md, architektur.md, vegetation.md, moodboard.html
 - recherche/LOOK_BIBLE.md v1.0 (alle Empfehlungen angenommen)
 - MPFB 2.0.18 Installationstest in Blender 5.2.3: ok
+- Phase 1.1: scripts/configs/assets_auswahl.json, scripts/phase1/make_manifest.py, assets_manifest.json (70 Assets, 1,36 GB), download_assets.py (in der Cloud getestet, inkl. Überspringen), LIZENZEN.txt
 
 ## Halb fertig / fehlt
-- Zweite Bestätigung der LOOK_BIBLE.md v1.0 durch den Nutzer fehlt noch
+- Phase 1.2–1.6 noch offen (Material-Bibliothek, Gelände, Straßen, Gebäude-Blockout, Kameras)
 - fahrzeuge.md / militaer.md: erst vor Phase 3 (laut Auftrag)
 
 ## Nächster konkreter Schritt
-- In einer neuen Sitzung: Blender ist im Container NICHT dauerhaft. Neu installieren:
-  `curl -O https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz`
-  und nach /opt entpacken (Symlink /usr/local/bin/blender).
-- Nach der Bestätigung: Phase 1 starten (AUFTRAG.md Phase 1 lesen). Erster Schritt 1.1:
-  Assets per Poly-Haven-API auswählen, assets_manifest.json + download_assets.py schreiben.
+- Neue Sitzung: Blender 5.2.3 installieren (siehe PROTOKOLL.md), dann `python3 download_assets.py --nur-basis`.
+- Phase 1.2: scripts/phase1/materialien.py schreiben (MAT_-Bibliothek + Gruppe MAT_Verwitterung),
+  Testreihe rendern nach renders/test/phase1_materialtest.png.
 
 ## Offene Fragen an den Nutzer
-- Zweite Bestätigung der Look-Bible v1.0 (gefragt am 2026-11-04)
+- keine
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL (alle Domains erreichbar)
@@ -35,6 +34,9 @@
 - Branch: weiter in `claude/zen-meitner-53hxe1`
 - Recherche Phase 0 starten: ja
 - Phase-0-Fragen 1–11: alle Empfehlungen angenommen (siehe LOOK_BIBLE.md)
+- Look-Bible v1.0 bestätigt, Phase 1 freigegeben (2026-11-04)
 
 ## Ausgeführte Skripte (Reihenfolge)
-- keine Projektskripte bisher
+1. scripts/phase1/make_manifest.py (erzeugt assets_manifest.json)
+2. download_assets.py --nur-basis
+3. scripts/phase1/make_lizenzen.py
