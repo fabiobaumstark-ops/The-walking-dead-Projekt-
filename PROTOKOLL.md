@@ -35,7 +35,16 @@
 
 ### Entscheidung
 - STOPP laut Auftrag A1 (Domain blockiert). Warte auf Freigabe der Domains.
+- Nutzer hat Network access auf FULL gestellt; A1b in AUFTRAG.md eingetragen.
 
 ### Git
 - Push in Branch `claude/zen-meitner-53hxe1` (für diese Sitzung vorgegeben;
   `main` existiert noch nicht, Repo war leer).
+
+## Phase 0 – Schritt 2: Netzwerk FULL + Blender-Installation (2026-11-04)
+- Erneuter Test: blender.org, download.blender.org, api.polyhaven.com,
+  dl.polyhaven.org (Testdatei 200 OK), ambientcg.com, extensions.blender.org erreichbar.
+- **Blender 5.2.3 LTS** (Build-Hash e13b728c6880), offizielle Linux-x64-Version
+  von download.blender.org, SHA256 geprüft, installiert unter /opt/blender-5.2.3-linux-x64.
+  → Zu Hause auf dem Mac dieselbe Version **Blender 5.2.3 LTS (macOS Apple Silicon)** nutzen.
+- Cycles-CPU-Testrender 480x270, 16 Samples: 1,8 s – funktioniert.

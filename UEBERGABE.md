@@ -1,33 +1,37 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 0, Schritt 1 (Umgebungsprüfung) – abgeschlossen, dann STOPP
-- **Blender-Version:** noch nicht installiert (geplant: 5.2.3)
+- **Aktuelle Phase:** Phase 0, Schritt 3 (Recherche) – läuft
+- **Blender-Version:** 5.2.3 LTS (Linux, /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** noch keine
 - **Branch:** `claude/zen-meitner-53hxe1`
+- **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 
 ## Fertig
-- AUFTRAG.md (vollständiger Auftrag, Version 8)
-- PROTOKOLL.md (Umgebungsprüfung)
+- AUFTRAG.md (Version 8, A1b Netzwerk FULL ergänzt)
+- PROTOKOLL.md (Umgebungsprüfung, Blender-Installation)
 - .gitignore
+- Blender 5.2.3 LTS installiert + Testrender ok
 
 ## Halb fertig / fehlt
-- Blender-Installation (blockiert: blender.org gesperrt; Ausweg: `pip install bpy==5.2.3`)
-- Recherche Phase 0 (RECHERCHE.md, moodboard.html, LOOK_BIBLE.md, architektur.md, vegetation.md) – noch nicht begonnen
+- Recherche Phase 0: recherche/RECHERCHE.md, architektur.md, vegetation.md,
+  moodboard.html, LOOK_BIBLE.md – in Arbeit
+- Fragen-Katalog Phase 0 (11 Fragen) – noch nicht gestellt
 
 ## Nächster konkreter Schritt
-1. Prüfen, ob diese Domains erreichbar sind:
-   `curl -s -o /dev/null -w "%{http_code}" https://api.polyhaven.com/assets?t=hdris`
-   (gleich für download.blender.org, dl.polyhaven.org).
-2. Wenn ja: Blender 5.2.3 (Linux) installieren, Version in PROTOKOLL.md eintragen.
-3. Phase-0-Recherche starten (Themen 1–11 aus AUFTRAG.md, ca. 30–40 Suchen).
+- In einer neuen Sitzung: Blender ist im Container NICHT dauerhaft. Neu installieren:
+  `curl -O https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz`
+  und nach /opt entpacken (Symlink /usr/local/bin/blender).
+- Recherche Themen 1–11 (AUFTRAG.md, Phase 0) fortsetzen; fertige Dateien
+  in recherche/ prüfen und fehlende Themen ergänzen.
 
 ## Offene Fragen an den Nutzer
-- Domains freigeben (siehe PROTOKOLL.md) – **wartet auf Antwort**
-- Darf als Ausweg Blender als Python-Modul von PyPI (bpy 5.2.3) genutzt werden?
-- Push nach `main` oder weiter im Sitzungs-Branch?
+- keine offen (Phase-0-Fragen folgen nach der Recherche)
 
-## Bisherige Freigaben
-- keine
+## Bisherige Antworten/Freigaben
+- Netzwerk: FULL (alle Domains erreichbar)
+- Blender: normale Linux-Version (nicht bpy von PyPI)
+- Branch: weiter in `claude/zen-meitner-53hxe1`
+- Recherche Phase 0 starten: ja
 
 ## Ausgeführte Skripte (Reihenfolge)
-- keine
+- keine Projektskripte bisher
