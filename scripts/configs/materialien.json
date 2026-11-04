@@ -568,32 +568,38 @@
   "MAT_Sitzstoff_Grau": {
    "basis": "MAT_Sitzstoff",
    "farbe": "#5E5C58",
-   "farbe_gain": 1.7
+   "farbe_gain": 1.7,
+   "lokal": 0.3
   },
   "MAT_Sitzstoff_Beige": {
    "basis": "MAT_Sitzstoff",
    "farbe": "#9C8E74",
-   "farbe_gain": 1.7
+   "farbe_gain": 1.7,
+   "lokal": 0.3
   },
   "MAT_Sitzstoff_Schwarz": {
    "basis": "MAT_Sitzstoff",
    "farbe": "#2E2D2B",
-   "farbe_gain": 1.7
+   "farbe_gain": 1.7,
+   "lokal": 0.3
   },
   "MAT_Leder_Schwarz": {
    "basis": "MAT_Leder",
    "farbe": "#262524",
-   "farbe_gain": 2.0
+   "farbe_gain": 2.0,
+   "lokal": 0.3
   },
   "MAT_Leder_Beige": {
    "basis": "MAT_Leder",
    "farbe": "#A08C6E",
-   "farbe_gain": 2.0
+   "farbe_gain": 2.0,
+   "lokal": 0.3
   },
   "MAT_Leder_Grau": {
    "basis": "MAT_Leder",
    "farbe": "#6A6865",
-   "farbe_gain": 2.0
+   "farbe_gain": 2.0,
+   "lokal": 0.3
   },
   "MAT_Armaturen": {
    "basis": "MAT_Leder",
@@ -604,7 +610,8 @@
     0.25
    ],
    "normal": 0.5,
-   "rauheit_min": 0.5
+   "rauheit_min": 0.5,
+   "lokal": 0.3
   },
   "MAT_Tuerverkleidung": {
    "basis": "MAT_Leder",
@@ -614,18 +621,21 @@
     0.3,
     0.3
    ],
-   "normal": 0.5
+   "normal": 0.5,
+   "lokal": 0.3
   },
   "MAT_Dachhimmel": {
    "basis": "MAT_Sitzstoff",
    "farbe": "#A39C8C",
    "farbe_gain": 1.6,
-   "normal": 0.3
+   "normal": 0.3,
+   "lokal": 0.3
   },
   "MAT_Teppich_Auto": {
    "basis": "MAT_Teppich",
    "farbe": "#3A3835",
-   "farbe_gain": 1.8
+   "farbe_gain": 1.8,
+   "lokal": 0.3
   },
   "MAT_Kunststoff_Schwarz": {
    "basis": "MAT_Leder",

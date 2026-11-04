@@ -195,9 +195,12 @@ def bauen(typ, farbe="Silber", felge=None, seed=1, alter=0.8, col=None, cid=None
     if innen:
         FT.innenraum(lo, T, mats, col, root, cid, rnd)
     # Alter/Verwitterung an alle Teile weitergeben
+    innen_teile = ("Sitz_", "Rueckbank", "Reihe3", "Armaturen", "Lenkrad", "Innen_Boden", "Sonnenblenden", "Gurte",
+                   "Hutablage", "Spritzwand", "Trennwand", "Laderaumboden", "Schalthebel")
     for ob in _kinder(root):
         ob["lack_alter"] = alter
-        ob["verw_korrektur"] = 0.0
+        # Innenraum: geschuetzt -> kaum Moos/Flechten/Staub (bis Scheiben zerbrechen, dann im Schadensmodul hoeher)
+        ob["verw_korrektur"] = -0.75 if any(k in ob.name for k in innen_teile) else 0.0
     lo.bm.free()
     return root
 

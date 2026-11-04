@@ -354,3 +354,13 @@
   - Scheiben 5 mm, Türen mit Scharnier-Drehpunkt
   - Leuchten/Grill per Raycast-Patch auf der Oberfläche
   - Testläufe: Kappen-Normalen waren invertiert (schwarze Front), Scheinwerfer-Oberkante falsch, Spiegel innen → behoben
+- Vorschau-Iteration 2–3 (Testläufe in niedriger Auflösung):
+  - F (Kleinwagen) wirkte wie ein Mini-Van → neues Profil: abfallendes Dach, schrägere Heckklappe, H 1,50 m
+  - B (Kompakt-SUV) wirkte wie ein Kombi → Gürtellinie +4–5 cm (kleinere Fenster), Radlauf-Leisten statt treppiger Verkleidung
+  - Pickup: Kabinen-Heckfenster ergänzt, Rücklichter an den Bordwand-Enden, Kennzeichen-Ausrichtung korrigiert
+  - Kastenwagen: Fenster in den Hecktüren
+  - Stoßstangen und Seitenleisten als durchgehende Profile (vorher sichtbare Segmente)
+  - Sitze als Polster mit Seitenwangen; Vorzeichenfehler behoben (Lehnen neigten nach vorne)
+  - Armaturenbrett mit Seitenprofil
+  - Kantenverschleiß am Lack = Grundierung statt Rost (Rost nur über eigene Maske unten); Innenraum ohne Moos/Flechten
+  - Je Typ 2–3 Front-/Heck-Varianten in fahrzeuge.json (für die Flotte)

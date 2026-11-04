@@ -38,7 +38,7 @@ def studio():
     V.hdri_welt(hdr, 1.0, rot)
     V.sonne(60, el, staerke=2.5, kelvin=5000, winkel_grad=2.0)
     bm = bmesh.new()
-    V.box(bm, -60, -40, -0.05, 60, 40, 0.0)
+    V.box(bm, -120, -120, -0.05, 120, 120, 0.0)
     V.objekt_aus_bmesh("Boden_Asphalt", bm, sc.collection, material=V.material("MAT_Asphalt_Rissig"))
     return sc
 
@@ -91,8 +91,8 @@ if __name__ == "__main__":
             "vorne": (c + Vector((L / 2 + 3.4, 3.9, 1.3 + Hh * 0.15)), c + Vector((0.35, 0, Hh * 0.45)), 35),
             "seite": (c + Vector((0, L * 1.62, 1.05)), c + Vector((0, 0, Hh * 0.47)), 50),
             "hinten": (c + Vector((-(L / 2 + 3.2), 3.8, 1.45 + Hh * 0.15)), c + Vector((-0.35, 0, Hh * 0.45)), 35),
-            "innen": (c + Vector((P.x(I["sitz_v"] + 0.15), P.hw(I["sitz_v"]) + 1.25, I["sitz"] + 0.42)),
-                      c + Vector((P.x(I["sitz_v"] - 0.45), -0.1, I["sitz"] + 0.12)), 22),
+            "innen": (c + Vector((P.x(I["sitz_v"] + 0.45), P.hw(I["sitz_v"]) + 0.85, I["sitz"] + 0.70)),
+                      c + Vector((P.x(I["lenkrad"][0] - 0.25), 0.15, I["lenkrad"][1] - 0.05)), 20),
         }
         tuer = bpy.data.objects.get(f"{r.name}_Tuer_vl")
         for n, (pos, ziel, lens) in ansichten.items():
@@ -100,7 +100,7 @@ if __name__ == "__main__":
             sc.camera = cam
             sc.view_settings.exposure = 0.7 if n == "innen" else 0.0
             if tuer is not None:
-                tuer.rotation_euler.z = math.radians(-62) if n == "innen" else 0.0
+                tuer.rotation_euler.z = math.radians(-75) if n == "innen" else 0.0
             t0 = time.time()
             V.vorschau_render(sc, os.path.join(ausgabe, f"phase3_grund_{t}_{n}.png"), samples=samples * (2 if n == "innen" else 1),
                               breite=breite, hoehe=hoehe)
@@ -128,7 +128,7 @@ if __name__ == "__main__":
         sc.camera = cam
         t0 = time.time()
         V.vorschau_render(sc, os.path.join(ausgabe, "phase3_grund_reihe.png"), samples=24 if not schnell else 12,
-                          breite=1600 if not schnell else 800, hoehe=300 if not schnell else 150)
+                          breite=2400 if not schnell else 1200, hoehe=420 if not schnell else 210)
         zeiten["reihe"] = round(time.time() - t0, 1)
     bpy.ops.wm.save_as_mainfile(filepath=os.path.join(V.ROOT, "viertel_fz_grundmodelle_test.blend"), compress=True)
     print("ZEITEN", zeiten)

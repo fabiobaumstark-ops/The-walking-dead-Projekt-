@@ -73,6 +73,66 @@ def zylinder(bm, p0, p1, r, seg=16, mat=0, deckel=True, r1=None):
     return fl
 
 
+def polster(bm, c, s, rot=None, achse="z", wange=0.0, mulde=0.0, mat=0, cuts=4):
+    """Gepolsterter Kasten (fein unterteilt, fuer Subsurf): Seitenwangen und Mulde auf der Vorderseite 'achse'."""
+    tmp = bmesh.new()
+    bmesh.ops.create_cube(tmp, size=1.0)
+    bmesh.ops.subdivide_edges(tmp, edges=tmp.edges[:], cuts=cuts, use_grid_fill=True)
+    ai = {"x": 0, "z": 2}[achse]
+    for v in tmp.verts:
+        p = Vector(v.co)
+        vorne = max(0.0, p[ai] * 2) ** 2          # 1 an der Vorderseite
+        ry = abs(p.y) * 2                           # 0 Mitte, 1 Rand
+        w = wange * max(0.0, (ry - 0.45) / 0.55) ** 1.5 - mulde * max(0.0, 1 - ry / 0.7) ** 2
+        p = Vector((p.x * s[0], p.y * s[1], p.z * s[2]))
+        p[ai] += w * vorne
+        if rot is not None:
+            p = rot @ p
+        v.co = p + Vector(c)
+    for f in tmp.faces:
+        f.material_index = mat
+        f.smooth = True
+    me = bpy.data.meshes.new("tmp_polster")
+    tmp.to_mesh(me)
+    tmp.free()
+    bm.from_mesh(me)
+    bpy.data.meshes.remove(me)
+
+
+def rrechteck(w, h, r, n=3):
+    """Abgerundetes Rechteck als Profil (a quer, b hoch), Mitte (0, 0)."""
+    pts = []
+    r = min(r, w / 2.01, h / 2.01)
+    for ca, cb, a0 in ((w / 2 - r, -h / 2 + r, -90), (w / 2 - r, h / 2 - r, 0), (-w / 2 + r, h / 2 - r, 90), (-w / 2 + r, -h / 2 + r, 180)):
+        for k in range(n + 1):
+            t = math.radians(a0 + 90 * k / n)
+            pts.append((ca + r * math.cos(t), cb + r * math.sin(t)))
+    return pts
+
+
+def profil_zug(bm, punkte, profil, oben=Vector((0, 0, 1)), mat=0, kappen=True):
+    """Profil entlang eines Pfades ziehen (durchgehende Leisten, Stossstangen, Relings)."""
+    ringe = []
+    n = len(punkte)
+    for i, p in enumerate(punkte):
+        t = (punkte[min(i + 1, n - 1)] - punkte[max(i - 1, 0)]).normalized()
+        u = (oben - t * oben.dot(t)).normalized()
+        sd = t.cross(u)
+        ringe.append([bm.verts.new(p + sd * a + u * b) for a, b in profil])
+    m = len(profil)
+    for r0, r1 in zip(ringe, ringe[1:]):
+        for k in range(m):
+            k1 = (k + 1) % m
+            f = bm.faces.new((r0[k], r0[k1], r1[k1], r1[k]))
+            f.material_index = mat
+            f.smooth = True
+    if kappen and n > 1:
+        for r, rev in ((ringe[0], True), (ringe[-1], False)):
+            f = bm.faces.new(list(reversed(r)) if rev else r)
+            f.material_index = mat
+    return ringe
+
+
 def rotation_um_y(profil, seg, mat=0, bm=None, winkel=(0, 2 * math.pi)):
     """Dreht ein Profil [(r, y), ...] um die y-Achse (Radachse)."""
     bm = bm or bmesh.new()
@@ -507,16 +567,14 @@ def kennzeichen(lo, T, mats, col, root, cid, rnd, bvh=None):
     if hit[0] is None:
         return None
     pos, n = hit[0], hit[1]
+    if n.x > 0:  # Normale zur Kamera hinter dem Fahrzeug drehen
+        n = -n
     bm = bmesh.new()
-    rot = Vector((0, 0, 1)).rotation_difference(n).to_matrix()
     # Tafel 30,5 x 15,2 cm, leicht schraeg wie die Flaeche
     basis = Matrix((Vector((0, -1, 0)) if n.x < 0 else Vector((0, 1, 0)), Vector((0, 0, 1)), n)).transposed()
     c = pos + n * 0.004
-    quader(bm, c, (0.0, 0.0, 0.0), 0)  # Platzhalter fuer Indizes
-    bm.clear()
     qr = basis
-    for f in quader(bm, Vector((0, 0, 0)), (0.305, 0.152, 0.003), 0):
-        pass
+    quader(bm, Vector((0, 0, 0)), (0.305, 0.152, 0.003), 0)
     bmesh.ops.transform(bm, matrix=qr.to_4x4(), verts=bm.verts)
     bmesh.ops.translate(bm, vec=c, verts=bm.verts)
     buch = "".join(rnd.choice("ABCDEFGHJKLMNPRSTVWXYZ") for _ in range(3))
@@ -728,7 +786,7 @@ def dachreling(lo, T, mats, col, root, cid):
 
 
 def seitenleiste(lo, T, mats, col, root, cid):
-    """Seitliche Schutzleiste (Kombi 1990er)."""
+    """Seitliche Schutzleiste (Kombi 1990er), durchgehendes Profil."""
     z = T.get("seitenleiste")
     if not z:
         return
@@ -736,20 +794,20 @@ def seitenleiste(lo, T, mats, col, root, cid):
     bm = bmesh.new()
     for s in (1, -1):
         pts = []
-        for k in range(40):
-            d = 0.55 + (P.L - 1.0) * k / 39
-            p, n = oberflaeche_seite(lo, d, z, s, 0.004)
-            if p is not None:
+        for k in range(60):
+            d = 0.50 + (P.L - 0.95) * k / 59
+            p, n = oberflaeche_seite(lo, d, z, s, 0.006)
+            if p is not None and (not pts or (p - pts[-1]).length < 0.2):
                 pts.append(p)
-        for a, b in zip(pts, pts[1:]):
-            c = (a + b) / 2
-            rot = Vector((1, 0, 0)).rotation_difference((b - a).normalized()).to_matrix()
-            quader(bm, c, ((b - a).length + 0.002, 0.012, 0.045), 0, rot)
+        if len(pts) > 2:
+            if s < 0:
+                pts.reverse()
+            profil_zug(bm, pts, rrechteck(0.014, 0.045, 0.006, 2))
     objekt(f"{cid}_Seitenleiste", bm, col, [mats["grau"]], root)
 
 
 def stossfaenger_extra(lo, T, mats, col, root, cid):
-    """Separate Stossstangen (Chrom beim Pickup, grauer Kunststoff beim alten Kombi)."""
+    """Separate Stossstangen (Chrom beim Pickup, grauer Kunststoff beim alten Kombi) als durchgehendes Profil."""
     art = T["stossf"]
     if art not in ("chrom", "grau"):
         return
@@ -762,26 +820,22 @@ def stossfaenger_extra(lo, T, mats, col, root, cid):
         z0, z1 = P.bot(0.05) + 0.03, bl + 0.01
     else:
         z0, z1 = bl - 0.14, bl + 0.01
-    # vorne: Strahlen ueber die Breite, Leiste davor
+    zm, hh = (z0 + z1) / 2, z1 - z0
     for seite, x_start, richt in (("v", L / 2 + 1, -1), ("h", -L / 2 - 1, 1)):
         if seite == "h" and T["heck"] == "pritsche":
             continue
-        pts = []
         hw = P.hw(0.15) if seite == "v" else P.hw(L - 0.15)
-        for k in range(25):
-            y = -hw * 0.98 + 2 * hw * 0.98 * k / 24
-            hit = lo.bvh.ray_cast(Vector((x_start, y, (z0 + z1) / 2)), Vector((richt, 0, 0)), 5.0)
+        pts = []
+        for k in range(41):
+            y = -hw * 0.99 + 2 * hw * 0.99 * k / 40
+            hit = lo.bvh.ray_cast(Vector((x_start, y, zm)), Vector((richt, 0, 0)), 5.0)
             if hit[0] is not None:
-                pts.append(hit[0] + Vector((-richt * 0.035, 0, 0)))
-        for a, b in zip(pts, pts[1:]):
-            c = (a + b) / 2
-            c.z = (z0 + z1) / 2
-            rot = Vector((0, 1, 0)).rotation_difference(Vector(((b - a).x, (b - a).y, 0)).normalized()).to_matrix()
-            quader(bm, c, (0.075, (b - a).length + 0.003, z1 - z0), 0, rot)
-    ob = objekt(f"{cid}_Stossstange", bm, col, [mat], root)
-    m = ob.modifiers.new("Fase", "BEVEL")
-    m.width = 0.015
-    m.segments = 3
+                p = hit[0] + Vector((-richt * 0.03, 0, 0))
+                p.z = zm
+                pts.append(p)
+        if len(pts) > 2:
+            profil_zug(bm, pts, rrechteck(0.075, hh, 0.025 if art == "chrom" else 0.012, 3))
+    objekt(f"{cid}_Stossstange", bm, col, [mat], root)
 
 
 def schiebetuer_schiene(lo, T, mats, col, root, cid):
@@ -836,31 +890,21 @@ def innenraum(lo, T, mats, col, root, cid, rnd):
     def sitz(name, d, y, breite, hoehe_sitz, lehne_h=0.62, kopf=True, neigung=18):
         bm = bmesh.new()
         x = P.x(d)
-        quader(bm, (x + 0.15, y, hoehe_sitz - 0.065), (0.50, breite, 0.13), 0)
+        einzel = breite < 0.7
+        polster(bm, (x + 0.15, y, hoehe_sitz - 0.065), (0.50, breite, 0.13), None, "z", 0.045 if einzel else 0.015, 0.012)
         quader(bm, (x + 0.15, y, (boden + hoehe_sitz - 0.13) / 2), (0.36, breite * 0.7, max(hoehe_sitz - 0.13 - boden, 0.02)), 1)
-        rot = Matrix.Rotation(math.radians(neigung), 3, "Y")
+        rot = Matrix.Rotation(math.radians(-neigung), 3, "Y")  # Lehne nach hinten (-x)
         lc = Vector((x - 0.06, y, hoehe_sitz - 0.05)) + rot @ Vector((0, 0, lehne_h / 2))
-        quader(bm, lc, (0.11, breite, lehne_h), 0, rot)
-        if breite < 0.7:  # Seitenwangen an Sitzflaeche und Lehne (Einzelsitze)
-            for sy in (-1, 1):
-                quader(bm, (x + 0.13, y + sy * (breite / 2 - 0.045), hoehe_sitz - 0.045), (0.46, 0.09, 0.15), 0)
-                wc = Vector((x - 0.06, y + sy * (breite / 2 - 0.045), hoehe_sitz - 0.05)) + rot @ Vector((0.045, 0, lehne_h * 0.42))
-                quader(bm, wc, (0.13, 0.09, lehne_h * 0.75), 0, rot)
+        polster(bm, lc, (0.12, breite, lehne_h), rot, "x", 0.06 if einzel else 0.02, 0.015)
         if kopf:
             kc = Vector((x - 0.06, y, hoehe_sitz - 0.05)) + rot @ Vector((0, 0, lehne_h + 0.13))
             for yy in (-0.06, 0.06):
                 zylinder(bm, Vector((x - 0.06, y + yy, hoehe_sitz - 0.05)) + rot @ Vector((0, 0, lehne_h - 0.02)),
                          Vector((x - 0.06, y + yy, hoehe_sitz - 0.05)) + rot @ Vector((0, 0, lehne_h + 0.07)), 0.006, 6, 2)
-            quader(bm, kc, (0.09, min(0.27, breite * 0.55), 0.17), 0, rot)
+            polster(bm, kc, (0.10, min(0.27, breite * 0.55), 0.17), rot, "x", 0.0, 0.01, cuts=2)
         ob = objekt(name, bm, col, [sitzm, mats["dunkel"], mats["chrom"]], root)
-        m = ob.modifiers.new("Polster", "BEVEL")
-        m.width = 0.035
-        m.segments = 3
-        m.limit_method = "ANGLE"
         sub = ob.modifiers.new("Rund", "SUBSURF")
-        sub.levels = sub.render_levels = 1
-        for f in ob.data.polygons:
-            f.use_smooth = True
+        sub.levels = sub.render_levels = 2
         return ob
 
     hz = I["sitz"]
@@ -871,27 +915,39 @@ def innenraum(lo, T, mats, col, root, cid, rnd):
         obs.append(sitz(f"{cid}_Rueckbank", I["sitz_h"], 0, bw, hz - 0.03, 0.60, False, 22))
         bmk = bmesh.new()
         for yy in (-bw * 0.33, bw * 0.33):
-            rot = Matrix.Rotation(math.radians(22), 3, "Y")
+            rot = Matrix.Rotation(math.radians(-22), 3, "Y")
             c = Vector((P.x(I["sitz_h"]) - 0.06, yy, hz - 0.08)) + rot @ Vector((0, 0, 0.73))
-            quader(bmk, c, (0.09, 0.26, 0.16), 0, rot)
+            polster(bmk, c, (0.10, 0.26, 0.16), rot, "x", 0.0, 0.01, cuts=2)
         o = objekt(f"{cid}_Rueckbank_Kopfst", bmk, col, [sitzm], root)
-        m = o.modifiers.new("Polster", "BEVEL")
-        m.width = 0.03
-        m.segments = 3
+        m = o.modifiers.new("Rund", "SUBSURF")
+        m.levels = m.render_levels = 2
     if I.get("reihe3"):
         bw = 2 * (P.hw(I["reihe3"]) - P.bw - 0.12)
         obs.append(sitz(f"{cid}_Reihe3", I["reihe3"], 0, bw, hz - 0.06, 0.55, False, 20))
-    # Armaturenbrett: Keil unter der Frontscheibe
+    # Armaturenbrett: Seitenprofil (unter der Frontscheibe) quer durch das Auto gezogen
     d0, d1 = I["armaturen"]
     bm = bmesh.new()
-    n = 10
-    for k in range(n):
-        a, b = d0 + (d1 - d0) * k / n, d0 + (d1 - d0) * (k + 1) / n
-        dm = (a + b) / 2
-        zt = min(P.belt(dm) + 0.05, P.top(dm) - T["woelbung"] - 0.05)
-        zb = boden + 0.25 if k < n - 3 else boden + 0.38
-        w = P.hw(dm) - 0.07
-        quader(bm, (P.x(dm), 0, (zt + zb) / 2), (b - a + 0.002, 2 * w, zt - zb), 0)
+    zb_ = P.belt(d1)
+    tiefe = d1 - d0
+    roh = [(0.0, zb_ - 0.30), (0.03, zb_ - 0.14), (-0.015, zb_ - 0.06), (0.0, zb_ + 0.01), (0.10, zb_ + 0.045),
+           (tiefe * 0.55, zb_ + 0.05), (tiefe, zb_ + 0.0), (tiefe + 0.02, zb_ - 0.25), (tiefe * 0.5, zb_ - 0.32)]
+    prof = []
+    for dx, z in roh:
+        dd = d1 - dx
+        zmax = P.top(dd) - T["woelbung"] - 0.07
+        prof.append((dx, min(z, zmax)))
+    w = P.hw(d1) - 0.07
+    pts = [Vector((P.x(d1), -w + 2 * w * k / 12, 0)) for k in range(13)]
+    profil_zug(bm, pts, [(a, b) for a, b in reversed(prof)], mat=0)
+    # Instrumententraeger vor dem Fahrer, Mittelkonsole, Display, Duesen
+    lz = I["lenkrad"]
+    polster(bm, (P.x(d1 - 0.10), 0.37, zb_ + 0.06), (0.18, 0.40, 0.08), None, "z", 0.0, 0.0, cuts=2)
+    quader(bm, (P.x(d1 - 0.02), 0, P.T["innen"]["boden"] + 0.42), (0.08, 0.30, 0.30), 0)
+    quader(bm, (P.x(d1 + 0.021), 0, zb_ - 0.12), (0.004, 0.22, 0.13), 1)
+    sv = I["sitz_v"]
+    quader(bm, (P.x((d1 + sv + 0.1) / 2), 0, boden + 0.14), (sv + 0.1 - d1, 0.24, 0.28), 0)
+    for yy in (-(w - 0.10), -0.09, 0.09, (w - 0.10)):
+        quader(bm, (P.x(d1 - 0.01), yy, zb_ - 0.025), (0.03, 0.11, 0.045), 1)
     lz = I["lenkrad"]
     # Instrumententraeger vor dem Fahrer
     quader(bm, (P.x(d1 - 0.12), 0.37, P.belt(d1) + 0.035), (0.2, 0.36, 0.08), 0)
@@ -905,8 +961,9 @@ def innenraum(lo, T, mats, col, root, cid, rnd):
         quader(bm, (P.x(d1 + 0.001), yy * (P.hw(d1) - 0.1) / 0.6 if abs(yy) > 0.5 else yy, P.belt(d1) - 0.02), (0.004, 0.11, 0.05), 1)
     o = objekt(f"{cid}_Armaturen", bm, col, [mats["armaturen"], mats["dunkel"]], root)
     m = o.modifiers.new("Fase", "BEVEL")
-    m.width = 0.02
-    m.segments = 3
+    m.width = 0.012
+    m.segments = 2
+    m.limit_method = "ANGLE"
     obs.append(o)
     # Lenkrad (US: links = +y)
     bm = bmesh.new()

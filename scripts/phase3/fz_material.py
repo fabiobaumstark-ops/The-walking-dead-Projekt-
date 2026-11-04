@@ -94,7 +94,7 @@ def lack(name, hexf, metallic=0.0):
     bump.inputs["Strength"].default_value = 0.06
     bump.inputs["Distance"].default_value = 0.01
     nt.links.new(_m(nt, "ADD", _m(nt, "MULTIPLY", _n(nt, P, 3.0, 2.0), 0.5), rmask), bump.inputs["Height"])
-    _ende(nt, b, farbe, rau, bump.outputs["Normal"], 0.5, "#7A4A2E")
+    _ende(nt, b, farbe, rau, bump.outputs["Normal"], 0.5, "#8E8A82")  # Kanten: Grundierung statt Rost (Rost kommt aus der eigenen Maske)
     return m
 
 
