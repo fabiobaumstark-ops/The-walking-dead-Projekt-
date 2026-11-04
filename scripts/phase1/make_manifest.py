@@ -122,6 +122,20 @@ def main():
     for aid in sel["modelle"]:
         print("Modell", aid, flush=True)
         assets.append(modell(aid))
+    for e in sel.get("pakete", []):
+        print("Paket", e["name"], flush=True)
+        groesse = None
+        try:
+            req = urllib.request.Request(e["url"], method="HEAD", headers=UA)
+            with urllib.request.urlopen(req, timeout=60) as r:
+                groesse = int(r.headers.get("Content-Length") or 0) or None
+        except Exception:
+            pass
+        assets.append({"name": e["name"], "typ": "paket", "quelle": "MakeHuman Community", "asset_id": e["name"],
+                       "seite": e["seite"], "aufloesung": "-", "lizenz": e["lizenz"], "autoren": e.get("autoren", []),
+                       "zielpfad": os.path.dirname(e["ziel"]), "gruppe": "basis", "zweck": e.get("zweck", ""),
+                       "dateien": [{"url": e["url"], "ziel": e["ziel"], "size": groesse, "md5": None,
+                                    "entpacken_nach": e["entpacken_nach"]}]})
     total = sum((f["size"] or 0) for a in assets for f in a["dateien"])
     basis = sum((f["size"] or 0) for a in assets if a["gruppe"] == "basis" for f in a["dateien"])
     man = {

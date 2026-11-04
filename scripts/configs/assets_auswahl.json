@@ -1,58 +1,317 @@
 {
-  "_info": "Auswahl der Assets fuer Phase 1. make_manifest.py erzeugt daraus assets_manifest.json (mit URLs, Groessen, MD5). Aufloesung 2k = Standard, 4k nur Hero.",
-  "texturen": [
-    {"mat": "MAT_Asphalt_Alt",          "quelle": "polyhaven", "id": "asphalt_04",            "res": "2k"},
-    {"mat": "MAT_Asphalt_Rissig",       "quelle": "polyhaven", "id": "asphalt_02",            "res": "2k"},
-    {"mat": "MAT_Asphalt_Geflickt",     "quelle": "polyhaven", "id": "tarred_gravel",         "res": "2k"},
-    {"mat": "MAT_Beton_Glatt",          "quelle": "polyhaven", "id": "concrete_wall_008",     "res": "2k"},
-    {"mat": "MAT_Beton_Grob",           "quelle": "polyhaven", "id": "dirty_concrete",        "res": "2k"},
-    {"mat": "MAT_Ziegel_Rot",           "quelle": "polyhaven", "id": "red_brick",             "res": "2k"},
-    {"mat": "MAT_Ziegel_Verblasst",     "quelle": "polyhaven", "id": "brick_wall_09",         "res": "2k"},
-    {"mat": "MAT_Ziegel_Gestrichen",    "quelle": "polyhaven", "id": "painted_worn_brick",    "res": "2k"},
-    {"mat": "MAT_Putz",                 "quelle": "polyhaven", "id": "grey_plaster",          "res": "2k"},
-    {"mat": "MAT_Putz_Beschaedigt",     "quelle": "polyhaven", "id": "damaged_plaster",       "res": "2k"},
-    {"mat": "MAT_Holz_Verkleidung",     "quelle": "ambientcg", "id": "WoodSiding009",         "res": "2k"},
-    {"mat": "MAT_Holz_Verkleidung_Roh", "quelle": "polyhaven", "id": "weathered_plank_siding","res": "2k"},
-    {"mat": "MAT_Holz_Planken",         "quelle": "polyhaven", "id": "wood_planks_grey",      "res": "2k"},
-    {"mat": "MAT_Holz_Bretter_Alt",     "quelle": "polyhaven", "id": "old_planks_02",         "res": "2k"},
-    {"mat": "MAT_Sperrholz",            "quelle": "polyhaven", "id": "plywood",               "res": "2k"},
-    {"mat": "MAT_OSB",                  "quelle": "polyhaven", "id": "oriented_strand_board", "res": "2k"},
-    {"mat": "MAT_Flachdach_Bitumen",    "quelle": "polyhaven", "id": "bitumen",               "res": "2k"},
-    {"mat": "MAT_Gehweg_Beton",         "quelle": "polyhaven", "id": "brushed_concrete",      "res": "2k"},
-    {"mat": "MAT_Gehwegplatten",        "quelle": "polyhaven", "id": "concrete_pavement_02",  "res": "2k"},
-    {"mat": "MAT_Bordstein",            "quelle": "polyhaven", "id": "granular_concrete",     "res": "2k"},
-    {"mat": "MAT_Rost_Hell",            "quelle": "polyhaven", "id": "rusty_metal_02",        "res": "2k"},
-    {"mat": "MAT_Rost_Dunkel",          "quelle": "polyhaven", "id": "rust_coarse_01",        "res": "2k"},
-    {"mat": "MAT_Metall_Lackiert",      "quelle": "polyhaven", "id": "green_metal_rust",      "res": "2k"},
-    {"mat": "MAT_Wellblech",            "quelle": "polyhaven", "id": "corrugated_iron_02",    "res": "2k"},
-    {"mat": "MAT_Erde",                 "quelle": "polyhaven", "id": "brown_mud_02",          "res": "2k"},
-    {"mat": "MAT_Matsch_Laub",          "quelle": "polyhaven", "id": "brown_mud_leaves_01",   "res": "2k"},
-    {"mat": "MAT_Kies",                 "quelle": "polyhaven", "id": "gravel_floor",          "res": "2k"},
-    {"mat": "MAT_Sand",                 "quelle": "polyhaven", "id": "dense_sand",            "res": "2k"},
-    {"mat": "MAT_Moos",                 "quelle": "ambientcg", "id": "Moss002",               "res": "2k"},
-    {"mat": "MAT_Laub_Boden",           "quelle": "polyhaven", "id": "dry_decay_leaves",      "res": "2k"},
-    {"mat": "MAT_Gras_Boden",           "quelle": "polyhaven", "id": "sparse_grass",          "res": "2k"},
-    {"mat": "MAT_Sackleinen",           "quelle": "polyhaven", "id": "hessian_230",           "res": "2k"},
-    {"mat": "MAT_Stoff_Plane",          "quelle": "polyhaven", "id": "rough_linen",           "res": "2k"},
-    {"mat": "MAT_Teppich",              "quelle": "polyhaven", "id": "dirty_carpet",          "res": "2k"},
-    {"mat": "MAT_Fliesen",              "quelle": "polyhaven", "id": "dirty_tiles",           "res": "2k"},
-    {"mat": "MAT_Sitzstoff",            "quelle": "polyhaven", "id": "poly_wool_herringbone", "res": "2k"},
-    {"mat": "MAT_Leder",                "quelle": "polyhaven", "id": "brown_leather",         "res": "2k"},
-    {"mat": "MAT_Rost_Blech",           "quelle": "polyhaven", "id": "rusty_metal_04",        "res": "2k"},
-    {"mat": "MAT_Blech_Rostflecken",    "quelle": "polyhaven", "id": "rusty_metal_sheet",     "res": "2k"}
-  ],
-  "hdris": [
-    {"name": "HDRI_Haupt",     "quelle": "polyhaven", "id": "kloofendal_28d_misty_puresky",         "res": "4k",  "gruppe": "basis"},
-    {"name": "HDRI_Haupt",     "quelle": "polyhaven", "id": "kloofendal_28d_misty_puresky",         "res": "16k", "gruppe": "final"},
-    {"name": "HDRI_Alternative","quelle": "polyhaven", "id": "kloofendal_38d_partly_cloudy_puresky", "res": "4k",  "gruppe": "basis"}
-  ],
-  "modelle": [
-    "Barrel_01","barrel_03","wooden_crate_01","wooden_military_crate","old_tyre","metal_jerrycan","plastic_jerrycan",
-    "metal_trash_can","trashbag","cardboard_box_01","can_rusted","plastic_monobloc_chair_01","Rockingchair_01","WoodenChair_01",
-    "boulder_01","tree_stump_01","tree_stump_02","dry_branches_medium_01","dead_tree_trunk","shrub_01","shrub_02","shrub_03","shrub_04",
-    "grass_medium_01","grass_medium_02","grass_bermuda_01","nettle_plant","weed_plant_02","fern_02",
-    "concrete_road_barrier","modular_chainlink_fence","utility_box_01"
-  ],
-  "selbst_bauen": ["Asphaltschindeln (keine CC0-Fototextur gefunden: prozedurale Schindel-Geometrie + Fotobasis tarred_gravel)",
-                   "Betontruemmer", "Ziegelhaufen", "Bretter", "Paletten"]
+ "_info": "Auswahl der Assets fuer Phase 1. make_manifest.py erzeugt daraus assets_manifest.json (mit URLs, Groessen, MD5). Aufloesung 2k = Standard, 4k nur Hero.",
+ "texturen": [
+  {
+   "mat": "MAT_Asphalt_Alt",
+   "quelle": "polyhaven",
+   "id": "asphalt_04",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Asphalt_Rissig",
+   "quelle": "polyhaven",
+   "id": "asphalt_02",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Asphalt_Geflickt",
+   "quelle": "polyhaven",
+   "id": "tarred_gravel",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Beton_Glatt",
+   "quelle": "polyhaven",
+   "id": "concrete_wall_008",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Beton_Grob",
+   "quelle": "polyhaven",
+   "id": "dirty_concrete",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Ziegel_Rot",
+   "quelle": "polyhaven",
+   "id": "red_brick",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Ziegel_Verblasst",
+   "quelle": "polyhaven",
+   "id": "brick_wall_09",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Ziegel_Gestrichen",
+   "quelle": "polyhaven",
+   "id": "painted_worn_brick",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Putz",
+   "quelle": "polyhaven",
+   "id": "grey_plaster",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Putz_Beschaedigt",
+   "quelle": "polyhaven",
+   "id": "damaged_plaster",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Holz_Verkleidung",
+   "quelle": "ambientcg",
+   "id": "WoodSiding009",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Holz_Verkleidung_Roh",
+   "quelle": "polyhaven",
+   "id": "weathered_plank_siding",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Holz_Planken",
+   "quelle": "polyhaven",
+   "id": "wood_planks_grey",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Holz_Bretter_Alt",
+   "quelle": "polyhaven",
+   "id": "old_planks_02",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Sperrholz",
+   "quelle": "polyhaven",
+   "id": "plywood",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_OSB",
+   "quelle": "polyhaven",
+   "id": "oriented_strand_board",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Flachdach_Bitumen",
+   "quelle": "polyhaven",
+   "id": "bitumen",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Gehweg_Beton",
+   "quelle": "polyhaven",
+   "id": "brushed_concrete",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Gehwegplatten",
+   "quelle": "polyhaven",
+   "id": "concrete_pavement_02",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Bordstein",
+   "quelle": "polyhaven",
+   "id": "granular_concrete",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Rost_Hell",
+   "quelle": "polyhaven",
+   "id": "rusty_metal_02",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Rost_Dunkel",
+   "quelle": "polyhaven",
+   "id": "rust_coarse_01",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Metall_Lackiert",
+   "quelle": "polyhaven",
+   "id": "green_metal_rust",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Wellblech",
+   "quelle": "polyhaven",
+   "id": "corrugated_iron_02",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Erde",
+   "quelle": "polyhaven",
+   "id": "brown_mud_02",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Matsch_Laub",
+   "quelle": "polyhaven",
+   "id": "brown_mud_leaves_01",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Kies",
+   "quelle": "polyhaven",
+   "id": "gravel_floor",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Sand",
+   "quelle": "polyhaven",
+   "id": "dense_sand",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Moos",
+   "quelle": "ambientcg",
+   "id": "Moss002",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Laub_Boden",
+   "quelle": "polyhaven",
+   "id": "dry_decay_leaves",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Gras_Boden",
+   "quelle": "polyhaven",
+   "id": "sparse_grass",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Sackleinen",
+   "quelle": "polyhaven",
+   "id": "hessian_230",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Stoff_Plane",
+   "quelle": "polyhaven",
+   "id": "rough_linen",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Teppich",
+   "quelle": "polyhaven",
+   "id": "dirty_carpet",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Fliesen",
+   "quelle": "polyhaven",
+   "id": "dirty_tiles",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Sitzstoff",
+   "quelle": "polyhaven",
+   "id": "poly_wool_herringbone",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Leder",
+   "quelle": "polyhaven",
+   "id": "brown_leather",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Rost_Blech",
+   "quelle": "polyhaven",
+   "id": "rusty_metal_04",
+   "res": "2k"
+  },
+  {
+   "mat": "MAT_Blech_Rostflecken",
+   "quelle": "polyhaven",
+   "id": "rusty_metal_sheet",
+   "res": "2k"
+  }
+ ],
+ "hdris": [
+  {
+   "name": "HDRI_Haupt",
+   "quelle": "polyhaven",
+   "id": "kloofendal_28d_misty_puresky",
+   "res": "4k",
+   "gruppe": "basis"
+  },
+  {
+   "name": "HDRI_Haupt",
+   "quelle": "polyhaven",
+   "id": "kloofendal_28d_misty_puresky",
+   "res": "16k",
+   "gruppe": "final"
+  },
+  {
+   "name": "HDRI_Alternative",
+   "quelle": "polyhaven",
+   "id": "kloofendal_38d_partly_cloudy_puresky",
+   "res": "4k",
+   "gruppe": "basis"
+  }
+ ],
+ "modelle": [
+  "Barrel_01",
+  "barrel_03",
+  "wooden_crate_01",
+  "wooden_military_crate",
+  "old_tyre",
+  "metal_jerrycan",
+  "plastic_jerrycan",
+  "metal_trash_can",
+  "trashbag",
+  "cardboard_box_01",
+  "can_rusted",
+  "plastic_monobloc_chair_01",
+  "Rockingchair_01",
+  "WoodenChair_01",
+  "boulder_01",
+  "tree_stump_01",
+  "tree_stump_02",
+  "dry_branches_medium_01",
+  "dead_tree_trunk",
+  "shrub_01",
+  "shrub_02",
+  "shrub_03",
+  "shrub_04",
+  "grass_medium_01",
+  "grass_medium_02",
+  "grass_bermuda_01",
+  "nettle_plant",
+  "weed_plant_02",
+  "fern_02",
+  "concrete_road_barrier",
+  "modular_chainlink_fence",
+  "utility_box_01"
+ ],
+ "selbst_bauen": [
+  "Asphaltschindeln (keine CC0-Fototextur gefunden: prozedurale Schindel-Geometrie + Fotobasis tarred_gravel)",
+  "Betontruemmer",
+  "Ziegelhaufen",
+  "Bretter",
+  "Paletten"
+ ],
+ "pakete": [
+  {
+   "name": "MPFB_Systemassets",
+   "url": "https://files2.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip",
+   "ziel": "assets/mpfb/makehuman_system_assets_cc0.zip",
+   "entpacken_nach": "assets/mpfb/data",
+   "seite": "https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "MakeHuman Community"
+   ],
+   "zweck": "Haut-, Kleidungs- und Haartexturen der Figuren (Phase 3.6); MPFB-Neuaufbau der Figuren"
+  }
+ ]
 }

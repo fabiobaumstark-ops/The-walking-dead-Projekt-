@@ -1,0 +1,33 @@
+{
+ "_info": "Phase 3.6 – Figuren (MPFB 2 + MakeHuman-Systemassets CC0). 12 Vorlagen (eigene Posen, gebacken), verteilt als Gruppen + Einzelne. Abstand zu Hero-Kameras: Gruppen 15-40 m und > 40 m, nie unter min_abstand_m. Kein Blut, keine Wunden.",
+ "seed": 666,
+ "min_abstand_m": 12.0,
+ "vorlagen": [
+  {"name": "M1", "macro": {"gender": 1.0, "age": 0.55, "weight": 0.62, "muscle": 0.55, "height": 0.55}, "haut": "middleage_caucasian_male", "kleidung": ["male_worksuit01", "shoes02"], "haar": "short02", "pose": "schlurfen"},
+  {"name": "F1", "macro": {"gender": 0.0, "age": 0.5, "weight": 0.45, "height": 0.45}, "haut": "young_african_female", "kleidung": ["female_casualsuit01", "shoes03"], "haar": "ponytail01", "pose": "gebeugt"},
+  {"name": "M2", "macro": {"gender": 1.0, "age": 0.78, "weight": 0.55, "height": 0.5}, "haut": "old_caucasian_male", "kleidung": ["male_elegantsuit01", "shoes01"], "haar": "short04", "pose": "bein_ziehen"},
+  {"name": "F2", "macro": {"gender": 0.0, "age": 0.6, "weight": 0.55, "height": 0.4}, "haut": "middleage_asian_female", "kleidung": ["female_sportsuit01", "shoes05"], "haar": "bob01", "pose": "kopf_schief"},
+  {"name": "M3", "macro": {"gender": 1.0, "age": 0.45, "weight": 0.4, "muscle": 0.6, "height": 0.7}, "haut": "young_african_male", "kleidung": ["male_casualsuit03", "shoes04"], "haar": "short01", "pose": "starrend"},
+  {"name": "M4", "macro": {"gender": 1.0, "age": 0.6, "weight": 0.85, "height": 0.55}, "haut": "middleage_african_male", "kleidung": ["male_casualsuit05", "shoes06"], "haar": "short03", "pose": "wand"},
+  {"name": "F3", "macro": {"gender": 0.0, "age": 0.72, "weight": 0.6, "height": 0.42}, "haut": "old_caucasian_female", "kleidung": ["female_elegantsuit01", "shoes03"], "haar": "long01", "pose": "auto"},
+  {"name": "M5", "macro": {"gender": 1.0, "age": 0.5, "weight": 0.5, "height": 0.5}, "haut": "young_caucasian_male2", "kleidung": ["male_casualsuit02", "shoes02"], "haar": "afro01", "pose": "hockend"},
+  {"name": "F4", "macro": {"gender": 0.0, "age": 0.52, "weight": 0.5, "height": 0.55}, "haut": "young_caucasian_female", "kleidung": ["female_casualsuit02", "shoes04"], "haar": "braid01", "pose": "schlurfen"},
+  {"name": "M6", "macro": {"gender": 1.0, "age": 0.62, "weight": 0.45, "height": 0.45}, "haut": "middleage_asian_male", "kleidung": ["male_casualsuit06", "shoes01"], "haar": "short02", "pose": "gebeugt"},
+  {"name": "M7", "macro": {"gender": 1.0, "age": 0.82, "weight": 0.4, "height": 0.5}, "haut": "old_african_male", "kleidung": ["male_casualsuit04", "shoes05"], "haar": null, "pose": "schlurfen"},
+  {"name": "F5", "macro": {"gender": 0.0, "age": 0.58, "weight": 0.7, "height": 0.5}, "haut": "middleage_caucasian_female", "kleidung": ["female_casualsuit01", "shoes06"], "haar": "bob02", "pose": "starrend"}
+ ],
+ "gruppen": [
+  {"name": "Strasse_Mitte", "mitte": [-2.0, -3.0], "radius": 4.5, "anzahl": 5, "richtung": 180, "info": "CAM_Hero_01: 22-35 m"},
+  {"name": "Strasse_Dunst", "mitte": [41.0, 0.5], "radius": 6.0, "anzahl": 7, "richtung": 180, "info": "CAM_Hero_01: 65-75 m im Dunst, CAM_Hero_03: 35 m"},
+  {"name": "Stau_Checkpoint", "mitte": [52.5, 2.0], "radius": 5.0, "anzahl": 6, "richtung": 0, "info": "CAM_Hero_03: 18-30 m, unscharf"},
+  {"name": "Absturz", "mitte": [20.5, -9.5], "radius": 2.0, "anzahl": 3, "richtung": 60, "vorlagen": ["M1", "F4", "M6", "M7"], "info": "CAM_Hero_04: 13-16 m"}
+ ],
+ "einzelne": [
+  {"name": "Wand_Apotheke", "vorlage": "M4", "pos": [-17.6, 10.85], "richtung": -90},
+  {"name": "Auto_Querstrasse", "vorlage": "F3", "pos": [19.5, 27.6], "richtung": 0},
+  {"name": "Hockend_Kreuzung", "vorlage": "M5", "pos": [14.6, 0.6], "richtung": 120},
+  {"name": "Gasse", "vorlage": "M2", "pos": [-31.0, 33.4], "richtung": 200},
+  {"name": "Tankstelle", "vorlage": "F2", "pos": [-69.5, -17.5], "richtung": 40},
+  {"name": "Hochstrasse", "vorlage": "M3", "pos": [99.0, -8.5], "richtung": 170}
+ ]
+}

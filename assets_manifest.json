@@ -1,8 +1,8 @@
 {
  "_info": "Liste aller externen Assets. Laden mit: python3 download_assets.py",
  "erstellt": "2026-11-04",
- "groesse_gesamt_mb": 1430,
- "groesse_basis_mb": 1247,
+ "groesse_gesamt_mb": 1711,
+ "groesse_basis_mb": 1528,
  "selbst_gebaut": [
   "Asphaltschindeln (keine CC0-Fototextur gefunden: prozedurale Schindel-Geometrie + Fotobasis tarred_gravel)",
   "Betontruemmer",
@@ -3506,6 +3506,30 @@
      "ziel": "assets/models/utility_box_01/textures/utility_box_01_diff_2k.jpg",
      "size": 1983621,
      "md5": "744dfa07f09368dad8124a6af1360176"
+    }
+   ]
+  },
+  {
+   "name": "MPFB_Systemassets",
+   "typ": "paket",
+   "quelle": "MakeHuman Community",
+   "asset_id": "MPFB_Systemassets",
+   "seite": "https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html",
+   "aufloesung": "-",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "MakeHuman Community"
+   ],
+   "zielpfad": "assets/mpfb",
+   "gruppe": "basis",
+   "zweck": "Haut-, Kleidungs- und Haartexturen der Figuren (Phase 3.6); MPFB-Neuaufbau der Figuren",
+   "dateien": [
+    {
+     "url": "https://files2.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip",
+     "ziel": "assets/mpfb/makehuman_system_assets_cc0.zip",
+     "size": 280737770,
+     "md5": null,
+     "entpacken_nach": "assets/mpfb/data"
     }
    ]
   }

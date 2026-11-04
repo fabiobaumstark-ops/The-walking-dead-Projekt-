@@ -105,6 +105,20 @@ def entpacken(zip_pfad, ziel_ordner):
                 shutil.copyfileobj(src, dst)
 
 
+def entpacken_struktur(zip_pfad, ziel_ordner):
+    """Nur Bilddateien, Ordnerstruktur bleibt (fuer die Figuren-Texturen); unsichere Pfade werden uebersprungen."""
+    with zipfile.ZipFile(zip_pfad) as z:
+        for name in z.namelist():
+            if name.startswith("/") or ".." in name.split("/") or not name.lower().endswith((".png", ".jpg", ".jpeg")):
+                continue
+            ziel = os.path.join(ziel_ordner, *name.split("/"))
+            os.makedirs(os.path.dirname(ziel), exist_ok=True)
+            if os.path.exists(ziel):
+                continue
+            with z.open(name) as src, open(ziel, "wb") as dst:
+                shutil.copyfileobj(src, dst)
+
+
 def main():
     ap = argparse.ArgumentParser(description="Assets laden")
     ap.add_argument("--nur-basis", action="store_true", help="grosse 'final'-Dateien (16K-HDRI) weglassen")
@@ -143,6 +157,8 @@ def main():
             ok += 1
         if f.get("entpacken"):
             entpacken(ziel, os.path.dirname(ziel))
+        if f.get("entpacken_nach"):
+            entpacken_struktur(ziel, os.path.join(ROOT, f["entpacken_nach"]))
 
     print(f"\nFertig: {ok} geladen, {uebersprungen} schon vorhanden, {fehler} Fehler.")
     if fehler:

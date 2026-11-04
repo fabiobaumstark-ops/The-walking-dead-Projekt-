@@ -59,13 +59,17 @@ if __name__ == "__main__":
     if not nur:
         platzhalter_entfernen()
     import flotte as FL
-    if not nur or any(g != "Militaer" for g in nur):
-        FL.flotte_bauen(nur_gruppen=[g for g in nur if g != "Militaer"] if nur else None)
+    if not nur or any(g not in ("Militaer", "Figuren") for g in nur):
+        FL.flotte_bauen(nur_gruppen=[g for g in nur if g not in ("Militaer", "Figuren")] if nur else None)
     print("ZEIT Flotte", round(time.time() - t0, 1), "s", flush=True)
     if not nur or "Militaer" in nur:
         import militaer as MI
         MI.bauen()
         print("ZEIT Militaer", round(time.time() - t0, 1), "s", flush=True)
+    if not nur or "Figuren" in nur:
+        import figuren as FG
+        FG.bauen()
+        print("ZEIT Figuren", round(time.time() - t0, 1), "s", flush=True)
     if "--ohne-speichern" not in args:
         pfad = os.path.join(V.ROOT, f"viertel_v{version}{'test' if '--test' in args else ''}.blend")
         bpy.ops.wm.save_as_mainfile(filepath=pfad, compress=True)
