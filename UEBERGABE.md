@@ -1,8 +1,8 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 2b – Detail-Ausbau nach Nutzer-Feedback (läuft; Test-Build viertel_v03test.blend wird nicht committet)
+- **Aktuelle Phase:** Phase 2b abgeschlossen (Renders laufen/fertig) → **wartet auf Freigabe Phase 2 (Fragen 1–3, STOPP)**
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
-- **.blend-Version:** `viertel_v02.blend` (Phase 2, 20 MB, Texturpfade relativ); Vorversion `viertel_v01.blend` (Blockout)
+- **.blend-Version:** `viertel_v03.blend` (Phase 2b, 30,6 MB); Vorversion `viertel_v02.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 
@@ -54,10 +54,10 @@
    - dann 8 Grundmodelle bauen und ZWISCHEN-STOPP zur Freigabe
 
 ## Offene Fragen an den Nutzer
-- Dichte der Stadt (2026-11-04, Antwort fehlt):
-  - A) Innenstadt verdichten: geschlossene 3–5-geschossige Zeilen + Hochhaus-Skyline im Dunst (Empfehlung)
-  - B) nur Skyline
-  - C) nur Viertel verdichten
+- Phase-2-Freigabe erneut (nach Phase 2b):
+  1. Gebäude und Straßen glaubwürdig?
+  2. Detailmenge?
+  3. Checkpoint und Barrikaden?
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL
@@ -83,6 +83,7 @@
   - 3: Flair (Gegenlicht/Dunst → Phase 5) und Boden (Erde/Matsch/aufgebrochener Asphalt → jetzt in 2b)
   - Pflanzen müssen realistisch und detailreich sein
   - Verzierte Fassaden und hohe Hintergrundgebäude nicht ausdrücklich gewählt (angeboten)
+- Dichte: Antwort C (Viertel verdichten, keine Hochhaus-Skyline) → umgesetzt in v03
 - Neu: A13 Hintergrund-Ring (AUFTRAG.md). Silhouetten und Gelände in Phase 2, Bäume in Phase 4, Dunst in Phase 5.
   Nach Phase 2 mit CAM_Hero_02 auf leere Horizontstellen prüfen
 
@@ -95,3 +96,5 @@
 6. `blender -b viertel_v01.blend --python scripts/phase1/render_blockout.py`
 7. `blender -b --factory-startup --python scripts/phase2/build_phase2.py -- --version 02` (Phase 2b: --version 03; Module: + fassaden_details (über gebaeude2), boden, vegetation_klein)
 8. `blender -b viertel_v02.blend --python scripts/phase1/render_blockout.py -- --prefix phase2`
+9. Phase 2b: `blender -b --factory-startup --python scripts/phase2/build_phase2.py -- --version 03`
+10. `blender -b viertel_v03.blend --python scripts/phase1/render_blockout.py -- --prefix phase2b`
