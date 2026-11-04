@@ -80,16 +80,18 @@ def kasten(bm, mitte, groesse, rot=(0, 0, 0), mat=0):
     einfuegen(bm, tmp, mat)
 
 
-def einfuegen(bm, tmp, mat):
+def einfuegen(bm, tmp, mat=None):
+    """tmp-bmesh in bm uebernehmen; mat=None behaelt die Material-Indizes von tmp."""
     me = bpy.data.meshes.new("tmp")
     tmp.to_mesh(me)
     tmp.free()
     n0 = len(bm.faces)
     bm.from_mesh(me)
     bpy.data.meshes.remove(me)
-    bm.faces.ensure_lookup_table()
-    for f in list(bm.faces)[n0:]:
-        f.material_index = mat
+    if mat is not None:
+        bm.faces.ensure_lookup_table()
+        for f in list(bm.faces)[n0:]:
+            f.material_index = mat
 
 
 def obj(name, bm, col, mats, uv=True, fase=None):

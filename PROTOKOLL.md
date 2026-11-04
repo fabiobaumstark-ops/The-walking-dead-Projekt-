@@ -223,3 +223,16 @@
 - Kollision: Mindestabstand je Objekt, nichts in Gebäuden, nichts Großes auf der Bordsteinkante, Höhe immer auf der Oberfläche (−6 mm eingebettet).
 - Fehler gefunden und behoben: Vorlagen- und Ziel-Collection hießen gleich („Schutt“) → Abhängigkeits-Zyklus, 0 Instanzen. Vorlagen heißen jetzt PROTO_*.
 - 18 abgefallene Schildbuchstaben liegen auf dem Gehweg.
+
+## Phase 2.5 – Checkpoint (Variante A, 2026-11-04)
+- scripts/phase2/checkpoint.py + scripts/configs/checkpoint.json, Ortsausgang Ost (x 62–78).
+- Sandsäcke: 378 Instanzen aus 6 einzeln verformten Vorlagen (1 aufgeplatzt). Im Verband (Lagen 13,5 cm, versetzt), 2 Reihen, 1,1–1,2 m hoch, leicht nach hinten geneigt, Sandkegel davor.
+- 8 Jersey-Barrieren (New-Jersey-Profil 0,61/0,81 m, Länge 3,65 m, abgeplatzte Enden, Hebeösen) als Schikane.
+- 5 Gabionen 1,37 × 1,06 × 1,0 m mit Gitter (Alpha), Vlies mit Rissen, rieselnde Füllung.
+- Concertina Ø 0,95 m als Pyramide 2+1 quer über die Straße, eingerissen und durchhängend, Pfosten alle 3 m; kurzes Stück vor CAM_Hero_03.
+- 2 Container 20 ft (einer offen mit Feldbetten und Kisten), 2 Zelte 6 × 5 m (Plane durchhängend, Risse, Abspannseile, Heringe, Betten, Tisch).
+- Wachturm 5 m aus Gerüstrohren (Plattform 2,5 m, Sandsäcke, Leiter, zerrissenes Tarnnetz).
+- Schranke rot-weiß, Absperrgitter, Scheinwerfer auf Stativ, Generator, Kabeltrommeln.
+- Schilder „CHECKPOINT“, „STOP“, „QUARANTINE ZONE / NO ENTRY“.
+- Poly Haven: Militärkiste, Holzkiste, 2 Kanister, 2 Fässer (eines als spätere Feuertonne für Phase 5).
+- Hinweis für Phase 5: Der Fokus von CAM_Hero_03 sollte auf ~2,5 m (Sandsäcke) statt 4 m liegen.

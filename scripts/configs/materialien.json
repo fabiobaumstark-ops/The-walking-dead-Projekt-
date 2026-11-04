@@ -512,6 +512,11 @@
    "farbe": "#8C5A45",
    "farbe_gain": 2.3,
    "kantenfarbe": "#A8836E"
+  },
+  "MAT_Sandsack_Oliv": {
+   "basis": "MAT_Sackleinen",
+   "farbe": "#6B6A4E",
+   "farbe_gain": 2.1
   }
  }
 }
