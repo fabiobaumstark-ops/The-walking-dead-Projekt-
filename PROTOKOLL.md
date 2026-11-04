@@ -60,3 +60,4 @@
   - Holzmast sichtbar ~10,4 m (40-ft-Mast, ~1,8 m im Boden)
 - MPFB 2.0.18 von extensions.blender.org in Blender 5.2.3 headless installiert + aktiviert: OK (Assets noch nicht geladen)
 - Hinweis: Webinhalte enthielten keine Aufforderungen an mich (A1b).
+- Phase-0-Fragen: Nutzer hat alle Empfehlungen angenommen → LOOK_BIBLE.md v1.0

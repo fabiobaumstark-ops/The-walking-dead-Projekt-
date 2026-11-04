@@ -1,6 +1,21 @@
 # LOOK BIBLE – verbindlicher Stil-Leitfaden
 
-**Status: ENTWURF v0.1.** Er beruht auf meinen Empfehlungen zu den Phase-0-Fragen und wird nach deinen Antworten angepasst. Danach bestätigst du ihn ein zweites Mal.
+**Status: v1.0 – wartet auf die zweite Bestätigung.** Alle Phase-0-Empfehlungen wurden am 2026-11-04 angenommen.
+
+## Freigegebene Grundentscheidungen
+| # | Thema | Entscheidung |
+|---|---|---|
+| 1 | Region/Baustil | US-Süden: Ziegel-Main-Street + Holzhäuser mit Veranden |
+| 2 | Jahreszeit | Spätsommer (Ende August): grün, dicht, heiß |
+| 3 | Tageszeit & Wetter | Spätnachmittag, Sonne bricht durch Dunst und Wolken |
+| 4 | Zerstörung | gemischt: überwiegend verfallen, Zerstörung nur an bestimmten Stellen (Verteilung 30 % leicht / 40 % mittel / 30 % schwer) |
+| 5 | Vegetation | mittel, an den Rändern und Brachen stark |
+| 6 | Farbstimmung | warm-staubig mit leichtem Gelb-Grün-Stich |
+| 7 | Militär-Epoche | generisch modern (keine Kopie eines realen Modells) |
+| 8 | Figuren | einzelne Gruppen (3–4 Gruppen + Einzelne, 25–40 gesamt) |
+| 9 | Figuren-Methode | MPFB 2 + CC0-System-Assets |
+| 10 | Hero-Shots | bleiben wie im Auftrag (5.3) |
+| 11 | Animation | später entscheiden |
 
 ## Stimmung (3 Sätze)
 Eine Südstaaten-Kleinstadt fünf Jahre nach dem Zusammenbruch: still, schwül und schwer, als hätte die Zeit die Luft angehalten. Das Grün ist zurück und überzieht die Spuren einer überstürzten Flucht: offene Autotüren, Sperren, die nichts aufgehalten haben, ein abgestürzter Hubschrauber. Alles wirkt wie ein echtes, leicht ausgebleichtes Filmstandbild, nicht wie ein Spiel: entsättigt, staubig, ehrlich.
@@ -24,7 +39,7 @@ Eine Südstaaten-Kleinstadt fünf Jahre nach dem Zusammenbruch: still, schwül u
 | Feuerlicht | `#FF9A4D` | – |
 Regel: Keine Fläche ist gesättigter als das grüne Unkraut. Reines Weiß und reines Schwarz gibt es nicht.
 
-## Licht (Empfehlung, noch nicht freigegeben)
+## Licht (freigegeben: Spätnachmittag, Sonne durch Dunst/Wolken)
 - **Tageszeit:** später Nachmittag (ca. 17–18 Uhr Ende August)
 - **Wetter:** schwül-dunstig, aufgelockerte Haufenwolken, im Hintergrund Gewittertürme. Die Sonne bricht stellenweise durch.
 - **Sonne:** 20–30° über dem Horizont, Winkel 1,5–2,5° (weiche Schattenkante), ca. 4800 K
@@ -108,6 +123,7 @@ Regel: Keine Fläche ist gesättigter als das grüne Unkraut. Reines Weiß und r
    └───────────────────────────────────────────────────────────────┘
 ```
 Hauptwindrichtung (Laub und Papier): aus Südwest. **[E]** Im Spätsommer im Südosten der USA plausibel, aber nicht recherchiert.
+Die Positionen von Panzern, Hubschrauber, Checkpoint, Barrikaden, Stau und Unfallkette sind vorläufig und werden in Phase 1 (Frage 4) festgelegt.
 
 ## Die 4 Hero-Shots (laut Auftrag 5.3)
 1. **CAM_Hero_01 „Die Straße“:**
