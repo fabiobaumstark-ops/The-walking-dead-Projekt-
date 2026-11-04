@@ -262,3 +262,29 @@
 - Phase-1-Silhouettenkästen ersetzt. Die Baumgruppen-Platzhalter (Kugeln) bleiben bis Phase 4.
 - A13-Prüfung CAM_Hero_02: Der Horizont hat jetzt Hügelwellen, Gebäude, Wasserturm und Silo; keine leeren Stellen mehr.
   Er wirkt aber noch kahl und bräunlich, solange Wälder, Baumreihen und Kudzu (Phase 4) sowie Dunst (Phase 5) fehlen.
+
+## Phase 2 – Abschluss (2026-11-04)
+- viertel_v02.blend (20 MB). Aufbau aller Teile aus Skripten in 27 s.
+- Renders (CPU 4 Kerne, 960 × 540, 48 Samples): CAM 1: 130 s, CAM 2: 129 s, CAM 3: 154 s, CAM 4: 135 s, Draufsicht (600 × 540): 59 s.
+  → renders/test/phase2_cam1–4.png, phase2_draufsicht.png, phase2_lageplan(_variante_A).png
+- Korrektur nach Prüfung: Zeitungen kleiner (8–29 cm) und dunkler; vorher waren es zu große, zu weiße Blätter.
+
+### D1-Checkliste Phase 2
+- Maßstab ok: Tür 2,1–2,3 m, Geschoss 3,2 m, Bordstein 15 cm, Ampel-Unterkante 5,3 m, Mast 10,4 m
+- Nichts schwebt: Schutt auf der Oberfläche, Gehwegplatten im Gehweg, Sandsäcke auf dem Boden
+- Kachelung auf Straßen/Böden durch Anti-Tiling stark reduziert. An großen Ziegelwänden ist die Wiederholung aus der Ferne noch leicht erkennbar → Phase 4
+- Kanten gefast (Modifier) an Gebäuden, Bordsteinen, Barrieren, Checkpoint
+- Kein Z-Fighting gefunden (Dachplatten jetzt innerhalb der Wände)
+- Keine echten Marken: Läden, Tankstelle (HARLAN FUEL), Werbetafel und Straßennamen sind erfunden; Wasserturm ohne Ortsnamen
+- Nichts aus Filmen/Serien, kein Blut
+- Offen: Fahrzeuge/Figuren (Phase 3), Vegetation (Phase 4), Dunst/Grading (Phase 5)
+
+### D2-Qualitätsbewertung Phase 2 (ehrlich)
+| Kriterium | Note | Was verrät CGI / was hilft |
+|---|---|---|
+| Realismus Geometrie | 6 | Gute Fenster, Ladenfronten, Masten, Checkpoint. Aber: Schuttkegel als glatte Hügel, Auto-Platzhalter, Kugel-Bäume, Matratzen zu sauber → Schuttkegel aus Einzelteilen, Phase 3/4 |
+| Realismus Materialien | 5 | Fotobasis überall, aber Wände noch zu gleichmäßig. Einige Farbvarianten (rosa Ziegel B30) wirken pastellig, Verwitterung wirkt in Totalen zu schwach → Phase 4: mehr Ruß/Feuchte am Sockel, Ausblühungen, Laub |
+| Einheitlicher Look | 6 | Bibliothek + Verwitterung auf allem, Poly-Haven-Props passen. Die Platzhalter fallen auf |
+| Licht & Stimmung | 4 | Flaches Dunst-HDRI, ohne Volumen-Dunst, Lichtstrahlen und Grading wirkt das Bild „sauber“ → Phase 5 |
+| Komposition | 6 | Ausschnitte tragen, aber Panzer, Hubschrauber und Stau fehlen noch als Hauptmotive → Phase 3 |
+| Glaubwürdigkeit der Geschichte | 6 | Checkpoint mit Schikane, Barrikaden, Plünderung, Graffiti, Glas unter Fenstern. Fahrzeuge und Fluchtspuren folgen in Phase 3 |

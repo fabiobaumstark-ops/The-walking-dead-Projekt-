@@ -110,7 +110,7 @@ def prototypen_bauen(cfg):
         V.box(bm, -l / 2, -rnd.uniform(0.05, 0.1), 0, l / 2, rnd.uniform(0.05, 0.1), 0.022)
         eintraege.append(("holz", _proto_objekt(f"DEB_Brett_{i + 1:02d}", bm, col, V.material("MAT_Holz_Bretter_Alt"))))
     for i in range(4):  # Papier/Zeitungen
-        sx, sy = rnd.choice([(0.21, 0.3), (0.3, 0.58), (0.58, 0.3), (0.15, 0.2)])
+        sx, sy = [(0.1, 0.15), (0.15, 0.29), (0.21, 0.15), (0.08, 0.1)][i]  # gefaltete/zerrissene Zeitungsseiten
         eintraege.append(("papier", _proto_objekt(f"DEB_Papier_{i + 1:02d}", _platte_knautsch(rnd, sx, sy, 0.25, 5), col, V.material("MAT_Papier"))))
     for i in range(3):  # Kleidung
         mat = V.material(["MAT_Plane_Oliv", "MAT_Markise_Rot", "MAT_Lack_Blau"][i]) if i < 2 else V.material("MAT_Stoff_Plane")

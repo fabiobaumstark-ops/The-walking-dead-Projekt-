@@ -502,10 +502,10 @@
   },
   "MAT_Papier": {
    "basis": "MAT_Stoff_Plane",
-   "farbe": "#CFC5A8",
-   "farbe_gain": 2.4,
+   "farbe": "#A99F86",
+   "farbe_gain": 1.9,
    "rauheit_min": 0.8,
-   "lokal": 0.5
+   "lokal": 0.9
   },
   "MAT_Ziegelstein": {
    "basis": "MAT_Beton_Grob",
