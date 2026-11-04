@@ -1,0 +1,11 @@
+{
+  "_info": "Hero-Kameras (Auftrag 5.3). pos/ziel in m (z = Hoehe ueber Gelaende bzw. absolut bei 'z_absolut'). Kamera bleibt waagerecht (Vertikalen senkrecht), Bildausschnitt ueber shift_y.",
+  "sensor_mm": 36,
+  "kameras": [
+    {"name": "CAM_Hero_01", "titel": "Die Strasse", "pos": [-30.0, -2.5, 1.7], "ziel": [60.0, -1.0], "brennweite": 35, "blende": 4.0, "fokus_m": 25.0, "shift_y": 0.06},
+    {"name": "CAM_Hero_02", "titel": "Ueberblick", "pos": [-50.45, 11.75, 1.8], "auf_dach": "B09", "ziel": [115.0, -5.0], "brennweite": 24, "blende": 8.0, "fokus_m": 120.0, "shift_y": -0.2},
+    {"name": "CAM_Hero_03", "titel": "Checkpoint", "pos": [76.0, 3.5, 1.5], "ziel": [-20.0, 0.0], "brennweite": 50, "blende": 2.8, "fokus_m": 4.0, "shift_y": 0.0},
+    {"name": "CAM_Hero_04", "titel": "Absturz", "pos": [27.0, 2.0, 0.8], "ziel": [31.0, -11.35], "brennweite": 28, "blende": 5.6, "fokus_m": 16.0, "shift_y": 0.45}
+  ],
+  "uebersicht": {"name": "CAM_Draufsicht", "mitte": [10.0, -2.0], "ortho_skala": 230.0}
+}

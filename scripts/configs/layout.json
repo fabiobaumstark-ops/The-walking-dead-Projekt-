@@ -15,7 +15,7 @@
     {"name": "SO", "rechteck": [22, -100, 100, -7], "seiten": {"N": "STR_Hauptstrasse", "W": "STR_Querstrasse_Ost"}, "ecken": ["NW"]}
   ],
   "baumscheiben": {"abstand": 10.0, "groesse": [1.2, 1.2], "abstand_zur_ecke": 9.0},
-  "platz": {"name": "STR_Platz", "rechteck": [-38, -51.35, 2, -11.35], "brunnen_durchmesser": 8.0},
+  "platz": {"name": "STR_Platz", "rechteck": [-37, -51.35, 3, -11.35], "brunnen_durchmesser": 8.0},
   "gasse": {"name": "STR_Gasse", "rechteck": [-46, 31.35, 14, 35.35]},
   "hochstrasse": {
     "name": "STR_Hochstrasse", "achse_x": 115.0, "von": -150, "bis": 150,

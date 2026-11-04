@@ -1,0 +1,28 @@
+{
+  "_info": "Platzierungsvarianten fuer Freigabe-Frage 4 (Phase 1). rechteck = [x0, y0, x1, y1] in m.",
+  "elemente": {
+    "PA": {"name": "Panzer A", "farbe": "#C0392B"},
+    "PB": {"name": "Panzer B", "farbe": "#E67E22"},
+    "H":  {"name": "Hubschrauber", "farbe": "#8E44AD"},
+    "C":  {"name": "Checkpoint", "farbe": "#2E86C1"},
+    "B1": {"name": "Barrikade 1 (Hauptstr.)", "farbe": "#16A085"},
+    "B2": {"name": "Barrikade 2 (Querstr.)", "farbe": "#16A085"},
+    "B3": {"name": "Barrikade 3 (Gasse)", "farbe": "#16A085"},
+    "S":  {"name": "Stau", "farbe": "#D4AC0D"},
+    "U":  {"name": "Unfallkette", "farbe": "#7F8C8D"}
+  },
+  "varianten": {
+    "A": {"titel": "A – Checkpoint am Ortsausgang Ost (Empfehlung)",
+          "PA": [-9, 1.5, 0.5, 5.2], "PB": [62, 9.5, 70, 14], "H": [26, -15, 36, -10],
+          "C": [62, -9, 78, 9], "S": [26, -7, 60, 7], "U": [12, -6, 25, 6],
+          "B1": [-62, -7, -57, 7], "B2": [-54, -36, -46, -31], "B3": [-44, 31.4, -41, 35.3]},
+    "B": {"titel": "B – Checkpoint an der Kreuzung",
+          "PA": [-24, -6, -14.5, -2.3], "PB": [37, -14, 44, -10], "H": [5, 10, 11.3, 14],
+          "C": [13, -8, 25, 8], "S": [27, -7, 70, 7], "U": [-56, -6, -44, 5],
+          "B1": [-75, -7, -70, 7], "B2": [14, -40, 22, -35], "B3": [6, 31.4, 9, 35.3]},
+    "C": {"titel": "C – Checkpoint unter der Hochstrasse",
+          "PA": [44, 1.5, 53.5, 5.2], "PB": [48, 9.5, 56, 14], "H": [73, -15, 85, -10],
+          "C": [92, -9, 106, 9], "S": [58, -7, 90, 7], "U": [12, -6, 25, 6],
+          "B1": [-62, -7, -57, 7], "B2": [-54, -36, -46, -31], "B3": [-44, 31.4, -41, 35.3]}
+  }
+}
