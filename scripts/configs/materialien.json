@@ -506,6 +506,12 @@
    "farbe_gain": 2.4,
    "rauheit_min": 0.8,
    "lokal": 0.5
+  },
+  "MAT_Ziegelstein": {
+   "basis": "MAT_Beton_Grob",
+   "farbe": "#8C5A45",
+   "farbe_gain": 2.3,
+   "kantenfarbe": "#A8836E"
   }
  }
 }

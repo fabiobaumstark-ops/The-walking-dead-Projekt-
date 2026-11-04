@@ -883,7 +883,7 @@ def gn_instanzen(quelle_col):
 
 def prototypen(name):
     """Collection fuer Vorlage-Objekte (aus der View-Layer ausgeschlossen, nur als Instanzquelle)."""
-    col = collection(f"00_Prototypen/{name}")
+    col = collection(f"00_Prototypen/PROTO_{name}")
     def _excl(lc):
         for c in lc.children:
             if c.name == "00_Prototypen":

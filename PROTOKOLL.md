@@ -211,3 +211,15 @@
   - Asphalt dunkler (Wert 0,56–0,58, Verwitterung „Lokal“ 0,25), Staub global auf max. 45 % Deckung
   - Markierungen weniger verwittert, Nassrand rauer (0,28–0,5)
 - Renderzeit CAM_Hero_01 (480 × 270, 12 Samples): ~16 s.
+
+## Phase 2.4 – Schutt-Streuung (2026-11-04)
+- GN_Schutt_Streuung mit ~1 570 Instanzen. Vorlagen:
+  - selbst gebaut: Betonbrocken 5–95 cm (kantig), Ziegel (ganz/halb/gebrochen), Ziegelhaufen, Glasscherben-Felder, Bretter, Papier/Zeitungen (zerknittert), Kleidung, Schuhe, Koffer, Rucksack, Matratzen, Einkaufswagen, Flaschen, heruntergefallene Klimageräte
+  - Poly Haven: Karton, rostige Dose, alter Reifen, Müllsack, Mülltonne, 2 Stühle, 2 Kanister
+- Verteilung:
+  - dichter an Wänden (bis 1,6 m), in Rinnsteinen, in der Gasse und im Kamerabereich (×1,6), außerhalb ×0,35
+  - Glas an den gemerkten kaputten Fenstern, 60 Teile je schwer beschädigter Fassade
+  - Papier/Plastik zum Wind ausgerichtet (aus SW) und vor windzugewandten Wänden gehäuft
+- Kollision: Mindestabstand je Objekt, nichts in Gebäuden, nichts Großes auf der Bordsteinkante, Höhe immer auf der Oberfläche (−6 mm eingebettet).
+- Fehler gefunden und behoben: Vorlagen- und Ziel-Collection hießen gleich („Schutt“) → Abhängigkeits-Zyklus, 0 Instanzen. Vorlagen heißen jetzt PROTO_*.
+- 18 abgefallene Schildbuchstaben liegen auf dem Gehweg.
