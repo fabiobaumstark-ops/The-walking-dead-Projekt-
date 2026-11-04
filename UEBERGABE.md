@@ -1,8 +1,8 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 2 läuft (allein, ohne parallele Agenten). 2.1/2.2 Gebäude + 2.3 Straßenraum fertig, als Nächstes 2.4 Schutt
+- **Aktuelle Phase:** Phase 2 abgeschlossen → **wartet auf Freigabe (Phase-2-Fragen 1–3, STOPP)**
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
-- **.blend-Version:** `viertel_v01.blend` (Blockout, 7,6 MB, Texturpfade relativ)
+- **.blend-Version:** `viertel_v02.blend` (Phase 2, 20 MB, Texturpfade relativ); Vorversion `viertel_v01.blend` (Blockout)
 - **Branch:** `claude/zen-meitner-53hxe1`
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 
@@ -31,21 +31,33 @@
 - Varianten für Frage 4: scripts/configs/platzierung_varianten.json
 
 ## Halb fertig / fehlt
-- Phase 2:
-  - fertig: 2.1/2.2 Gebäude (scripts/phase2/gebaeude2.py, Baukasten scripts/lib/fassade.py)
-  - fertig: 2.3 Straßenraum (scripts/phase2/strassenraum.py + scripts/configs/strassenraum.json)
-  - offen: 2.4 Schutt (schutt.py), 2.5 Checkpoint (checkpoint.py), 2.6 Barrikaden (barrikaden.py), A13 Hintergrund-Ring (hintergrund_ring.py)
-  - build_phase2.py lädt diese Module automatisch, sobald die Datei existiert
+- Phase 2 komplett:
+  - 2.1/2.2 Gebäude: scripts/phase2/gebaeude2.py
+  - 2.3 Straßenraum: strassenraum.py
+  - 2.4 Schutt: schutt.py
+  - 2.5 Checkpoint: checkpoint.py
+  - 2.6 Barrikaden: barrikaden.py
+  - A13 Hintergrund: hintergrund_ring.py
+  - Aufbau aller Teile: scripts/phase2/build_phase2.py
+- Bewusst offen für spätere Phasen:
+  - Autos der Barrikade 1 und Wracks auf der Hochstraße sind Platzhalter (Phase 3)
+  - Baum-Platzhalter (Kugeln) bis Phase 4
+  - Kirche und Lagerhalle noch ohne echte Fensteröffnungen
 
 ## Nächster konkreter Schritt
-1. Neue Sitzung:
-   - Blender 5.2.3 installieren (`curl -O https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz`, nach /opt entpacken, Symlink /usr/local/bin/blender)
-   - dann `python3 download_assets.py --nur-basis`
-2. Phase 2 starten (AUFTRAG.md Phase 2 + A13 lesen). Phase-1-Antworten sind schon in den Configs.
-3. Neu bauen (Befehle unten), Version hochzählen (v02), dann Phase 2 laut AUFTRAG.md.
+1. Neue Sitzung: Blender 5.2.3 installieren, `python3 download_assets.py --nur-basis`.
+2. Antworten auf die Phase-2-Fragen einarbeiten (Configs in scripts/configs/, neu bauen mit
+   `blender -b --factory-startup --python scripts/phase2/build_phase2.py -- --version 03`).
+3. Danach Phase 3 laut AUFTRAG.md:
+   - zuerst Fahrzeug-Recherche 3.1.0 → recherche/fahrzeuge.md
+   - Militär-Recherche → recherche/militaer.md
+   - dann 8 Grundmodelle bauen und ZWISCHEN-STOPP zur Freigabe
 
-## Offene Fragen an den Nutzer
-- keine (Phase 2 läuft)
+## Offene Fragen an den Nutzer (gestellt am 2026-11-04)
+- Phase-2-Freigabe:
+  1. Gebäude und Straßen glaubwürdig?
+  2. Detailmenge?
+  3. Checkpoint und Barrikaden?
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL
@@ -68,4 +80,5 @@
 4. `blender -b --factory-startup --python scripts/phase1/materialtest.py`
 5. `blender -b --factory-startup --python scripts/phase1/build_blockout.py -- --version 01`
 6. `blender -b viertel_v01.blend --python scripts/phase1/render_blockout.py`
-7. Phase 2: `blender -b --factory-startup --python scripts/phase2/build_phase2.py -- --version 02` (Test: --version 02test, Datei danach löschen)
+7. `blender -b --factory-startup --python scripts/phase2/build_phase2.py -- --version 02`
+8. `blender -b viertel_v02.blend --python scripts/phase1/render_blockout.py -- --prefix phase2`

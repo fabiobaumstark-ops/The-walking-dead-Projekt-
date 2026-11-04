@@ -242,3 +242,23 @@
 - Barrikade 1 (Hauptstraße West, x = −59,5): 2 quergestellte Autos (Platzhalter mit Typ-A-Maßen, werden in Phase 3 ersetzt), Bus-Seitenteil, angelehnte Wellblechtafeln, Paletten, Ketten, halb offenes Maschendraht-Tor.
 - Barrikade 2 (Querstraße West, y = −33,5): 45 Teile (Schränke, Türen, Matratzen, Reifenstapel, Bretter, Tische, Sofas), teils eingestürzt, Stacheldraht-Spirale mit Riss.
 - Barrikade 3 (Gasse, x = −42,5): Palisade aus Brettern (2,05–2,35 m mit Spitzen), 2 Riegel, 3 Stützbalken mit Keilen, 6 angespitzte Pfähle davor.
+
+## Phase 2 – Hintergrund-Ring A13 (2026-11-04)
+- scripts/phase2/hintergrund_ring.py + scripts/configs/hintergrund.json.
+- Horizont: Fernring-Gelände von 330 bis 1 600 m mit Hügeln bis 70 m (grobe Wellen + Kuppen/Täler).
+  Begründung: 34 m reichten von 32 m Kamerahöhe nicht für eine sichtbar bewegte Horizontlinie (CAM_Hero_02 geprüft).
+  Einschätzung: 70 m ist für das Hügelland im Südosten der USA plausibel, aber nicht recherchiert.
+- Mittelgrund (80–150 m): 9 weitere Straßenzüge mit einfachen Häusern und Gewerbebauten.
+  Fototexturen, dunkle Fensterflächen, 25 % mit eingesunkenen Dächern, keine Innenräume.
+- Hintergrund (150–330 m): 120 Silhouetten (Häuser, Hallen, Blöcke bis 8 Geschosse). Zusätzlich 70 Höfe, Scheunen und Hallen auf den Hügeln (340–720 m).
+- Landmarken (eigenes Design, ohne Ortsnamen):
+  - Wasserturm 28 m + Tank auf 6 Beinen
+  - weißer Kirchturm mit Spitze
+  - Getreidesilo (3 Zylinder + Elevator)
+  - Funkmast 72 m mit Abspannseilen
+  - Hochspannungsleitung mit Gittermasten (34 m) und Durchhang
+  - Werbetafel am Highway „PECAN PIES / NEXT EXIT 2 MI“ (erfunden, Paneele fehlen)
+- Die Hochstraße läuft bis ~520 m nach Norden und Süden weiter, mit Autowracks (Platzhalter bis Phase 3).
+- Phase-1-Silhouettenkästen ersetzt. Die Baumgruppen-Platzhalter (Kugeln) bleiben bis Phase 4.
+- A13-Prüfung CAM_Hero_02: Der Horizont hat jetzt Hügelwellen, Gebäude, Wasserturm und Silo; keine leeren Stellen mehr.
+  Er wirkt aber noch kahl und bräunlich, solange Wälder, Baumreihen und Kudzu (Phase 4) sowie Dunst (Phase 5) fehlen.
