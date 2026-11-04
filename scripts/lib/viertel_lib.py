@@ -336,7 +336,7 @@ def verwitterung_gruppe():
     # a) Staub von oben
     oben_n = _maprange(nt, Nz, 0.25, 0.9)
     staub = _math(nt, "MULTIPLY", oben_n, _maprange(nt, _noise(nt, P, 2.5, 8.0, 0.6), 0.38, 0.72, 0.1, 1.0))
-    staub = _math(nt, "MULTIPLY", staub, _math(nt, "MULTIPLY", staerke("verw_staub"), 0.55), clamp=True)
+    staub = _math(nt, "MULTIPLY", staub, _math(nt, "MULTIPLY", staerke("verw_staub"), 0.45), clamp=True)
     farbe = _mix_rgb(nt, staub, farbe, hex_lin(vc["staubfarbe"]))
     rau = _math(nt, "ADD", rau, _math(nt, "MULTIPLY", staub, 0.35), clamp=True)
 
@@ -416,6 +416,16 @@ def material(name):
     nt.links.new(uv.outputs["UV"], mp.inputs["Vector"])
     vec = mp.outputs["Vector"]
 
+    anti = std.get("antitiling")
+    if anti:  # zweite, gedrehte und verschobene Abtastung, gemischt ueber grossen Noise (keine Kachelwiederholung)
+        mp2 = nt.nodes.new("ShaderNodeMapping")
+        mp2.inputs["Scale"].default_value = (0.93 / groesse[0], 0.93 / groesse[1], 1.0)
+        mp2.inputs["Rotation"].default_value = (0, 0, 0.73)
+        mp2.inputs["Location"].default_value = (0.37, 0.61, 0)
+        nt.links.new(uv.outputs["UV"], mp2.inputs["Vector"])
+        geo0 = nt.nodes.new("ShaderNodeNewGeometry")
+        maske = _maprange(nt, _noise(nt, geo0.outputs["Position"], 0.09, 3.0, 0.55), 0.42, 0.58)
+
     def tex(pfad, nicht_farbe):
         if not pfad:
             return None
@@ -423,7 +433,13 @@ def material(name):
         t.image = _bild(pfad, nicht_farbe)
         t.interpolation = "Cubic" if nicht_farbe else "Linear"
         nt.links.new(vec, t.inputs["Vector"])
-        return t.outputs["Color"]
+        if not anti:
+            return t.outputs["Color"]
+        t2 = nt.nodes.new("ShaderNodeTexImage")
+        t2.image = t.image
+        t2.interpolation = t.interpolation
+        nt.links.new(mp2.outputs["Vector"], t2.inputs["Vector"])
+        return _mix_rgb(nt, maske, t.outputs["Color"], t2.outputs["Color"])
 
     col = tex(_karte(ordner, "_diff_", "_color"), False)
     rough = tex(_karte(ordner, "_rough_", "_roughness"), True)
@@ -432,6 +448,7 @@ def material(name):
 
     # Ebene 1+2: Fototextur, Farbanpassung an Look-Bible, grossflaechige Variation
     hsv = nt.nodes.new("ShaderNodeHueSaturation")
+    hsv.name = "HSV_Basis"
     for i, k in enumerate(("Hue", "Saturation", "Value")):
         hsv.inputs[k].default_value = std["hsv"][i]
     _link(nt, col, hsv.inputs["Color"])
@@ -760,8 +777,9 @@ def mat_farbe(name, hexfarbe, abplatzer=0.5, unterlage="MAT_Asphalt_Rissig", rau
     m, nt, b = _neues_mat(name)
     g = _grunge(nt, unterlage, 0.5)
     geo = nt.nodes.new("ShaderNodeNewGeometry")
-    alpha = _maprange(nt, _math(nt, "ADD", _math(nt, "MULTIPLY", g, 0.7), _math(nt, "MULTIPLY", _noise(nt, geo.outputs["Position"], 1.4, 4.0), 0.5)),
-                      0.25 + 0.45 * abplatzer, 0.32 + 0.45 * abplatzer, 1.0, 0.0)
+    wert = _math(nt, "ADD", _math(nt, "MULTIPLY", g, 0.6), _math(nt, "MULTIPLY", _noise(nt, geo.outputs["Position"], 1.4, 4.0), 0.4))
+    grenze = 0.78 - 0.4 * abplatzer  # abplatzer 0 = fast intakt, 1 = fast ganz weg
+    alpha = _maprange(nt, wert, grenze - 0.03, grenze + 0.03, 1.0, 0.0)
     farbe = _mix_rgb(nt, _maprange(nt, g, 0.2, 0.9, 0.0, 0.45), hex_lin(hexfarbe), hex_lin("#8A8478"))
     grp = _verw_anschluss(nt, farbe, rau, None, lokal=lokal)
     nt.links.new(grp.outputs["Farbe"], b.inputs["Base Color"])
@@ -829,18 +847,19 @@ def mat_schindeln(name="MAT_Dachschindeln"):
 
 
 # ---------------------------------------------------------------- Phase 2: Instanzen (A9)
-def gn_instanzen():
-    """GN-Gruppe: setzt Instanzen einer Collection auf die Punkte eines Mesh (Attribute rot, skal, idx)."""
-    if "GN_Instanzen_Punkte" in bpy.data.node_groups:
-        return bpy.data.node_groups["GN_Instanzen_Punkte"]
-    ng = bpy.data.node_groups.new("GN_Instanzen_Punkte", "GeometryNodeTree")
+def gn_instanzen(quelle_col):
+    """GN-Gruppe GN_Instanzen_<Collection>: setzt Instanzen der Collection auf die Punkte eines Mesh (Attribute rot, skal, idx)."""
+    name = f"GN_Instanzen_{quelle_col.name}"
+    if name in bpy.data.node_groups:
+        return bpy.data.node_groups[name]
+    ng = bpy.data.node_groups.new(name, "GeometryNodeTree")
     ng.interface.new_socket("Geometry", in_out="INPUT", socket_type="NodeSocketGeometry")
-    ng.interface.new_socket("Sammlung", in_out="INPUT", socket_type="NodeSocketCollection")
     ng.interface.new_socket("Geometry", in_out="OUTPUT", socket_type="NodeSocketGeometry")
     gi, go = ng.nodes.new("NodeGroupInput"), ng.nodes.new("NodeGroupOutput")
     m2p = ng.nodes.new("GeometryNodeMeshToPoints")
     ci = ng.nodes.new("GeometryNodeCollectionInfo")
     ci.transform_space = "ORIGINAL"
+    ci.inputs["Collection"].default_value = quelle_col
     ci.inputs["Separate Children"].default_value = True
     ci.inputs["Reset Children"].default_value = True
     iop = ng.nodes.new("GeometryNodeInstanceOnPoints")
@@ -851,7 +870,6 @@ def gn_instanzen():
         a.inputs["Name"].default_value = name
         return a.outputs["Attribute"]
     ng.links.new(gi.outputs["Geometry"], m2p.inputs["Mesh"])
-    ng.links.new(gi.outputs["Sammlung"], ci.inputs["Collection"])
     ng.links.new(m2p.outputs["Points"], iop.inputs["Points"])
     ng.links.new(ci.outputs[0], iop.inputs["Instance"])
     ng.links.new(attr("idx", "INT"), iop.inputs["Instance Index"])
@@ -889,9 +907,7 @@ def instanzen(name, punkte, quelle_col, ziel_col):
     ob = bpy.data.objects.new(name, me)
     ziel_col.objects.link(ob)
     mod = ob.modifiers.new("GN_Instanzen", "NODES")
-    mod.node_group = gn_instanzen()
-    sock = next(s for s in mod.node_group.interface.items_tree if getattr(s, "name", "") == "Sammlung")
-    mod[sock.identifier] = quelle_col
+    mod.node_group = gn_instanzen(quelle_col)
     return ob
 
 
@@ -908,8 +924,7 @@ def mat_variante(basis, idx, tint=None):
     m.name = name
     m.use_fake_user = True
     nt = m.node_tree
-    hsv = next(n for n in nt.nodes if n.type == "HUE_SAT" and n.inputs["Color"].is_linked
-               and n.inputs["Color"].links[0].from_node.type == "TEX_IMAGE")
+    hsv = nt.nodes["HSV_Basis"]
     dh = [0, 0.012, -0.012, 0.025][idx % 4]
     ds = [1, 0.85, 1.1, 0.75][idx % 4]
     dv = [1, 0.9, 1.07, 0.82][idx % 4]

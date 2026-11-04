@@ -1,0 +1,47 @@
+{
+  "_info": "Strassenraum Phase 2.3. Koordinaten in m (x Ost, y Nord). Detailzonen = feine Fahrbahn (0,25 m) im Bereich der Hero-Kameras.",
+  "seed": 77,
+  "raster_m": 0.25,
+  "detail_zonen": [[-45, -7, 82, 7], [14, 7, 22, 25], [14, -25, 22, -7]],
+  "senken": [[-20, 4.5], [-8, -2.5], [5, 5.5], [30, -4.0], [44, 2.0], [55, -5.5], [17.5, 14], [19, -18]],
+  "oel_pfuetzen": 2,
+  "schlagloecher": [[-24, -1.5, 0.35], [-15, 5.8, 0.2], [-3, -5.5, 0.4], [9, 1.0, 0.25], [26, 3.0, 0.3], [38, -1.0, 0.45], [50, 4.5, 0.2], [65, -3.0, 0.35], [16, 12, 0.25], [20.5, -14, 0.3]],
+  "flicken": [[-35, 1.0, 3.0, 1.4], [-12, -6.0, 2.2, 1.0], [2, 3.6, 4.0, 1.8], [33, -6.5, 1.8, 1.2], [60, 0.5, 2.5, 2.5], [15, 15, 2.0, 3.0]],
+  "riss_flaeche_m2": 7.0,
+  "netzriss_felder": 9,
+  "gullideckel": [[-28, 3.5], [-10, -3.5], [6, 3.5], [30, -3.5], [48, 3.5], [70, -3.5], [18, 16], [18, -16]],
+  "gehweg_zonen": [[-45, 8, 8.35, 11.35], [28, 82, 8.35, 11.35], [-40, 8, -11.35, -8.35], [28, 82, -11.35, -8.35]],
+  "strommasten": {
+    "abstand": 36,
+    "linien": [
+      {"name": "Nord_West", "von": [-95, 7.75], "bis": [9, 7.75]},
+      {"name": "Nord_Ost", "von": [27, 7.75], "bis": [95, 7.75]},
+      {"name": "Ost_Sued", "von": [13.6, -90], "bis": [13.6, -14]},
+      {"name": "Ost_Nord", "von": [13.6, 14], "bis": [13.6, 90]}
+    ],
+    "umgeknickt": [-25.67, 7.75],
+    "riss_anteil": 0.12
+  },
+  "laternen": {"reihen": [[-95, 95, -7.75]], "abstand": 25, "umgeknickt": 0.3, "auslassen": [18, -50]},
+  "ampeln": {"masten": [[11.5, 9.5], [24.5, 9.5], [11.5, -9.5], [24.5, -9.5]], "mitte": [18, 0], "unterkante_m": 5.3, "heruntergefallen": 2},
+  "schilder": [
+    {"art": "stop", "pos": [-45.2, -9.0], "richtung": 0},
+    {"art": "tempo", "pos": [-60, -8.6], "richtung": -90},
+    {"art": "tempo", "pos": [70, 8.6], "richtung": 90, "verbogen": 18},
+    {"art": "einbahn", "pos": [13.2, 36.0], "richtung": 90},
+    {"art": "parken", "pos": [-20, 8.6], "richtung": 0, "verbogen": 25},
+    {"art": "parken", "pos": [40, -8.6], "richtung": 180},
+    {"art": "strassenname", "pos": [12.6, 8.6], "namen": [["MAIN ST", 0], ["CEDAR ST", 90]]},
+    {"art": "strassenname", "pos": [23.4, -8.6], "namen": [["MAIN ST", 0], ["CEDAR ST", 90]], "verbogen": 12},
+    {"art": "strassenname", "pos": [-45.4, -8.6], "namen": [["MAIN ST", 0], ["BELL ST", 90]]},
+    {"art": "bus", "pos": [-7.5, -9.0], "richtung": 0}
+  ],
+  "hydranten": [[-33, 8.9], [-5, -8.9], [25, 8.9], [45, -8.9], [13.0, -20], [-44, -20]],
+  "hydrant_umgefahren": 1,
+  "hydrant_farbe": "MAT_Lack_Gelb",
+  "parkuhren": [[-44, 8, 8.6]],
+  "briefkaesten": [[-36, -9.6, 0], [30, 9.8, 0]],
+  "zeitungsautomaten": [[-30, 10.4, 3.14, "rot"], [-29.3, 10.4, 3.14, "gruen"], [36, -10.5, 0, "rot"]],
+  "bushaltestelle": [-5, -10.0],
+  "fahrradstaender": [-30, -10.6]
+}

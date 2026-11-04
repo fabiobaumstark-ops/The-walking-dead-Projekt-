@@ -1,6 +1,6 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 2 läuft (allein, ohne parallele Agenten). 2.1/2.2 Gebäude fertig, als Nächstes 2.3 Straßenraum
+- **Aktuelle Phase:** Phase 2 läuft (allein, ohne parallele Agenten). 2.1/2.2 Gebäude + 2.3 Straßenraum fertig, als Nächstes 2.4 Schutt
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** `viertel_v01.blend` (Blockout, 7,6 MB, Texturpfade relativ)
 - **Branch:** `claude/zen-meitner-53hxe1`
@@ -33,7 +33,8 @@
 ## Halb fertig / fehlt
 - Phase 2:
   - fertig: 2.1/2.2 Gebäude (scripts/phase2/gebaeude2.py, Baukasten scripts/lib/fassade.py)
-  - offen: 2.3 Straßenraum (scripts/phase2/strassenraum.py), 2.4 Schutt (schutt.py), 2.5 Checkpoint (checkpoint.py), 2.6 Barrikaden (barrikaden.py), A13 Hintergrund-Ring (hintergrund_ring.py)
+  - fertig: 2.3 Straßenraum (scripts/phase2/strassenraum.py + scripts/configs/strassenraum.json)
+  - offen: 2.4 Schutt (schutt.py), 2.5 Checkpoint (checkpoint.py), 2.6 Barrikaden (barrikaden.py), A13 Hintergrund-Ring (hintergrund_ring.py)
   - build_phase2.py lädt diese Module automatisch, sobald die Datei existiert
 
 ## Nächster konkreter Schritt

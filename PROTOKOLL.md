@@ -186,3 +186,28 @@
 - Selbst gebaut: MAT_Dachschindeln (Fotobasis tarred_gravel + Laschenraster), MAT_Maschendraht (Fotobasis rusty_metal_02).
 - Aufbauzeit gesamt: 15 s, .blend ~12,7 MB.
 - Bekannt / offen: Ladeninnenräume eher dunkel (Innenmaterialien aufgehellt), Markisenbahnen noch flach, Kirche und Lagerhalle ohne echte Öffnungen.
+
+## Phase 2.3 – Straßenraum (2026-11-04)
+- Bibliotheks-Materialien ersetzen das Blockout-Grau an Gelände, Blöcken, Platz, Gasse und Hochstraße.
+- Kachel-Vermeidung (zweite gedrehte Abtastung, Noise-Mischung) bei Asphalt, Erde, Gras, Beton, Kies, Laub, Bordstein und Bitumen.
+- Feine Fahrbahn (0,25 m) in den Kamerazonen:
+  - Absenkungen mit Pfützen (2 mit Öl-Schlieren über Thin Film), nasser Rand
+  - 10 Schlaglöcher (Ø 0,4–0,9 m, mit Wasser oder Erde gefüllt), 6 Flickstellen
+  - ca. 300 Längs- und Querrisse + Netzriss-Felder; Rissverläufe sind für die Vegetation in Phase 4 gemerkt
+- Markierungen: gelbe Doppellinie, Spurlinien gestrichelt 3/9 m, Randlinien, Zebrastreifen mit 0,6-m-Balken, Haltelinien.
+  Abplatzer über eine Fotomaske. Gullideckel Ø 60 cm.
+- Gehweg: Betonplatten 1,5 × 1,5 m als GN-Instanzen (3 Varianten, gedreht). Neben den Baumscheiben angehoben (2–6 cm) und gekippt.
+- Strommasten (10,4 m sichtbar, alle ~35 m):
+  - Querträger, Porzellan-Isolatoren, Trafos an jedem 3. Mast, Abspannseile
+  - 6 Leitungen je Feld mit Durchhang, 12 % gerissen bis zum Boden; Mast bei x = −25,7 umgeknickt
+- Laternen 8 m mit 2-m-Ausleger alle 25 m, 30 % umgeknickt.
+- Ampeln: Spannseile diagonal an 4 Masten, Signalgeber mit Unterkante 5,3 m (TDOT-Recherche), einer heruntergefallen.
+- Schilder generisch mit erfundenen Straßennamen (MAIN ST, CEDAR ST, BELL ST), teils verbogen: Stop, Tempo 30, Einbahn, Parkverbot, Bus.
+- Stadtmöbel:
+  - 6 Hydranten (einer umgefahren, mit Kalkspur)
+  - Parkuhren, 2 Briefkästen (dunkelgrün, ohne Logo)
+  - Zeitungsautomaten mit erfundener Schlagzeile, Bushaltestelle, Fahrradständer mit Rädern
+- Korrekturen nach Test:
+  - Asphalt dunkler (Wert 0,56–0,58, Verwitterung „Lokal“ 0,25), Staub global auf max. 45 % Deckung
+  - Markierungen weniger verwittert, Nassrand rauer (0,28–0,5)
+- Renderzeit CAM_Hero_01 (480 × 270, 12 Samples): ~16 s.

@@ -19,21 +19,23 @@
    "hsv": [
     0.5,
     0.5,
-    0.62
+    0.56
    ],
    "rauheit_min": 0.7,
-   "lokal": 0.5,
-   "kantenfarbe": "#8C8A84"
+   "lokal": 0.25,
+   "kantenfarbe": "#8C8A84",
+   "antitiling": true
   },
   "MAT_Asphalt_Rissig": {
    "hsv": [
     0.5,
-    0.55,
-    1.0
+    0.5,
+    0.58
    ],
    "rauheit_min": 0.7,
-   "lokal": 0.5,
-   "kantenfarbe": "#8C8A84"
+   "lokal": 0.25,
+   "kantenfarbe": "#8C8A84",
+   "antitiling": true
   },
   "MAT_Asphalt_Geflickt": {
    "hsv": [
@@ -41,7 +43,9 @@
     0.5,
     0.85
    ],
-   "rauheit_min": 0.65
+   "rauheit_min": 0.65,
+   "antitiling": true,
+   "lokal": 0.25
   },
   "MAT_Beton_Glatt": {
    "hsv": [
@@ -57,7 +61,8 @@
     0.75,
     1.0
    ],
-   "rauheit_min": 0.8
+   "rauheit_min": 0.8,
+   "antitiling": true
   },
   "MAT_Ziegel_Rot": {
    "hsv": [
@@ -151,7 +156,8 @@
     0.6,
     1.1
    ],
-   "rauheit_min": 0.6
+   "rauheit_min": 0.6,
+   "antitiling": true
   },
   "MAT_Gehweg_Beton": {
    "hsv": [
@@ -160,7 +166,8 @@
     1.0
    ],
    "rauheit_min": 0.8,
-   "fugen_m": 1.5
+   "fugen_m": 1.5,
+   "antitiling": true
   },
   "MAT_Gehwegplatten": {
    "hsv": [
@@ -176,7 +183,8 @@
     0.7,
     1.0
    ],
-   "rauheit_min": 0.8
+   "rauheit_min": 0.8,
+   "antitiling": true
   },
   "MAT_Rost_Hell": {
    "hsv": [
@@ -221,7 +229,8 @@
     1.0
    ],
    "rauheit_min": 0.85,
-   "lokal": 0.3
+   "lokal": 0.3,
+   "antitiling": true
   },
   "MAT_Matsch_Laub": {
    "hsv": [
@@ -230,7 +239,8 @@
     1.0
    ],
    "rauheit_min": 0.6,
-   "lokal": 0.3
+   "lokal": 0.3,
+   "antitiling": true
   },
   "MAT_Kies": {
    "hsv": [
@@ -239,7 +249,8 @@
     1.0
    ],
    "rauheit_min": 0.8,
-   "lokal": 0.4
+   "lokal": 0.4,
+   "antitiling": true
   },
   "MAT_Sand": {
    "hsv": [
@@ -266,7 +277,8 @@
     1.0
    ],
    "rauheit_min": 0.7,
-   "lokal": 0.2
+   "lokal": 0.2,
+   "antitiling": true
   },
   "MAT_Gras_Boden": {
    "hsv": [
@@ -275,7 +287,8 @@
     1.0
    ],
    "rauheit_min": 0.8,
-   "lokal": 0.2
+   "lokal": 0.2,
+   "antitiling": true
   },
   "MAT_Sackleinen": {
    "hsv": [
@@ -461,6 +474,38 @@
   "MAT_Mauer_Innen": {
    "basis": "MAT_Ziegel_Verblasst",
    "lokal": 0.4
+  },
+  "MAT_Asphalt_Nass": {
+   "basis": "MAT_Asphalt_Alt",
+   "hsv": [
+    0.5,
+    0.45,
+    0.38
+   ],
+   "rauheit_min": 0.28,
+   "rauheit_max": 0.5,
+   "antitiling": true,
+   "lokal": 0.2
+  },
+  "MAT_Kalkfleck": {
+   "basis": "MAT_Beton_Glatt",
+   "farbe": "#D9D3C6",
+   "farbe_gain": 2.4,
+   "lokal": 0.3
+  },
+  "MAT_Porzellan": {
+   "basis": "MAT_Beton_Glatt",
+   "farbe": "#5A3A2A",
+   "farbe_gain": 2.0,
+   "rauheit_min": 0.25,
+   "rauheit_max": 0.45
+  },
+  "MAT_Papier": {
+   "basis": "MAT_Stoff_Plane",
+   "farbe": "#CFC5A8",
+   "farbe_gain": 2.4,
+   "rauheit_min": 0.8,
+   "lokal": 0.5
   }
  }
 }
