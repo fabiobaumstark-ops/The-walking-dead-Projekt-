@@ -270,6 +270,19 @@ Zeitplan: Gebäude-Silhouetten und Gelände in Phase 2, Bäume in Phase 4,
 Dunst in Phase 5. Nach Phase 2 mit CAM_Hero_02 prüfen, dass es am
 Horizont keine leeren, flachen Stellen mehr gibt.
 
+A14 ZEITSPANNE UND REFERENZ-LOOK (Ergänzung vom 2026-11-04, ersetzt "ca. 5 Jahre")
+- Die Szene spielt ca. 10–15 Jahre nach dem Zusammenbruch (Arbeitswert 12 Jahre).
+  Alle Stellen im Auftrag mit "5 Jahre" gelten entsprechend.
+- Vegetation: stark überwuchert.
+  - Ranken und Efeu bedecken ganze Fassaden.
+  - Straßen und Gehwege sind großteils von Erde, Gras, Büschen und Blumen bedeckt, nur ein ausgetretener Weg bleibt frei.
+  - Pionierbäume sind deutlich höher.
+  - Pflanzen müssen so realistisch und detailreich wirken wie auf der Referenz des Nutzers.
+- Flair laut Referenz des Nutzers: warmes Gegenlicht, tiefer heller Dunst, Lichtstrahlen.
+  Der Boden ist mit Erde, Matsch, Moos und aufgebrochenem Asphalt bedeckt.
+- Die Referenz dient nur der Stimmung. Bildaufbau, Gebäude und Fahrzeuge werden nicht nachgebaut, das Bild wird nicht gespeichert.
+- Zeitplan: Boden/Erde und kleine Vegetation in Phase 2b, große Vegetation in Phase 4 (nach den Fahrzeugen), Licht/Dunst in Phase 5.
+
 ======================================================================
 TEIL B – PHASEN
 ======================================================================

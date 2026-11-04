@@ -35,7 +35,7 @@ print(f"[{time.time() - t0:5.1f}s] Umgebung (Phase 1)")
 import gebaeude2  # noqa: E402
 gebaeude2.bauen()
 print(f"[{time.time() - t0:5.1f}s] Gebaeude Phase 2")
-for modul in ("strassenraum", "schutt", "checkpoint", "barrikaden", "vegetation_klein", "hintergrund_ring"):
+for modul in ("strassenraum", "schutt", "checkpoint", "barrikaden", "boden", "vegetation_klein", "hintergrund_ring"):
     if an(modul) and os.path.exists(os.path.join(HIER, modul + ".py")):
         __import__(modul).bauen()
         print(f"[{time.time() - t0:5.1f}s] {modul}")

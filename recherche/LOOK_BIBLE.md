@@ -1,6 +1,6 @@
 # LOOK BIBLE – verbindlicher Stil-Leitfaden
 
-**Status: v1.0 – wartet auf die zweite Bestätigung.** Alle Phase-0-Empfehlungen wurden am 2026-11-04 angenommen.
+**Status: v1.1 (2026-11-04)** – v1.0 bestätigt. Änderung laut Nutzer: Zeitspanne 10–15 Jahre, stark überwuchert, Flair und Boden wie Referenz (siehe AUFTRAG A14).
 
 ## Freigegebene Grundentscheidungen
 | # | Thema | Entscheidung |
@@ -8,8 +8,8 @@
 | 1 | Region/Baustil | US-Süden: Ziegel-Main-Street + Holzhäuser mit Veranden |
 | 2 | Jahreszeit | Spätsommer (Ende August): grün, dicht, heiß |
 | 3 | Tageszeit & Wetter | Spätnachmittag, Sonne bricht durch Dunst und Wolken |
-| 4 | Zerstörung | gemischt: überwiegend verfallen, Zerstörung nur an bestimmten Stellen (Verteilung 30 % leicht / 40 % mittel / 30 % schwer) |
-| 5 | Vegetation | mittel, an den Rändern und Brachen stark |
+| 4 | Zerstörung | gemischt: überwiegend verfallen, Zerstörung nur an bestimmten Stellen (Verteilung 30 % leicht / 40 % mittel / 30 % schwer); nach 10–15 Jahren mehr Dacheinstürze und starker Rost |
+| 5 | Vegetation | **stark überwuchert** (Änderung v1.1): Fassaden voller Ranken, Straßen großteils mit Erde und Grün bedeckt, ausgetretener Weg in der Mitte |
 | 6 | Farbstimmung | warm-staubig mit leichtem Gelb-Grün-Stich |
 | 7 | Militär-Epoche | generisch modern (keine Kopie eines realen Modells) |
 | 8 | Figuren | einzelne Gruppen (3–4 Gruppen + Einzelne, 25–40 gesamt) |
@@ -18,7 +18,7 @@
 | 11 | Animation | später entscheiden |
 
 ## Stimmung (3 Sätze)
-Eine Südstaaten-Kleinstadt fünf Jahre nach dem Zusammenbruch: still, schwül und schwer, als hätte die Zeit die Luft angehalten. Das Grün ist zurück und überzieht die Spuren einer überstürzten Flucht: offene Autotüren, Sperren, die nichts aufgehalten haben, ein abgestürzter Hubschrauber. Alles wirkt wie ein echtes, leicht ausgebleichtes Filmstandbild, nicht wie ein Spiel: entsättigt, staubig, ehrlich.
+Eine Südstaaten-Kleinstadt gut zehn Jahre nach dem Zusammenbruch: still, schwül und schwer, als hätte die Zeit die Luft angehalten. Das Grün ist zurück und überzieht die Spuren einer überstürzten Flucht: offene Autotüren, Sperren, die nichts aufgehalten haben, ein abgestürzter Hubschrauber. Alles wirkt wie ein echtes, leicht ausgebleichtes Filmstandbild, nicht wie ein Spiel: entsättigt, staubig, ehrlich.
 
 ## Farbpalette (sRGB-Hex, Basisfarben vor dem Licht)
 | Element | Hex | Änderung zum Auftrag |
@@ -46,7 +46,7 @@ Regel: Keine Fläche ist gesättigter als das grüne Unkraut. Reines Weiß und r
 - **HDRI-Kandidaten (Poly Haven, CC0):** `abandoned_tank_farm_01/02` (urban, nachmittags, 16K), `abandoned_parking` (urban, 16K), `quarry_cloudy` (20K, geringer Kontrast)
 - **Dunst:** zunehmend mit der Tiefe. Ab ca. 150 m werden die Silhouetten deutlich blasser, der Horizont versinkt im Dunst.
 
-## Zustand nach 5 Jahren
+## Zustand nach 10–15 Jahren (v1.1)
 - **Verrostet:**
   - Autos an Schwellern, Radläufen und Kanten
   - Ketten und Laufrollen der Panzer
@@ -96,7 +96,7 @@ Regel: Keine Fläche ist gesättigter als das grüne Unkraut. Reines Weiß und r
 2. Keine perfekt sauberen oder gleichfarbigen Flächen
 3. Keine identischen Autos oder Häuser nebeneinander
 4. Kein Kriegsgebiet mit Bombenkratern überall
-5. Kein dichter Wald auf der Fahrbahn (dafür sind 5 Jahre zu kurz)
+5. Kein geschlossener Wald mitten auf der Fahrbahn (Bäume nur an Rändern, Rissen und im Schutt; die Mitte bleibt als Trampelpfad offen)
 6. Kein Nebel wie eine Wand, keine übertriebenen Lichtstrahlen
 7. Kein Blut, keine Wunden, keine Leichen
 8. Keine echten Marken, Logos, Kennzeichen oder Hoheitszeichen
@@ -145,3 +145,13 @@ Die Positionen von Panzern, Hubschrauber, Checkpoint, Barrikaden, Stau und Unfal
    - von unten, 28 mm, f/5.6
    - Rumpf und hängender Heckausleger vor dem Wolkenhimmel
    - Rotorblatt im Vordergrund
+
+## Ergänzung v1.1 – Referenz-Flair des Nutzers (nur Stimmung, nichts nachbauen)
+- Licht: tiefe, warme Sonne im Gegenlicht, heller Dunst schluckt die Tiefe, Lichtstrahlen zwischen den Häusern.
+- Boden:
+  - Asphalt großflächig unter Erde, Matsch, Moos und Gras verschwunden, aufgebrochene Platten
+  - Pfützen, ein ausgetretener Pfad in der Fahrbahnmitte
+- Vegetation:
+  - Efeu und wilder Wein über ganze Fassaden
+  - hohe Gräser, Büsche, Farne, Blumen (vereinzelt rote/gelbe Blüten), junge Bäume 6–12 m
+- Qualität: Pflanzen müssen nah vor der Kamera fotoreal wirken (echte Modelle, Detail, Variation).

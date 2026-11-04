@@ -235,8 +235,8 @@
   "MAT_Matsch_Laub": {
    "hsv": [
     0.5,
-    0.75,
-    1.0
+    0.7,
+    0.72
    ],
    "rauheit_min": 0.6,
    "lokal": 0.3,
@@ -326,7 +326,7 @@
  },
  "verwitterung": {
   "_info": "Zentrale Regler (werden als Szenen-Eigenschaften verw_* angelegt, aendern: Szene > Benutzerdefinierte Eigenschaften).",
-  "verw_master": 0.85,
+  "verw_master": 1.0,
   "verw_staub": 1.0,
   "verw_schmutz": 1.0,
   "verw_kanten": 1.3,

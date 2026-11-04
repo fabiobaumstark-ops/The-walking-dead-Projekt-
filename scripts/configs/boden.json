@@ -1,0 +1,73 @@
+{
+ "_info": "Boden nach 10-15 Jahren (AUFTRAG A14). deckung 0..1 = Erde/Matsch-Bedeckung. Trampelpfad in der Fahrbahnmitte bleibt frei.",
+ "seed": 51,
+ "raster_m": 0.25,
+ "zonen": [
+  [
+   -60,
+   -11.35,
+   90,
+   11.35
+  ],
+  [
+   11.35,
+   11.35,
+   24.65,
+   30
+  ],
+  [
+   11.35,
+   -30,
+   24.65,
+   -11.35
+  ],
+  [
+   -46,
+   31.35,
+   14,
+   35.35
+  ]
+ ],
+ "dicke_m": 0.05,
+ "flecken_m": 5.5,
+ "fahrbahn_basis": 1.05,
+ "rinne": 0.9,
+ "rinne_breite_m": 2.6,
+ "gehweg_basis": 0.95,
+ "wand": 0.9,
+ "wand_breite_m": 1.4,
+ "bordstein_gehweg": 0.35,
+ "moos_anteil": 1.0,
+ "pfad": {
+  "breite_m": 1.8,
+  "schwung_m": 1.2,
+  "wellenlaenge_m": 9.0
+ },
+ "schollen_felder": [
+  [
+   -16,
+   3.0,
+   2.2
+  ],
+  [
+   10,
+   -3.5,
+   1.8
+  ],
+  [
+   36,
+   2.5,
+   2.5
+  ],
+  [
+   56,
+   -1.5,
+   2.0
+  ],
+  [
+   18,
+   20,
+   1.6
+  ]
+ ]
+}

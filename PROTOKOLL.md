@@ -293,3 +293,16 @@
 - Nutzer: „zu wenig Details, Moos fehlt“, „viel zu wenig Details“.
 - Entscheidung des Nutzers: 1C + Moos jetzt, 2 alle Bereiche, 3B mehr Details am Checkpoint.
 - Annahme (dem Nutzer mitgeteilt): „Moos und so“ = Moos, Flechten, Laub und kleine Grasbüschel in Rissen und Fugen. Bäume, Büsche, Ranken und Kudzu bleiben in Phase 4.
+- Referenzbild vom Nutzer: Konzeptkunst einer überwucherten Stadt (Signatur unten links, vermutlich aus einem Videospiel – unsicher).
+  Wird nur als Stimmungsreferenz genutzt, nicht nachgebaut und nicht gespeichert.
+- Entscheidungen: 1A Zeitspanne 10–15 Jahre und stark überwuchert (AUFTRAG A14, LOOK_BIBLE v1.1), 2A große Vegetation in Phase 4, 3 Flair + Boden übernehmen.
+- Folgen:
+  - Boden jetzt: Erdschichten, Matsch, Moos auf dem Asphalt, aufgebrochene Platten, ausgetretener Pfad
+  - stärkere Verwitterung (verw_master 0,85 → 1,0, mehr Rost/Moos)
+  - in Phase 3 stärker verrostete Fahrzeuge
+- Boden (scripts/phase2/boden.py + scripts/configs/boden.json):
+  - Erdschicht und Moosflächen über Fahrbahn, Gehweg und Gasse, mit weichen Rändern über das Attribut „deckung“
+  - in der Fahrbahnmitte ein geschwungener Trampelpfad (1,8 m) frei
+  - 5 Felder mit aufgebrochenen Asphaltschollen
+  - Erste Abdeckung war zu niedrig (kaum sichtbar) → Grundwerte auf ~1,0 erhöht, Alpha-Schwelle 0,16–0,4. Erde dunkler, Moos kräftiger.
+- Nutzer-Wunsch „vor allem soll die Stadt so eine Dichte haben“ → Rückfrage gestellt (A Innenstadt verdichten + Skyline / B nur Skyline / C nur Viertel).
