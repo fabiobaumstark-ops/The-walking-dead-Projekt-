@@ -25,6 +25,11 @@ nur = args[args.index("--nur") + 1].split(",") if "--nur" in args else None
 def platzhalter_entfernen():
     import barrikaden as B
     import hintergrund_ring as HR
+    import strassenraum as SR
+    # Zustand des Strassenmoduls fuer die Bodenhoehe (Barrikaden liegen ausserhalb der Detailzonen -> Senken irrelevant)
+    SR.L = V.config("layout.json")
+    SR.C = V.config("strassenraum.json")
+    SR.DETAIL[:] = [tuple(z) for z in SR.C["detail_zonen"]]
     for n in ("CHK_Barrikade_1", "CHK_Barrikade_2", "CHK_Barrikade_3", "CHK_Barrikaden_Ketten_Draht"):
         ob = bpy.data.objects.get(n)
         if ob:

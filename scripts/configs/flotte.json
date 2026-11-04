@@ -404,10 +404,10 @@
     {
      "typ": "S",
      "pos": [
-      31.5,
-      -0.6
+      36.8,
+      -1.6
      ],
-     "richtung": 28,
+     "richtung": 32,
      "farbe": "Schulbus_Gelb",
      "zustand": {
       "tueren": {

@@ -23,7 +23,7 @@ import fz_karosserie as K  # noqa: E402
 import fz_material as FM  # noqa: E402
 import fz_teile as FT  # noqa: E402
 
-INNEN = {"Tuer": "innen_tuer", "Karosserie": "dachhimmel", "Boden": "teppich"}
+INNEN = {"Tuer": "innen_tuer", "Karosserie": "dachhimmel", "Boden": "teppich", "Haube": "lack", "Kofferraum": "lack", "Heckklappe": "lack"}
 
 
 def cfg():

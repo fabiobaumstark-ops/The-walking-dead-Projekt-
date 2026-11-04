@@ -94,6 +94,7 @@
 - Dichte: Antwort C (Viertel verdichten, keine Hochhaus-Skyline) → umgesetzt in v03
 - Phase 2/2b freigegeben („Gut weiter“, 2026-11-04). Qualitätsrunde nach Phase 5 vereinbart (AUFTRAG 5.8).
 - Phase 3: allein (ohne parallele Agenten, wie Phase 2)
+- Dateigröße (2026-11-04): Antwort B – eine große .blend erlaubt (Ziel unter 90 MB, GitHub-Grenze 100 MB)
 - ZWISCHEN-STOPP 3.1.11 (Grundmodelle A–H) freigegeben: „das passt“ (2026-11-04) → weiter mit Flotte, Schäden, Sonderfahrzeugen, Militär, Figuren
 - Neu: A13 Hintergrund-Ring (AUFTRAG.md). Silhouetten und Gelände in Phase 2, Bäume in Phase 4, Dunst in Phase 5.
   Nach Phase 2 mit CAM_Hero_02 auf leere Horizontstellen prüfen

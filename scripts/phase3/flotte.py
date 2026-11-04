@@ -262,26 +262,22 @@ def zusammenfassen(root, col):
         tmp.from_mesh(me)
         tmp.transform(inv @ o.matrix_world)
         karte = []
-        for m in me.materials:
+        for m in [sl.material for sl in o.material_slots]:  # Originale, NICHT die ausgewerteten Kopien
             if m not in mats:
                 mats.append(m)
             karte.append(mats.index(m))
         for f in tmp.faces:
-            f.material_index = karte[f.material_index] if karte else 0
+            f.material_index = karte[min(f.material_index, len(karte) - 1)] if karte else 0
         me2 = bpy.data.meshes.new("tmp_lod")
         tmp.to_mesh(me2)
         tmp.free()
         bm.from_mesh(me2)
         bpy.data.meshes.remove(me2)
         ev.to_mesh_clear()
-    for o in teile:
-        d = o.data
-        bpy.data.objects.remove(o)
-        if d.users == 0:
-            bpy.data.meshes.remove(d)
-    for o in list(root.children_recursive):
-        if o.type == "MESH":
-            bpy.data.objects.remove(o)
+    # Originale entfernen (gesammelt, Meshes bleiben als verwaiste Daten und werden beim Speichern verworfen)
+    weg = [o for o in root.children_recursive if o.type == "MESH"]
+    bpy.data.batch_remove(weg)
+    bpy.context.view_layer.update()
     me = bpy.data.meshes.new(f"{root.name}_Fern")
     bm.to_mesh(me)
     bm.free()

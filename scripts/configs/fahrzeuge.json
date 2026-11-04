@@ -43,7 +43,7 @@
    0.55
   ],
   "Schulbus_Gelb": [
-   "#D29A1E",
+   "#E09A0C",
    0.0
   ],
   "Militaer_Oliv": [
@@ -2871,8 +2871,9 @@
    ],
    "aufschrift": {
     "text": "SCHOOL BUS",
-    "z": 2.8,
-    "groesse": 0.24
+    "z": 2.95,
+    "groesse": 0.24,
+    "nur_front_heck": true
    },
    "kennzeichen": {
     "z": 0.8,

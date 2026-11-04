@@ -1,21 +1,251 @@
 {
  "_info": "Phase 3.3-3.5 – Militaer (generisch modern, eigenes Design; Masse nach recherche/militaer.md). Koordinaten Welt: x Ost, y Nord, richtung in Grad (0 = Osten).",
  "panzer_masse": {
-  "wanne_l": 7.75, "wanne_b": 3.50, "deck_z": 1.64, "schuerze_b": 3.58, "turm_dach_z": 2.48,
-  "laufrollen_x": [2.72, 1.82, 0.92, 0.02, -0.88, -1.78, -2.68], "laufrolle_r": 0.35, "laufrolle_z": 0.43,
-  "leitrad": [3.40, 0.62, 0.30], "triebrad": [-3.40, 0.66, 0.36], "stuetzrollen_x": [1.35, -1.35], "stuetzrolle": [0.88, 0.10],
-  "kette_b": 0.63, "kette_teilung": 0.17, "kette_y": 1.43, "rohr_l": 5.3, "turm_x": 0.25
+  "wanne_l": 7.75,
+  "wanne_b": 3.5,
+  "deck_z": 1.64,
+  "schuerze_b": 3.58,
+  "turm_dach_z": 2.48,
+  "laufrollen_x": [
+   2.72,
+   1.82,
+   0.92,
+   0.02,
+   -0.88,
+   -1.78,
+   -2.68
+  ],
+  "laufrolle_r": 0.35,
+  "laufrolle_z": 0.43,
+  "leitrad": [
+   3.4,
+   0.62,
+   0.3
+  ],
+  "triebrad": [
+   -3.4,
+   0.66,
+   0.36
+  ],
+  "stuetzrollen_x": [
+   1.35,
+   -1.35
+  ],
+  "stuetzrolle": [
+   0.88,
+   0.1
+  ],
+  "kette_b": 0.63,
+  "kette_teilung": 0.17,
+  "kette_y": 1.43,
+  "rohr_l": 5.3,
+  "turm_x": 0.25
  },
  "panzer_a": {
-  "pos": [-3.6, 3.35], "richtung": 180, "turm_grad": 22, "rohr_grad": -3,
-  "kette_ab": "r", "kette_ab_laenge": 6.5,
-  "schuerzen_fehlen": [["l", 2], ["r", 4], ["r", 5]], "schuerzen_verbogen": [["l", 0, 9], ["l", 5, -6]],
-  "werkzeug_fehlt": ["axt"], "nummer": "K-37", "busch_staukorb": true, "pfuetze": true
+  "pos": [
+   -3.6,
+   3.35
+  ],
+  "richtung": 180,
+  "turm_grad": 22,
+  "rohr_grad": -3,
+  "kette_ab": "r",
+  "kette_ab_laenge": 6.5,
+  "schuerzen_fehlen": [
+   [
+    "l",
+    2
+   ],
+   [
+    "r",
+    4
+   ],
+   [
+    "r",
+    5
+   ]
+  ],
+  "schuerzen_verbogen": [
+   [
+    "l",
+    0,
+    9
+   ],
+   [
+    "l",
+    5,
+    -6
+   ]
+  ],
+  "werkzeug_fehlt": [
+   "axt"
+  ],
+  "nummer": "K-37",
+  "busch_staukorb": true,
+  "pfuetze": true
  },
  "panzer_b": {
-  "pos": [65.6, 12.2], "richtung": 63, "nick_grad": 7, "turm_grad": -12, "rohr_grad": 24,
-  "kette_ab": null, "schuerzen_fehlen": [["l", 0], ["l", 1], ["l", 2], ["l", 3], ["l", 4], ["l", 5], ["r", 1], ["r", 3]],
-  "werkzeug_fehlt": ["schaufel", "axt", "brechstange"], "nummer": "K-41", "busch_staukorb": false,
-  "schutt": {"mitte_lokal": [2.6, 0.0], "radius": 3.6, "hoehe": 1.9, "teile": 900}, "wand_loch": {"objekt": "BLD_Wohnhaus_Ziegel_04", "mitte": [66.8, 11.35, 1.6], "groesse": [4.2, 1.6, 3.4]}
+  "pos": [
+   65.6,
+   12.2
+  ],
+  "richtung": 63,
+  "nick_grad": 7,
+  "turm_grad": -12,
+  "rohr_grad": 24,
+  "kette_ab": null,
+  "schuerzen_fehlen": [
+   [
+    "l",
+    0
+   ],
+   [
+    "l",
+    1
+   ],
+   [
+    "l",
+    2
+   ],
+   [
+    "l",
+    3
+   ],
+   [
+    "l",
+    4
+   ],
+   [
+    "l",
+    5
+   ],
+   [
+    "r",
+    1
+   ],
+   [
+    "r",
+    3
+   ]
+  ],
+  "werkzeug_fehlt": [
+   "schaufel",
+   "axt",
+   "brechstange"
+  ],
+  "nummer": "K-41",
+  "busch_staukorb": false,
+  "schutt": {
+   "mitte_lokal": [
+    2.6,
+    0.0
+   ],
+   "radius": 3.6,
+   "hoehe": 1.9,
+   "teile": 900
+  },
+  "wand_loch": {
+   "objekt": "BLD_Wohnhaus_Ziegel_04",
+   "mitte": [
+    66.8,
+    11.35,
+    1.6
+   ],
+   "groesse": [
+    4.2,
+    1.6,
+    3.4
+   ]
+  }
+ },
+ "hubschrauber": {
+  "_info": "Steckt mit dem Bug ca. 4,5 m tief im 2. OG von B21 (Loch aus Phase 2, Nordfassade y = -11,35); Kabine ragt ueber den Gehweg. pos z = Hoehe ueber Boden an der Fassade.",
+  "seed": 73,
+  "pos_xy": [
+   30.65,
+   -9.6
+  ],
+  "z_ueber_boden": 7.0,
+  "rot": [
+   15,
+   8,
+   -97
+  ],
+  "heck_knick": -64,
+  "heck_roll": 18,
+  "heck_gier": -8,
+  "nummer": "4K-2207",
+  "blatt1_gier": 70,
+  "blaetter": [
+   [
+    [
+     27.6,
+     -1.2
+    ],
+    [
+     2,
+     0,
+     -60
+    ]
+   ],
+   [
+    [
+     35.6,
+     -4.2
+    ],
+    [
+     -3,
+     0,
+     152
+    ]
+   ],
+   [
+    [
+     31.5,
+     11.6,
+     6.2
+    ],
+    [
+     0,
+     20,
+     -90
+    ]
+   ]
+  ],
+  "heckrotor": [
+   30.2,
+   -8.6,
+   35
+  ],
+  "truemmer": {
+   "mitte": [
+    30.6,
+    -8.9,
+    0
+   ],
+   "radius": 3.6,
+   "teile": 520
+  },
+  "kisten": [
+   [
+    28.6,
+    -9.6,
+    20
+   ],
+   [
+    32.7,
+    -7.8,
+    -35
+   ]
+  ],
+  "blatt1_nick": 38,
+  "russ": {
+   "x": [
+    26.6,
+    34.8
+   ],
+   "z_ueber_loch": 0.2,
+   "hoehe": 5.5
+  }
  }
 }

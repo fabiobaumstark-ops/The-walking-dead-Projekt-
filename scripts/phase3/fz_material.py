@@ -71,6 +71,8 @@ def lack(name, hexf, metallic=0.0, matt=False):
     wert = _m(nt, "ADD", _m(nt, "MULTIPLY", grunge, 0.45), _m(nt, "MULTIPLY", _n(nt, P, 2.2, 6.0, 0.65), 0.55))
     schwelle = _m(nt, "SUBTRACT", 0.8, _m(nt, "MULTIPLY", _m(nt, "MULTIPLY", alter, oben), 0.33))
     kl = _mr(nt, _m(nt, "SUBTRACT", wert, schwelle), -0.02, 0.02)
+    if matt:  # Tarnlack ohne Klarlack: keine kreidigen Klarlack-Flecken, nur leichte Fleckigkeit
+        kl = _m(nt, "MULTIPLY", kl, 0.25)
     kreide = _mix(nt, 0.35, hsv.outputs["Color"], V.hex_lin("#BDB8AE"))
     farbe = _mix(nt, kl, farbe, kreide)
     # Rostflecken: unten (Schweller, Radlaeufe, Tuerunterkanten) + vereinzelt oben (Blasen)

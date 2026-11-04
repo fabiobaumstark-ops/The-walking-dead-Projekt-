@@ -103,4 +103,7 @@ def bauen(boden=None):
     import flotte as FL
     boden = boden or FL.Boden()
     col = V.collection("05_Militaer")
-    return panzer_setzen(boden, col)
+    out = panzer_setzen(boden, col)
+    import hubschrauber as HS
+    out.append(HS.absturz(boden, col, PZ.cfg()["hubschrauber"]))
+    return out

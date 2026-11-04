@@ -1333,7 +1333,7 @@ def leisten_streifen_schrift(lo, T, mats, col, root, cid, rnd, teil_obs):
     if T.get("aufschrift"):
         a = T["aufschrift"]
         bm = bmesh.new()
-        for s in (1, -1):
+        for s in (() if a.get("nur_front_heck") else (1, -1)):
             _text_auf(bm, lo.bvh, a["text"], a["groesse"], (P.x(P.L * 0.55), s * 4, a["z"]), (0, -s, 0), 0)
         _text_auf(bm, lo.bvh, a["text"], a["groesse"] * 0.8, (P.L / 2 + 3, 0, a["z"]), (-1, 0, 0), 0)
         _text_auf(bm, lo.bvh, a["text"], a["groesse"] * 0.8, (-P.L / 2 - 3, 0, a["z"]), (1, 0, 0), 0)
