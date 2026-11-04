@@ -306,3 +306,9 @@
   - 5 Felder mit aufgebrochenen Asphaltschollen
   - Erste Abdeckung war zu niedrig (kaum sichtbar) → Grundwerte auf ~1,0 erhöht, Alpha-Schwelle 0,16–0,4. Erde dunkler, Moos kräftiger.
 - Nutzer-Wunsch „vor allem soll die Stadt so eine Dichte haben“ → Rückfrage gestellt (A Innenstadt verdichten + Skyline / B nur Skyline / C nur Viertel).
+- Dichte (Nutzer: Antwort C, keine Skyline):
+  - Typ 3 jetzt mit 3–5 Geschossen; Typ 1 höher (B11 4, B12 5, B14 4, B17 5, B20 4, B21 4 – Hubschrauber bleibt im 2. OG, B24 5, B30 5, B38 3)
+  - neue Gebäude B39 (Typ 3 zwischen Feuerwache und Büro_1), B40 und B41 (Typ 1, je 5 Geschosse an den Ostenden)
+  - Lagerhalle B18 durch Typ-3-Geschäftshaus ersetzt (Typ 8 jetzt 3×: Kirche, Feuerwache, Schule)
+  - B22 bis x = 45,5 verbreitert; schmale Durchgänge bleiben bewusst
+  - Hauptstraßen-Achse West/Ost im Mittelgrund als geschlossene Innenstadt-Zeilen (3–6 Geschosse) statt Flachbauten

@@ -139,7 +139,7 @@ def lageplan(variante=None):
     V.objekt_aus_bmesh("PLAN_Massstab", bm, col, material=schwarz, uv=False)
     _text("50 m", -75, -99.5, 121, 2.8, schwarz, col)
     _text("N ^", 118, 92, 121, 4.0, schwarz, col)
-    name = "phase1_lageplan.png"
+    name = f"{praefix}_lageplan.png"
     if not variante:
         _legende()
     if variante:
@@ -154,7 +154,7 @@ def lageplan(variante=None):
             V.objekt_aus_bmesh(f"PLAN_{key}", bm, col, material=m, uv=False)
             _text(key, (rect[0] + rect[2]) / 2, (rect[1] + rect[3]) / 2, 123, 3.0, _flachmat("PLAN_Weiss", "#FFFFFF"), col)
         _text(var["titel"], 10, 100, 121, 4.2, schwarz, col)
-        name = f"phase1_lageplan_variante_{variante}.png"
+        name = f"{praefix}_lageplan_variante_{variante}.png"
     # Planansicht: Cycles mit gleichmaessigem weissen Himmel (kein OpenGL noetig)
     welt = bpy.data.worlds.get("PLAN_Welt") or bpy.data.worlds.new("PLAN_Welt")
     welt.node_tree.nodes["Background"].inputs["Color"].default_value = (1, 1, 1, 1)
@@ -183,5 +183,5 @@ def lageplan(variante=None):
 
 if __name__ == "__main__" and (not nur or "lageplan" in nur):
     lageplan()
-    for v in ("A", "B", "C"):
+    for v in (("A", "B", "C") if praefix == "phase1" else ("A",)):
         lageplan(v)

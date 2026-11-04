@@ -1,30 +1,187 @@
 {
-  "_info": "Hintergrund-Ring (AUFTRAG A13). Mittelgrund 80-150 m, Hintergrund 150-300 m, Horizont 300 m+ (Huegel bis radius_max). Baeume folgen in Phase 4, Dunst/Rauch in Phase 5.",
-  "seed": 9,
-  "fern": {"radius_max": 1600, "ringe": 18, "segmente": 96, "huegel_m": 70},
-  "mittelgrund": {
-    "seed": 3,
-    "strassen": [
-      {"name": "West_Main", "von": [-152, 0], "bis": [-102, 0], "breite": 14, "asphalt": false, "typ": "gewerbe"},
-      {"name": "West_Quer", "von": [-128, -150], "bis": [-128, 150], "breite": 8, "typ": "wohnen"},
-      {"name": "Sued_1", "von": [-100, -122], "bis": [100, -122], "breite": 8, "typ": "wohnen"},
-      {"name": "Nord_1", "von": [-100, 120], "bis": [100, 120], "breite": 8, "typ": "wohnen"},
-      {"name": "Ost_Quer", "von": [142, -150], "bis": [142, 150], "breite": 8, "typ": "gewerbe"},
-      {"name": "Ost_Main", "von": [102, 0], "bis": [152, 0], "breite": 14, "asphalt": false, "typ": "gewerbe"},
-      {"name": "West_Sued", "von": [-50, -150], "bis": [-50, -102], "breite": 8, "asphalt": false, "typ": "wohnen"},
-      {"name": "Ost_Nord", "von": [18, 102], "bis": [18, 150], "breite": 8, "asphalt": false, "typ": "wohnen"},
-      {"name": "Ost_Sued", "von": [18, -150], "bis": [18, -102], "breite": 8, "asphalt": false, "typ": "wohnen"}
-    ]
-  },
-  "hintergrund": {"seed": 4, "anzahl": 120, "r_min": 160, "r_max": 330, "fern_anzahl": 70},
-  "landmarken": {
-    "wasserturm": [255, 32],
-    "kirchturm": [-215, 35],
-    "silo": [190, -175],
-    "funkmast": [175, 215],
-    "hochspannung": [{"von": [-600, 300], "bis": [650, 265], "abstand": 260}],
-    "werbetafel": {"pos": [131, 175], "richtung": 0, "text": "PECAN PIES\nNEXT EXIT  2 MI"}
-  },
-  "hochstrasse_bis": 520,
-  "wracks_pro_feld": 0.55
+ "_info": "Hintergrund-Ring (AUFTRAG A13). Mittelgrund 80-150 m, Hintergrund 150-300 m, Horizont 300 m+ (Huegel bis radius_max). Baeume folgen in Phase 4, Dunst/Rauch in Phase 5.",
+ "seed": 9,
+ "fern": {
+  "radius_max": 1600,
+  "ringe": 18,
+  "segmente": 96,
+  "huegel_m": 70
+ },
+ "mittelgrund": {
+  "seed": 3,
+  "strassen": [
+   {
+    "name": "West_Main",
+    "von": [
+     -152,
+     0
+    ],
+    "bis": [
+     -102,
+     0
+    ],
+    "breite": 14,
+    "asphalt": false,
+    "typ": "innenstadt",
+    "luecken": 0.0
+   },
+   {
+    "name": "West_Quer",
+    "von": [
+     -128,
+     -150
+    ],
+    "bis": [
+     -128,
+     150
+    ],
+    "breite": 8,
+    "typ": "wohnen"
+   },
+   {
+    "name": "Sued_1",
+    "von": [
+     -100,
+     -122
+    ],
+    "bis": [
+     100,
+     -122
+    ],
+    "breite": 8,
+    "typ": "wohnen"
+   },
+   {
+    "name": "Nord_1",
+    "von": [
+     -100,
+     120
+    ],
+    "bis": [
+     100,
+     120
+    ],
+    "breite": 8,
+    "typ": "wohnen"
+   },
+   {
+    "name": "Ost_Quer",
+    "von": [
+     142,
+     -150
+    ],
+    "bis": [
+     142,
+     150
+    ],
+    "breite": 8,
+    "typ": "gewerbe"
+   },
+   {
+    "name": "Ost_Main",
+    "von": [
+     102,
+     0
+    ],
+    "bis": [
+     152,
+     0
+    ],
+    "breite": 14,
+    "asphalt": false,
+    "typ": "innenstadt",
+    "luecken": 0.0
+   },
+   {
+    "name": "West_Sued",
+    "von": [
+     -50,
+     -150
+    ],
+    "bis": [
+     -50,
+     -102
+    ],
+    "breite": 8,
+    "asphalt": false,
+    "typ": "wohnen"
+   },
+   {
+    "name": "Ost_Nord",
+    "von": [
+     18,
+     102
+    ],
+    "bis": [
+     18,
+     150
+    ],
+    "breite": 8,
+    "asphalt": false,
+    "typ": "wohnen"
+   },
+   {
+    "name": "Ost_Sued",
+    "von": [
+     18,
+     -150
+    ],
+    "bis": [
+     18,
+     -102
+    ],
+    "breite": 8,
+    "asphalt": false,
+    "typ": "wohnen"
+   }
+  ]
+ },
+ "hintergrund": {
+  "seed": 4,
+  "anzahl": 120,
+  "r_min": 160,
+  "r_max": 330,
+  "fern_anzahl": 70
+ },
+ "landmarken": {
+  "wasserturm": [
+   255,
+   32
+  ],
+  "kirchturm": [
+   -215,
+   35
+  ],
+  "silo": [
+   190,
+   -175
+  ],
+  "funkmast": [
+   175,
+   215
+  ],
+  "hochspannung": [
+   {
+    "von": [
+     -600,
+     300
+    ],
+    "bis": [
+     650,
+     265
+    ],
+    "abstand": 260
+   }
+  ],
+  "werbetafel": {
+   "pos": [
+    131,
+    175
+   ],
+   "richtung": 0,
+   "text": "PECAN PIES\nNEXT EXIT  2 MI"
+  }
+ },
+ "hochstrasse_bis": 520,
+ "wracks_pro_feld": 0.55
 }

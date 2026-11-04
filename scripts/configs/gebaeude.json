@@ -1,62 +1,670 @@
 {
-  "_info": "Gebaeude-Generator Phase 1 (Blockout). rechteck = Grundriss [x0, y0, x1, y1] in m, front = Strassenseite (S/N/W/O). Fehlende Werte (Geschosse, Fassade, Farbe, Zerstoerung) setzt der Generator per Seed. zerstoerung fest = 'leicht'/'mittel'/'schwer'.",
-  "seed": 42,
-  "zerstoerung_anteile": {"leicht": 0.30, "mittel": 0.40, "schwer": 0.30},
-  "geschosshoehe": {"1": 3.2, "2": 2.8, "3": 3.2, "5": 3.8, "6": 4.0, "7": 3.0, "8": 3.5},
-  "eg_hoehe_typ3": [4.0, 4.6],
-  "attika": [0.6, 1.0],
-  "aufstaenderung_typ2": [0.6, 0.9],
-  "fassaden": {
-    "1": ["MAT_Ziegel_Rot", "MAT_Ziegel_Verblasst", "MAT_Ziegel_Gestrichen"],
-    "4": ["MAT_Putz", "MAT_Beton_Glatt"],
-    "2": ["MAT_Holz_Verkleidung", "MAT_Holz_Verkleidung_Roh"],
-    "3": ["MAT_Ziegel_Rot", "MAT_Ziegel_Verblasst", "MAT_Ziegel_Gestrichen", "MAT_Putz"],
-    "5": ["MAT_Beton_Glatt", "MAT_Beton_Grob"],
-    "6": ["MAT_Beton_Glatt", "MAT_Putz"],
-    "7": ["MAT_Beton_Grob"],
-    "8": ["MAT_Ziegel_Rot", "MAT_Holz_Verkleidung", "MAT_Beton_Grob", "MAT_Wellblech"]
-  },
-  "farbvarianten": 4,
-  "typnamen": {"1": "Wohnhaus_Ziegel", "2": "Holzhaus_Veranda", "3": "Geschaeftshaus", "4": "Tankstelle",
-               "5": "Buero", "6": "Krankenhaus", "7": "Parkhaus", "8": "Sonstiges"},
-  "gebaeude": [
-    {"id": "B01", "typ": 3, "rechteck": [-46.0, 11.35, -38.5, 31.35], "front": "S", "geschosse": [2, 3], "laden": "Diner"},
-    {"id": "B02", "typ": 3, "rechteck": [-38.5, 11.35, -32.0, 31.35], "front": "S", "geschosse": [2, 3], "laden": "Friseur"},
-    {"id": "B03", "typ": 3, "rechteck": [-32.0, 11.35, -23.5, 31.35], "front": "S", "geschosse": [2, 3], "laden": "Eisenwaren"},
-    {"id": "B04", "typ": 3, "rechteck": [-23.5, 11.35, -16.5, 31.35], "front": "S", "geschosse": [2, 3], "laden": "Apotheke"},
-    {"id": "B05", "typ": 3, "rechteck": [-16.5, 11.35, -10.5, 31.35], "front": "S", "geschosse": [2, 3], "laden": "Bar"},
-    {"id": "B06", "typ": 3, "rechteck": [-10.5, 11.35, -1.5, 31.35], "front": "S", "geschosse": [2, 3], "laden": "Gebrauchtwaren"},
-    {"id": "B07", "typ": 3, "rechteck": [-1.5, 11.35, 5.0, 31.35], "front": "S", "geschosse": [2, 3], "laden": "Waschsalon"},
-    {"id": "B08", "typ": 3, "rechteck": [5.0, 11.35, 11.35, 31.35], "front": "S", "geschosse": [2, 3], "laden": "Lebensmittel"},
-    {"id": "B09", "typ": 5, "name": "Buero_1", "rechteck": [-74.0, 11.35, -50.0, 33.35], "front": "S", "geschosse": 8, "variante": "band", "kamera_dach": "CAM_Hero_02"},
-    {"id": "B10", "typ": 8, "name": "Feuerwache", "art": "feuerwache", "rechteck": [-98.0, 11.35, -80.0, 31.35], "front": "S", "geschosse": 2},
-    {"id": "B11", "typ": 1, "rechteck": [-46.0, 38.0, -35.0, 54.0], "front": "S", "geschosse": 3},
-    {"id": "B12", "typ": 1, "rechteck": [-33.0, 38.0, -21.0, 56.0], "front": "S", "geschosse": 4},
-    {"id": "B13", "typ": 5, "name": "Buero_4", "rechteck": [-18.0, 40.0, -2.0, 58.0], "front": "S", "geschosse": 7, "variante": "band"},
-    {"id": "B14", "typ": 1, "rechteck": [1.0, 38.0, 12.0, 52.0], "front": "S", "geschosse": 2},
-    {"id": "B15", "typ": 6, "name": "Krankenhaus", "rechteck": [-48.0, 72.0, 10.0, 92.0], "front": "S", "geschosse": 6},
-    {"id": "B16", "typ": 7, "name": "Parkhaus", "rechteck": [24.65, 11.35, 56.65, 41.35], "front": "S", "geschosse": 4, "zerstoerung": "schwer", "einsturz_ecke": "SO"},
-    {"id": "B17", "typ": 1, "rechteck": [59.0, 11.35, 73.0, 27.35], "front": "S", "geschosse": 4},
-    {"id": "B18", "typ": 8, "name": "Lagerhalle", "art": "lagerhalle", "rechteck": [76.0, 11.35, 98.0, 41.35], "front": "S", "geschosse": 1},
-    {"id": "B19", "typ": 5, "name": "Buero_3", "rechteck": [26.0, 48.0, 46.0, 66.0], "front": "S", "geschosse": 6, "variante": "band", "zerstoerung": "mittel", "brand": true},
-    {"id": "B20", "typ": 1, "rechteck": [59.0, 33.0, 71.0, 49.0], "front": "S", "geschosse": 3},
-    {"id": "B21", "typ": 1, "name": "Wohnhaus_Hubschrauber", "rechteck": [24.65, -29.35, 36.65, -11.35], "front": "N", "geschosse": 3, "zerstoerung": "schwer"},
-    {"id": "B22", "typ": 3, "rechteck": [37.0, -31.35, 44.5, -11.35], "front": "N", "geschosse": [2, 3], "laden": "Elektro"},
-    {"id": "B23", "typ": 5, "name": "Buero_2", "rechteck": [48.0, -33.35, 70.0, -11.35], "front": "N", "geschosse": 10, "variante": "glas"},
-    {"id": "B24", "typ": 1, "rechteck": [73.0, -27.35, 85.0, -11.35], "front": "N", "geschosse": 3},
-    {"id": "B25", "typ": 8, "name": "Schule", "art": "schule", "rechteck": [55.0, -75.0, 97.0, -58.0], "front": "N", "geschosse": 2},
-    {"id": "B26", "typ": 2, "rechteck": [30.65, -52.0, 42.65, -42.0], "front": "W", "geschosse": [1, 2]},
-    {"id": "B27", "typ": 2, "rechteck": [30.65, -68.0, 42.65, -58.0], "front": "W", "geschosse": [1, 2]},
-    {"id": "B28", "typ": 2, "rechteck": [30.65, -84.0, 42.65, -74.0], "front": "W", "geschosse": [1, 2]},
-    {"id": "B29", "typ": 3, "rechteck": [-43.5, -31.35, -37.0, -11.35], "front": "N", "geschosse": [2, 3], "laden": "Schuhe"},
-    {"id": "B30", "typ": 1, "rechteck": [3.5, -27.35, 11.35, -11.35], "front": "N", "geschosse": 3},
-    {"id": "B31", "typ": 8, "name": "Kirche", "art": "kirche", "rechteck": [-22.0, -82.0, -6.0, -60.0], "front": "N", "geschosse": 1},
-    {"id": "B32", "typ": 2, "rechteck": [-37.5, -66.0, -25.5, -56.0], "front": "W", "geschosse": [1, 2]},
-    {"id": "B33", "typ": 2, "rechteck": [-37.5, -84.0, -25.5, -74.0], "front": "W", "geschosse": [1, 2]},
-    {"id": "B34", "typ": 4, "name": "Tankstelle", "rechteck": [-96.0, -46.0, -56.5, -11.35], "front": "N", "geschosse": 1},
-    {"id": "B35", "typ": 2, "rechteck": [-74.5, -62.0, -62.5, -52.0], "front": "O", "geschosse": [1, 2]},
-    {"id": "B36", "typ": 2, "rechteck": [-74.5, -78.0, -62.5, -68.0], "front": "O", "geschosse": [1, 2]},
-    {"id": "B37", "typ": 2, "rechteck": [-74.5, -94.0, -62.5, -84.0], "front": "O", "geschosse": [1, 2]},
-    {"id": "B38", "typ": 1, "rechteck": [-96.0, -70.0, -82.0, -54.0], "front": "O", "geschosse": 2}
+ "_info": "Gebaeude-Generator Phase 1 (Blockout). rechteck = Grundriss [x0, y0, x1, y1] in m, front = Strassenseite (S/N/W/O). Fehlende Werte (Geschosse, Fassade, Farbe, Zerstoerung) setzt der Generator per Seed. zerstoerung fest = 'leicht'/'mittel'/'schwer'.",
+ "seed": 42,
+ "zerstoerung_anteile": {
+  "leicht": 0.3,
+  "mittel": 0.4,
+  "schwer": 0.3
+ },
+ "geschosshoehe": {
+  "1": 3.2,
+  "2": 2.8,
+  "3": 3.2,
+  "5": 3.8,
+  "6": 4.0,
+  "7": 3.0,
+  "8": 3.5
+ },
+ "eg_hoehe_typ3": [
+  4.0,
+  4.6
+ ],
+ "attika": [
+  0.6,
+  1.0
+ ],
+ "aufstaenderung_typ2": [
+  0.6,
+  0.9
+ ],
+ "fassaden": {
+  "1": [
+   "MAT_Ziegel_Rot",
+   "MAT_Ziegel_Verblasst",
+   "MAT_Ziegel_Gestrichen"
+  ],
+  "4": [
+   "MAT_Putz",
+   "MAT_Beton_Glatt"
+  ],
+  "2": [
+   "MAT_Holz_Verkleidung",
+   "MAT_Holz_Verkleidung_Roh"
+  ],
+  "3": [
+   "MAT_Ziegel_Rot",
+   "MAT_Ziegel_Verblasst",
+   "MAT_Ziegel_Gestrichen",
+   "MAT_Putz"
+  ],
+  "5": [
+   "MAT_Beton_Glatt",
+   "MAT_Beton_Grob"
+  ],
+  "6": [
+   "MAT_Beton_Glatt",
+   "MAT_Putz"
+  ],
+  "7": [
+   "MAT_Beton_Grob"
+  ],
+  "8": [
+   "MAT_Ziegel_Rot",
+   "MAT_Holz_Verkleidung",
+   "MAT_Beton_Grob",
+   "MAT_Wellblech"
   ]
+ },
+ "farbvarianten": 4,
+ "typnamen": {
+  "1": "Wohnhaus_Ziegel",
+  "2": "Holzhaus_Veranda",
+  "3": "Geschaeftshaus",
+  "4": "Tankstelle",
+  "5": "Buero",
+  "6": "Krankenhaus",
+  "7": "Parkhaus",
+  "8": "Sonstiges"
+ },
+ "gebaeude": [
+  {
+   "id": "B01",
+   "typ": 3,
+   "rechteck": [
+    -46.0,
+    11.35,
+    -38.5,
+    31.35
+   ],
+   "front": "S",
+   "geschosse": [
+    3,
+    5
+   ],
+   "laden": "Diner"
+  },
+  {
+   "id": "B02",
+   "typ": 3,
+   "rechteck": [
+    -38.5,
+    11.35,
+    -32.0,
+    31.35
+   ],
+   "front": "S",
+   "geschosse": [
+    3,
+    5
+   ],
+   "laden": "Friseur"
+  },
+  {
+   "id": "B03",
+   "typ": 3,
+   "rechteck": [
+    -32.0,
+    11.35,
+    -23.5,
+    31.35
+   ],
+   "front": "S",
+   "geschosse": [
+    3,
+    5
+   ],
+   "laden": "Eisenwaren"
+  },
+  {
+   "id": "B04",
+   "typ": 3,
+   "rechteck": [
+    -23.5,
+    11.35,
+    -16.5,
+    31.35
+   ],
+   "front": "S",
+   "geschosse": [
+    3,
+    5
+   ],
+   "laden": "Apotheke"
+  },
+  {
+   "id": "B05",
+   "typ": 3,
+   "rechteck": [
+    -16.5,
+    11.35,
+    -10.5,
+    31.35
+   ],
+   "front": "S",
+   "geschosse": [
+    3,
+    5
+   ],
+   "laden": "Bar"
+  },
+  {
+   "id": "B06",
+   "typ": 3,
+   "rechteck": [
+    -10.5,
+    11.35,
+    -1.5,
+    31.35
+   ],
+   "front": "S",
+   "geschosse": [
+    3,
+    5
+   ],
+   "laden": "Gebrauchtwaren"
+  },
+  {
+   "id": "B07",
+   "typ": 3,
+   "rechteck": [
+    -1.5,
+    11.35,
+    5.0,
+    31.35
+   ],
+   "front": "S",
+   "geschosse": [
+    3,
+    5
+   ],
+   "laden": "Waschsalon"
+  },
+  {
+   "id": "B08",
+   "typ": 3,
+   "rechteck": [
+    5.0,
+    11.35,
+    11.35,
+    31.35
+   ],
+   "front": "S",
+   "geschosse": [
+    3,
+    5
+   ],
+   "laden": "Lebensmittel"
+  },
+  {
+   "id": "B09",
+   "typ": 5,
+   "name": "Buero_1",
+   "rechteck": [
+    -74.0,
+    11.35,
+    -50.0,
+    33.35
+   ],
+   "front": "S",
+   "geschosse": 8,
+   "variante": "band",
+   "kamera_dach": "CAM_Hero_02"
+  },
+  {
+   "id": "B10",
+   "typ": 8,
+   "name": "Feuerwache",
+   "art": "feuerwache",
+   "rechteck": [
+    -98.0,
+    11.35,
+    -80.0,
+    31.35
+   ],
+   "front": "S",
+   "geschosse": 2
+  },
+  {
+   "id": "B11",
+   "typ": 1,
+   "rechteck": [
+    -46.0,
+    38.0,
+    -35.0,
+    54.0
+   ],
+   "front": "S",
+   "geschosse": 4
+  },
+  {
+   "id": "B12",
+   "typ": 1,
+   "rechteck": [
+    -33.0,
+    38.0,
+    -21.0,
+    56.0
+   ],
+   "front": "S",
+   "geschosse": 5
+  },
+  {
+   "id": "B13",
+   "typ": 5,
+   "name": "Buero_4",
+   "rechteck": [
+    -18.0,
+    40.0,
+    -2.0,
+    58.0
+   ],
+   "front": "S",
+   "geschosse": 7,
+   "variante": "band"
+  },
+  {
+   "id": "B14",
+   "typ": 1,
+   "rechteck": [
+    1.0,
+    38.0,
+    12.0,
+    52.0
+   ],
+   "front": "S",
+   "geschosse": 4
+  },
+  {
+   "id": "B15",
+   "typ": 6,
+   "name": "Krankenhaus",
+   "rechteck": [
+    -48.0,
+    72.0,
+    10.0,
+    92.0
+   ],
+   "front": "S",
+   "geschosse": 6
+  },
+  {
+   "id": "B16",
+   "typ": 7,
+   "name": "Parkhaus",
+   "rechteck": [
+    24.65,
+    11.35,
+    56.65,
+    41.35
+   ],
+   "front": "S",
+   "geschosse": 4,
+   "zerstoerung": "schwer",
+   "einsturz_ecke": "SO"
+  },
+  {
+   "id": "B17",
+   "typ": 1,
+   "rechteck": [
+    59.0,
+    11.35,
+    73.0,
+    27.35
+   ],
+   "front": "S",
+   "geschosse": 5
+  },
+  {
+   "id": "B18",
+   "typ": 3,
+   "rechteck": [
+    76.0,
+    11.35,
+    83.5,
+    31.35
+   ],
+   "front": "S",
+   "geschosse": [
+    3,
+    5
+   ],
+   "laden": "Gebrauchtwaren"
+  },
+  {
+   "id": "B19",
+   "typ": 5,
+   "name": "Buero_3",
+   "rechteck": [
+    26.0,
+    48.0,
+    46.0,
+    66.0
+   ],
+   "front": "S",
+   "geschosse": 6,
+   "variante": "band",
+   "zerstoerung": "mittel",
+   "brand": true
+  },
+  {
+   "id": "B20",
+   "typ": 1,
+   "rechteck": [
+    59.0,
+    33.0,
+    71.0,
+    49.0
+   ],
+   "front": "S",
+   "geschosse": 4
+  },
+  {
+   "id": "B21",
+   "typ": 1,
+   "name": "Wohnhaus_Hubschrauber",
+   "rechteck": [
+    24.65,
+    -29.35,
+    36.65,
+    -11.35
+   ],
+   "front": "N",
+   "geschosse": 4,
+   "zerstoerung": "schwer"
+  },
+  {
+   "id": "B22",
+   "typ": 3,
+   "rechteck": [
+    37.0,
+    -31.35,
+    45.5,
+    -11.35
+   ],
+   "front": "N",
+   "geschosse": [
+    3,
+    5
+   ],
+   "laden": "Elektro"
+  },
+  {
+   "id": "B23",
+   "typ": 5,
+   "name": "Buero_2",
+   "rechteck": [
+    48.0,
+    -33.35,
+    70.0,
+    -11.35
+   ],
+   "front": "N",
+   "geschosse": 10,
+   "variante": "glas"
+  },
+  {
+   "id": "B24",
+   "typ": 1,
+   "rechteck": [
+    73.0,
+    -27.35,
+    85.0,
+    -11.35
+   ],
+   "front": "N",
+   "geschosse": 5
+  },
+  {
+   "id": "B25",
+   "typ": 8,
+   "name": "Schule",
+   "art": "schule",
+   "rechteck": [
+    55.0,
+    -75.0,
+    97.0,
+    -58.0
+   ],
+   "front": "N",
+   "geschosse": 2
+  },
+  {
+   "id": "B26",
+   "typ": 2,
+   "rechteck": [
+    30.65,
+    -52.0,
+    42.65,
+    -42.0
+   ],
+   "front": "W",
+   "geschosse": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "B27",
+   "typ": 2,
+   "rechteck": [
+    30.65,
+    -68.0,
+    42.65,
+    -58.0
+   ],
+   "front": "W",
+   "geschosse": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "B28",
+   "typ": 2,
+   "rechteck": [
+    30.65,
+    -84.0,
+    42.65,
+    -74.0
+   ],
+   "front": "W",
+   "geschosse": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "B29",
+   "typ": 3,
+   "rechteck": [
+    -43.5,
+    -31.35,
+    -37.0,
+    -11.35
+   ],
+   "front": "N",
+   "geschosse": [
+    3,
+    5
+   ],
+   "laden": "Schuhe"
+  },
+  {
+   "id": "B30",
+   "typ": 1,
+   "rechteck": [
+    3.5,
+    -27.35,
+    11.35,
+    -11.35
+   ],
+   "front": "N",
+   "geschosse": 5
+  },
+  {
+   "id": "B31",
+   "typ": 8,
+   "name": "Kirche",
+   "art": "kirche",
+   "rechteck": [
+    -22.0,
+    -82.0,
+    -6.0,
+    -60.0
+   ],
+   "front": "N",
+   "geschosse": 1
+  },
+  {
+   "id": "B32",
+   "typ": 2,
+   "rechteck": [
+    -37.5,
+    -66.0,
+    -25.5,
+    -56.0
+   ],
+   "front": "W",
+   "geschosse": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "B33",
+   "typ": 2,
+   "rechteck": [
+    -37.5,
+    -84.0,
+    -25.5,
+    -74.0
+   ],
+   "front": "W",
+   "geschosse": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "B34",
+   "typ": 4,
+   "name": "Tankstelle",
+   "rechteck": [
+    -96.0,
+    -46.0,
+    -56.5,
+    -11.35
+   ],
+   "front": "N",
+   "geschosse": 1
+  },
+  {
+   "id": "B35",
+   "typ": 2,
+   "rechteck": [
+    -74.5,
+    -62.0,
+    -62.5,
+    -52.0
+   ],
+   "front": "O",
+   "geschosse": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "B36",
+   "typ": 2,
+   "rechteck": [
+    -74.5,
+    -78.0,
+    -62.5,
+    -68.0
+   ],
+   "front": "O",
+   "geschosse": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "B37",
+   "typ": 2,
+   "rechteck": [
+    -74.5,
+    -94.0,
+    -62.5,
+    -84.0
+   ],
+   "front": "O",
+   "geschosse": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "B38",
+   "typ": 1,
+   "rechteck": [
+    -96.0,
+    -70.0,
+    -82.0,
+    -54.0
+   ],
+   "front": "O",
+   "geschosse": 3
+  },
+  {
+   "id": "B39",
+   "typ": 3,
+   "rechteck": [
+    -80.0,
+    11.35,
+    -74.0,
+    31.35
+   ],
+   "front": "S",
+   "geschosse": [
+    3,
+    4
+   ],
+   "laden": "Bar"
+  },
+  {
+   "id": "B40",
+   "typ": 1,
+   "rechteck": [
+    84.0,
+    11.35,
+    98.0,
+    29.35
+   ],
+   "front": "S",
+   "geschosse": 5
+  },
+  {
+   "id": "B41",
+   "typ": 1,
+   "rechteck": [
+    85.5,
+    -27.35,
+    99.0,
+    -11.35
+   ],
+   "front": "N",
+   "geschosse": 5
+  }
+ ],
+ "_dichte_info": "Phase 2b (Nutzer 2026-11-04, Antwort C): Viertel verdichtet - Typ 3 mit 3-5 Geschossen, Typ 1 hoeher, Luecken geschlossen (B39-B41), Lagerhalle B18 durch Geschaeftshaus ersetzt."
 }

@@ -140,24 +140,31 @@ def mittelgrund(col):
             bm_str.faces.new([bm_str.verts.new((v.x, v.y, gz(v.x, v.y) + 0.04)) for v in q])
             k += 1
         s = rnd.uniform(4, 10)
+        typ = st.get("typ", "wohnen")
+        innen = typ == "innenstadt"
         while s < Ls - 6:
+            w_row = rnd.uniform(7.0, 12.0)
             for seite in (-1, 1):
                 if rnd.random() < st.get("luecken", 0.15):
                     continue
-                w, dd = rnd.uniform(7.5, 12), rnd.uniform(8.5, 13)
-                abst = st["breite"] / 2 + rnd.uniform(5, 9) + dd / 2
-                p = Vector((xa, ya)) + d * s + n * seite * abst
-                if not frei(p.x, p.y, max(w, dd) / 2 + 1):
+                w, dd = (w_row, rnd.uniform(15, 20)) if innen else (rnd.uniform(7.5, 12), rnd.uniform(8.5, 13))
+                abst = st["breite"] / 2 + (3.5 if innen else rnd.uniform(5, 9)) + dd / 2
+                p = Vector((xa, ya)) + d * (s + w / 2 if innen else s) + n * seite * abst
+                if innen:
+                    if (abs(p.x) < 101 and abs(p.y) < 101) or abs(p.x - 115) < 10 + w / 2:
+                        continue
+                elif not frei(p.x, p.y, max(w, dd) / 2 + 1):
                     continue
                 yaw = math.atan2(d.y, d.x) + (0 if seite > 0 else math.pi)
-                typ = st.get("typ", "wohnen")
-                if typ == "gewerbe":
+                if innen:  # geschlossene Innenstadt-Zeile, 3-6 Geschosse, Ziegel
+                    einfaches_haus(bm, p.x, p.y, yaw, w - 0.15, dd, rnd.randint(3, 6), "flach", rnd, rnd.choice([0, 4, 0, 6]))
+                elif typ == "gewerbe":
                     w, dd = rnd.uniform(12, 30), rnd.uniform(12, 25)
                     einfaches_haus(bm, p.x, p.y, yaw, w, dd, rnd.randint(1, 2), "flach", rnd, rnd.choice([0, 4, 6]))
                 else:
                     einfaches_haus(bm, p.x, p.y, yaw, w, dd, rnd.choice([1, 1, 2]), "sattel", rnd, rnd.choice([5, 7, 5]), kaputt=rnd.random() < 0.25)
                 belegt.append((p.x, p.y, max(w, dd) / 2 + 2))
-            s += rnd.uniform(15, 24)
+            s += (w_row + 0.2) if innen else rnd.uniform(15, 24)
     mats = [V.material("MAT_Ziegel_Rot"), V.mat_glas("MAT_Glas_Dunkel", 2.0), V.mat_schindeln(), V.material("MAT_Flachdach_Bitumen"),
             V.material("MAT_Ziegel_Verblasst"), V.mat_variante("MAT_Holz_Verkleidung", 2, "#C9D0D0"), V.material("MAT_Beton_Grob"),
             V.mat_variante("MAT_Holz_Verkleidung", 1, "#E4DCC6")]

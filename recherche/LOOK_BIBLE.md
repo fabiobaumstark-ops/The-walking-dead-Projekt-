@@ -155,3 +155,9 @@ Die Positionen von Panzern, Hubschrauber, Checkpoint, Barrikaden, Stau und Unfal
   - Efeu und wilder Wein über ganze Fassaden
   - hohe Gräser, Büsche, Farne, Blumen (vereinzelt rote/gelbe Blüten), junge Bäume 6–12 m
 - Qualität: Pflanzen müssen nah vor der Kamera fotoreal wirken (echte Modelle, Detail, Variation).
+
+## Ergänzung v1.1 – Dichte (Nutzer 2026-11-04, Antwort C)
+- Das Viertel ist verdichtet: geschlossene Ziegelzeilen mit 3–5 Geschossen entlang der Hauptstraße, Lücken geschlossen.
+  Die Hauptstraßen-Achse läuft in der Ferne mit 3–6-geschossigen Blöcken weiter (Straßenschlucht).
+- Keine Hochhaus-Skyline im Hintergrund (bewusst nicht gewählt).
+- Stil-Merkmal 9 gilt angepasst: „dichte Südstaaten-Innenstadt (Mittelstadt) mit Ziegelzeilen, Strommasten, Leitungen“.
