@@ -18,6 +18,7 @@ args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 schnell = "--schnell" in args
 nur = args[args.index("--nur") + 1].split(",") if "--nur" in args else None
 ausgabe = args[args.index("--out") + 1] if "--out" in args else os.path.join(V.ROOT, "renders", "test")
+praefix = args[args.index("--prefix") + 1] if "--prefix" in args else "phase1"
 os.makedirs(ausgabe, exist_ok=True)
 sc = bpy.context.scene
 zeiten = {}
@@ -41,9 +42,9 @@ def hero():
         sc.camera = bpy.data.objects[name]
         t0 = time.time()
         if schnell:
-            V.vorschau_render(sc, os.path.join(ausgabe, f"phase1_cam{i}.png"), samples=12, breite=480, hoehe=270)
+            V.vorschau_render(sc, os.path.join(ausgabe, f"{praefix}_cam{i}.png"), samples=12, breite=480, hoehe=270)
         else:
-            V.vorschau_render(sc, os.path.join(ausgabe, f"phase1_cam{i}.png"), samples=48)
+            V.vorschau_render(sc, os.path.join(ausgabe, f"{praefix}_cam{i}.png"), samples=48)
         zeiten[name] = round(time.time() - t0, 1)
 
 
@@ -51,7 +52,7 @@ def draufsicht():
     sc.camera = bpy.data.objects["CAM_Draufsicht"]
     sc.camera.data.ortho_scale = 235
     t0 = time.time()
-    V.vorschau_render(sc, os.path.join(ausgabe, "phase1_draufsicht.png"), samples=16 if schnell else 32,
+    V.vorschau_render(sc, os.path.join(ausgabe, f"{praefix}_draufsicht.png"), samples=16 if schnell else 32,
                       breite=600, hoehe=540)
     zeiten["Draufsicht"] = round(time.time() - t0, 1)
 
