@@ -40,6 +40,10 @@ MAT_Sackleinen               textur  Poly Haven CC0 1.0 colormass, Rico Cilliers
 MAT_Stoff_Plane              textur  Poly Haven CC0 1.0 colormass, Rico Cilliers / https://polyhaven.com/a/rough_linen
 MAT_Teppich                  textur  Poly Haven CC0 1.0 Rohit Seervi / https://polyhaven.com/a/dirty_carpet
 MAT_Fliesen                  textur  Poly Haven CC0 1.0 Matterfield, Jenelle van Heerden / https://polyhaven.com/a/dirty_tiles
+MAT_Sitzstoff                textur  Poly Haven CC0 1.0 colormass, Rico Cilliers / https://polyhaven.com/a/poly_wool_herringbone
+MAT_Leder                    textur  Poly Haven CC0 1.0 Rob Tuytel / https://polyhaven.com/a/brown_leather
+MAT_Rost_Blech               textur  Poly Haven CC0 1.0 Amal Kumar / https://polyhaven.com/a/rusty_metal_04
+MAT_Blech_Rostflecken        textur  Poly Haven CC0 1.0 Amal Kumar / https://polyhaven.com/a/rusty_metal_sheet
 HDRI_Haupt                   hdri    Poly Haven CC0 1.0 Greg Zaal, Jenelle van Heerden / https://polyhaven.com/a/kloofendal_28d_misty_puresky
 HDRI_Haupt                   hdri    Poly Haven CC0 1.0 Greg Zaal, Jenelle van Heerden / https://polyhaven.com/a/kloofendal_28d_misty_puresky
 HDRI_Alternative             hdri    Poly Haven CC0 1.0 Greg Zaal, Jarod Guest / https://polyhaven.com/a/kloofendal_38d_partly_cloudy_puresky

@@ -470,7 +470,7 @@ def material(name):
         nt.links.new(mp2.outputs["Vector"], t2.inputs["Vector"])
         return _mix_rgb(nt, maske, t.outputs["Color"], t2.outputs["Color"])
 
-    col = tex(_karte(ordner, "_diff_", "_color"), False)
+    col = tex(_karte(ordner, "_diff_", "_color", "_albedo_"), False)
     rough = tex(_karte(ordner, "_rough_", "_roughness"), True)
     nor = tex(_karte(ordner, "_nor_gl_", "_normalgl"), True)
     disp = tex(_karte(ordner, "_disp_", "_displacement"), True)

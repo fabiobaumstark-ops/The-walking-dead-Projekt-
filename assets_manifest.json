@@ -1,8 +1,8 @@
 {
  "_info": "Liste aller externen Assets. Laden mit: python3 download_assets.py",
  "erstellt": "2026-11-04",
- "groesse_gesamt_mb": 1358,
- "groesse_basis_mb": 1174,
+ "groesse_gesamt_mb": 1430,
+ "groesse_basis_mb": 1247,
  "selbst_gebaut": [
   "Asphaltschindeln (keine CC0-Fototextur gefunden: prozedurale Schindel-Geometrie + Fotobasis tarred_gravel)",
   "Betontruemmer",
@@ -1723,6 +1723,207 @@
      "ziel": "assets/textures/dirty_tiles/dirty_tiles_ao_2k.jpg",
      "size": 1021945,
      "md5": "7f7de7054a15fef820c9752cb3a0282b"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Sitzstoff",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "poly_wool_herringbone",
+   "seite": "https://polyhaven.com/a/poly_wool_herringbone",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "colormass",
+    "Rico Cilliers"
+   ],
+   "zielpfad": "assets/textures/poly_wool_herringbone",
+   "masse_m": [
+    0.27,
+    0.276
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/poly_wool_herringbone/poly_wool_herringbone_diff_2k.jpg",
+     "ziel": "assets/textures/poly_wool_herringbone/poly_wool_herringbone_diff_2k.jpg",
+     "size": 3650614,
+     "md5": "ab20cb6c120dfa5d38f4e4d3fd9b980d"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/poly_wool_herringbone/poly_wool_herringbone_rough_2k.jpg",
+     "ziel": "assets/textures/poly_wool_herringbone/poly_wool_herringbone_rough_2k.jpg",
+     "size": 3674893,
+     "md5": "009bf33f8d8a5fda0ba245e5a4dd646d"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/poly_wool_herringbone/poly_wool_herringbone_nor_gl_2k.jpg",
+     "ziel": "assets/textures/poly_wool_herringbone/poly_wool_herringbone_nor_gl_2k.jpg",
+     "size": 4048573,
+     "md5": "954185c16339c6bb3d1825071e4cfe90"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/poly_wool_herringbone/poly_wool_herringbone_disp_2k.png",
+     "ziel": "assets/textures/poly_wool_herringbone/poly_wool_herringbone_disp_2k.png",
+     "size": 7774989,
+     "md5": "355d23dfa3e7e17d2e3afd3be882922e"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/poly_wool_herringbone/poly_wool_herringbone_ao_2k.jpg",
+     "ziel": "assets/textures/poly_wool_herringbone/poly_wool_herringbone_ao_2k.jpg",
+     "size": 3289574,
+     "md5": "b31b91c44b702dc130503ffea2bb1af3"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Leder",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "brown_leather",
+   "seite": "https://polyhaven.com/a/brown_leather",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Rob Tuytel"
+   ],
+   "zielpfad": "assets/textures/brown_leather",
+   "masse_m": [
+    0.4,
+    0.4
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brown_leather/brown_leather_albedo_2k.jpg",
+     "ziel": "assets/textures/brown_leather/brown_leather_albedo_2k.jpg",
+     "size": 2137518,
+     "md5": "1bd381c43817743a2affdd1ce2d193c7"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brown_leather/brown_leather_rough_2k.jpg",
+     "ziel": "assets/textures/brown_leather/brown_leather_rough_2k.jpg",
+     "size": 2801956,
+     "md5": "95b48a5c95b02d87dadee46c26f1cfb5"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brown_leather/brown_leather_nor_gl_2k.jpg",
+     "ziel": "assets/textures/brown_leather/brown_leather_nor_gl_2k.jpg",
+     "size": 3030702,
+     "md5": "6e86bbaf5e995c4154b76a1e4b0f4f1c"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/brown_leather/brown_leather_disp_2k.png",
+     "ziel": "assets/textures/brown_leather/brown_leather_disp_2k.png",
+     "size": 8130412,
+     "md5": "13b4f3f8551d0726c846b90ae273f081"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brown_leather/brown_leather_ao_2k.jpg",
+     "ziel": "assets/textures/brown_leather/brown_leather_ao_2k.jpg",
+     "size": 1541878,
+     "md5": "4ff0006acb807b9ddccd387a093d89b8"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Rost_Blech",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "rusty_metal_04",
+   "seite": "https://polyhaven.com/a/rusty_metal_04",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Amal Kumar"
+   ],
+   "zielpfad": "assets/textures/rusty_metal_04",
+   "masse_m": [
+    2.0,
+    2.0
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/rusty_metal_04/rusty_metal_04_diff_2k.jpg",
+     "ziel": "assets/textures/rusty_metal_04/rusty_metal_04_diff_2k.jpg",
+     "size": 3463347,
+     "md5": "4506564abb3ff16ff7a3dfecf0386ba8"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/rusty_metal_04/rusty_metal_04_rough_2k.jpg",
+     "ziel": "assets/textures/rusty_metal_04/rusty_metal_04_rough_2k.jpg",
+     "size": 2548882,
+     "md5": "bf8eb527dd96b3491add04fc07c92455"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/rusty_metal_04/rusty_metal_04_nor_gl_2k.jpg",
+     "ziel": "assets/textures/rusty_metal_04/rusty_metal_04_nor_gl_2k.jpg",
+     "size": 3582694,
+     "md5": "b524a2a880732090097c02371c9d21d7"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/rusty_metal_04/rusty_metal_04_disp_2k.png",
+     "ziel": "assets/textures/rusty_metal_04/rusty_metal_04_disp_2k.png",
+     "size": 6373455,
+     "md5": "777787f21544949b7b61068b6b9bca97"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/rusty_metal_04/rusty_metal_04_ao_2k.jpg",
+     "ziel": "assets/textures/rusty_metal_04/rusty_metal_04_ao_2k.jpg",
+     "size": 1103505,
+     "md5": "b26d9535287b63a27cba06ce1ccd98cb"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Blech_Rostflecken",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "rusty_metal_sheet",
+   "seite": "https://polyhaven.com/a/rusty_metal_sheet",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Amal Kumar"
+   ],
+   "zielpfad": "assets/textures/rusty_metal_sheet",
+   "masse_m": [
+    2.0,
+    2.0
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/rusty_metal_sheet/rusty_metal_sheet_diff_2k.jpg",
+     "ziel": "assets/textures/rusty_metal_sheet/rusty_metal_sheet_diff_2k.jpg",
+     "size": 2802519,
+     "md5": "a7af114ffca2ec2b363acc7d55007439"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/rusty_metal_sheet/rusty_metal_sheet_rough_2k.jpg",
+     "ziel": "assets/textures/rusty_metal_sheet/rusty_metal_sheet_rough_2k.jpg",
+     "size": 2157951,
+     "md5": "e2f9b105b53183ea7767b94daa479cef"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/rusty_metal_sheet/rusty_metal_sheet_nor_gl_2k.jpg",
+     "ziel": "assets/textures/rusty_metal_sheet/rusty_metal_sheet_nor_gl_2k.jpg",
+     "size": 2058355,
+     "md5": "62d002f82b62d442569f9b60e18fe256"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/rusty_metal_sheet/rusty_metal_sheet_disp_2k.png",
+     "ziel": "assets/textures/rusty_metal_sheet/rusty_metal_sheet_disp_2k.png",
+     "size": 6797885,
+     "md5": "24c3b7a3938da74d24ca3de51945066d"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/rusty_metal_sheet/rusty_metal_sheet_ao_2k.jpg",
+     "ziel": "assets/textures/rusty_metal_sheet/rusty_metal_sheet_ao_2k.jpg",
+     "size": 1702827,
+     "md5": "a7e5963cd2a4cb7db4becea71d9b930a"
     }
    ]
   },

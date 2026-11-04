@@ -35,7 +35,11 @@
     {"mat": "MAT_Sackleinen",           "quelle": "polyhaven", "id": "hessian_230",           "res": "2k"},
     {"mat": "MAT_Stoff_Plane",          "quelle": "polyhaven", "id": "rough_linen",           "res": "2k"},
     {"mat": "MAT_Teppich",              "quelle": "polyhaven", "id": "dirty_carpet",          "res": "2k"},
-    {"mat": "MAT_Fliesen",              "quelle": "polyhaven", "id": "dirty_tiles",           "res": "2k"}
+    {"mat": "MAT_Fliesen",              "quelle": "polyhaven", "id": "dirty_tiles",           "res": "2k"},
+    {"mat": "MAT_Sitzstoff",            "quelle": "polyhaven", "id": "poly_wool_herringbone", "res": "2k"},
+    {"mat": "MAT_Leder",                "quelle": "polyhaven", "id": "brown_leather",         "res": "2k"},
+    {"mat": "MAT_Rost_Blech",           "quelle": "polyhaven", "id": "rusty_metal_04",        "res": "2k"},
+    {"mat": "MAT_Blech_Rostflecken",    "quelle": "polyhaven", "id": "rusty_metal_sheet",     "res": "2k"}
   ],
   "hdris": [
     {"name": "HDRI_Haupt",     "quelle": "polyhaven", "id": "kloofendal_28d_misty_puresky",         "res": "4k",  "gruppe": "basis"},
