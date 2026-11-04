@@ -632,3 +632,31 @@ def hdri_rotation_fuer(img, ziel_azimut_grad):
     phi_img, el = hdri_sonne(img)
     phi_ziel = math.radians(90.0 - ziel_azimut_grad)
     return math.degrees(phi_img - phi_ziel), math.degrees(el)
+
+
+# ---------------------------------------------------------------- Blockout
+BLOCKOUT_GRAU = {
+    "Fahrbahn": "#3C3C3B", "Brache": "#6A6658", "Bordstein": "#9A9892", "Gehweg": "#8E8C86",
+    "Gruenstreifen": "#5E6250", "Grundstueck": "#6E6B60", "Gebaeude": "#A3A19B", "Dach": "#74726D",
+    "Beton": "#8A877F", "Holz": "#8B8478", "Metall": "#6E6E6E", "Glas": "#4A5055", "Schutt": "#7E7A72",
+    "Baum": "#4F5545", "Hintergrund": "#8A8E8C", "Markierung": "#B0AEA6",
+}
+
+
+def blockout_mat(zone):
+    """Graues Blockout-Material (Phase 1). Wird in Phase 2-4 durch MAT_-Bibliothek ersetzt."""
+    name = f"MAT_Blockout_{zone}"
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    m = bpy.data.materials.new(name)
+    m.use_fake_user = True
+    b = m.node_tree.nodes.get("Principled BSDF")
+    b.inputs["Base Color"].default_value = hex_lin(BLOCKOUT_GRAU[zone])
+    b.inputs["Roughness"].default_value = 0.85
+    m.diffuse_color = hex_lin(BLOCKOUT_GRAU[zone])
+    return m
+
+
+def smooth(t):
+    t = max(0.0, min(1.0, t))
+    return t * t * (3 - 2 * t)

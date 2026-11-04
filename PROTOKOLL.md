@@ -91,3 +91,17 @@
   - Kanten, Wasserläufe und Moos verstärkt
 - Renderzeiten Testreihe (960×540, 64 Samples, CPU 4 Kerne): 0 % 29 s, 50 % 57 s, 100 % 56 s.
 - Bekannt: Auf runden Formen (Kugel) erzeugt die Box-Projektion sichtbare Nähte. Bei Architektur ist das unkritisch, Nachbesserung in Phase 4.
+
+## Phase 1.3/1.4 – Gelände & Straßen (2026-11-04)
+- Gelände 300×300 m (1-m-Raster), Gefälle 0,8 % nach Osten, 0,4 % nach Süden (gesamt 0,9 %).
+  Noise ±10 cm (Wellenlänge ~22 m), Böschungen nur am Rand. Außenring bis 350 m für den Horizont.
+- Fahrbahnen mit 1,2 % Querneigung (Dachprofil). Gehweg-Blöcke 15 cm über der Rinne.
+  Bordstein 15 × 15 cm, Eckradius 6 m, abgesenkte Bordsteine (1,6 m) an jeder Kreuzungsecke.
+- Hauptstraße 14 m + Grünstreifen 1,2 m + Gehweg 3 m. Querstraße Ost (x = 18) 8 m, Querstraße West (x = −50) 8 m als Einmündung von Süden.
+  Abweichung/Entscheidung: West nur südlich der Hauptstraße (T-Kreuzung), damit es eine „Kreuzung“ (Ost, mit Ampeln) und eine Einmündung gibt.
+- Baumscheiben alle 10 m im Grünstreifen, Platz 40 × 40 m mit eigenem Brunnen (achteckiges Becken + Säule mit Kugel), 8 Bänke, Gasse 4 m mit 4 Müllcontainern.
+- Hochstraße (x = 115): Pfeiler Ø 1,5 m alle 30 m, Platte 12 m breit, 1,2 m dick, Oberkante 8 m.
+  Feld y = −15…15 abgestürzt: Nordende lehnt auf 4,5 m am Pfeiler, Südende liegt auf der Hauptstraße.
+  Gezackte Bruchkanten, Bewehrung, herabhängende Leitplanken.
+  Entscheidung: „8 m über Boden“ als Oberkante interpretiert (lichte Höhe ~5,6 m unter dem Querriegel).
+- Aufbauzeit Umgebung: 4 s.

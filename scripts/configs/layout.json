@@ -1,0 +1,28 @@
+{
+  "_info": "Lageplan in Metern. x = Osten, y = Norden, Ursprung = Mitte Hauptstrasse am Platz. Blockflaechen (Gehweg/Grundstuecke) liegen 15 cm ueber der Fahrbahn (Bordsteinhoehe).",
+  "bordstein": {"hoehe": 0.15, "breite": 0.15, "eckradius": 6.0, "rampe_breite": 1.6},
+  "strassen": [
+    {"name": "STR_Hauptstrasse", "achse": "x", "lage": 0.0, "von": -150, "bis": 150, "fahrbahn": 14.0, "gehweg": 3.0, "gruenstreifen": 1.2, "spuren": 4},
+    {"name": "STR_Querstrasse_Ost", "achse": "y", "lage": 18.0, "von": -150, "bis": 150, "fahrbahn": 8.0, "gehweg": 2.5, "gruenstreifen": 0.0, "spuren": 2},
+    {"name": "STR_Querstrasse_West", "achse": "y", "lage": -50.0, "von": -150, "bis": 0, "fahrbahn": 8.0, "gehweg": 2.5, "gruenstreifen": 0.0, "spuren": 2}
+  ],
+  "_bloecke_info": "Rechtecke [x0, y0, x1, y1] bis zur Bordsteinkante. strassenseiten: Kanten mit Bordstein/Gehweg (S,N,W,O) und welcher Strasse. ecken: abgerundete Kreuzungsecken.",
+  "bloecke": [
+    {"name": "NW", "rechteck": [-100, 7, 14, 100], "seiten": {"S": "STR_Hauptstrasse", "O": "STR_Querstrasse_Ost"}, "ecken": ["SO"]},
+    {"name": "NO", "rechteck": [22, 7, 100, 100], "seiten": {"S": "STR_Hauptstrasse", "W": "STR_Querstrasse_Ost"}, "ecken": ["SW"]},
+    {"name": "SW", "rechteck": [-100, -100, -54, -7], "seiten": {"N": "STR_Hauptstrasse", "O": "STR_Querstrasse_West"}, "ecken": ["NO"]},
+    {"name": "SM", "rechteck": [-46, -100, 14, -7], "seiten": {"N": "STR_Hauptstrasse", "W": "STR_Querstrasse_West", "O": "STR_Querstrasse_Ost"}, "ecken": ["NW", "NO"]},
+    {"name": "SO", "rechteck": [22, -100, 100, -7], "seiten": {"N": "STR_Hauptstrasse", "W": "STR_Querstrasse_Ost"}, "ecken": ["NW"]}
+  ],
+  "baumscheiben": {"abstand": 10.0, "groesse": [1.2, 1.2], "abstand_zur_ecke": 9.0},
+  "platz": {"name": "STR_Platz", "rechteck": [-38, -51.35, 2, -11.35], "brunnen_durchmesser": 8.0},
+  "gasse": {"name": "STR_Gasse", "rechteck": [-46, 31.35, 14, 35.35]},
+  "hochstrasse": {
+    "name": "STR_Hochstrasse", "achse_x": 115.0, "von": -150, "bis": 150,
+    "breite": 12.0, "dicke": 1.2, "oberkante_ueber_boden": 8.0,
+    "pfeiler_durchmesser": 1.5, "pfeiler_abstand": 30.0, "pfeiler_start": -135.0,
+    "eingestuerzt_von": -15.0, "eingestuerzt_bis": 15.0
+  },
+  "hauptbereich": [-60, -60, 60, 60],
+  "hintergrund": {"seed": 21, "baumgruppen": 70, "ferne_gebaeude": 18, "radius_min": 165, "radius_max": 330}
+}
