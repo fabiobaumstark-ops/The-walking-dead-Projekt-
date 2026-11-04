@@ -130,9 +130,9 @@ class Bau:
         bm2 = bmesh.new()
         m = Matrix.Translation((x, y, V.h(x, y) + 0.15 + hoehe * 0.35)) @ Matrix.Diagonal((radius, radius * rnd.uniform(0.7, 1.0), hoehe, 1))
         bmesh.ops.create_icosphere(bm2, subdivisions=2, radius=1.0, matrix=m)
-        for vv in bm2.verts:
+        for vv in bm2.verts:  # unregelmaessiger, flacher Kegel statt glattem Felsbrocken
+            vv.co += Vector((rnd.uniform(-0.35, 0.35), rnd.uniform(-0.35, 0.35), rnd.uniform(-0.25, 0.25)))
             vv.co.z = max(vv.co.z, V.h(vv.co.x, vv.co.y) + 0.05)
-            vv.co += Vector((rnd.uniform(-0.15, 0.15), rnd.uniform(-0.15, 0.15), rnd.uniform(-0.1, 0.1)))
         self.mesh_einfuegen(bm2, SC)
 
 
@@ -472,7 +472,7 @@ def _teileinsturz(b, top, gh, rnd):
     # dunkler Einbruch (Hohlraum) in der Fassade und herabhaengende Deckenplatte
     b.box(u0 + 0.3, -0.05, u1 - 0.3, 0.01, top - tiefe - gh * 0.6, top - 0.1, GL)
     b.schiefe_platte(u0 + 0.4, u1 - 0.4, 0.2, top - gh * 0.7, -1.4, top - gh * 1.6, 0.25, BE)
-    b.schuttkegel((u0 + u1) / 2, -2.0, rnd.uniform(2.5, 4.0), rnd.uniform(1.0, 1.8), rnd)
+    b.schuttkegel((u0 + u1) / 2, -1.6, rnd.uniform(2.0, 3.2), rnd.uniform(0.8, 1.4), rnd)
 
 
 def _grundstueck(b, g, rnd):

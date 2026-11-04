@@ -49,9 +49,10 @@ def hero():
 
 def draufsicht():
     sc.camera = bpy.data.objects["CAM_Draufsicht"]
+    sc.camera.data.ortho_scale = 235
     t0 = time.time()
     V.vorschau_render(sc, os.path.join(ausgabe, "phase1_draufsicht.png"), samples=16 if schnell else 32,
-                      breite=540 if schnell else 960, hoehe=540)
+                      breite=600, hoehe=540)
     zeiten["Draufsicht"] = round(time.time() - t0, 1)
 
 

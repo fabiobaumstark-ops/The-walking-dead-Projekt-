@@ -230,6 +230,7 @@ def block_mesh(L, block):
     mats = [V.blockout_mat(z) for z in ("Bordstein", "Gehweg", "Gruenstreifen", "Grundstueck")]
     ob = V.objekt_aus_bmesh(f"STR_Block_{block['name']}", bm, V.collection("02_Strassen/Bloecke"), material=mats)
     ob["info"] = "Slots: 0 Bordstein, 1 Gehweg, 2 Gruenstreifen, 3 Grundstueck"
+    V.fase(ob, 0.015, 2, winkel=40.0)  # Bordsteinkanten gefast
     return ob
 
 

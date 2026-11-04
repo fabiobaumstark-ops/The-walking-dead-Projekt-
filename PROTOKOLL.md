@@ -105,3 +105,49 @@
   Gezackte Bruchkanten, Bewehrung, herabhängende Leitplanken.
   Entscheidung: „8 m über Boden“ als Oberkante interpretiert (lichte Höhe ~5,6 m unter dem Querriegel).
 - Aufbauzeit Umgebung: 4 s.
+
+## Phase 1.5/1.6 – Gebäude-Blockout, Kameras, Renders (2026-11-04)
+- 38 Gebäude (Seed 42):
+  - Typ 1 ×9, Typ 2 ×8, Typ 3 ×10, Typ 4 ×1, Typ 5 ×4, Typ 6 ×1, Typ 7 ×1, Typ 8 ×4 (Kirche, Feuerwache, Schule, Lagerhalle)
+  - Zerstörung: 11 leicht / 16 mittel / 11 schwer (29 / 42 / 29 %)
+  - Nachbarregel (Höhe ± 0,4 m UND Fassade + Farbe verschieden): max. 2 Würfe nötig
+- Blockout-Inhalt:
+  - Körper, Attika, Gesimse, Fensterraster
+  - Typ 3: Schaufenster mit Sockel, Oberlicht, Schildband, Markisen
+  - Typ 2: Veranden (2,4 m, Pfosten ~2,5 m, Dach durchhängend) und Kriechraum
+  - Typ 1/3: Feuertreppen
+  - Typ 4: Tankstellendach 30 × 12 m auf 5,25 m
+  - Typ 7: Parkhaus 4 Ebenen mit eingestürzter Ecke
+  - Zelte vor dem Krankenhaus
+  - Grundstücke: Zäune, Einfahrten, Briefkästen
+  - Schwere Schäden als Teil-Einsturz + Schuttkegel
+- Abweichungen/Entscheidungen:
+  - Krankenhaus nach Westen verschoben (x = −48…10), weil es sonst über der Querstraße Ost lag
+  - Platz um 1 m nach Osten (x = −37…3), damit das Eckhaus B29 6,5 m breit sein kann
+  - Hubschrauber-Gebäude = B21 (Typ 1), Brandschaden = B19 (Büro_3)
+- Kameras waagerecht (Vertikalen senkrecht), Bildausschnitt über Shift. CAM_Hero_02 steht an der Dachkante von B09 (sonst verdeckt die Attika das Bild).
+- Lageplan wird mit Cycles bei weißem Himmel gerendert (Workbench braucht OpenGL, das in der Cloud fehlt).
+- Renderzeiten (CPU 4 Kerne, 960 × 540, 48 Samples):
+  - CAM 1: 25 s, CAM 2: 26 s, CAM 3: 28 s, CAM 4: 26 s
+  - Draufsicht 600 × 540: 11 s
+  - Lageplan: je 4 s
+- Speicher (Teil C, Schätzung): Blockout-Datei 7,6 MB, Render < 2 GB RAM. Für die finale Szene schätze ich 12–20 GB (Texturen 2K/4K + Vegetations-Instanzen). Der Textur-Cache von Blender 5.2 sollte das auf dem M4 Pro im Rahmen halten. Bei 24 GB Mac-RAM ist das eng, bei 48 GB unkritisch (dein RAM ist mir nicht bekannt).
+
+### D1-Checkliste (Blockout)
+- Maßstab ok: Tür 2,1–2,3 m, Geschoss 3,2 m, Veranda-Geländer 0,9 m
+- Nichts schwebt (Schutt, Zäune und Bäume auf das Gelände geklemmt)
+- Kanten gefast: Modifier an Gebäuden, Bordsteinen, Brunnen, Hochstraße
+- Kein Z-Fighting gesehen
+- Himmel nicht ausgebrannt, Schatten nicht schwarz
+- Keine Marken
+- Noch offen (phasenbedingt): einfarbige Flächen (Blockout-Grau), Texturen, Fahrzeuge, Figuren
+
+### D2-Qualitätsbewertung Phase 1 (ehrlich)
+| Kriterium | Note | Was verrät CGI / was hilft |
+|---|---|---|
+| Realismus Geometrie | 4 | Reine Volumen: keine Fensterlaibungen, Schutt als Kegel, keine Kleinteile → Phase 2 Details + Schadenskatalog |
+| Realismus Materialien | 3 (Szene) / 6 (Testreihe) | Szene noch grau. Testreihe: Verwitterung eher dezent, Box-Naht auf der Kugel → Phase 2/4 Zuweisung, Anti-Tiling, Verwitterung stärker |
+| Einheitlicher Look | 6 | In der Testreihe fügen sich Fass, Kiste und Barriere ein. Eigene Objekte sind an den Kanten etwas sauberer → Kantenebene verstärken |
+| Licht & Stimmung | 5 | HDRI + Sonne korrekt ausgerichtet (28,5°), aber noch kein Dunst/Volumen und kein Grading → Phase 5 |
+| Komposition | 6 | Ausschnitte stimmen, aber die Hauptmotive (Panzer, Hubschrauber, Checkpoint) fehlen noch → Phase 2/3 |
+| Glaubwürdigkeit der Geschichte | 3 | Noch keine Fahrzeuge, Sperren oder Fluchtspuren → Phase 2/3 |
