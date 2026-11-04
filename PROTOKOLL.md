@@ -312,3 +312,28 @@
   - Lagerhalle B18 durch Typ-3-Geschäftshaus ersetzt (Typ 8 jetzt 3×: Kirche, Feuerwache, Schule)
   - B22 bis x = 45,5 verbreitert; schmale Durchgänge bleiben bewusst
   - Hauptstraßen-Achse West/Ost im Mittelgrund als geschlossene Innenstadt-Zeilen (3–6 Geschosse) statt Flachbauten
+
+## Phase 2b – Abschluss (2026-11-04)
+- viertel_v03.blend (30,6 MB), Aufbau aus Skripten in 69 s.
+- Inhalt: 41 Gebäude, 4 718 Schuttteile, 526 Sandsäcke, 3 567 Grasbüschel, 1 875 Moospolster, 90 Laubhaufen.
+  Dazu Erdschicht, Moosflächen, Asphaltschollen, Fassaden-Details, Innenraum-Möbel, Hausanschlüsse.
+- Renders (CPU, 960 × 540, 48 Samples): CAM 1: 287 s, CAM 2: 234 s, CAM 3: 301 s, CAM 4: 279 s, Draufsicht 117 s.
+  Mehr als doppelt so lang wie in Phase 2 (mehr Instanzen und Shader-Ebenen), aber unter der 10-min-Grenze.
+  → renders/test/phase2b_cam1–4.png, phase2b_draufsicht.png, phase2b_lageplan(_variante_A).png
+
+### D1-Checkliste Phase 2b
+- Maßstab ok
+- Nichts schwebt: Schuttkegel aus Einzelteilen liegen auf dem Fuß, Gras/Moos auf der Oberfläche, Erdschicht folgt dem Boden
+- Keine Bordstein-Überbrückung durch die Erdschicht
+- Keine echten Marken/Orte. Zettel, Plakate und Such-Markierungen nur mit erfundenen allgemeinen Texten
+- Offen: Fahrzeuge (Phase 3), große Vegetation (Phase 4), Licht/Dunst (Phase 5)
+
+### D2-Qualitätsbewertung Phase 2b (ehrlich)
+| Kriterium | Note | Was verrät CGI / was hilft |
+|---|---|---|
+| Realismus Geometrie | 7 | Dicht, viele Kleinteile, Schutt aus Einzelteilen. Kugel-Bäume und Auto-Platzhalter fallen auf → Phase 3/4 |
+| Realismus Materialien | 6 | Verwitterung jetzt sichtbar (Moos, Flechten, Feuchte, Fahnen). Einige gestrichene Ziegelfassaden wirken blass (B30), die Erde ist noch zu gleichförmig → Phase 4: Gras/Laub auf der Erde, Farbvariation |
+| Einheitlicher Look | 6 | Alles läuft über die Bibliothek und MAT_Verwitterung; nur die Platzhalter stechen heraus |
+| Licht & Stimmung | 4 | Ohne warmes Gegenlicht, Dunst und Grading noch flach (Phase 5) |
+| Komposition | 6 | Die Straßenschluchten wirken jetzt (CAM 1/3). Hauptmotive (Panzer, Hubschrauber, Stau) fehlen noch |
+| Glaubwürdigkeit der Geschichte | 7 | Checkpoint mit Lager-Spuren, Barrikaden, Plünderung, Zettel „MISSING“, Such-Markierungen |
