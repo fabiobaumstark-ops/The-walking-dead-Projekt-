@@ -364,3 +364,84 @@
   - Armaturenbrett mit Seitenprofil
   - Kantenverschleiß am Lack = Grundierung statt Rost (Rost nur über eigene Maske unten); Innenraum ohne Moos/Flechten
   - Je Typ 2–3 Front-/Heck-Varianten in fahrzeuge.json (für die Flotte)
+
+## Phase 3 – Fahrzeuge, Militär & Figuren (2026-11-04)
+### Ablauf
+- Recherche: recherche/fahrzeuge.md, recherche/militaer.md
+- Zwischen-Stopp: 8 Grundmodelle, freigegeben („das passt“). Vorschau: renders/test/phase3_grund_*
+- Flotte: 38 Fahrzeuge + 5 Sonderfahrzeuge (scripts/configs/flotte.json)
+  - Stau: 12 + 1 auf dem Gehweg
+  - Unfallkette: 6, davon 1 ausgebrannt, 1 auf der Seite, 1 auf dem Dach
+  - SUV am Strommast: 1
+  - geparkt: 8
+  - Plünderung: 2 (Kombi mit Kartons, Limousine auf Ziegeln)
+  - Tankstelle: 3
+  - Polizeisperre: 2 (schwarz-weiß, Lichtbalken, generisch „POLICE“)
+  - Barrikade 1: 2 (ersetzen die Platzhalter)
+  - Sonderfahrzeuge: Schulbus, Sattelzug (Auflieger umgekippt, Ladung verstreut), Rettungswagen mit Trage, 2 Militär-Lkw
+- Schäden per Seed (fz_schaden.py):
+  - platte Reifen, fehlende Räder, Glas (gesprungen/zerbrochen/fehlt)
+  - Türen, Hauben und Klappen offen, Dellen, ausgebrannt
+- Detailstufen: nah (< 20 m) voll; mittel (20–60 m) ohne Unterboden; fern (> 60 m) zu einem Mesh zusammengefasst
+- Panzer A: Hauptstraße, Turm 22°, rechte Kette abgesprungen, Schürzen teils fehlend/verbogen, Staukorb mit Ladung und Busch, Pfütze
+- Panzer B: in B17 gefahren
+  - vorne 7° angehoben, Rohr 24° hoch, Front unter Schutt
+  - Mauerdurchbruch als Boolean-Modifier am Phase-2-Gebäude B17 (nicht zerstörend, Modifier „Panzer_B_Durchbruch“)
+- Hubschrauber: im 2. OG von B21 (Loch aus Phase 2)
+  - Heckausleger abgeknickt, Heckrotor am Boden
+  - Blätter: eines am Kopf, zwei auf der Straße, eines in der Parkhaus-Fassade
+  - Trümmerfeld, Ruß an der Fassade
+- Figuren: 27 aus 12 Vorlagen (MPFB 2 + MakeHuman-Systemassets CC0)
+  - 8 Posen, kein Blut
+  - Abstand ≥ 12 m zu allen Hero-Kameras
+- Dateigröße: viertel_v04.blend 70,7 MB (Freigabe B: eine große Datei). v02 entfernt.
+
+### Gefundene und behobene Fehler
+- Scheinwerfer-Oberkante falsch, Kappen-Normalen invertiert (schwarze Front)
+- Spiegel innen, Rückenlehnen nach vorne geneigt
+- Fern-LOD-Absturz: Materialien der ausgewerteten Kopien übernommen → Originale verwenden
+- Barrikaden-Neubau brauchte den Zustand des Straßenmoduls
+- Schulbus verdeckte CAM_Hero_04 → nach Osten verschoben
+- Hubschrauber zu tief im Gebäude → 4,5 m herausgezogen
+- Glas brach flächenweise (Schachbrett) → scheibenweise
+- Figuren zu hell → dunkler
+- Posen: Achsen per Testreihe kalibriert
+
+### Renderzeiten (CPU, 960×540, 48 Samples)
+- CAM_Hero_01 236 s, CAM_Hero_02 193 s, CAM_Hero_03 263 s, CAM_Hero_04 245 s, Draufsicht 94 s
+- Bau der Szene: ca. 14 min (Flotte 5 min, Militär < 1 min, Figuren 8 min)
+
+### D1-Checkliste Phase 3
+- [x] Maßstab: Autos 4,1–5,9 m, Figuren 1,55–1,90 m, Bus 11,8 m
+- [x] Nichts schwebt: Fahrzeuge stehen auf den 4 Radpunkten (Ebene durch die Radhöhen), Figuren mit tiefstem Punkt auf dem Boden
+  - [ ] Einzelfälle prüfe ich in Phase 4 mit Vegetation
+- [x] Keine sichtbar gekachelten Texturen
+- [x] Keine sauberen Flächen mehr: Autolack mit Schmutzfilm, Dellen, Klarlack-Schäden, Rost
+- [x] Kanten gefast (Bevel/Solidify-Ränder)
+- [x] Keine falschen Normalen (Kappen korrigiert)
+- [ ] Himmel/Schatten: unverändert bis Phase 5
+- [x] Komposition: Hauptmotive jetzt vorhanden (Panzer A links, Stau in die Tiefe, Hubschrauber oben rechts in CAM 1)
+- [x] Look-Bible: Farben ausgeblichen, Rost, Moos auf waagerechten Flächen
+- [~] Selbst gebaut vs. heruntergeladen: nach der Korrektur meist nicht mehr auffällig; der Panzerturm wirkt aus der Nähe noch etwas glatt (Einschätzung)
+- [x] Kein reales Modell erkennbar, keine Marken/Logos; Reifen, Kennzeichen und Nummern sind erfunden
+- [x] Nichts aus Filmen/Serien, kein Blut
+
+### Konsistenz-Test (A10.6): renders/test/phase3_konsistenz_1–4
+1. Kombi ↔ Kartons (Scan):
+   - vorher auffällig, weil der Lack zu sauber war
+   - jetzt mit Schmutzfilm, Schlieren und stärkeren Dellen
+2. Militär-Lkw ↔ Kisten und Kanister (Scan): kaum Unterschied.
+3. Panzer-Staukorb ↔ Kanister und Busch (Scan):
+   - vorher auffällig, weil die Flächen zu glatt waren
+   - jetzt mit Zusatzpanzerung, Schrauben, Schweißnähten und feinerer Lackstruktur
+4. Figur ↔ geparktes Auto: kaum Unterschied.
+
+### D2-Qualitätsbewertung Phase 3 (ehrlich)
+| Kriterium | Note | Was verrät CGI / was hilft |
+|---|---|---|
+| Realismus Geometrie | 7 | Fahrzeuge mit Spaltmaßen, Leuchten, Innenraum; Panzer mit Laufwerk und Einzelgliedern. Hubschrauber-Rumpf noch recht glatt und einfach; Bäume weiter Kugeln → Phase 4 |
+| Realismus Materialien | 6 | Lack, Rost, Glas, Reifen gealtert. Aus der Nähe wirken Karosserien noch etwas „glatt“ (keine echten Beulen), Figurenkleidung von Nahem zu einheitlich → Qualitätsrunde: Beulen per Displacement, mehr Schmutz in Fugen |
+| Einheitlicher Look | 7 | Alles läuft über MAT_Verwitterung; der Konsistenz-Test ist nach den Korrekturen weitgehend unauffällig |
+| Licht & Stimmung | 4 | Unverändert flach (Phase 5: Gegenlicht, Dunst, Grading) |
+| Komposition | 7 | CAM 1 erfüllt die Look-Bible (Panzer links, Stau, Hubschrauber oben rechts). CAM 4 ist durch den hängenden Heckausleger unruhig |
+| Glaubwürdigkeit der Geschichte | 8 | Flucht-Stau mit offenen Türen, Unfallkette, Plünderung, verlassene Polizeisperre, Absturz mit Trümmerfeld |

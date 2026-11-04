@@ -1,8 +1,8 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 3 – Flotte (Schäden, Anordnung), danach Sonderfahrzeuge, Panzer, Hubschrauber, Figuren
+- **Aktuelle Phase:** Phase 3 abgeschlossen → wartet auf Freigabe (Fragen 1–6 unten)
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
-- **.blend-Version:** `viertel_v03.blend` (Phase 2b, 30,6 MB); Vorversion `viertel_v02.blend`
+- **.blend-Version:** `viertel_v04.blend` (Phase 3, 70,7 MB, Freigabe B: eine große Datei); Vorversion `viertel_v03.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 
@@ -65,7 +65,7 @@
    - dann 8 Grundmodelle bauen und ZWISCHEN-STOPP zur Freigabe
 
 ## Offene Fragen an den Nutzer
-- keine (Phase 3 läuft)
+- Freigabe-Fragen Phase 3 (1–6): Flotte, Panzer A, Hubschrauber, Geschichte, Figuren, einheitlicher Look
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL
@@ -112,3 +112,6 @@
 10. `blender -b viertel_v03.blend --python scripts/phase1/render_blockout.py -- --prefix phase2b`
 11. Phase 3: `python3 scripts/phase1/make_manifest.py && python3 download_assets.py --nur-basis && python3 scripts/phase1/make_lizenzen.py` (neue Fahrzeug-Texturen)
 12. `blender -b --factory-startup --python scripts/phase3/vorschau_grundmodelle.py` → renders/test/phase3_grund_*.png, dann `python3 scripts/phase3/kontaktbogen.py`
+13. MakeHuman-Systemassets (CC0) für MPFB: `download_assets.py` lädt sie nach assets/mpfb (Texturen entpackt nach assets/mpfb/data); für den Figuren-Neubau das Zip zusätzlich in den MPFB-Benutzerordner entpacken (…/extensions/.user/user_default/mpfb/data)
+14. `blender -b viertel_v03.blend --python scripts/phase3/build_phase3.py -- --version 04` (ohne --factory-startup, MPFB muss aktiv sein) → viertel_v04.blend
+15. `blender -b viertel_v04.blend --python scripts/phase1/render_blockout.py -- --prefix phase3 --nur CAM_Hero_01,CAM_Hero_02,CAM_Hero_03,CAM_Hero_04,draufsicht`
