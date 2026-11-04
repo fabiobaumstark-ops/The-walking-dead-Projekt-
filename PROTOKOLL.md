@@ -151,3 +151,8 @@
 | Licht & Stimmung | 5 | HDRI + Sonne korrekt ausgerichtet (28,5°), aber noch kein Dunst/Volumen und kein Grading → Phase 5 |
 | Komposition | 6 | Ausschnitte stimmen, aber die Hauptmotive (Panzer, Hubschrauber, Checkpoint) fehlen noch → Phase 2/3 |
 | Glaubwürdigkeit der Geschichte | 3 | Noch keine Fahrzeuge, Sperren oder Fluchtspuren → Phase 2/3 |
+
+## Phase-1-Freigabe (2026-11-04)
+- Antworten: 1A, 2A, 3A, 4A (Variante A: Checkpoint am Ortsausgang Ost), 5B (Verwitterung stärker).
+- Umgesetzt: verw_master 0,7 → 0,85, verw_kanten 1,0 → 1,3, Variante A als „gewaehlt“ festgeschrieben.
+- AUFTRAG.md ergänzt: A13 Hintergrund-Ring und eine Baum-Regel in 4.1 (freie echte Modelle vor selbst erzeugten).

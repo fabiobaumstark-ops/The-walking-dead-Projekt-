@@ -1,6 +1,6 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 1 abgeschlossen → **wartet auf Freigabe (Fragen 1–5, STOPP)**
+- **Aktuelle Phase:** Phase 1 freigegeben → **wartet auf „weiter“ für Phase 2 (STOPP)**
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** `viertel_v01.blend` (Blockout, 7,6 MB, Texturpfade relativ)
 - **Branch:** `claude/zen-meitner-53hxe1`
@@ -37,20 +37,11 @@
 1. Neue Sitzung:
    - Blender 5.2.3 installieren (`curl -O https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz`, nach /opt entpacken, Symlink /usr/local/bin/blender)
    - dann `python3 download_assets.py --nur-basis`
-2. Antworten des Nutzers auf die Phase-1-Fragen einarbeiten:
-   - Layout/Höhen: scripts/configs/layout.json + gebaeude.json
-   - Kameras: kameras.json
-   - Platzierung: gewählte Variante aus platzierung_varianten.json festschreiben
-   - Verwitterung: materialien.json → verwitterung
+2. Phase 2 starten (AUFTRAG.md Phase 2 + A13 lesen). Phase-1-Antworten sind schon in den Configs.
 3. Neu bauen (Befehle unten), Version hochzählen (v02), dann Phase 2 laut AUFTRAG.md.
 
-## Offene Fragen an den Nutzer (gestellt am 2026-11-04)
-Phase-1-Freigabe:
-1. Layout
-2. Höhen/Dichte
-3. Kameraausschnitte
-4. Platzierungsvariante A/B/C (Empfehlung A)
-5. Materialien/Verwitterung (Empfehlung: Standard stärker, 0,85)
+## Offene Fragen an den Nutzer
+- Start von Phase 2 („weiter“)
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL
@@ -58,6 +49,12 @@ Phase-1-Freigabe:
 - Branch: claude/zen-meitner-53hxe1
 - Phase-0-Fragen 1–11: alle Empfehlungen angenommen
 - Look-Bible v1.0 bestätigt, Phase 1 freigegeben
+- Phase-1-Fragen (2026-11-04): 1A Layout ok, 2A Höhen/Dichte ok, 3A Kameras ok,
+  4A Platzierung Variante A (platzierung_varianten.json → "gewaehlt": "A"),
+  5B Verwitterung stärker (verw_master 0,85, verw_kanten 1,3 in materialien.json)
+- Bäume (Phase 4): freie Baum-Modelle aus anderen Quellen, nur eindeutig freie Lizenz, echte Modelle vor selbst erzeugten
+- Neu: A13 Hintergrund-Ring (AUFTRAG.md). Silhouetten und Gelände in Phase 2, Bäume in Phase 4, Dunst in Phase 5.
+  Nach Phase 2 mit CAM_Hero_02 auf leere Horizontstellen prüfen
 
 ## Ausgeführte Skripte (Reihenfolge, alle im Repo-Hauptordner)
 1. `python3 scripts/phase1/make_manifest.py`

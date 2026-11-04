@@ -40,7 +40,7 @@
   },
   "verwitterung": {
     "_info": "Zentrale Regler (werden als Szenen-Eigenschaften verw_* angelegt, aendern: Szene > Benutzerdefinierte Eigenschaften).",
-    "verw_master": 0.7, "verw_staub": 1.0, "verw_schmutz": 1.0, "verw_kanten": 1.0,
+    "verw_master": 0.85, "verw_staub": 1.0, "verw_schmutz": 1.0, "verw_kanten": 1.3,
     "verw_wasser": 1.0, "verw_moos": 1.0, "verw_bleich": 1.0,
     "staubfarbe": "#9A9284", "schmutzfarbe": "#4A3B2C", "moosfarbe": "#4F5A2A",
     "sonne_azimut_grad": 265, "sonne_hoehe_grad": 28,

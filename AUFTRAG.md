@@ -253,6 +253,23 @@ Für eine NEUE Sitzung (Cloud oder lokal auf meinem Mac):
 - Fasse mir in 5 Zeilen zusammen, wo wir stehen, und frag, ob du
   beim "nächsten Schritt" weitermachen sollst.
 
+A13 HINTERGRUND-RING (Ergänzung vom 2026-11-04)
+Der Hintergrund darf nicht leer wirken, vor allem beim Überblick
+(CAM_Hero_02). Rund um das Viertel wird ein Hintergrund-Ring geplant:
+- 3 Tiefenebenen, jeweils mit einfacherer Detailstufe:
+  Mittelgrund (80–150 m), Hintergrund (150–300 m), Horizont (300 m+)
+- weitere Häuser und Straßenzüge als vereinfachte Silhouetten
+- Waldränder und Baumreihen rundum, teils mit Kudzu überwuchert
+- typische Südstaaten-Landmarken (generisch, eigenes Design):
+  Wasserturm, Kirchturm, Getreidesilo, Funkmast, Hochspannungsleitung,
+  verblasste Werbetafel am Highway mit erfundener Werbung
+- die Hochstraße läuft in die Ferne weiter, mit Autowracks darauf
+- leichte Hügel/Geländewellen am Horizont
+- 1–2 Rauchsäulen in der Ferne
+Zeitplan: Gebäude-Silhouetten und Gelände in Phase 2, Bäume in Phase 4,
+Dunst in Phase 5. Nach Phase 2 mit CAM_Hero_02 prüfen, dass es am
+Horizont keine leeren, flachen Stellen mehr gibt.
+
 ======================================================================
 TEIL B – PHASEN
 ======================================================================
@@ -932,6 +949,10 @@ PHASE 4 – VEGETATION & MATERIAL-FEINSCHLIFF
 ----------------------------------------------------------------------
 4.1 VEGETATION (Geometry Nodes mit Masken, Arten und Mengen nach
     recherche/vegetation.md und Jahreszeit aus der Look-Bible)
+Bäume (Ergänzung vom 2026-11-04): freie Baum-Modelle aus anderen
+Quellen verwenden, nur mit eindeutig freier Lizenz (in LIZENZEN.txt
+und assets_manifest.json eintragen). Echte Modelle haben Vorrang vor
+selbst erzeugten Bäumen.
 Gräser und Kräuter:
 - In allen Rissen und Fugen von Asphalt und Gehweg: Höhe 10–60 cm,
   Dichte entlang der Risse am höchsten, in Fahrspuren niedriger.
