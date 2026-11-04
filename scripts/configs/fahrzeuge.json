@@ -376,6 +376,43 @@
     "alu5",
     "alu6",
     "stahl_kappe"
+   ],
+   "varianten": [
+    {},
+    {
+     "licht_v": {
+      "stil": "keil",
+      "b": 0.44,
+      "h": 0.11
+     },
+     "grill": {
+      "stil": "gitter",
+      "h": 0.1,
+      "unten": true
+     },
+     "licht_h": {
+      "stil": "quer",
+      "b": 0.36,
+      "h": 0.11
+     }
+    },
+    {
+     "licht_v": {
+      "stil": "rechteck",
+      "b": 0.38,
+      "h": 0.12
+     },
+     "grill": {
+      "stil": "quer_gross",
+      "h": 0.15,
+      "unten": false
+     },
+     "licht_h": {
+      "stil": "quer",
+      "b": 0.5,
+      "h": 0.12
+     }
+    }
    ]
   },
   "B": {
@@ -685,7 +722,39 @@
     "alu6",
     "alu5"
    ],
-   "radlaufleiste": true
+   "radlaufleiste": true,
+   "varianten": [
+    {},
+    {
+     "licht_v": {
+      "stil": "schmal",
+      "b": 0.4,
+      "h": 0.11
+     },
+     "grill": {
+      "stil": "quer",
+      "h": 0.18,
+      "unten": true
+     },
+     "licht_h": {
+      "stil": "senkrecht",
+      "b": 0.28,
+      "h": 0.24
+     }
+    },
+    {
+     "licht_v": {
+      "stil": "rechteck",
+      "b": 0.34,
+      "h": 0.14
+     },
+     "grill": {
+      "stil": "quer_gross",
+      "h": 0.2,
+      "unten": true
+     }
+    }
+   ]
   },
   "C": {
    "name": "Grosser SUV",
@@ -974,7 +1043,39 @@
     "alu6",
     "alu5"
    ],
-   "radlaufleiste": false
+   "radlaufleiste": false,
+   "varianten": [
+    {},
+    {
+     "licht_v": {
+      "stil": "rechteck",
+      "b": 0.4,
+      "h": 0.18
+     },
+     "grill": {
+      "stil": "gitter",
+      "h": 0.28,
+      "unten": true
+     },
+     "licht_h": {
+      "stil": "senkrecht",
+      "b": 0.2,
+      "h": 0.36
+     }
+    },
+    {
+     "licht_v": {
+      "stil": "keil",
+      "b": 0.42,
+      "h": 0.15
+     },
+     "grill": {
+      "stil": "quer_gross",
+      "h": 0.34,
+      "unten": false
+     }
+    }
+   ]
   },
   "D": {
    "name": "Pickup Doppelkabine",
@@ -1218,7 +1319,35 @@
     "stahl"
    ],
    "kabinenfenster": true,
-   "radlaufleiste": true
+   "radlaufleiste": true,
+   "varianten": [
+    {},
+    {
+     "licht_v": {
+      "stil": "rechteck",
+      "b": 0.34,
+      "h": 0.2
+     },
+     "grill": {
+      "stil": "gitter",
+      "h": 0.34,
+      "unten": false
+     }
+    },
+    {
+     "licht_v": {
+      "stil": "keil",
+      "b": 0.36,
+      "h": 0.17
+     },
+     "grill": {
+      "stil": "quer_gross",
+      "h": 0.4,
+      "unten": true
+     },
+     "stossf": "lack"
+    }
+   ]
   },
   "E": {
    "name": "Kombi 1990er",
@@ -1498,6 +1627,26 @@
    },
    "felgen": [
     "stahl_kappe"
+   ],
+   "varianten": [
+    {},
+    {
+     "licht_v": {
+      "stil": "rechteck",
+      "b": 0.3,
+      "h": 0.15
+     },
+     "grill": {
+      "stil": "gitter",
+      "h": 0.12,
+      "unten": false
+     },
+     "licht_h": {
+      "stil": "senkrecht",
+      "b": 0.26,
+      "h": 0.18
+     }
+    }
    ]
   },
   "F": {
@@ -1801,6 +1950,38 @@
    "felgen": [
     "stahl_kappe",
     "alu5"
+   ],
+   "varianten": [
+    {},
+    {
+     "licht_v": {
+      "stil": "keil",
+      "b": 0.36,
+      "h": 0.12
+     },
+     "grill": {
+      "stil": "quer",
+      "h": 0.06,
+      "unten": true
+     },
+     "licht_h": {
+      "stil": "senkrecht",
+      "b": 0.14,
+      "h": 0.3
+     }
+    },
+    {
+     "licht_v": {
+      "stil": "rechteck",
+      "b": 0.3,
+      "h": 0.14
+     },
+     "grill": {
+      "stil": "gitter",
+      "h": 0.1,
+      "unten": true
+     }
+    }
    ]
   },
   "G": {
@@ -2098,6 +2279,26 @@
    "felgen": [
     "alu5",
     "stahl_kappe"
+   ],
+   "varianten": [
+    {},
+    {
+     "licht_v": {
+      "stil": "keil",
+      "b": 0.44,
+      "h": 0.13
+     },
+     "grill": {
+      "stil": "gitter",
+      "h": 0.1,
+      "unten": true
+     },
+     "licht_h": {
+      "stil": "senkrecht",
+      "b": 0.16,
+      "h": 0.42
+     }
+    }
    ]
   },
   "H": {
@@ -2361,7 +2562,35 @@
     "stahl"
    ],
    "hecktuer_fenster": true,
-   "radlaufleiste": false
+   "radlaufleiste": false,
+   "varianten": [
+    {},
+    {
+     "licht_v": {
+      "stil": "rechteck",
+      "b": 0.26,
+      "h": 0.2
+     },
+     "grill": {
+      "stil": "gitter",
+      "h": 0.22,
+      "unten": false
+     }
+    },
+    {
+     "licht_v": {
+      "stil": "keil",
+      "b": 0.32,
+      "h": 0.18
+     },
+     "grill": {
+      "stil": "quer",
+      "h": 0.24,
+      "unten": true
+     },
+     "stossf": "lack"
+    }
+   ]
   }
  }
 }

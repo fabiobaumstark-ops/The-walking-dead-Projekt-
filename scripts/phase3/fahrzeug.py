@@ -68,9 +68,11 @@ def _gewichte_tuer(ob, P, piv):
     return vg
 
 
-def bauen(typ, farbe="Silber", felge=None, seed=1, alter=0.8, col=None, cid=None, innen=True):
+def bauen(typ, farbe="Silber", felge=None, seed=1, alter=0.8, col=None, cid=None, innen=True, variante=0):
     C = cfg()
-    T = C["typen"][typ]
+    T = dict(C["typen"][typ])
+    vs = T.get("varianten") or [{}]
+    T.update(vs[variante % len(vs)])  # Front-/Heck-Variante (Leuchten, Grill, Stossstange)
     rnd = random.Random(seed)
     felge = felge or T["felgen"][0]
     P = K.Profil(T, C["spalt_m"])
@@ -83,7 +85,7 @@ def bauen(typ, farbe="Silber", felge=None, seed=1, alter=0.8, col=None, cid=None
     root.empty_display_size = 1.0
     col.objects.link(root)
     for k, v in (("typ", typ), ("typ_name", T["name"]), ("farbe", farbe), ("felge", felge), ("seed", seed),
-                 ("lack_alter", alter)):
+                 ("lack_alter", alter), ("variante", variante)):
         root[k] = v
 
     gruppen = {}
