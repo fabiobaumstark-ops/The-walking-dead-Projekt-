@@ -1,21 +1,75 @@
 {
-  "_info": "Schutt-Streuung Phase 2.4. dichte_* = Wahrscheinlichkeit pro Versuch, versuche_pro_m2 = Abtastdichte. Wind weht nach Nordost (aus Suedwest).",
-  "seed": 99,
-  "bereich": [-100, -100, 100, 100],
-  "hero_bereich": [-50, -20, 85, 20],
-  "versuche_pro_m2": 0.6,
-  "dichte_fahrbahn": 0.03,
-  "dichte_gehweg": 0.06,
-  "dichte_wand": 0.35,
-  "dichte_rinne": 0.25,
-  "dichte_gasse": 0.5,
-  "faktor_ausserhalb": 0.35,
-  "faktor_hero": 1.6,
-  "glas_anteil": 0.6,
-  "schutt_pro_schaden": 60,
-  "wind_nach": [0.707, 0.707],
-  "gasse": [-46, 31.35, 14, 35.35],
-  "polyhaven": [["karton", "cardboard_box_01"], ["dose", "can_rusted"], ["reifen", "old_tyre"], ["muell", "trashbag"],
-                ["muell", "metal_trash_can"], ["moebel", "WoodenChair_01"], ["moebel", "plastic_monobloc_chair_01"],
-                ["plastik", "plastic_jerrycan"], ["plastik", "metal_jerrycan"]]
+ "_info": "Schutt-Streuung Phase 2.4. dichte_* = Wahrscheinlichkeit pro Versuch, versuche_pro_m2 = Abtastdichte. Wind weht nach Nordost (aus Suedwest).",
+ "seed": 99,
+ "bereich": [
+  -100,
+  -100,
+  100,
+  100
+ ],
+ "hero_bereich": [
+  -50,
+  -20,
+  85,
+  20
+ ],
+ "versuche_pro_m2": 1.9,
+ "dichte_fahrbahn": 0.012,
+ "dichte_gehweg": 0.06,
+ "dichte_wand": 0.5,
+ "dichte_rinne": 0.4,
+ "dichte_gasse": 0.7,
+ "faktor_ausserhalb": 0.35,
+ "faktor_hero": 1.6,
+ "glas_anteil": 0.6,
+ "schutt_pro_schaden": 60,
+ "wind_nach": [
+  0.707,
+  0.707
+ ],
+ "gasse": [
+  -46,
+  31.35,
+  14,
+  35.35
+ ],
+ "polyhaven": [
+  [
+   "karton",
+   "cardboard_box_01"
+  ],
+  [
+   "dose",
+   "can_rusted"
+  ],
+  [
+   "reifen",
+   "old_tyre"
+  ],
+  [
+   "muell",
+   "trashbag"
+  ],
+  [
+   "muell",
+   "metal_trash_can"
+  ],
+  [
+   "moebel",
+   "WoodenChair_01"
+  ],
+  [
+   "moebel",
+   "plastic_monobloc_chair_01"
+  ],
+  [
+   "plastik",
+   "plastic_jerrycan"
+  ],
+  [
+   "plastik",
+   "metal_jerrycan"
+  ]
+ ],
+ "kegel_teile_pro_m2": 55
 }

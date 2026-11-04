@@ -383,6 +383,114 @@ def schilder(bm, cfg, rnd, mats):
                 SR.rohr(bm, (p.x, p.y, z - 0.3), (p.x, p.y, p.z + hh), 0.04, seg=6, mat=mats["holz"])
 
 
+def extras(bm, cu_kabel, cfg, rnd, mats, punkte_sack):
+    """3B: Spuren von Menschen - Kistenstapel, Munitions-/Rationskisten, Schlafsaecke, Feldbett draussen,
+    Feuerstelle, Waescheleine, Plane als Unterstand, Kabel am Boden, Helme, Stiefel, Schablonen-Texte."""
+    E = cfg["extras"]
+    for w in E["sandsackwaende"]:
+        sandsackwand(punkte_sack, w["start"], w["richtung"], w["laenge"], w.get("lagen", 6), w.get("reihen", 2), rnd)
+    for (x, y, n, yaw) in E["kistenstapel"]:
+        z = boden(x, y)
+        for k in range(n):
+            gr = (0.9, 0.5, 0.45) if k % 2 == 0 else (0.6, 0.4, 0.35)
+            SR.kasten(bm, (x + rnd.uniform(-0.05, 0.05), y + rnd.uniform(-0.05, 0.05), z + 0.25 + k * 0.45), gr, rot=(0, 0, yaw + rnd.uniform(-0.15, 0.15)), mat=mats["oliv"])
+    m_txt = mats["schrift"]
+    for (x, y, yaw, text) in E["kisten_text"]:
+        z = boden(x, y)
+        SR.kasten(bm, (x, y, z + 0.2), (0.7, 0.4, 0.4), rot=(0, 0, yaw), mat=mats["holz"])
+        m = Matrix.Translation((x, y, z + 0.41)) @ Matrix.Rotation(yaw, 4, "Z")
+        V.text_mesh(bm, text, 0.09, m, m_txt, extrude=0.0)
+    for (x, y, yaw) in E["schlafsaecke"]:
+        z = boden(x, y)
+        SR.rohr(bm, Vector((x, y, z + 0.13)) - Vector((math.cos(yaw), math.sin(yaw), 0)) * 0.3,
+                Vector((x, y, z + 0.13)) + Vector((math.cos(yaw), math.sin(yaw), 0)) * 0.3, 0.13, seg=12, mat=mats["vlies"])
+    for (x, y, yaw) in E["feldbetten"]:
+        z = boden(x, y)
+        mk = Matrix.Translation((x, y, z)) @ Matrix.Rotation(yaw, 4, "Z")
+        t = bmesh.new()
+        V.box(t, -1.0, -0.33, 0.42, 1.0, 0.33, 0.46)
+        SR.einfuegen_m(bm, t, mk, mats["stoff"])
+        for (a_, b_) in ((-0.95, -0.33), (0.95, -0.33), (-0.95, 0.33), (0.95, 0.33)):
+            t = bmesh.new()
+            V.box(t, a_ - 0.02, b_ - 0.02, 0, a_ + 0.02, b_ + 0.02, 0.42)
+            SR.einfuegen_m(bm, t, mk, mats["rohr"])
+    fx, fy = E["feuerstelle"]  # Steinring, Asche, verkohlte Hoelzer
+    z = boden(fx, fy)
+    for k in range(10):
+        a_ = 2 * math.pi * k / 10
+        SR.kasten(bm, (fx + math.cos(a_) * 0.55, fy + math.sin(a_) * 0.55, z + 0.07), (0.2, 0.16, 0.14), rot=(rnd.uniform(-0.3, 0.3), 0, a_), mat=mats["beton"])
+    for k in range(5):
+        a_ = rnd.uniform(0, 6.28)
+        SR.rohr(bm, (fx + math.cos(a_) * 0.4, fy + math.sin(a_) * 0.4, z + 0.05), (fx - math.cos(a_) * 0.2, fy - math.sin(a_) * 0.2, z + 0.1), 0.04, seg=6, mat=mats["rost"])
+    SR.rohr(bm, (fx, fy, z - 0.01), (fx, fy, z + 0.015), 0.42, seg=16, mat=mats["asche"])
+    (ax, ay), (bx, by) = E["waescheleine"]
+    za, zb = boden(ax, ay) + 1.8, boden(bx, by) + 1.8
+    sp = cu_kabel.splines.new("POLY")
+    sp.points.add(10)
+    for k in range(11):
+        t = k / 10
+        p = Vector((ax, ay, za)).lerp(Vector((bx, by, zb)), t)
+        p.z -= 0.25 * 4 * t * (1 - t)
+        sp.points[k].co = (*p, 1)
+    for k in range(4):  # Kleidung an der Leine
+        t = 0.2 + k * 0.18
+        p = Vector((ax, ay, za)).lerp(Vector((bx, by, zb)), t)
+        p.z -= 0.25 * 4 * t * (1 - t)
+        d = (Vector((bx, by, 0)) - Vector((ax, ay, 0))).normalized()
+        vs = [p - d * 0.25, p + d * 0.25, p + d * 0.22 - Vector((0, 0, 0.6)), p - d * 0.22 - Vector((0, 0, 0.55))]
+        f = bm.faces.new([bm.verts.new(v) for v in vs])
+        f.material_index = mats["stoff"] if k % 2 else mats["vlies"]
+    px, py, pyaw = E["plane_unterstand"]  # Plane schraeg zwischen Container und zwei Stangen
+    z = boden(px, py)
+    mk = Matrix.Translation((px, py, z)) @ Matrix.Rotation(pyaw, 4, "Z")
+    for dx in (-1.4, 1.4):
+        p0 = mk @ Vector((dx, -1.8, 0))
+        SR.rohr(bm, p0, p0 + Vector((0, 0, 1.5)), 0.025, seg=6, mat=mats["rohr"])
+    vs = [mk @ Vector((-1.6, 0, 2.3)), mk @ Vector((1.6, 0, 2.25)), mk @ Vector((1.5, -1.85, 1.5)), mk @ Vector((-1.5, -1.85, 1.45))]
+    f = bm.faces.new([bm.verts.new(v) for v in vs])
+    f.material_index = mats["plane"]
+    for (pa, pb) in E["kabel"]:  # Kabel am Boden (vom Generator)
+        a_, b_ = Vector(pa + [0]), Vector(pb + [0])
+        sp = cu_kabel.splines.new("POLY")
+        n = 14
+        sp.points.add(n)
+        for k in range(n + 1):
+            t = k / n
+            p = a_.lerp(b_, t) + Vector((math.sin(t * 7 + a_.x) * 0.35, math.cos(t * 5) * 0.3, 0))
+            p.z = boden(p.x, p.y) + 0.02
+            sp.points[k].co = (*p, 1)
+    for (x, y) in E["helme"]:
+        z = boden(x, y)
+        t = bmesh.new()
+        bmesh.ops.create_uvsphere(t, u_segments=14, v_segments=7, radius=0.15)
+        for v in t.verts:
+            v.co.z = max(v.co.z, 0) * 0.9
+        bmesh.ops.transform(t, matrix=Matrix.Translation((x, y, z)) @ Matrix.Rotation(rnd.uniform(-2.5, 2.5), 4, "X"), verts=t.verts)
+        SR.einfuegen(bm, t, mats["oliv"])
+    for (x, y, yaw, text, gr) in E["schablonen"]:  # Schablonen-/Spruehtexte auf Container/Jersey
+        z = boden(x, y)
+        m = Matrix.Translation((x, y, z + gr[1])) @ Matrix.Rotation(yaw, 4, "Z") @ Matrix.Rotation(math.pi / 2, 4, "X")
+        V.text_mesh(bm, text, gr[0], m, mats["schrift_rot"] if "TURN" in text else m_txt, extrude=0.0)
+
+
+def moos_punkte(punkte_sack, cfg):
+    """Moos auf den obersten Sandsack-Lagen und Jersey-Barrieren (fuer vegetation_klein)."""
+    out = bpy.app.driver_namespace.setdefault("moos_punkte", [])
+    top = {}
+    for (p, rot, sk, idx) in punkte_sack:
+        k = (round(p[0], 1), round(p[1], 1))
+        if k not in top or p[2] > top[k][2]:
+            top[k] = p
+    for p in top.values():
+        out.append((p[0], p[1], p[2] + 0.14, RND.uniform(0.06, 0.16)))
+    for j in cfg["jersey"]:
+        x, y = j["mitte"]
+        for k in range(3):
+            d = math.radians(j["richtung"])
+            o = RND.uniform(-1.6, 1.6)
+            out.append((x + math.cos(d) * o, y + math.sin(d) * o, boden(x, y) + 0.8, RND.uniform(0.05, 0.12)))
+
+
 def bauen():
     global RND
     cfg = V.config("checkpoint.json")
@@ -394,14 +502,15 @@ def bauen():
         sandsackwand(punkte, w["start"], w["richtung"], w["laenge"], w.get("lagen", 8), w.get("reihen", 2), rnd, w.get("luecke"))
     mats = {"beton": 0, "rost": 1, "vlies": 2, "sand": 3, "draht": 4, "wand": 5, "rahmen": 6, "stoff": 7, "holz": 8,
             "plane": 9, "seil": 10, "rohr": 11, "netz": 12, "rot": 13, "weiss": 14, "oliv": 15, "gummi": 16,
-            "sperrholz": 17, "schrift": 18, "schrift_rot": 19}
+            "sperrholz": 17, "schrift": 18, "schrift_rot": 19, "asche": 20}
     matlist = [V.material("MAT_Beton_Grob"), V.material("MAT_Rost_Dunkel"), V.material("MAT_Plane_Oliv"), V.material("MAT_Sand"),
                V.mat_maschendraht("MAT_Gabionen_Gitter"), V.material("MAT_Container"), V.material("MAT_Lack_Oliv"),
                V.material("MAT_Stoff_Plane"), V.material("MAT_Holz_Bretter_Alt"), V.material("MAT_Plane_Oliv"),
                V.material("MAT_Gummi"), V.material("MAT_Stahl_Verzinkt"), V.material("MAT_Plane_Oliv"),
                V.material("MAT_Lack_Rot"), V.material("MAT_Lack_Weiss"), V.material("MAT_Lack_Oliv"), V.material("MAT_Gummi"),
                V.material("MAT_Sperrholz"), V.mat_farbe("MAT_Schablone_Schwarz", "#151515", 0.35, "MAT_Beton_Grob", lokal=0.5),
-               V.mat_farbe("MAT_Schablone_Rot", "#7A1E18", 0.35, "MAT_Beton_Grob", lokal=0.5)]
+               V.mat_farbe("MAT_Schablone_Rot", "#7A1E18", 0.35, "MAT_Beton_Grob", lokal=0.5),
+               V.mat_farbe("MAT_Asche", "#3A3734", 0.1, "MAT_Beton_Grob", rau=0.95, lokal=0.3)]
     bm = bmesh.new()
     for j in cfg["jersey"]:
         jersey(bm, j["mitte"], math.radians(j["richtung"]), j.get("laenge", 3.65), rnd)
@@ -419,6 +528,14 @@ def bauen():
     wachturm(bm, *cfg["wachturm"], rnd, mats, punkte)
     kleinkram(bm, cfg, rnd, mats)
     schilder(bm, cfg, rnd, mats)
+    cu_k = bpy.data.curves.new("CHK_Kabel_Leine", "CURVE")
+    cu_k.dimensions = "3D"
+    cu_k.bevel_depth = 0.012
+    extras(bm, cu_k, cfg, rnd, mats, punkte)
+    ok = bpy.data.objects.new("CHK_Kabel_Leine", cu_k)
+    cu_k.materials.append(V.material("MAT_Gummi"))
+    col.objects.link(ok)
+    moos_punkte(punkte, cfg)
     ob = V.objekt_aus_bmesh("CHK_Checkpoint", bm, col, material=matlist)
     V.fase(ob, 0.01, 1, winkel=40)
     sack = V.instanzen("CHK_Sandsaecke", punkte, proto, col)

@@ -79,7 +79,7 @@ def prototypen_bauen(cfg):
         for v in bm.verts:  # kantig: Ecken zufaellig versetzen
             v.co += Vector((rnd.uniform(-0.12, 0.12), rnd.uniform(-0.12, 0.12), rnd.uniform(-0.06, 0.06))) * g
         kat_b = "beton" if i < 6 else "beton_gross"
-        eintraege.append((kat_b, _proto_objekt(f"DEB_Betonbrocken_{i + 1:02d}", bm, col, V.material("MAT_Beton_Grob"))))
+        eintraege.append((kat_b, _proto_objekt(f"DEB_Betonbrocken_{i + 1:02d}", bm, col, V.material("MAT_Betonbrocken"))))
     for i in range(3):
         eintraege.append(("ziegel", _proto_objekt(f"DEB_Ziegel_{i + 1:02d}", _ziegel(rnd, [0, 0.5, 0.8][i]), col, ziegel_mat)))
     for i in range(2):  # Ziegelhaufen
@@ -164,6 +164,34 @@ def prototypen_bauen(cfg):
         m = Matrix.Rotation(math.pi / 2, 4, "Y") if i == 1 else Matrix()
         bmesh.ops.transform(bm, matrix=m, verts=bm.verts)
         eintraege.append(("flasche", _proto_objekt(f"DEB_Flasche_{i + 1:02d}", bm, col, V.mat_glas("MAT_Glas_Flasche", 2.0))))
+    for i in range(3):  # Muellhaufen (Saecke, Kartons, Papier, Dosen zusammen)
+        bm = bmesh.new()
+        for k in range(rnd.randint(6, 12)):
+            t = _stein(rnd, rnd.uniform(0.25, 0.6), rnd.uniform(0.5, 0.9), 1)
+            bmesh.ops.translate(t, verts=t.verts, vec=(rnd.uniform(-0.6, 0.6), rnd.uniform(-0.5, 0.5), rnd.uniform(0, 0.2)))
+            SR.einfuegen(bm, t, rnd.choice([0, 0, 1]))
+        for k in range(rnd.randint(3, 6)):
+            t = bmesh.new()
+            s_ = rnd.uniform(0.2, 0.45)
+            V.box(t, -s_ / 2, -s_ / 2, 0, s_ / 2, s_ / 2, s_ * 0.8)
+            bmesh.ops.rotate(t, verts=t.verts, cent=(0, 0, 0), matrix=Matrix.Rotation(rnd.uniform(0, 6.28), 3, "Z") @ Matrix.Rotation(rnd.uniform(-0.6, 0.6), 3, "X"))
+            bmesh.ops.translate(t, verts=t.verts, vec=(rnd.uniform(-0.7, 0.7), rnd.uniform(-0.6, 0.6), rnd.uniform(0, 0.25)))
+            SR.einfuegen(bm, t, 2)
+        eintraege.append(("muellhaufen", _proto_objekt(f"DEB_Muellhaufen_{i + 1:02d}", bm, col, [V.material("MAT_Lack_Schwarz"), V.material("MAT_Plane_Oliv"), V.material("MAT_Papier")])))
+    for i in range(3):  # Plastiktueten (zerknittert)
+        eintraege.append(("plastik", _proto_objekt(f"DEB_Plastiktuete_{i + 1:02d}", _platte_knautsch(rnd, rnd.uniform(0.2, 0.35), rnd.uniform(0.15, 0.3), 0.9, 6), col,
+                                                    V.material(["MAT_Lack_Weiss", "MAT_Lack_Schwarz", "MAT_Lack_Blau"][i]))))
+    for i in range(3):  # Moebelteile: Schublade, Tischbein, Tuerblatt-Stueck
+        bm = bmesh.new()
+        if i == 0:
+            V.box(bm, -0.25, -0.2, 0, 0.25, 0.2, 0.02)
+            for (a_, b_, c_, d_) in ((-0.25, -0.2, -0.23, 0.2), (0.23, -0.2, 0.25, 0.2), (-0.25, -0.2, 0.25, -0.18), (-0.25, 0.18, 0.25, 0.2)):
+                V.box(bm, a_, b_, 0, c_, d_, 0.15)
+        elif i == 1:
+            V.box(bm, -0.35, -0.03, 0, 0.35, 0.03, 0.06)
+        else:
+            V.box(bm, -0.45, -0.3, 0, 0.45, 0.3, 0.04)
+        eintraege.append(("moebel", _proto_objekt(f"DEB_Moebelteil_{i + 1:02d}", bm, col, V.material("MAT_Holz_Bretter_Alt"))))
     bm = bmesh.new()  # heruntergefallenes Klimageraet
     V.box(bm, -0.33, -0.3, 0, 0.33, 0.3, 0.4)
     V.box(bm, -0.3, -0.31, 0.05, 0.3, -0.3, 0.35)
@@ -241,16 +269,20 @@ def verteilen(cfg, eintraege, boden_teile):
                         return False
         return True
 
-    def setzen(x, y, k, r, flach=False, gross=1.0, tilt=0.12, yaw=None):
-        if not frei(x, y, r):
+    def setzen(x, y, k, r, flach=False, gross=1.0, tilt=0.12, yaw=None, z_auf=None, pruefen=True):
+        if k not in kat:
+            return False
+        if pruefen and not frei(x, y, r):
             return False
         d, n, drin = _abstand_gebaeude(x, y)
-        if drin or d < r * 0.6:
+        if drin or (pruefen and d < r * 0.6):
             return False
         bd = _bordstein_nah(x, y)
-        if bd < r and r > 0.12:  # nichts Grosses auf der Bordsteinkante
+        if pruefen and bd < r and r > 0.12:  # nichts Grosses auf der Bordsteinkante
             return False
         z, art = _oberflaeche(x, y)
+        if z_auf is not None:
+            z += z_auf
         idx = rnd.choice(kat[k])
         yaw = rnd.uniform(0, 6.28) if yaw is None else yaw
         t = 0.0 if flach else tilt
@@ -271,6 +303,17 @@ def verteilen(cfg, eintraege, boden_teile):
             setzen(x, y, "klimageraet", 0.4, tilt=0.5)
         elif art.startswith("buchstabe:"):
             buchstaben.setdefault(art.split(":")[1], []).append((x, y))
+        elif art.startswith("schuttkegel:"):  # Schuttkegel aus Einzelteilen auf dem flachen Fuss
+            _, rr, hh = art.split(":")
+            rr, hh = float(rr), float(hh)
+            for k in range(int(rr * rr * cfg["kegel_teile_pro_m2"])):
+                a_ = rnd.uniform(0, 2 * math.pi)
+                d_ = rr * math.sqrt(rnd.random()) * 1.1
+                px, py = p.x + math.cos(a_) * d_, p.y + math.sin(a_) * d_
+                t = min(1.0, d_ / rr)
+                zz = 0.45 * hh * max(0.0, 1 - t * t) + rnd.uniform(0, 0.55 * hh) * max(0.0, 1 - t) ** 1.5
+                kat_ = rnd.choice(["ziegel", "ziegel", "ziegel", "beton", "beton", "ziegelhaufen", "holz", "beton_gross"] if t < 0.6 else ["ziegel", "beton", "glas", "papier"])
+                setzen(px, py, kat_, 0.05, tilt=1.2, z_auf=zz - 0.02, pruefen=False, gross=rnd.uniform(0.7, 1.2))
     # 2) Flaechenstreuung nach Dichte
     n_versuche = int((x1 - x0) * (y1 - y0) * cfg["versuche_pro_m2"])
     for _ in range(n_versuche):
@@ -328,6 +371,8 @@ def verteilen(cfg, eintraege, boden_teile):
             setzen(x, y, "moebel", 0.5, tilt=1.2) if "moebel" in kat else None
         elif r < 0.945:
             setzen(x, y, "wagen", 0.6, tilt=0.0 if rnd.random() < 0.6 else 1.4)
+        elif r < 0.965 and d < 2.0:
+            setzen(x, y, "muellhaufen", 0.8, tilt=0.05)
         else:
             setzen(x, y, "ziegelhaufen", 0.5)
     # 3) Schuttkegel vor schwer beschaedigten Gebaeuden: zusaetzliche Ziegel/Brocken

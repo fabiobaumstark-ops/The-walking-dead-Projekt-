@@ -1,0 +1,53 @@
+{
+ "_info": "Kleine Vegetation Phase 2b (aus Phase 4 vorgezogen): Grasbueschel in Rissen/Fugen, Moospolster, Laub/Erde. Baeume/Bueche/Ranken folgen in Phase 4.",
+ "seed": 23,
+ "gras_modelle": [
+  [
+   "grass_bermuda_01",
+   24
+  ],
+  [
+   "grass_medium_02",
+   11
+  ],
+  [
+   "grass_medium_01",
+   16
+  ]
+ ],
+ "riss_anteil": 0.22,
+ "riss_moos": 0.05,
+ "fugen_anteil": 0.13,
+ "rinnen": [
+  [
+   -60,
+   90,
+   6.95
+  ],
+  [
+   -60,
+   90,
+   -6.95
+  ]
+ ],
+ "rinne_anteil": 0.55,
+ "rinne_gras": 0.35,
+ "rinne_moos": 0.25,
+ "baumscheibe_gras": 14,
+ "wand_gras": 0.22,
+ "wand_moos": 0.12,
+ "wand_anteil": 0.45,
+ "laubhaufen": 90,
+ "oelflecken": 14,
+ "gras_hsv": [
+  0.5,
+  0.5,
+  0.62
+ ],
+ "gras_hsv_trocken": [
+  0.46,
+  0.42,
+  0.85
+ ],
+ "trocken_anteil": 0.45
+}

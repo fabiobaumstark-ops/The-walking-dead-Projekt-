@@ -12,3 +12,6 @@ teile/**/*.blend1
 __pycache__/
 *.pyc
 .DS_Store
+
+# Test-Builds
+viertel_v*test.blend

@@ -125,6 +125,18 @@ def barrikade1(bm, cu, cfg, rnd):
     # Ketten zwischen den Autos
     for (ya, yb) in c["ketten"]:
         kette(cu, (x, ya, boden(x, ya) + 0.6), (x, yb, boden(x, yb) + 0.6))
+    # 3B: Reifenstapel, Sperrholzplatte mit Spruehtext, Kanister, Muell vor der Barrikade
+    for (dx, y, n) in c.get("reifen", []):
+        for j in range(n):
+            p = Vector((x + dx, y, boden(x + dx, y) + 0.12 + j * 0.23))
+            SR.rohr(bm, p - Vector((0, 0, 0.11)), p + Vector((0, 0, 0.11)), 0.33, seg=14, mat=M["gummi"])
+    for (dx, y, text) in c.get("platten", []):
+        z = boden(x + dx, y)
+        m = Matrix.Translation((x + dx, y, z + 1.0)) @ Matrix.Rotation(math.radians(-90 + rnd.uniform(-6, 6)), 4, "Z") @ Matrix.Rotation(math.radians(80), 4, "X")
+        t = bmesh.new()
+        V.box(t, -1.2, -0.6, -0.01, 1.2, 0.6, 0.01)
+        SR.einfuegen_m(bm, t, m, M["sperrholz"])
+        V.text_mesh(bm, text, 0.3, m @ Matrix.Translation((0, 0, 0.012)), M["lack2"], extrude=0.0)
 
 
 def barrikade2(bm, cu, cfg, rnd):
@@ -189,6 +201,12 @@ def barrikade3(bm, cfg, rnd):
         b = Vector((x + 1.6, yy, boden(x + 1.6, yy) + 0.05))
         SR.rohr(bm, a, b, 0.055, seg=6, mat=M["holz"])
         kb(bm, Matrix.Translation((x + 1.75, yy, boden(x + 1.75, yy))), -0.12, -0.08, 0, 0.12, 0.08, 0.1, M["holz"])
+    # 3B: Spruehtext auf der Palisade, Faesser und Sandsaecke dahinter
+    m = Matrix.Translation((x - 0.02, (y0 + y1) / 2, boden(x, (y0 + y1) / 2) + 1.4)) @ Matrix.Rotation(-math.pi / 2, 4, "Z") @ Matrix.Rotation(math.pi / 2, 4, "X")
+    V.text_mesh(bm, "KEEP OUT", 0.38, m, M["lack2"], extrude=0.0)
+    for (dx, dy) in ((0.9, 0.6), (1.0, 3.2)):
+        p = Vector((x + dx, y0 + dy, boden(x + dx, y0 + dy)))
+        SR.rohr(bm, p, p + Vector((0, 0, 0.88)), 0.29, seg=14, mat=M["rost"])
     for k in range(c["pfaehle"]):  # angespitzte Pfaehle davor (Westseite)
         yy = y0 + 0.3 + (y1 - y0 - 0.6) * k / max(1, c["pfaehle"] - 1)
         z = boden(x - 1.0, yy)

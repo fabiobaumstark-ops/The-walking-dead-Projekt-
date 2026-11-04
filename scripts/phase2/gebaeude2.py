@@ -17,6 +17,7 @@ HIER = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HIER, "..", "phase1"))
 import blockout_gebaeude as P1  # noqa: E402
 import fassade as FA  # noqa: E402
+import fassaden_details as FD  # noqa: E402
 import viertel_lib as V  # noqa: E402
 
 S = FA.SLOT
@@ -33,6 +34,21 @@ class Bau2(P1.Bau):
         self.rnd = rnd
         self.deko = bmesh.new()          # Decals (Russ, Graffiti) mit eigener UV
         self.boden_teile = []            # heruntergefallene Dinge (Position, Art) fuer Schutt/Props
+        self.kabel = []                  # Hausanschluesse (Mastpunkt, Fassadenpunkt)
+        self.info = None
+
+    def schuttkegel(self, u, v, radius, hoehe, rnd):
+        """Flacher, unregelmaessiger Schuttfuss; die Oberflaeche aus Einzelteilen setzt schutt.py darauf."""
+        x, y = self.r.p(u, v)
+        bm2 = bmesh.new()
+        h0 = hoehe * 0.45
+        m = Matrix.Translation((x, y, V.h(x, y) + 0.15)) @ Matrix.Diagonal((radius, radius * rnd.uniform(0.7, 1.0), h0, 1))
+        bmesh.ops.create_icosphere(bm2, subdivisions=2, radius=1.0, matrix=m)
+        for vv in bm2.verts:
+            vv.co += Vector((rnd.uniform(-0.25, 0.25), rnd.uniform(-0.25, 0.25), rnd.uniform(-0.08, 0.08)))
+            vv.co.z = max(vv.co.z, V.h(vv.co.x, vv.co.y) + 0.1)
+        self.mesh_einfuegen(bm2, S["Schutt"])
+        self.boden_teile.append((Vector((x, y, 0)), f"schuttkegel:{radius:.2f}:{hoehe:.2f}"))
 
     def wand(self, seite, dicke=0.3):
         return FA.Wand(self, seite, dicke)
@@ -237,6 +253,12 @@ def typ1(b, g, rnd):
     _tuer(b, wv, tuer[0], tuer[1], eg, eg + 2.3, rnd)
     ops["vorne"] += gross
     zacken = {"vorne": list(range(len(ops["vorne"]) - len(gross), len(ops["vorne"])))}
+    b.info = {"top": top, "geschosse": geschosse, "ops": ops, "dicke": 0.3, "tuer_oben": eg + 2.6}
+    for seite, neu in FD.zusatzschaden(b, g, rnd, ops).items():
+        zacken.setdefault(seite, [])
+        for o in neu:
+            ops[seite].append(o)
+            zacken[seite].append(len(ops[seite]) - 1)
     huelle(b, g, geschosse, top, ops, zacken=zacken)
     b.box(-0.04, -0.04, W + 0.04, D + 0.04, g["zg"], b.z0 + 0.35, S["Beton"])  # Sockel
     for k in range(1, n):  # Gurtgesimse
@@ -321,6 +343,12 @@ def typ3(b, g, rnd):
             ops[seite] += fenster_reihe(b, b.wand(seite), [z + 0.9 for z in og], 0.9, 1.5, 2.6, 1.2, g, rnd, eg_index=-1)
     ops["vorne"] += gross
     zacken = {"vorne": list(range(len(ops["vorne"]) - len(gross), len(ops["vorne"])))}
+    b.info = {"top": top, "geschosse": geschosse, "ops": ops, "dicke": 0.3, "eg": eg}
+    for seite, neu in FD.zusatzschaden(b, g, rnd, ops).items():
+        zacken.setdefault(seite, [])
+        for o in neu:
+            ops[seite].append(o)
+            zacken[seite].append(len(ops[seite]) - 1)
     huelle(b, g, geschosse, top, ops, zacken=zacken, kern=False,
            boden=[S["Fliesen"]] + [rnd.choice([S["InnenBoden"], S["Teppich"]]) for _ in og])
     # Pilaster, Gesimse, Ziergesims
@@ -501,7 +529,43 @@ DEKO_MATS = None
 def deko_materialien():
     return [V.mat_russ(), V.mat_farbe("MAT_Graffiti_Schwarz", "#1A1A1A", 0.35, "MAT_Beton_Grob", lokal=0.6),
             V.mat_farbe("MAT_Graffiti_Rot", "#7E1F1A", 0.35, "MAT_Beton_Grob", lokal=0.6),
-            V.mat_farbe("MAT_Graffiti_Weiss", "#D9D4C8", 0.35, "MAT_Beton_Grob", lokal=0.6)]
+            V.mat_farbe("MAT_Graffiti_Weiss", "#D9D4C8", 0.35, "MAT_Beton_Grob", lokal=0.6),
+            V.mat_fahne("MAT_Schmutzfahne", "#2E2A22", 0.75), V.mat_fahne("MAT_Rostfahne", "#6A3A1E", 0.7),
+            V.mat_fahne("MAT_Ausbluehung", "#DEDAD0", 0.6, unten_stark=True), V.material("MAT_Papier"),
+            V.mat_farbe("MAT_Druckfarbe", "#1C1A18", 0.25, "MAT_Beton_Grob", rau=0.8, lokal=0.4)]
+
+
+def _mastpunkte():
+    """Anschlusspunkte (8,4 m) aller Strommasten aus scripts/configs/strassenraum.json."""
+    C = V.config("strassenraum.json")["strommasten"]
+    out = []
+    for linie in C["linien"]:
+        (xa, ya), (xb, yb) = linie["von"], linie["bis"]
+        Lg = math.hypot(xb - xa, yb - ya)
+        n = max(1, int(round(Lg / C["abstand"])))
+        for k in range(n + 1):
+            x, y = xa + (xb - xa) * k / n, ya + (yb - ya) * k / n
+            if abs(x - C["umgeknickt"][0]) < 1 and abs(y - C["umgeknickt"][1]) < 1:
+                continue
+            out.append(Vector((x, y, V.h(x, y) + 0.15 + 8.4)))
+    return out
+
+
+def _hausanschluesse(kabel):
+    cu = bpy.data.curves.new("STR_Hausanschluesse", "CURVE")
+    cu.dimensions = "3D"
+    cu.bevel_depth = 0.009
+    for (a, b) in kabel:
+        sp = cu.splines.new("POLY")
+        sp.points.add(12)
+        for k in range(13):
+            t = k / 12
+            p = a.lerp(b, t)
+            p.z -= 0.6 * 4 * t * (1 - t)
+            sp.points[k].co = (*p, 1)
+    ob = bpy.data.objects.new("STR_Hausanschluesse", cu)
+    cu.materials.append(V.material("MAT_Gummi"))
+    V.collection("02_Strassen/Strommasten").objects.link(ob)
 
 
 # ------------------------------------------------------------------ Hauptfunktion
@@ -523,7 +587,8 @@ def bauen():
                 g["nachbar_links" if g["front"] == "S" else "nachbar_rechts"] = True
             if ueberlapp_y and abs(a[0] - x1) < 0.6:
                 g["nachbar_rechts" if g["front"] == "S" else "nachbar_links"] = True
-    zaehler, ergebnis, boden_teile = {}, [], []
+    zaehler, ergebnis, boden_teile, kabel = {}, [], [], []
+    masten = _mastpunkte()
     for g in geb:
         rnd = random.Random(cfg["seed"] * 1000 + int(g["id"][1:]))
         g["cfg"] = cfg
@@ -537,6 +602,9 @@ def bauen():
             NEU[g["typ"]](b, g, rnd)
         else:
             P1.BAUER[g["typ"]](b, g, rnd)
+        FD.fassade(b, g, rnd, masten)
+        FD.innenraum(b, g, rnd)
+        kabel += b.kabel
         tname = cfg["typnamen"][str(g["typ"])]
         zaehler[tname] = zaehler.get(tname, 0) + 1
         name = f"BLD_{g['name']}" if g.get("name") else f"BLD_{tname}_{zaehler[tname]:02d}"
@@ -563,6 +631,7 @@ def bauen():
         boden_teile += [(p, art, g["id"]) for p, art in b.boden_teile]
         ergebnis.append(ob)
     bpy.app.driver_namespace["boden_teile"] = boden_teile
+    _hausanschluesse(kabel)
     print(f"GEBAEUDE2: {len(ergebnis)} Gebaeude, {len(boden_teile)} Bodenteile (Glas/Klimageraete/Buchstaben)")
     return ergebnis, boden_teile
 
@@ -622,6 +691,7 @@ def typ2(b, g, rnd):
         w = b.wand(seite, d)
         ops[seite].append({"s0": tuer[0], "s1": tuer[1], "z0": ze, "z1": ze + 2.1})
         _tuer(b, w, tuer[0], tuer[1], ze, ze + 2.1, rnd)
+    b.info = {"top": traufe, "geschosse": [ze + k * 2.8 for k in range(n)], "ops": ops, "dicke": d, "tuer_oben": ze + 2.15}
     for seite, o_list in ops.items():
         FA.wandscheibe(b.bm, b.wand(seite, d), ze - 0.12, traufe, o_list, rnd, S["Fassade"], S["InnenWand"], unebenheit=0.012)
     for k in range(n):
@@ -794,6 +864,7 @@ def typ5(b, g, rnd):
             o_list.append(o)
             _modulfassade(b, w, o, g, rnd, k, n)
         ops[seite] = o_list
+    b.info = {"top": top, "geschosse": geschosse, "ops": ops, "dicke": 0.3}
     huelle(b, g, geschosse, top, ops, kern=True,
            boden=[S["Fliesen"]] + [S["Schutt"] if (g.get("brand") and k >= n - 3) else S["Teppich"] for k in range(1, n)])
     for k in range(1, n):  # Deckenstirn/Bruestungsband
@@ -871,6 +942,7 @@ def typ6(b, g, rnd):
                                    aus=[(6, 22)] if seite == "vorne" else None, vorhaenge=0.5)
     w = b.wand("vorne")
     ops["vorne"].append({"s0": 9.0, "s1": 19.0, "z0": z0 + 0.1, "z1": z0 + 3.2})  # Notaufnahme-Eingang
+    b.info = {"top": top, "geschosse": geschosse, "ops": ops, "dicke": 0.3}
     huelle(b, g, geschosse, top, ops)
     dach_flach(b, g, top, 1.0)
     for k in range(1, n):
@@ -933,6 +1005,7 @@ def typ8(b, g, rnd):
         if art == "schule":
             w = b.wand("vorne")
             ops["vorne"].append({"s0": W / 2 - 1.2, "s1": W / 2 + 1.2, "z0": z0, "z1": z0 + 2.6})
+        b.info = {"top": top, "geschosse": geschosse, "ops": ops, "dicke": 0.3}
         huelle(b, g, geschosse, top, ops)
         dach_flach(b, g, top, 0.8)
         b.box(-0.03, -0.03, W + 0.03, 0, z0 + 3.35, z0 + 3.6, S["Beton"])

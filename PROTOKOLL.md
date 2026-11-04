@@ -288,3 +288,8 @@
 | Licht & Stimmung | 4 | Flaches Dunst-HDRI, ohne Volumen-Dunst, Lichtstrahlen und Grading wirkt das Bild „sauber“ → Phase 5 |
 | Komposition | 6 | Ausschnitte tragen, aber Panzer, Hubschrauber und Stau fehlen noch als Hauptmotive → Phase 3 |
 | Glaubwürdigkeit der Geschichte | 6 | Checkpoint mit Schikane, Barrikaden, Plünderung, Graffiti, Glas unter Fenstern. Fahrzeuge und Fluchtspuren folgen in Phase 3 |
+
+## Phase 2b – Detail-Ausbau (Feedback 2026-11-04)
+- Nutzer: „zu wenig Details, Moos fehlt“, „viel zu wenig Details“.
+- Entscheidung des Nutzers: 1C + Moos jetzt, 2 alle Bereiche, 3B mehr Details am Checkpoint.
+- Annahme (dem Nutzer mitgeteilt): „Moos und so“ = Moos, Flechten, Laub und kleine Grasbüschel in Rissen und Fugen. Bäume, Büsche, Ranken und Kudzu bleiben in Phase 4.

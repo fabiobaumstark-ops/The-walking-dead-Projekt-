@@ -1,6 +1,6 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 2 abgeschlossen → **wartet auf Freigabe (Phase-2-Fragen 1–3, STOPP)**
+- **Aktuelle Phase:** Phase 2b – Detail-Ausbau nach Nutzer-Feedback (läuft)
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** `viertel_v02.blend` (Phase 2, 20 MB, Texturpfade relativ); Vorversion `viertel_v01.blend` (Blockout)
 - **Branch:** `claude/zen-meitner-53hxe1`
@@ -53,11 +53,8 @@
    - Militär-Recherche → recherche/militaer.md
    - dann 8 Grundmodelle bauen und ZWISCHEN-STOPP zur Freigabe
 
-## Offene Fragen an den Nutzer (gestellt am 2026-11-04)
-- Phase-2-Freigabe:
-  1. Gebäude und Straßen glaubwürdig?
-  2. Detailmenge?
-  3. Checkpoint und Barrikaden?
+## Offene Fragen an den Nutzer
+- keine (Phase 2b läuft)
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL
@@ -70,6 +67,13 @@
   5B Verwitterung stärker (verw_master 0,85, verw_kanten 1,3 in materialien.json)
 - Bäume (Phase 4): freie Baum-Modelle aus anderen Quellen, nur eindeutig freie Lizenz, echte Modelle vor selbst erzeugten
 - Phase 2 gestartet: Option A (allein, keine parallelen Agenten)
+- Phase-2-Feedback (2026-11-04):
+  - Frage 1 B „zu wenig Details, Moos fehlt“, Frage 2 A „viel zu wenig Details“
+  - Nachfrage beantwortet:
+    - 1C: Bäume, Büsche und Ranken bleiben in Phase 4, aber Moos, Flechten, Laub und kleine Grasbüschel in Rissen und Fugen jetzt
+    - 2: alle Detail-Bereiche (Fassaden, Boden, Zerstörung, Innenräume)
+    - 3B: Checkpoint und Barrikaden mit mehr Details und Menschenspuren
+  - Umsetzung als Phase 2b
 - Neu: A13 Hintergrund-Ring (AUFTRAG.md). Silhouetten und Gelände in Phase 2, Bäume in Phase 4, Dunst in Phase 5.
   Nach Phase 2 mit CAM_Hero_02 auf leere Horizontstellen prüfen
 

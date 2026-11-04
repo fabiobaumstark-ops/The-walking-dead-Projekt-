@@ -340,17 +340,46 @@ def verwitterung_gruppe():
     farbe = _mix_rgb(nt, staub, farbe, hex_lin(vc["staubfarbe"]))
     rau = _math(nt, "ADD", rau, _math(nt, "MULTIPLY", staub, 0.35), clamp=True)
 
-    # e) Moos auf waagerechten, schattigen Flaechen (AO als Schatten-Naeherung)
+    # e) Moos (Fototextur Moss002): oben auf schattigen Flaechen, in Vertiefungen, am feuchten Wandfuss
     ao2 = nt.nodes.new("ShaderNodeAmbientOcclusion")
     ao2.samples = 4
     ao2.inputs["Distance"].default_value = 1.5
-    schatten = _maprange(nt, ao2.outputs["AO"], 0.95, 0.55, 0.45, 1.0)
-    flecken = _maprange(nt, _noise(nt, P, 0.9, 6.0, 0.7, 0.3), 0.48, 0.62)
-    moos = _math(nt, "MULTIPLY", _math(nt, "MULTIPLY", _maprange(nt, Nz, 0.55, 0.95), schatten), flecken)
-    moos = _math(nt, "MULTIPLY", moos, _math(nt, "MULTIPLY", staerke("verw_moos"), 0.9), clamp=True)
-    mfarbe = _mix_rgb(nt, _noise(nt, P, 9.0, 4.0), hex_lin(vc["moosfarbe"]), hex_lin("#3B4720"))
+    schatten = _maprange(nt, ao2.outputs["AO"], 0.95, 0.5, 0.55, 1.0)
+    flecken = _maprange(nt, _noise(nt, P, 0.7, 6.0, 0.7, 0.3), 0.42, 0.58)
+    feinflecken = _maprange(nt, _noise(nt, P, 6.0, 4.0, 0.6), 0.35, 0.65, 0.4, 1.0)
+    oben_m = _math(nt, "MULTIPLY", _math(nt, "MULTIPLY", _maprange(nt, Nz, 0.45, 0.9), schatten), flecken)
+    nord = _maprange(nt, _math(nt, "MULTIPLY", sep.outputs["Y"], -1.0), -0.2, 0.7, 0.35, 1.0)  # Wand zeigt nach Norden = feucht
+    fuss_m = _math(nt, "MULTIPLY", _math(nt, "MULTIPLY", _maprange(nt, hoehe, 0.5, 0.05), senkrecht), _math(nt, "MULTIPLY", nord, flecken))
+    hohl_m = _math(nt, "MULTIPLY", _maprange(nt, ao.outputs["AO"], 0.75, 0.3), _maprange(nt, Nz, 0.1, 0.6))
+    moos = _math(nt, "MAXIMUM", _math(nt, "MAXIMUM", oben_m, _math(nt, "MULTIPLY", fuss_m, 0.8)), _math(nt, "MULTIPLY", hohl_m, 0.7))
+    moos = _math(nt, "MULTIPLY", _math(nt, "MULTIPLY", moos, feinflecken), _math(nt, "MULTIPLY", staerke("verw_moos"), 1.15), clamp=True)
+    eintrag_m = next(a for a in manifest()["assets"] if a["name"] == "MAT_Moos")
+    mt = nt.nodes.new("ShaderNodeTexImage")
+    mt.image = _bild(_karte(os.path.join(ROOT, eintrag_m["zielpfad"]), "_color"), False)
+    uvm = nt.nodes.new("ShaderNodeUVMap")
+    mpm = nt.nodes.new("ShaderNodeMapping")
+    mpm.inputs["Scale"].default_value = (0.8, 0.8, 1)
+    nt.links.new(uvm.outputs["UV"], mpm.inputs["Vector"])
+    nt.links.new(mpm.outputs["Vector"], mt.inputs["Vector"])
+    mhsv = nt.nodes.new("ShaderNodeHueSaturation")
+    mhsv.inputs["Saturation"].default_value = 0.75
+    mhsv.inputs["Value"].default_value = 0.8
+    nt.links.new(mt.outputs["Color"], mhsv.inputs["Color"])
+    mfarbe = _mix_rgb(nt, _noise(nt, P, 3.0, 4.0), mhsv.outputs["Color"], hex_lin("#5A5A2E"), "MULTIPLY")
+    mfarbe = _mix_rgb(nt, 0.5, mhsv.outputs["Color"], mfarbe)
     farbe = _mix_rgb(nt, moos, farbe, mfarbe)
     rau = _math(nt, "MAXIMUM", rau, _math(nt, "MULTIPLY", moos, 0.95))
+
+    # g) Flechten: kleine hellgrau-gruene Flecken auf Stein/Beton (Lokal steuert pro Material)
+    fl = _maprange(nt, _noise(nt, P, 7.5, 3.0, 0.5, 0.2), 0.62, 0.68)
+    fl = _math(nt, "MULTIPLY", fl, _maprange(nt, _noise(nt, P, 0.6, 2.0), 0.45, 0.6))
+    fl = _math(nt, "MULTIPLY", fl, _math(nt, "MULTIPLY", _attr(nt, "verw_flechten"), M), clamp=True)
+    farbe = _mix_rgb(nt, _math(nt, "MULTIPLY", fl, 0.75), farbe, hex_lin("#A3A88E"))
+
+    # h) Feuchte am Wandfuss: dunkler, unregelmaessiger Rand (zusaetzlich zum Schmutz)
+    feucht = _math(nt, "MULTIPLY", _maprange(nt, _math(nt, "ADD", hoehe, _math(nt, "MULTIPLY", _noise(nt, P, 1.2, 4.0), 0.3)), 0.75, 0.25), senkrecht)
+    feucht = _math(nt, "MULTIPLY", feucht, _math(nt, "MULTIPLY", staerke("verw_schmutz"), 0.55), clamp=True)
+    farbe = _mix_rgb(nt, feucht, farbe, _mix_rgb(nt, 1.0, farbe, (0.62, 0.6, 0.55, 1), "MULTIPLY"))
 
     nt.links.new(farbe, go.inputs["Farbe"])
     nt.links.new(rau, go.inputs["Rauheit"])
@@ -1001,5 +1030,32 @@ def mat_maschendraht(name="MAT_Maschendraht"):
     grp = _verw_anschluss(nt, t.outputs["Color"], 0.55, None, lokal=0.7)
     nt.links.new(grp.outputs["Farbe"], b.inputs["Base Color"])
     nt.links.new(grp.outputs["Rauheit"], b.inputs["Roughness"])
+    nt.links.new(alpha, b.inputs["Alpha"])
+    return m
+
+
+
+def mat_fahne(name, hexfarbe, staerke=0.7, unten_stark=False):
+    """Decal: Schmutz-/Rostfahne (oben stark, nach unten auslaufend, streifig) bzw. Ausbluehung (unten stark).
+    Decal-UV: u quer 0..1, v 0 unten .. 1 oben. Fotobasis: Rauheitskarte dirty_concrete."""
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    m, nt, b = _neues_mat(name)
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    sep = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(tc.outputs["UV"], sep.inputs[0])
+    g = _grunge(nt, "MAT_Beton_Grob", 0.6)
+    st = nt.nodes.new("ShaderNodeVectorMath")
+    st.operation = "MULTIPLY"
+    nt.links.new(tc.outputs["UV"], st.inputs[0])
+    st.inputs[1].default_value = (9.0, 0.6, 1.0)
+    streif = _maprange(nt, _noise(nt, st.outputs[0], 1.0, 3.0, 0.5), 0.35, 0.7, 0.2, 1.0)
+    v = sep.outputs["Y"]
+    verlauf = _maprange(nt, v, 0.6, 0.0) if unten_stark else _maprange(nt, v, 0.0, 0.95)
+    rand = _math(nt, "MULTIPLY", _maprange(nt, sep.outputs["X"], 0.0, 0.3), _maprange(nt, sep.outputs["X"], 1.0, 0.7))
+    alpha = _math(nt, "MULTIPLY", _math(nt, "MULTIPLY", verlauf, rand), _math(nt, "MULTIPLY", streif if not unten_stark else _maprange(nt, g, 0.2, 0.8), staerke), clamp=True)
+    alpha = _math(nt, "MULTIPLY", alpha, _maprange(nt, g, 0.1, 0.9, 0.6, 1.0))
+    b.inputs["Base Color"].default_value = hex_lin(hexfarbe)
+    b.inputs["Roughness"].default_value = 0.9
     nt.links.new(alpha, b.inputs["Alpha"])
     return m

@@ -1,41 +1,563 @@
 {
-  "_info": "Checkpoint Variante A (Ortsausgang Ost, x 62-78). richtung = Ausrichtung der Laengsachse in Grad (0 = Osten, 90 = Norden). Masse siehe recherche/architektur.md.",
-  "seed": 31,
-  "sandsackwaende": [
-    {"start": [74.0, 1.2], "richtung": [0, 1], "laenge": 5.0, "lagen": 8, "reihen": 2},
-    {"start": [74.0, 6.2], "richtung": [1, 0], "laenge": 1.5, "lagen": 8, "reihen": 2},
-    {"start": [66.0, -9.9], "richtung": [1, 0], "laenge": 4.0, "lagen": 6, "reihen": 2}
-  ],
-  "sandkegel": [[73.15, 2.6, 0.38, 0.12], [72.9, 5.0, 0.3, 0.1]],
-  "jersey": [
-    {"mitte": [67.0, -5.2], "richtung": 90}, {"mitte": [67.0, -1.5], "richtung": 92},
-    {"mitte": [70.0, 1.6], "richtung": 88}, {"mitte": [70.0, 5.3], "richtung": 90},
-    {"mitte": [65.0, -9.3], "richtung": 2}, {"mitte": [61.2, 9.4], "richtung": -4},
-    {"mitte": [69.5, -7.6], "richtung": 15}, {"mitte": [72.3, 8.0], "richtung": 70}
-  ],
-  "gabionen": [
-    {"mitte": [72.5, -6.3], "richtung": 90}, {"mitte": [72.5, -4.9], "richtung": 90},
-    {"mitte": [72.5, -3.5], "richtung": 90}, {"mitte": [72.5, -2.1], "richtung": 90}, {"mitte": [73.3, 9.6], "richtung": 0}
-  ],
-  "concertina": [
-    {"name": "West", "von": [63.5, -8.5], "bis": [63.5, 8.5], "riss": [7.5, 10.5], "riss_oben": [6.0, 12.0]},
-    {"name": "Vorne", "von": [72.9, -1.3], "bis": [72.9, 1.0]}
-  ],
-  "container": [{"mitte": [68.5, 9.7], "richtung": 0, "offen": true}, {"mitte": [64.5, -4.6], "richtung": 3}],
-  "zelte": [{"mitte": [84.0, -3.5], "richtung": 0}, {"mitte": [91.0, -3.0], "richtung": 4}],
-  "wachturm": [70.5, -11.0],
-  "kleinteile": {
-    "schranke": [72.2, -0.4],
-    "absperrgitter": [[75.5, -6.5, 0.3], [77.2, -6.0, 0.2], [64.0, 7.5, 1.5]],
-    "scheinwerfer": [74.6, -2.6],
-    "generator": [77.5, -4.0],
-    "kabeltrommeln": [[76.0, -7.2], [78.5, -6.8]]
+ "_info": "Checkpoint Variante A (Ortsausgang Ost, x 62-78). richtung = Ausrichtung der Laengsachse in Grad (0 = Osten, 90 = Norden). Masse siehe recherche/architektur.md.",
+ "seed": 31,
+ "sandsackwaende": [
+  {
+   "start": [
+    74.0,
+    1.2
+   ],
+   "richtung": [
+    0,
+    1
+   ],
+   "laenge": 5.0,
+   "lagen": 8,
+   "reihen": 2
   },
-  "schilder": [
-    {"text": "CHECKPOINT", "pos": [66.4, 1.0], "richtung": -90, "groesse": [2.4, 0.6], "hoehe": 1.6, "schrift": 0.34},
-    {"text": "STOP", "pos": [66.6, -3.4], "richtung": -90, "groesse": [1.0, 0.5], "hoehe": 0.98, "schrift": 0.3, "rot": true, "pfosten": false},
-    {"text": "QUARANTINE ZONE\nNO ENTRY", "pos": [63.0, 6.0], "richtung": -90, "groesse": [2.0, 0.8], "hoehe": 1.5, "schrift": 0.2, "kipp": 8, "rot": true}
+  {
+   "start": [
+    74.0,
+    6.2
+   ],
+   "richtung": [
+    1,
+    0
+   ],
+   "laenge": 1.5,
+   "lagen": 8,
+   "reihen": 2
+  },
+  {
+   "start": [
+    66.0,
+    -9.9
+   ],
+   "richtung": [
+    1,
+    0
+   ],
+   "laenge": 4.0,
+   "lagen": 6,
+   "reihen": 2
+  }
+ ],
+ "sandkegel": [
+  [
+   73.15,
+   2.6,
+   0.38,
+   0.12
   ],
-  "polyhaven": [["wooden_military_crate", 75.0, 6.6, 10], ["wooden_crate_01", 75.6, 7.5, -20], ["metal_jerrycan", 74.6, 5.0, 30],
-                ["plastic_jerrycan", 74.3, 5.7, 80], ["barrel_03", 75.2, 0.8, 0], ["Barrel_01", 76.8, -1.6, 15]]
+  [
+   72.9,
+   5.0,
+   0.3,
+   0.1
+  ]
+ ],
+ "jersey": [
+  {
+   "mitte": [
+    67.0,
+    -5.2
+   ],
+   "richtung": 90
+  },
+  {
+   "mitte": [
+    67.0,
+    -1.5
+   ],
+   "richtung": 92
+  },
+  {
+   "mitte": [
+    70.0,
+    1.6
+   ],
+   "richtung": 88
+  },
+  {
+   "mitte": [
+    70.0,
+    5.3
+   ],
+   "richtung": 90
+  },
+  {
+   "mitte": [
+    65.0,
+    -9.3
+   ],
+   "richtung": 2
+  },
+  {
+   "mitte": [
+    61.2,
+    9.4
+   ],
+   "richtung": -4
+  },
+  {
+   "mitte": [
+    69.5,
+    -7.6
+   ],
+   "richtung": 15
+  },
+  {
+   "mitte": [
+    72.3,
+    8.0
+   ],
+   "richtung": 70
+  }
+ ],
+ "gabionen": [
+  {
+   "mitte": [
+    72.5,
+    -6.3
+   ],
+   "richtung": 90
+  },
+  {
+   "mitte": [
+    72.5,
+    -4.9
+   ],
+   "richtung": 90
+  },
+  {
+   "mitte": [
+    72.5,
+    -3.5
+   ],
+   "richtung": 90
+  },
+  {
+   "mitte": [
+    72.5,
+    -2.1
+   ],
+   "richtung": 90
+  },
+  {
+   "mitte": [
+    73.3,
+    9.6
+   ],
+   "richtung": 0
+  }
+ ],
+ "concertina": [
+  {
+   "name": "West",
+   "von": [
+    63.5,
+    -8.5
+   ],
+   "bis": [
+    63.5,
+    8.5
+   ],
+   "riss": [
+    7.5,
+    10.5
+   ],
+   "riss_oben": [
+    6.0,
+    12.0
+   ]
+  },
+  {
+   "name": "Vorne",
+   "von": [
+    72.9,
+    -1.3
+   ],
+   "bis": [
+    72.9,
+    1.0
+   ]
+  }
+ ],
+ "container": [
+  {
+   "mitte": [
+    68.5,
+    9.7
+   ],
+   "richtung": 0,
+   "offen": true
+  },
+  {
+   "mitte": [
+    64.5,
+    -4.6
+   ],
+   "richtung": 3
+  }
+ ],
+ "zelte": [
+  {
+   "mitte": [
+    84.0,
+    -3.5
+   ],
+   "richtung": 0
+  },
+  {
+   "mitte": [
+    91.0,
+    -3.0
+   ],
+   "richtung": 4
+  }
+ ],
+ "wachturm": [
+  70.5,
+  -11.0
+ ],
+ "kleinteile": {
+  "schranke": [
+   72.2,
+   -0.4
+  ],
+  "absperrgitter": [
+   [
+    75.5,
+    -6.5,
+    0.3
+   ],
+   [
+    77.2,
+    -6.0,
+    0.2
+   ],
+   [
+    64.0,
+    7.5,
+    1.5
+   ]
+  ],
+  "scheinwerfer": [
+   74.6,
+   -2.6
+  ],
+  "generator": [
+   77.5,
+   -4.0
+  ],
+  "kabeltrommeln": [
+   [
+    76.0,
+    -7.2
+   ],
+   [
+    78.5,
+    -6.8
+   ]
+  ]
+ },
+ "schilder": [
+  {
+   "text": "CHECKPOINT",
+   "pos": [
+    66.4,
+    1.0
+   ],
+   "richtung": -90,
+   "groesse": [
+    2.4,
+    0.6
+   ],
+   "hoehe": 1.6,
+   "schrift": 0.34
+  },
+  {
+   "text": "STOP",
+   "pos": [
+    66.6,
+    -3.4
+   ],
+   "richtung": -90,
+   "groesse": [
+    1.0,
+    0.5
+   ],
+   "hoehe": 0.98,
+   "schrift": 0.3,
+   "rot": true,
+   "pfosten": false
+  },
+  {
+   "text": "QUARANTINE ZONE\nNO ENTRY",
+   "pos": [
+    63.0,
+    6.0
+   ],
+   "richtung": -90,
+   "groesse": [
+    2.0,
+    0.8
+   ],
+   "hoehe": 1.5,
+   "schrift": 0.2,
+   "kipp": 8,
+   "rot": true
+  }
+ ],
+ "polyhaven": [
+  [
+   "wooden_military_crate",
+   75.0,
+   6.6,
+   10
+  ],
+  [
+   "wooden_crate_01",
+   75.6,
+   7.5,
+   -20
+  ],
+  [
+   "metal_jerrycan",
+   74.6,
+   5.0,
+   30
+  ],
+  [
+   "plastic_jerrycan",
+   74.3,
+   5.7,
+   80
+  ],
+  [
+   "barrel_03",
+   75.2,
+   0.8,
+   0
+  ],
+  [
+   "Barrel_01",
+   76.8,
+   -1.6,
+   15
+  ]
+ ],
+ "extras": {
+  "sandsackwaende": [
+   {
+    "start": [
+     76.2,
+     -5.2
+    ],
+    "richtung": [
+     1,
+     0
+    ],
+    "laenge": 2.5,
+    "lagen": 5
+   },
+   {
+    "start": [
+     71.6,
+     -6.9
+    ],
+    "richtung": [
+     0,
+     1
+    ],
+    "laenge": 4.2,
+    "lagen": 2,
+    "reihen": 1
+   },
+   {
+    "start": [
+     65.5,
+     8.4
+    ],
+    "richtung": [
+     1,
+     0
+    ],
+    "laenge": 3.0,
+    "lagen": 6
+   }
+  ],
+  "kistenstapel": [
+   [
+    75.8,
+    7.6,
+    3,
+    0.2
+   ],
+   [
+    76.8,
+    7.2,
+    2,
+    -0.4
+   ],
+   [
+    77.6,
+    -2.9,
+    2,
+    0.1
+   ],
+   [
+    69.3,
+    8.1,
+    2,
+    1.2
+   ]
+  ],
+  "kisten_text": [
+   [
+    75.1,
+    6.0,
+    0.3,
+    "RATIONS"
+   ],
+   [
+    74.7,
+    -5.9,
+    1.4,
+    "MEDICAL"
+   ],
+   [
+    77.9,
+    6.4,
+    -0.2,
+    "WATER"
+   ]
+  ],
+  "schlafsaecke": [
+   [
+    83.0,
+    -1.4,
+    0.2
+   ],
+   [
+    85.2,
+    -1.1,
+    -0.3
+   ],
+   [
+    76.5,
+    4.8,
+    1.4
+   ]
+  ],
+  "feldbetten": [
+   [
+    80.5,
+    0.8,
+    0.1
+   ],
+   [
+    87.6,
+    0.6,
+    -0.15
+   ]
+  ],
+  "feuerstelle": [
+   79.2,
+   -1.8
+  ],
+  "waescheleine": [
+   [
+    71.4,
+    11.0
+   ],
+   [
+    76.4,
+    11.0
+   ]
+  ],
+  "plane_unterstand": [
+   75.0,
+   10.3,
+   0.0
+  ],
+  "kabel": [
+   [
+    [
+     77.5,
+     -4.0
+    ],
+    [
+     74.6,
+     -2.6
+    ]
+   ],
+   [
+    [
+     77.5,
+     -4.0
+    ],
+    [
+     71.6,
+     9.5
+    ]
+   ],
+   [
+    [
+     77.5,
+     -4.0
+    ],
+    [
+     84.0,
+     -1.0
+    ]
+   ]
+  ],
+  "helme": [
+   [
+    73.3,
+    -0.8
+   ],
+   [
+    78.4,
+    -5.6
+   ],
+   [
+    66.2,
+    4.4
+   ]
+  ],
+  "schablonen": [
+   [
+    71.52,
+    9.7,
+    1.5708,
+    "QUARANTINE",
+    [
+     0.32,
+     1.6
+    ]
+   ],
+   [
+    67.33,
+    -1.5,
+    -1.5708,
+    "TURN BACK",
+    [
+     0.18,
+     0.55
+    ]
+   ],
+   [
+    70.33,
+    5.3,
+    -1.5708,
+    "NO ENTRY",
+    [
+     0.16,
+     0.55
+    ]
+   ]
+  ]
+ }
 }
