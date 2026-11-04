@@ -27,8 +27,7 @@
      "typen": [
       "C",
       "F",
-      "A",
-      "E"
+      "A"
      ],
      "richtung": 0
     },
@@ -37,8 +36,7 @@
      "x_vorne": 61.0,
      "typen": [
       "H",
-      "A",
-      "B"
+      "A"
      ],
      "richtung": 0
     },
@@ -404,10 +402,10 @@
     {
      "typ": "S",
      "pos": [
-      36.8,
-      -1.6
+      44.5,
+      -1.2
      ],
-     "richtung": 32,
+     "richtung": 30,
      "farbe": "Schulbus_Gelb",
      "zustand": {
       "tueren": {

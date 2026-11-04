@@ -150,9 +150,9 @@ def material_altern(mat, art, rnd):
         hsv.inputs["Color"].default_value = b.inputs["Base Color"].default_value
     if art == "haut":
         hsv.inputs["Saturation"].default_value = 0.30
-        hsv.inputs["Value"].default_value = 0.78
-        farbe = V._mix_rgb(nt, 0.42, hsv.outputs["Color"], V.hex_lin("#8D9282"))
-        fleck = V._maprange(nt, V._noise(nt, P, 9.0, 6.0, 0.6), 0.45, 0.7, 0.0, 0.55)
+        hsv.inputs["Value"].default_value = 0.55
+        farbe = V._mix_rgb(nt, 0.40, hsv.outputs["Color"], V.hex_lin("#6E7366"))
+        fleck = V._maprange(nt, V._noise(nt, P, 9.0, 6.0, 0.6), 0.40, 0.7, 0.0, 0.65)
         farbe = V._mix_rgb(nt, fleck, farbe, V.hex_lin("#5A5346"))
         rau = 0.62
     elif art == "haar":
@@ -162,9 +162,9 @@ def material_altern(mat, art, rnd):
         rau = 0.8
     else:
         hsv.inputs["Saturation"].default_value = 0.45
-        hsv.inputs["Value"].default_value = 0.72
-        farbe = V._mix_rgb(nt, 0.25, hsv.outputs["Color"], V.hex_lin("#857D6E"))
-        fleck = V._maprange(nt, V._noise(nt, P, 3.5, 6.0, 0.65), 0.5, 0.72, 0.0, 0.7)
+        hsv.inputs["Value"].default_value = 0.50
+        farbe = V._mix_rgb(nt, 0.30, hsv.outputs["Color"], V.hex_lin("#5E574B"))
+        fleck = V._maprange(nt, V._noise(nt, P, 3.5, 6.0, 0.65), 0.45, 0.72, 0.0, 0.8)
         farbe = V._mix_rgb(nt, fleck, farbe, V.hex_lin("#3F382F"))
         # Loecher / Fetzen
         loch = V._maprange(nt, V._noise(nt, P, 6.0, 8.0, 0.7, 0.3), 0.66, 0.70, 1.0, 0.0)

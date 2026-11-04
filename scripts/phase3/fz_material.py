@@ -30,6 +30,15 @@ def _tex(nt, asset_mat, muster, nicht_farbe, skala):
     return t.outputs["Color"]
 
 
+def _vec_streck(nt, P):
+    """Position senkrecht gestreckt (fuer Wasser-/Schmutzschlieren)."""
+    vm = nt.nodes.new("ShaderNodeVectorMath")
+    vm.operation = "MULTIPLY"
+    nt.links.new(P, vm.inputs[0])
+    vm.inputs[1].default_value = (1.0, 1.0, 0.12)
+    return vm.outputs[0]
+
+
 def _geo(nt):
     g = nt.nodes.new("ShaderNodeNewGeometry")
     sep = nt.nodes.new("ShaderNodeSeparateXYZ")
@@ -83,24 +92,31 @@ def lack(name, hexf, metallic=0.0, matt=False):
                _m(nt, "MULTIPLY", _mr(nt, _n(nt, P, 12.0, 6.0, 0.6), 0.73, 0.76), oben))
     rmask = _m(nt, "MULTIPLY", rmask, _mr(nt, alter, 0.3, 1.0), clamp=True)
     farbe = _mix(nt, rmask, farbe, rost_t)
+    # Schmutzfilm: Staub/Russ-Schleier ueberall (staerker unten und auf waagerechten Flaechen), Schmutzschlieren
+    film = _m(nt, "MULTIPLY", _mr(nt, _n(nt, P, 1.8, 6.0, 0.62), 0.35, 0.75, 0.15, 0.55), _m(nt, "ADD", 0.4, alter), clamp=True)
+    film = _m(nt, "MAXIMUM", film, _m(nt, "MULTIPLY", _mr(nt, hoch, 0.9, 0.15), 0.75))
+    schliere = _m(nt, "MULTIPLY", _mr(nt, _n(nt, _vec_streck(nt, P), 4.0, 5.0, 0.6), 0.55, 0.72), _mr(nt, Nz, 0.4, 0.05))
+    farbe = _mix(nt, _m(nt, "MULTIPLY", film, 0.65), farbe, V.hex_lin("#7A7262"))
+    farbe = _mix(nt, _m(nt, "MULTIPLY", schliere, 0.5), farbe, V.hex_lin("#4E4639"))
     rau = _m(nt, "ADD", 0.32, _m(nt, "MULTIPLY", kl, 0.4))
     rau = _m(nt, "MAXIMUM", rau, _m(nt, "MULTIPLY", rmask, 0.9))
+    rau = _m(nt, "ADD", rau, _m(nt, "MULTIPLY", film, 0.35), clamp=True)
     # Klarlack-Schicht: weg bei Schaden und Rost, sonst stumpfer
     coat = _m(nt, "MULTIPLY", _m(nt, "SUBTRACT", 1.0, _m(nt, "MAXIMUM", kl, rmask)),
               _m(nt, "SUBTRACT", 1.0, _m(nt, "MULTIPLY", _m(nt, "MULTIPLY", alter, oben), 0.55)), clamp=True)
     if matt:
         coat = 0.0
         rau = _m(nt, "ADD", rau, 0.38, clamp=True)
-    _l(nt, coat, b.inputs["Coat Weight"])
+    _l(nt, _m(nt, "MULTIPLY", coat, _m(nt, "SUBTRACT", 1.0, _m(nt, "MULTIPLY", film, 0.8)), clamp=True) if not isinstance(coat, float) else coat, b.inputs["Coat Weight"])
     _l(nt, _m(nt, "ADD", 0.06, _m(nt, "MULTIPLY", alter, 0.3)), b.inputs["Coat Roughness"])
     met = _m(nt, "MULTIPLY", metallic, _m(nt, "SUBTRACT", 1.0, _m(nt, "MAXIMUM", rmask, _m(nt, "MULTIPLY", kl, 0.6))), clamp=True)
     _l(nt, met, b.inputs["Metallic"])
-    # leichte Dellen/Welligkeit + erhabene Rostblasen
+    # Dellen/Welligkeit + erhabene Rostblasen
     bump = nt.nodes.new("ShaderNodeBump")
-    bump.inputs["Strength"].default_value = 0.06
+    bump.inputs["Strength"].default_value = 0.12
     bump.inputs["Distance"].default_value = 0.01
     nt.links.new(_m(nt, "ADD", _m(nt, "MULTIPLY", _n(nt, P, 3.0, 2.0), 0.5), rmask), bump.inputs["Height"])
-    _ende(nt, b, farbe, rau, bump.outputs["Normal"], 0.5, "#8E8A82")  # Kanten: Grundierung statt Rost (Rost kommt aus der eigenen Maske)
+    _ende(nt, b, farbe, rau, bump.outputs["Normal"], 0.8, "#8E8A82")  # Kanten: Grundierung statt Rost (Rost kommt aus der eigenen Maske)
     return m
 
 

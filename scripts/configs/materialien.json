@@ -681,6 +681,20 @@
    "farbe": "#3E4A33",
    "farbe_gain": 2.0,
    "lokal": 0.3
+  },
+  "MAT_Panzer_Tarn": {
+   "basis": "MAT_Metall_Lackiert",
+   "farbe": "#5C5F45",
+   "farbe_gain": 2.4,
+   "kantenfarbe": "#6E5A40",
+   "groesse_m": [
+    0.55,
+    0.55
+   ],
+   "normal": 1.0,
+   "bump": 0.5,
+   "lokal": 1.3,
+   "variation": 0.14
   }
  }
 }

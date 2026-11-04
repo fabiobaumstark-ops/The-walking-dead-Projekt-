@@ -31,7 +31,7 @@ def cfg():
 
 def mats():
     return {
-        "tarn": V.material("MAT_Lack_Oliv"),
+        "tarn": V.material("MAT_Panzer_Tarn"),
         "rost": V.material("MAT_Rost_Dunkel"),
         "rost_hell": V.material("MAT_Rost_Hell"),
         "gummi": V.material("MAT_Gummi"),
@@ -205,6 +205,19 @@ def bauen(name, C, col, rnd, opt):
             ZY(bm, (x, s * 0.9 - 0.06, z), (x, s * 0.9 + 0.06, z), 0.06, 10, 2)
             Q(bm, (x - 0.06 * (1 if x > 0 else -1), s * 0.9, z + 0.06), (0.12, 0.16, 0.06), 0)
         Q(bm, (-3.93, s * 1.45, deck - 0.2), (0.06, 0.25, 0.18), 0)
+    # Schweissnaehte an Bug und Seiten, Schraubenreihe auf der Schuerzenoberkante, Deckel/Klappen auf dem Motordeck
+    for s in (1, -1):
+        ZY(bm, (3.88, s * 1.74, spz), (2.15, s * 1.74, deck), 0.014, 5, 0)
+        ZY(bm, (2.15, s * 1.74, deck), (-3.82, s * 1.74, deck), 0.012, 5, 0)
+        ZY(bm, (3.70, s * 1.09, 0.95), (3.40, s * 1.09, 0.48), 0.014, 5, 0)
+        for k in range(26):
+            x = 3.55 - k * 0.265
+            ZY(bm, (x, s * 1.755, spz - 0.02), (x, s * 1.79, spz - 0.02), 0.018, 6, 0)
+    for x0_, y0_ in ((-0.6, 0.85), (-0.6, -0.85), (1.4, 1.2), (1.4, -1.2)):
+        Q(bm, (x0_, y0_, deck + 0.012), (0.75, 0.55, 0.025), 0)
+        for dx in (-0.33, 0.33):
+            for dy in (-0.23, 0.23):
+                ZY(bm, (x0_ + dx, y0_ + dy, deck + 0.02), (x0_ + dx, y0_ + dy, deck + 0.04), 0.016, 6, 0)
     hull = OB(f"{name}_Wanne", bm, col, [M["tarn"], M["dunkel"], M["rost"]], root)
     _fase(hull, 0.025, 2)
     # Fahrerluke, Winkelspiegel, Scheinwerfer mit Schutzgitter
@@ -398,6 +411,25 @@ def turm_bauen(name, C, col, M, opt, rnd):
         Q(bm, (-1.15, s * 1.70, 0.45), (1.1, 0.16, 0.36), 0)
         for x in (0.6, -0.9, -1.9):
             ZY(bm, (x, s * 1.55, h + 0.0), (x, s * 1.55, h + 0.07), 0.035, 8, 0)  # Haken
+    # Zusatzpanzerung an den Turmseiten (Module mit Schraubenreihen), Schweissnaehte an der Turmkante
+    for s in (1, -1):
+        for k, (x0_, x1_) in enumerate(((1.30, 0.45), (0.40, -0.45))):
+            yy = s * (1.60 + 0.06 * (1 - k)) + s * 0.03
+            Q(bm, ((x0_ + x1_) / 2, yy, 0.42), (abs(x1_ - x0_) - 0.04, 0.07, 0.62), 0)
+            for i in range(5):
+                for zz in (0.16, 0.68):
+                    xb = x1_ + (x0_ - x1_) * (i + 0.5) / 5
+                    ZY(bm, (xb, yy + s * 0.035, zz), (xb, yy + s * 0.05, zz), 0.018, 6, 0)
+    for (xa_, ya_), (xb_, yb_) in zip(oben + oben[:1], oben[1:] + oben[:1]):
+        ZY(bm, (xa_, ya_, h + 0.004), (xb_, yb_, h + 0.004), 0.012, 5, 0)
+    for k in range(18):  # Schrauben am Dachrand
+        t = k / 18
+        i = int(t * len(oben))
+        xa_, ya_ = oben[i]
+        xb_, yb_ = oben[(i + 1) % len(oben)]
+        u = t * len(oben) - i
+        x_, y_ = xa_ + (xb_ - xa_) * u, ya_ + (yb_ - ya_) * u
+        ZY(bm, (x_ * 0.95, y_ * 0.95, h), (x_ * 0.95, y_ * 0.95, h + 0.02), 0.02, 6, 0)
     body = OB(f"{name}_Turm_Koerper", bm, col, [M["tarn"], M["dunkel"]], tr)
     _fase(body, 0.03, 2, 30)
     # Luken-Ausschnitte (Bool) -> man sieht durch die offenen Luken ins dunkle Innere
