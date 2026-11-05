@@ -44,6 +44,9 @@ MAT_Sitzstoff                textur  Poly Haven CC0 1.0 colormass, Rico Cilliers
 MAT_Leder                    textur  Poly Haven CC0 1.0 Rob Tuytel / https://polyhaven.com/a/brown_leather
 MAT_Rost_Blech               textur  Poly Haven CC0 1.0 Amal Kumar / https://polyhaven.com/a/rusty_metal_04
 MAT_Blech_Rostflecken        textur  Poly Haven CC0 1.0 Amal Kumar / https://polyhaven.com/a/rusty_metal_sheet
+MAT_Blatt_Efeu_A             textur  ambientCG  CC0 1.0 ambientCG (Lennart Demes) / https://ambientcg.com/view?id=LeafSet017
+MAT_Blatt_Efeu_B             textur  ambientCG  CC0 1.0 ambientCG (Lennart Demes) / https://ambientcg.com/view?id=LeafSet029
+MAT_Blatt_Wein               textur  ambientCG  CC0 1.0 ambientCG (Lennart Demes) / https://ambientcg.com/view?id=LeafSet024
 HDRI_Haupt                   hdri    Poly Haven CC0 1.0 Greg Zaal, Jenelle van Heerden / https://polyhaven.com/a/kloofendal_28d_misty_puresky
 HDRI_Haupt                   hdri    Poly Haven CC0 1.0 Greg Zaal, Jenelle van Heerden / https://polyhaven.com/a/kloofendal_28d_misty_puresky
 HDRI_Alternative             hdri    Poly Haven CC0 1.0 Greg Zaal, Jarod Guest / https://polyhaven.com/a/kloofendal_38d_partly_cloudy_puresky
@@ -79,6 +82,15 @@ fern_02                      modell  Poly Haven CC0 1.0 Rob Tuytel, Rico Cillier
 concrete_road_barrier        modell  Poly Haven CC0 1.0 Amal Kumar / https://polyhaven.com/a/concrete_road_barrier
 modular_chainlink_fence      modell  Poly Haven CC0 1.0 James Ray Cock, Amal Kumar / https://polyhaven.com/a/modular_chainlink_fence
 utility_box_01               modell  Poly Haven CC0 1.0 James Ray Cock / https://polyhaven.com/a/utility_box_01
+island_tree_01               modell  Poly Haven CC0 1.0 Rob Tuytel, Rico Cilliers / https://polyhaven.com/a/island_tree_01
+island_tree_02               modell  Poly Haven CC0 1.0 Rob Tuytel, Rico Cilliers / https://polyhaven.com/a/island_tree_02
+tree_small_02                modell  Poly Haven CC0 1.0 Rico Cilliers / https://polyhaven.com/a/tree_small_02
+dandelion_01                 modell  Poly Haven CC0 1.0 Rob Tuytel, Rico Cilliers / https://polyhaven.com/a/dandelion_01
+celandine_01                 modell  Poly Haven CC0 1.0 Rob Tuytel, Rico Cilliers / https://polyhaven.com/a/celandine_01
+periwinkle_plant             modell  Poly Haven CC0 1.0 Amal Kumar / https://polyhaven.com/a/periwinkle_plant
+flower_gazania               modell  Poly Haven CC0 1.0 James Ray Cock, Jenelle van Heerden / https://polyhaven.com/a/flower_gazania
+moss_01                      modell  Poly Haven CC0 1.0 Rob Tuytel / https://polyhaven.com/a/moss_01
+shrub_sorrel_01              modell  Poly Haven CC0 1.0 Rico Cilliers / https://polyhaven.com/a/shrub_sorrel_01
 MPFB_Systemassets            paket   MakeHuman  CC0 1.0 MakeHuman Community / https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html
 
 Selbst gebaut (keine externe Lizenz): Asphaltschindeln (keine CC0-Fototextur gefunden: prozedurale Schindel-Geometrie + Fotobasis tarred_gravel); Betontruemmer; Ziegelhaufen; Bretter; Paletten
