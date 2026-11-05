@@ -66,7 +66,7 @@
    - dann 8 Grundmodelle bauen und ZWISCHEN-STOPP zur Freigabe
 
 ## Offene Fragen an den Nutzer
-- Freigabe-Fragen Phase 3 (1–6): Flotte, Panzer A, Hubschrauber, Geschichte, Figuren, einheitlicher Look
+- keine (Phase 3: Nacharbeit 2B/3B läuft, danach STOPP vor Phase 4)
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL
@@ -99,6 +99,7 @@
 - ZWISCHEN-STOPP 3.1.11 (Grundmodelle A–H) freigegeben: „das passt“ (2026-11-04) → weiter mit Flotte, Schäden, Sonderfahrzeugen, Militär, Figuren
 - Neu: A13 Hintergrund-Ring (AUFTRAG.md). Silhouetten und Gelände in Phase 2, Bäume in Phase 4, Dunst in Phase 5.
   Nach Phase 2 mit CAM_Hero_02 auf leere Horizontstellen prüfen
+- Phase-3-Fragen (2026-11-05): alle Empfehlungen – 1A Flotte ok, 2B Panzerturm aus der Nähe weniger glatt (Dellen, Abplatzer, Schmutz), 3B Hubschrauberrumpf detaillierter (Nieten, Blechstöße, Dellen, Klappen), 4A Geschichte ok, 5A Figuren ok, 6A Look ok (Ausreißer über 2B/3B)
 
 ## Ausgeführte Skripte (Reihenfolge, alle im Repo-Hauptordner)
 1. `python3 scripts/phase1/make_manifest.py`
