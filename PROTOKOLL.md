@@ -445,3 +445,9 @@
 | Licht & Stimmung | 4 | Unverändert flach (Phase 5: Gegenlicht, Dunst, Grading) |
 | Komposition | 7 | CAM 1 erfüllt die Look-Bible (Panzer links, Stau, Hubschrauber oben rechts). CAM 4 ist durch den hängenden Heckausleger unruhig |
 | Glaubwürdigkeit der Geschichte | 8 | Flucht-Stau mit offenen Türen, Unfallkette, Plünderung, verlassene Polizeisperre, Absturz mit Trümmerfeld |
+
+## Lokale Einrichtung Mac (2026-11-05)
+- Apple M4 Pro, 12 Kerne, 24 GB RAM, macOS 27.0; Metal-GPU (16 Kerne) erkannt
+- Blender 5.2.3 LTS installiert (neben vorhandenem 5.1.0), SHA256 geprüft
+- `python3 download_assets.py --nur-basis`: 356 Dateien, 0 Fehler
+- Fehler gefunden: 13 Bilder in viertel_v04.blend hatten absolute Cloud-Pfade (Leder, Sitzstoff, Rostblech; Verstoß gegen A3) → auf relativ umgestellt, 0 fehlende Texturen

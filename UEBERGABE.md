@@ -5,6 +5,7 @@
 - **.blend-Version:** `viertel_v04.blend` (Phase 3, 70,7 MB, Freigabe B: eine große Datei); Vorversion `viertel_v03.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
+- **Lokal (Mac, 2026-11-05):** Blender 5.2.3 LTS unter /Applications/Blender-5.2.3.app, Metal-GPU (M4 Pro, 16 Kerne) erkannt, Assets geladen (356 Dateien, 1,7 GB)
 
 ## Fertig
 - Phase 0: AUFTRAG.md, PROTOKOLL.md, recherche/ (RECHERCHE.md, architektur.md, vegetation.md, moodboard.html, LOOK_BIBLE.md v1.0 – bestätigt)
@@ -115,3 +116,4 @@
 13. MakeHuman-Systemassets (CC0) für MPFB: `download_assets.py` lädt sie nach assets/mpfb (Texturen entpackt nach assets/mpfb/data); für den Figuren-Neubau das Zip zusätzlich in den MPFB-Benutzerordner entpacken (…/extensions/.user/user_default/mpfb/data)
 14. `blender -b viertel_v03.blend --python scripts/phase3/build_phase3.py -- --version 04` (ohne --factory-startup, MPFB muss aktiv sein) → viertel_v04.blend
 15. `blender -b viertel_v04.blend --python scripts/phase1/render_blockout.py -- --prefix phase3 --nur CAM_Hero_01,CAM_Hero_02,CAM_Hero_03,CAM_Hero_04,draufsicht`
+16. Mac, 2026-11-05: 13 absolute Bildpfade (/home/user/…) in viertel_v04.blend auf relativ (//assets/…) umgestellt, per Python-Einzeiler in Blender 5.2.3; danach 303 Bilder, 0 fehlend, 0 absolut
