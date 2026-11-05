@@ -20,6 +20,7 @@ sys.path.insert(0, os.path.join(HIER, "..", "lib"))
 sys.path.insert(0, HIER)
 import viertel_lib as V  # noqa: E402
 import fz_material as FM  # noqa: E402
+import mil_detail as MD  # noqa: E402
 import fz_teile as FT  # noqa: E402
 
 Q, ZY, OB = FT.quader, FT.zylinder, FT.objekt
@@ -31,7 +32,7 @@ def cfg():
 
 def mats():
     return {
-        "tarn": V.material("MAT_Panzer_Tarn"),
+        "tarn": MD.lack_veredeln(V.material("MAT_Panzer_Tarn")),  # 2B: Abplatzer, Schmutz, Dellen-Bump
         "rost": V.material("MAT_Rost_Dunkel"),
         "rost_hell": V.material("MAT_Rost_Hell"),
         "gummi": V.material("MAT_Gummi"),
@@ -403,7 +404,13 @@ def turm_bauen(name, C, col, M, opt, rnd):
     tr = bpy.data.objects.new(f"{name}_Turm", None)
     col.objects.link(tr)
     bm = bmesh.new()
-    loft2(bm, unten, oben, 0.0, h, 0)
+    schale = loft2(bm, unten, oben, 0.0, h, 0)
+    # 2B: Turmschale unterteilen und verbeulen (Rand unten/oben bleibt, eigener Seed -> Bau-Zufall unveraendert)
+    pd = MD.cfg()["turm_dellen"]
+    MD.unterteilen(bm, schale[2:], pd["unterteilung"])
+    sv = list(bm.verts)
+    MD.dellen(bm, sv, MD.rnd(1 if name.endswith("_A") else 2), pd,
+              fest=[v for v in sv if v.co.z < 0.03 or v.co.z > h - 0.03])
     # Turmring-Kragen unten
     ZY(bm, (0, 0, -0.06), (0, 0, 0.02), 1.15, 40, 0)
     # Staukaesten an den Seiten

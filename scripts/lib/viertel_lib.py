@@ -233,7 +233,7 @@ def _attr(nt, name, typ="VIEW_LAYER"):
 def verwitterung_gruppe():
     """Shader-Gruppe MAT_Verwitterung (Teil A10, Punkt 2). Durchlaeuft JEDES Material."""
     if "MAT_Verwitterung" in bpy.data.node_groups:
-        return bpy.data.node_groups["MAT_Verwitterung"]
+        return flechten_eingang(bpy.data.node_groups["MAT_Verwitterung"])
     vc = config("materialien.json")["verwitterung"]
     ng = bpy.data.node_groups.new("MAT_Verwitterung", "ShaderNodeTree")
     itf = ng.interface
@@ -384,6 +384,29 @@ def verwitterung_gruppe():
     nt.links.new(farbe, go.inputs["Farbe"])
     nt.links.new(rau, go.inputs["Rauheit"])
     nt.links.new(gi.outputs["Normale"], go.inputs["Normale"])
+    return flechten_eingang(ng)
+
+
+def flechten_eingang(ng):
+    """Eingang 'Flechten' (Standard 1.0 = unveraendert) fuer MAT_Verwitterung nachruesten: schwaecht die Flechten-Ebene
+    pro Material ab (z. B. Militaerlack). Ruestet auch Gruppen aelterer .blend-Dateien nach."""
+    if "Flechten" in ng.interface.items_tree:
+        return ng
+    s = ng.interface.new_socket("Flechten", in_out="INPUT", socket_type="NodeSocketFloat")
+    s.default_value, s.min_value, s.max_value = 1.0, 0.0, 2.0
+    gi = next(n for n in ng.nodes if n.type == "GROUP_INPUT")
+    ziel = hex_lin("#A3A88E")
+    for n in ng.nodes:
+        if n.bl_idname != "ShaderNodeMix" or n.data_type != "RGBA":
+            continue
+        b = _sock(n.inputs, "B_Color")
+        if b.is_linked or any(abs(b.default_value[i] - ziel[i]) > 1e-4 for i in range(3)):
+            continue
+        f = _sock(n.inputs, "Factor_Float")
+        quelle = f.links[0].from_socket
+        mul = _math(ng, "MULTIPLY", quelle, gi.outputs["Flechten"], clamp=True)
+        ng.links.new(mul, f)
+        break
     return ng
 
 

@@ -1,8 +1,8 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 3 abgeschlossen → wartet auf Freigabe (Fragen 1–6 unten)
+- **Aktuelle Phase:** Phase 3 freigegeben (2026-11-05), Nacharbeit 2B/3B fertig → STOPP, wartet auf „weiter“ für Phase 4
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
-- **.blend-Version:** `viertel_v04.blend` (Phase 3, 70,7 MB, Freigabe B: eine große Datei); Vorversion `viertel_v03.blend`
+- **.blend-Version:** `viertel_v05.blend` (Phase 3 + Nacharbeit 2B/3B, 72,7 MB, Freigabe B: eine große Datei); Vorversion `viertel_v04.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 - **Lokal (Mac, 2026-11-05):** Blender 5.2.3 LTS unter /Applications/Blender-5.2.3.app, Metal-GPU (M4 Pro, 16 Kerne) erkannt, Assets geladen (356 Dateien, 1,7 GB)
@@ -57,16 +57,13 @@
   - Kirche und Lagerhalle noch ohne echte Fensteröffnungen
 
 ## Nächster konkreter Schritt
-1. Neue Sitzung: Blender 5.2.3 installieren, `python3 download_assets.py --nur-basis`.
-2. Antworten auf die Phase-2-Fragen einarbeiten (Configs in scripts/configs/, neu bauen mit
-   `blender -b --factory-startup --python scripts/phase2/build_phase2.py -- --version 03`).
-3. Danach Phase 3 laut AUFTRAG.md:
-   - zuerst Fahrzeug-Recherche 3.1.0 → recherche/fahrzeuge.md
-   - Militär-Recherche → recherche/militaer.md
-   - dann 8 Grundmodelle bauen und ZWISCHEN-STOPP zur Freigabe
+1. Auf „weiter“ warten, dann Phase 4 (Vegetation & Material-Feinschliff) laut AUFTRAG.md, Teil B, Phase 4 – ohne parallele Agenten.
+2. Ausgangsdatei: `viertel_v05.blend`. Lokal auf dem Mac: `/Applications/Blender-5.2.3.app/Contents/MacOS/Blender`, Assets liegen in assets/.
+3. Vorschau-Licht steckt nicht in der .blend (kommt erst in Phase 5): Renders über `scripts/phase1/render_blockout.py` oder `scripts/phase3/render_nah.py`, die es selbst anlegen.
+4. Bekannt offen (Qualitätsrunde): Militär-Lkw und übrige Fahrzeuge haben weiter die hellen Flechten-Flecken; bei Bedarf dort ebenfalls Eingang „Flechten“ der Gruppe MAT_Verwitterung senken.
 
 ## Offene Fragen an den Nutzer
-- keine (Phase 3: Nacharbeit 2B/3B läuft, danach STOPP vor Phase 4)
+- Start Phase 4 („weiter“)
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL
@@ -118,3 +115,5 @@
 14. `blender -b viertel_v03.blend --python scripts/phase3/build_phase3.py -- --version 04` (ohne --factory-startup, MPFB muss aktiv sein) → viertel_v04.blend
 15. `blender -b viertel_v04.blend --python scripts/phase1/render_blockout.py -- --prefix phase3 --nur CAM_Hero_01,CAM_Hero_02,CAM_Hero_03,CAM_Hero_04,draufsicht`
 16. Mac, 2026-11-05: 13 absolute Bildpfade (/home/user/…) in viertel_v04.blend auf relativ (//assets/…) umgestellt, per Python-Einzeiler in Blender 5.2.3; danach 303 Bilder, 0 fehlend, 0 absolut
+17. Nacharbeit 2B/3B: `blender -b viertel_v04.blend --python scripts/phase3/nacharbeit_militaer.py -- --version 05` (baut nur 05_Militaer neu; Parameter militaer.json → "detail") → viertel_v05.blend
+18. `blender -b viertel_v05.blend --python scripts/phase3/render_nah.py -- --prefix phase3b` und `blender -b viertel_v05.blend --python scripts/phase1/render_blockout.py -- --prefix phase3b --nur CAM_Hero_01,CAM_Hero_02,CAM_Hero_03,CAM_Hero_04`

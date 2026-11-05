@@ -20,6 +20,7 @@ import fz_karosserie as K  # noqa: E402
 import fz_material as FM  # noqa: E402
 import fz_schaden as FS  # noqa: E402
 import fz_teile as FT  # noqa: E402
+import mil_detail as MD  # noqa: E402
 
 Q, ZY, OB = FT.quader, FT.zylinder, FT.objekt
 
@@ -33,7 +34,7 @@ BRUCH_X = -4.1
 
 def mats():
     return {
-        "lack": FM.lack("Heli_Oliv", "#474B39", 0.0, matt=True),
+        "lack": MD.lack_veredeln(MD.blech_naehte(FM.lack("Heli_Oliv", "#474B39", 0.0, matt=True))),  # 3B
         "dunkel": FM.dunkel(),
         "glas": FM.autoglas(),
         "russ": V.mat_russ() if hasattr(V, "mat_russ") else FM.dunkel(),
@@ -162,6 +163,10 @@ def bauen(name, col, rnd, opt):
             vs.append(karte[v])
         gbm.faces.new(vs)
     bmesh.ops.delete(bm, geom=glas, context="FACES")
+    # 3B: Dellen im Rumpfblech (nicht an Fenster-/Tuerkanten und Kappen, damit Glas und Tuer passen)
+    rand = {v for v in bm.verts if v.is_boundary or any(len(f.verts) > 4 for f in v.link_faces)}
+    rand |= {e.other_vert(v) for v in list(rand) for e in v.link_edges}
+    MD.dellen(bm, list(bm.verts), MD.rnd(3), MD.cfg()["rumpf_dellen"], fest=rand)
     rumpf = OB(f"{name}_Rumpf", bm, col, [M["lack"], M["dunkel"]], root)
     d = rumpf.modifiers.new("Blech", "SOLIDIFY")
     d.thickness = 0.02
@@ -193,6 +198,8 @@ def bauen(name, col, rnd, opt):
         ZY(bm, (0.35, 0, 3.2), (0.35 + 0.62 * math.cos(a), 0.62 * math.sin(a), 3.2), 0.07, 10, 3)
     ob = OB(f"{name}_Triebwerke_Rotorkopf", bm, col, [M["lack"], M["verbrannt"], M["dunkel"], M["rost"]], root)
     ob.modifiers.new("Rund", "SUBSURF").levels = 1
+    # 3B: offene Wartungsklappe rechts an der Triebwerksverkleidung
+    MD.klappe(f"{name}_Wartungsklappe", col, root, M["lack"], M["dunkel"], (0.55, -0.79, 2.42), (0.85, 0.30), -1)
     # Fahrwerk (feste Raeder), Trittstufen, Haltegriffe, Antennen, Rettungswinde
     bm = bmesh.new()
     for s in (1, -1):

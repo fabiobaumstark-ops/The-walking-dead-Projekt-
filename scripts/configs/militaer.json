@@ -247,5 +247,63 @@
    "z_ueber_loch": 0.2,
    "hoehe": 5.5
   }
+ },
+ "detail": {
+  "_info": "Phase-3-Nacharbeit 2B/3B (2026-11-05): Dellen (Geometrie), Abplatzer/Schmutz/Blechstoesse/Nieten (Shader). Seeds getrennt von den Bau-Seeds.",
+  "seed": 73,
+  "turm_dellen": {
+   "unterteilung": 7,
+   "anzahl": 14,
+   "radius_m": [
+    0.1,
+    0.32
+   ],
+   "tiefe_m": [
+    0.012,
+    0.035
+   ],
+   "welle_m": 0.004
+  },
+  "rumpf_dellen": {
+   "anzahl": 22,
+   "radius_m": [
+    0.12,
+    0.4
+   ],
+   "tiefe_m": [
+    0.012,
+    0.04
+   ],
+   "welle_m": 0.005
+  },
+  "lack": {
+   "abplatzer": 1.0,
+   "kante_radius_m": 0.08,
+   "flaechen_abplatzer": 0.6,
+   "schmutz_ecken": 0.85,
+   "dellen_bump": 0.25,
+   "primer": "#55503F",
+   "metall": "#3F3C37",
+   "rost": "#5E3A22",
+   "schmutz": "#4E4537",
+   "flechten": 0.15,
+   "tonvariation": 0.12,
+   "struktur": 0.25
+  },
+  "blech": {
+   "stoss_abstand_m": 0.95,
+   "naehte_z_m": [
+    0.55,
+    1.2,
+    1.98
+   ],
+   "fuge_m": 0.004,
+   "niet_abstand_m": 0.05,
+   "niet_versatz_m": 0.022,
+   "niet_radius_m": 0.0045
+  },
+  "klappe": {
+   "offen_grad": 72
+  }
  }
 }

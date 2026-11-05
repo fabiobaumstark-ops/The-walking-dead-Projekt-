@@ -451,3 +451,16 @@
 - Blender 5.2.3 LTS installiert (neben vorhandenem 5.1.0), SHA256 geprüft
 - `python3 download_assets.py --nur-basis`: 356 Dateien, 0 Fehler
 - Fehler gefunden: 13 Bilder in viertel_v04.blend hatten absolute Cloud-Pfade (Leder, Sitzstoff, Rostblech; Verstoß gegen A3) → auf relativ umgestellt, 0 fehlende Texturen
+
+## Phase 3 – Freigabe und Nacharbeit 2B/3B (2026-11-05, lokal auf dem Mac)
+- Freigabe: alle Empfehlungen (1A 2B 3B 4A 5A 6A)
+- Neu: scripts/phase3/mil_detail.py, nacharbeit_militaer.py, render_nah.py; Parameter in militaer.json → "detail" (eigener Seed 73, Bau-Seeds unverändert)
+- 2B Panzer (Turm + Lack):
+  - Turmschale in ein Raster geteilt, 14 Dellen (1,2–3,5 cm) + leichte Welligkeit
+  - Lack: dunkle Abplatzer an Kanten und Flächen (Grundierung → Metall → Rost), Schmutz in Ecken, ungleichmäßiges Ausbleichen (±12 %), feine Oberflächenstruktur
+- 3B Hubschrauber: 22 Dellen im Rumpfblech (nicht an Fenster-/Türkanten), Blechstöße alle 0,95 m + 3 Längsnähte mit Nietreihen, offene Wartungsklappe an der Triebwerksverkleidung, gleiche Lack-Veredelung
+- Hauptbefund: Die hellen Flecken auf Panzer und Hubschrauber kamen aus der Flechten-Ebene von MAT_Verwitterung (auf Lack wirkten sie wie weiße Farbkleckse). Gruppe hat jetzt den Eingang „Flechten“ (Standard 1,0 = alle anderen Materialien unverändert); Militärlack 0,15
+- Vorher/Nachher: renders/test/phase3a_* / phase3b_*; Hero-Kameras: phase3b_cam1–4
+- Renderzeiten Mac (CPU, 960×540, 48 Samples): CAM 1 38 s, CAM 2 31 s, CAM 3 43 s, CAM 4 45 s; Nahansichten (Metal-GPU, 64 Samples) ca. 50 s
+- Dateien: viertel_v05.blend 72,7 MB; viertel_v03.blend aus dem Repo entfernt (A3: aktuelle + letzte Version)
+- D2 neu: Realismus Materialien 6 → 7 (keine Farbkleckse mehr, Lack mit Tiefe); Einheitlicher Look 7 → 8. Rest unverändert. Dellen sieht man nur im Streiflicht – wirkt in Phase 5 mit tieferer Sonne stärker
