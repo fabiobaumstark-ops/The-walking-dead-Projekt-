@@ -1,6 +1,6 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 3 freigegeben (2026-11-05), Nacharbeit 2B/3B fertig → STOPP, wartet auf „weiter“ für Phase 4
+- **Aktuelle Phase:** Phase 4 läuft (Start 2026-11-05) – Teilschritt 4.0 Assets
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** `viertel_v05.blend` (Phase 3 + Nacharbeit 2B/3B, 72,7 MB, Freigabe B: eine große Datei); Vorversion `viertel_v04.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
@@ -63,7 +63,7 @@
 4. Bekannt offen (Qualitätsrunde): Militär-Lkw und übrige Fahrzeuge haben weiter die hellen Flechten-Flecken; bei Bedarf dort ebenfalls Eingang „Flechten“ der Gruppe MAT_Verwitterung senken.
 
 ## Offene Fragen an den Nutzer
-- Start Phase 4 („weiter“)
+- keine
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL
@@ -97,6 +97,7 @@
 - Neu: A13 Hintergrund-Ring (AUFTRAG.md). Silhouetten und Gelände in Phase 2, Bäume in Phase 4, Dunst in Phase 5.
   Nach Phase 2 mit CAM_Hero_02 auf leere Horizontstellen prüfen
 - Phase-3-Fragen (2026-11-05): alle Empfehlungen – 1A Flotte ok, 2B Panzerturm aus der Nähe weniger glatt (Dellen, Abplatzer, Schmutz), 3B Hubschrauberrumpf detaillierter (Nieten, Blechstöße, Dellen, Klappen), 4A Geschichte ok, 5A Figuren ok, 6A Look ok (Ausreißer über 2B/3B)
+- Phase 4 „weiter“ (2026-11-05), Ansatz: 1A Bäume = Poly-Haven-CC0 (island_tree_01, island_tree_02, tree_small_02; keine Kiefern – zu schwer), 2A Efeu/Wein = eigener Generator mit ambientCG-Blattfotos (CC0), 3A Straßen 60–70 % bewachsen, Trampelpfad 2–3 m in der Mitte
 
 ## Ausgeführte Skripte (Reihenfolge, alle im Repo-Hauptordner)
 1. `python3 scripts/phase1/make_manifest.py`
