@@ -1,6 +1,6 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 4 läuft (Start 2026-11-05) – Teilschritt 4.0 Assets
+- **Aktuelle Phase:** Phase 4 läuft – 4.0 Assets fertig, 4.1a Bäume fertig (Skripte), weiter mit 4.1b Ranken
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** `viertel_v05.blend` (Phase 3 + Nacharbeit 2B/3B, 72,7 MB, Freigabe B: eine große Datei); Vorversion `viertel_v04.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
@@ -118,3 +118,4 @@
 16. Mac, 2026-11-05: 13 absolute Bildpfade (/home/user/…) in viertel_v04.blend auf relativ (//assets/…) umgestellt, per Python-Einzeiler in Blender 5.2.3; danach 303 Bilder, 0 fehlend, 0 absolut
 17. Nacharbeit 2B/3B: `blender -b viertel_v04.blend --python scripts/phase3/nacharbeit_militaer.py -- --version 05` (baut nur 05_Militaer neu; Parameter militaer.json → "detail") → viertel_v05.blend
 18. `blender -b viertel_v05.blend --python scripts/phase3/render_nah.py -- --prefix phase3b` und `blender -b viertel_v05.blend --python scripts/phase1/render_blockout.py -- --prefix phase3b --nur CAM_Hero_01,CAM_Hero_02,CAM_Hero_03,CAM_Hero_04`
+19. Phase 4: `blender -b viertel_v05.blend --python scripts/phase4/build_phase4.py -- --version 06 [--nur Baeume,Ranken,Boden]` → viertel_v06.blend (lokal erzeugt, wird am Ende von 4.1 committet; Bäume sind aus assets/models VERLINKT, assets/ muss vorhanden sein)

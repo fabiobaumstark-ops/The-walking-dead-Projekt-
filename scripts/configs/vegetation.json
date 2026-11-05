@@ -1,0 +1,91 @@
+{
+ "_info": "Phase 4 – grosse Vegetation (AUFTRAG 4.1, A14: 10-15 Jahre, stark ueberwuchert). Hoehen in m. Modelle: Poly Haven CC0, Blaetter: ambientCG CC0.",
+ "seed": 61,
+ "lod_nah_m": 35,
+ "ausschluss_rechtecke": [
+  [
+   18,
+   -24,
+   42,
+   -3
+  ],
+  [
+   -12,
+   -1,
+   6,
+   9
+  ]
+ ],
+ "_ausschluss_info": "keine Baeume: Hubschrauber-Absturz (CAM_Hero_04-Bildmitte), Panzer A",
+ "baeume": {
+  "modelle": {
+   "gross": "island_tree_01",
+   "knorrig": "island_tree_02",
+   "jung": "tree_small_02"
+  },
+  "strassen": {
+   "anteil_baumscheiben": 0.5,
+   "hoehe_m": [
+    8.0,
+    13.0
+   ],
+   "tot_anteil": 0.18,
+   "max_anzahl": 14
+  },
+  "garten": {
+   "anzahl": 7,
+   "hoehe_m": [
+    7.0,
+    12.0
+   ],
+   "abstand_m": [
+    3.0,
+    6.0
+   ]
+  },
+  "platz": {
+   "anzahl": 4,
+   "hoehe_m": [
+    9.0,
+    14.0
+   ]
+  },
+  "umgestuerzt": {
+   "anzahl": 1,
+   "kippen_grad": 84
+  },
+  "pionier": {
+   "mauerfuss": 9,
+   "dach": 5,
+   "schutt": 4,
+   "gehweg": 5,
+   "hoehe_m": [
+    2.5,
+    9.0
+   ],
+   "dach_hoehe_m": [
+    1.5,
+    3.2
+   ]
+  },
+  "hintergrund": {
+   "radius_m": [
+    140,
+    750
+   ],
+   "kandidaten": 26000,
+   "flecken_m": 90.0,
+   "wald_schwelle": -0.05,
+   "arten_anteil": {
+    "gross": 0.55,
+    "jung": 0.3,
+    "knorrig": 0.15
+   },
+   "hoehe_m": [
+    9.0,
+    19.0
+   ],
+   "dezimieren": 0.07
+  }
+ }
+}
