@@ -15,7 +15,7 @@ from veg_basis import V  # noqa: E402
 
 args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 version = args[args.index("--version") + 1] if "--version" in args else "06"
-nur = args[args.index("--nur") + 1].split(",") if "--nur" in args else ["Baeume", "Ranken", "Boden", "Material"]
+nur = args[args.index("--nur") + 1].split(",") if "--nur" in args else ["Baeume", "Ranken", "Boden", "Material", "Konsistenz"]
 
 TEILE = {  # Ziel-Collections, Praefixe der Prototypen-Collections
     "Baeume": (["Baeume", "Baeume_Hintergrund"], ["PROTO_Baeume", "PROTO_Wald_"]),
@@ -61,6 +61,9 @@ if __name__ == "__main__":
         elif teil == "Material":
             import material_feinschliff
             material_feinschliff.bauen()
+        elif teil == "Konsistenz":
+            import konsistenz
+            konsistenz.bauen()
         print("ZEIT", teil, round(time.time() - t0, 1), "s", flush=True)
     if "--ohne-speichern" not in args:
         pfad = os.path.join(V.ROOT, f"viertel_v{version}.blend")

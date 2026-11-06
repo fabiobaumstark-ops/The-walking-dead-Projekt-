@@ -9,7 +9,8 @@ import sys
 HIER = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HIER, "..", "lib"))
 import bpy  # noqa: E402
-from mathutils import Vector  # noqa: E402
+import math  # noqa: E402
+from mathutils import Matrix, Vector  # noqa: E402
 import viertel_lib as V  # noqa: E402
 
 args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
@@ -22,6 +23,11 @@ ANSICHTEN = [
     ("panzer_a_nah", "MIL_Panzer_A", (6.5, -7.5, 1.7), (0, 0, 1.4), 35),
     ("hubschrauber_rumpf", "MIL_Hubschrauber_Rumpf", (-6.0, 7.0, -3.0), (0, 0, 1.0), 35),
     ("hubschrauber_nah", "MIL_Hubschrauber_Rumpf", (3.0, 6.0, -1.0), (0, 0, 1.6), 28),
+    # Phase 4.3 Konsistenz-Test (A10.6): selbst gebaut neben heruntergeladen
+    ("konsistenz_auto", "FZ_Geparkt_01", (-5.0, -3.5, 1.2), (0, 0, 0.6), 35),
+    ("konsistenz_panzer", "MIL_Panzer_A", (-7.0, -6.0, 1.5), (0, 0, 1.0), 35),
+    ("konsistenz_baum_fassade", "VEG_Baum_Strasse_01", (3.0, 9.0, 1.3), (0, 0, 3.0), 28),
+    ("konsistenz_wandfuss", "VEG_Baum_Pionier_01", (4.0, -4.0, 1.4), (0, 0, 1.0), 35),
 ]
 
 
@@ -48,6 +54,22 @@ def licht():
     V.sonne(265, el, staerke=2.5, kelvin=5000, winkel_grad=2.0, col=V.collection("10_Licht_Atmosphaere"))
 
 
+def frei(z, versatz, ziel):
+    """Versatz um das Ziel drehen, bis die Sichtlinie frei ist (Ranken/Baeume vor der Kamera -> schwarzes Bild)."""
+    dg = bpy.context.evaluated_depsgraph_get()
+    bester, weite = z + versatz, -1.0
+    for k in range(12):
+        c = z + Matrix.Rotation(math.radians(30 * k), 3, "Z") @ versatz
+        d = z - c
+        treffer, ort, _, _, o, _ = bpy.context.scene.ray_cast(dg, c, d.normalized(), distance=d.length)
+        frei_m = d.length if not treffer or o == ziel or o.parent == ziel else (ort - c).length
+        if frei_m >= 0.85 * d.length:
+            return c
+        if frei_m > weite:
+            bester, weite = c, frei_m
+    return bester
+
+
 sc = bpy.context.scene
 licht()
 metal = gpu()
@@ -59,7 +81,7 @@ for name, ziel, versatz, zv, f in ANSICHTEN:
         continue
     ob = bpy.data.objects[ziel]
     z = ob.matrix_world.translation + Vector(zv)
-    cam.location = z + Vector(versatz)
+    cam.location = frei(z, Vector(versatz), ob)
     cam.rotation_euler = (z - cam.location).to_track_quat("-Z", "Y").to_euler()
     cam_data.lens = f
     sc.camera = cam

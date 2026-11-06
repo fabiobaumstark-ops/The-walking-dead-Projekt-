@@ -1,8 +1,8 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 4 – 4.1 Vegetation und 4.2 Material-Prüfung fertig, offen: Konsistenz-Test 4.3, D1/D2, Freigabe-Fragen
+- **Aktuelle Phase:** Phase 4 fertig (4.1–4.3, D1/D2) – wartet auf Freigabe-Antworten, dann Phase 5
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
-- **.blend-Version:** `viertel_v06.blend` (Phase 4, 88,1 MB; Bäume aus assets/models verlinkt); Vorversion `viertel_v05.blend`
+- **.blend-Version:** `viertel_v07.blend` (Phase 4 inkl. Konsistenz, 88,1 MB; Bäume aus assets/models verlinkt); Vorversion `viertel_v06.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 - **Lokal (Mac, 2026-11-05):** Blender 5.2.3 LTS unter /Applications/Blender-5.2.3.app, Metal-GPU (M4 Pro, 16 Kerne) erkannt, Assets geladen (356 Dateien, 1,7 GB)
@@ -57,13 +57,13 @@
   - Kirche und Lagerhalle noch ohne echte Fensteröffnungen
 
 ## Nächster konkreter Schritt
-1. Auf „weiter“ warten, dann Phase 4 (Vegetation & Material-Feinschliff) laut AUFTRAG.md, Teil B, Phase 4 – ohne parallele Agenten.
-2. Ausgangsdatei: `viertel_v05.blend`. Lokal auf dem Mac: `/Applications/Blender-5.2.3.app/Contents/MacOS/Blender`, Assets liegen in assets/.
+1. Antworten auf die Phase-4-Fragen einarbeiten, auf „weiter“ warten, dann Phase 5 (Licht & Atmosphäre) laut AUFTRAG.md.
+2. Ausgangsdatei: `viertel_v07.blend`. Lokal auf dem Mac: `/Applications/Blender-5.2.3.app/Contents/MacOS/Blender`, Assets liegen in assets/.
 3. Vorschau-Licht steckt nicht in der .blend (kommt erst in Phase 5): Renders über `scripts/phase1/render_blockout.py` oder `scripts/phase3/render_nah.py`, die es selbst anlegen.
-4. Bekannt offen (Qualitätsrunde): Militär-Lkw und übrige Fahrzeuge haben weiter die hellen Flechten-Flecken; bei Bedarf dort ebenfalls Eingang „Flechten“ der Gruppe MAT_Verwitterung senken.
+4. Bekannt offen (Qualitätsrunde): Panzer A zu kastenförmig, Kartons/Matratzen klotzig (siehe PROTOKOLL Phase 4.3); Hügel > 750 m kahl → Dunst in Phase 5.
 
 ## Offene Fragen an den Nutzer
-- keine
+- Phase-4-Freigabe: Vegetationsmenge, künstlichstes Material, Farben vs. Look-Bible, Gesamteindruck
 
 ## Bisherige Antworten/Freigaben
 - Netzwerk: FULL
@@ -118,4 +118,6 @@
 16. Mac, 2026-11-05: 13 absolute Bildpfade (/home/user/…) in viertel_v04.blend auf relativ (//assets/…) umgestellt, per Python-Einzeiler in Blender 5.2.3; danach 303 Bilder, 0 fehlend, 0 absolut
 17. Nacharbeit 2B/3B: `blender -b viertel_v04.blend --python scripts/phase3/nacharbeit_militaer.py -- --version 05` (baut nur 05_Militaer neu; Parameter militaer.json → "detail") → viertel_v05.blend
 18. `blender -b viertel_v05.blend --python scripts/phase3/render_nah.py -- --prefix phase3b` und `blender -b viertel_v05.blend --python scripts/phase1/render_blockout.py -- --prefix phase3b --nur CAM_Hero_01,CAM_Hero_02,CAM_Hero_03,CAM_Hero_04`
-19. Phase 4: `blender -b viertel_v05.blend --python scripts/phase4/build_phase4.py -- --version 06 [--nur Baeume,Ranken,Boden]` → viertel_v06.blend (lokal erzeugt, wird am Ende von 4.1 committet; Bäume sind aus assets/models VERLINKT, assets/ muss vorhanden sein)
+19. Phase 4: `blender -b viertel_v05.blend --python scripts/phase4/build_phase4.py -- --version 06 [--nur Baeume,Ranken,Boden]` → viertel_v06.blend (Bäume sind aus assets/models VERLINKT, assets/ muss vorhanden sein)
+20. `blender -b viertel_v06.blend --python scripts/phase4/build_phase4.py -- --version 07 --nur Konsistenz` → viertel_v07.blend
+21. `blender -b viertel_v07.blend --python scripts/phase3/render_nah.py -- --prefix phase4 --nur konsistenz_auto,konsistenz_panzer,konsistenz_baum_fassade,konsistenz_wandfuss`; Hero-Kameras: `render_blockout.py -- --prefix phase4 --nur CAM_Hero_01,CAM_Hero_02,CAM_Hero_03,CAM_Hero_04,draufsicht` (aus v06, Konsistenz-Änderungen dort nur minimal)

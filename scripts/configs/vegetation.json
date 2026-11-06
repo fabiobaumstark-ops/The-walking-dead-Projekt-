@@ -535,5 +535,34 @@
     1.0
    ]
   }
+ },
+ "konsistenz": {
+  "_info": "Phase 4.3 (A10.6): Angleich selbst gebauter Objekte an heruntergeladene (siehe scripts/phase4/konsistenz.py).",
+  "uv_praefixe": [
+   "PRP_",
+   "DEB_",
+   "SCH_",
+   "BAR_"
+  ],
+  "uv_skala": 1.0,
+  "fasen_praefixe": [
+   "MIL_Panzer",
+   "PRP_Matratze",
+   "DEB_Muellhaufen"
+  ],
+  "fasen_breite_m": 0.03,
+  "hsv_value": {
+   "MAT_Papier": 0.6,
+   "MAT_Stoff_Plane": 0.5
+  },
+  "flechten_praefixe": [
+   "MAT_Panzer",
+   "MAT_Heli",
+   "MAT_Mil",
+   "MAT_Autolack",
+   "MAT_Fahrzeug",
+   "MAT_Lkw"
+  ],
+  "flechten_fahrzeuge": 0.3
  }
 }

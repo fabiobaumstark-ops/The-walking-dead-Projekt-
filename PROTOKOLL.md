@@ -464,3 +464,40 @@
 - Renderzeiten Mac (CPU, 960×540, 48 Samples): CAM 1 38 s, CAM 2 31 s, CAM 3 43 s, CAM 4 45 s; Nahansichten (Metal-GPU, 64 Samples) ca. 50 s
 - Dateien: viertel_v05.blend 72,7 MB; viertel_v03.blend aus dem Repo entfernt (A3: aktuelle + letzte Version)
 - D2 neu: Realismus Materialien 6 → 7 (keine Farbkleckse mehr, Lack mit Tiefe); Einheitlicher Look 7 → 8. Rest unverändert. Dellen sieht man nur im Streiflicht – wirkt in Phase 5 mit tieferer Sonne stärker
+
+## Phase 4 – Vegetation & Material-Feinschliff (2026-11-06, lokal auf dem Mac)
+- Freigabe: 1A Bäume Poly Haven (island_tree_01/02, tree_small_02), 2A eigener Efeu-/Wein-Generator mit ambientCG-Blattfotos, 3A Straßen 60–70 % überwuchert, Pfad 2–3 m frei
+- Skripte: scripts/phase4/ (veg_basis, baeume, ranken, bodendecker, material_feinschliff, konsistenz, build_phase4); Parameter in scripts/configs/vegetation.json
+- 4.1:
+  - Straßen-, Garten-, Platz-, Pionierbäume, ein umgestürzter Baum
+  - Hintergrundwald mit ca. 14.800 Instanzen
+  - ca. 107.000 Efeu-/Wein-/Kudzu-Büschel
+  - Bodendecker mit GN-Grasnarbe; Sichtkegel vor den Hero-Kameras bleibt frei
+- 4.2: 37 Pflanzen-Materialien ohne MAT_Verwitterung nachgerüstet, danach 0 ohne
+- 4.3 Konsistenz (renders/test/phase4_konsistenz_*):
+  - Befund 1: In 2 Nahansichten stand die Kamera im Efeu, das Bild war schwarz. Lösung: render_nah.py dreht die Kamera jetzt, bis die Sicht frei ist.
+  - Befund 2: Matratzen und Kartons wirkten wie weiße Klötze. Sie sind jetzt dunkler und gefast; die Klotzform bleibt sichtbar → Qualitätsrunde: durch Scans ersetzen oder neu modellieren.
+  - Befund 3: Panzer A wirkt neben Scan-Pflanzen und Figuren kastenförmig. Fasen (3 cm) helfen kaum, das Grundproblem ist die Form → Qualitätsrunde.
+  - Flechten auf Fahrzeuglack auf 0,3 gesenkt (17 Materialien)
+  - Bäume, Efeu und Gras passen gut zu Gebäuden und Autos.
+- Renderzeiten (CPU, 960×540, 48 Samples): CAM 1 86 s, CAM 2 65 s, CAM 3 85 s, CAM 4 72 s, Draufsicht 33 s; Nahansichten Metal-GPU ca. 60–90 s
+- Datei: viertel_v07.blend 88,1 MB (Bäume aus assets/models verlinkt); viertel_v05.blend entfernt
+
+### D1-Checkliste Phase 4
+- [x] Maßstab: Bäume 7–19 m, Gras 0,3–1,9 m, Büsche in echter Poly-Haven-Größe
+- [x] Nichts schwebt: alles per Strahl auf den Boden gesetzt, Ranken auf die Wand
+- [x] Keine gekachelten Texturen, Pflanzen mit Farbstreuung je Objekt
+- [x] Alle Materialien über MAT_Verwitterung (Ausnahmen: Decals, Wasser)
+- [ ] Himmel/Dunst: Hügel über 750 m kahl → Dunst in Phase 5
+- [~] Selbst gebaut vs. heruntergeladen: Panzer und Kartons/Matratzen fallen noch auf
+- [x] Keine Marken, nichts aus Filmen/Serien
+
+### D2-Qualitätsbewertung Phase 4 (ehrlich)
+| Kriterium | Note | Begründung |
+|---|---|---|
+| Realismus Geometrie | 7 | Bäume/Pflanzen fotoreal; Panzer und Kleinkram zu kastig |
+| Realismus Materialien | 7 | Pflanzen-Scans + Verwitterung; Kartons zu flach |
+| Einheitlicher Look | 7 | Vegetation verbindet alles; Panzer sticht heraus |
+| Licht & Stimmung | 4 | Vorschau-Licht flach, Phase 5 |
+| Komposition | 7 | Bewuchs rahmt die Hero-Kameras, Pfad frei |
+| Glaubwürdigkeit der Geschichte | 8 | 10–15 Jahre Verwilderung gut lesbar |
