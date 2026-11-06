@@ -16,8 +16,14 @@ sys.path.insert(0, os.path.join(HIER, "..", "lib"))
 sys.path.insert(0, os.path.join(HIER, "..", "phase2"))
 import viertel_lib as V  # noqa: E402
 
-BODEN = ("BOD_", "STR_", "GEO_")
+BODEN = ("BOD_", "STR_", "GEO_")  # fuer Kronen-Pruefung: Strassenmoebel (STR_) duerfen in Kronen ragen
+STR_KEIN_BODEN = ("STR_Laternen", "STR_Strommasten", "STR_Ampel", "STR_Schilder", "STR_Leitungen", "STR_Hausanschluesse",
+                  "STR_Hochstrasse", "STR_Platz_Brunnen")
 DURCH = ("VEG_", "FX_", "LGT_", "CAM_")
+
+
+def ist_boden(name):
+    return name.startswith(("BOD_", "GEO_")) or (name.startswith("STR_") and not name.startswith(STR_KEIN_BODEN))
 
 
 def cfg():
@@ -69,7 +75,7 @@ class Strahl:
     def boden(self, x, y, z0=90.0):
         """Bodenpunkt (z, normale, name) wenn von oben zuerst Boden getroffen wird, sonst None (Hindernis)."""
         loc, nor, ob = self.treffer((x, y, z0), (0, 0, -1))
-        if loc is None or not ob.name.startswith(BODEN):
+        if loc is None or not ist_boden(ob.name):
             return None
         return loc.z, nor, ob.name
 
@@ -184,6 +190,26 @@ def kopie(proto, name, col, pos=None, rot_z=0.0, skal=1.0, kipp=(0.0, 0.0), matr
             ob.material_slots[i].link = "OBJECT"
             ob.material_slots[i].material = s.material
     return ob
+
+
+def vegetation_ausblenden(namen):
+    """Collections voruebergehend aus der View-Layer nehmen (Strahlen muessen sie dann nicht durchdringen)."""
+    aus = []
+    def walk(lc):
+        for c in lc.children:
+            if c.name in namen and not c.exclude:
+                c.exclude = True
+                aus.append(c)
+            walk(c)
+    walk(bpy.context.view_layer.layer_collection)
+    bpy.context.view_layer.update()
+    return aus
+
+
+def vegetation_einblenden(aus):
+    for c in aus:
+        c.exclude = False
+    bpy.context.view_layer.update()
 
 
 def rnd(salz):

@@ -87,5 +87,453 @@
    ],
    "dezimieren": 0.07
   }
+ },
+ "ranken": {
+  "_info": "Freigabe 2A. Bueschel-Groessen in m. raster = Abstand der Bueschel auf der Fassade je Detailstufe (Abstand zur naechsten Hero-Kamera: lod_m).",
+  "blatt_hsv": {
+   "MAT_Blatt_Efeu_A": [
+    0.5,
+    1.0,
+    0.74
+   ],
+   "MAT_Blatt_Efeu_B": [
+    0.5,
+    0.8,
+    0.55
+   ],
+   "MAT_Blatt_Wein": [
+    0.5,
+    0.85,
+    0.68
+   ]
+  },
+  "bueschel": {
+   "efeu_nah": {
+    "blatt": [
+     "MAT_Blatt_Efeu_A",
+     "MAT_Blatt_Efeu_A",
+     "MAT_Blatt_Efeu_B"
+    ],
+    "varianten": 6,
+    "blaetter": 30,
+    "ausdehnung": 0.42,
+    "dicke": 0.16,
+    "blattgroesse": 0.11
+   },
+   "efeu_mittel": {
+    "blatt": [
+     "MAT_Blatt_Efeu_A",
+     "MAT_Blatt_Efeu_A",
+     "MAT_Blatt_Efeu_B"
+    ],
+    "varianten": 4,
+    "blaetter": 40,
+    "ausdehnung": 0.7,
+    "dicke": 0.2,
+    "blattgroesse": 0.14
+   },
+   "efeu_fern": {
+    "blatt": [
+     "MAT_Blatt_Efeu_A",
+     "MAT_Blatt_Efeu_A",
+     "MAT_Blatt_Efeu_B"
+    ],
+    "varianten": 3,
+    "blaetter": 34,
+    "ausdehnung": 1.1,
+    "dicke": 0.24,
+    "blattgroesse": 0.22
+   },
+   "wein_nah": {
+    "blatt": [
+     "MAT_Blatt_Wein"
+    ],
+    "art": "wein",
+    "varianten": 4,
+    "blaetter": 8,
+    "ausdehnung": 0.45,
+    "dicke": 0.14,
+    "blattgroesse": 0.08
+   },
+   "wein_mittel": {
+    "blatt": [
+     "MAT_Blatt_Wein"
+    ],
+    "art": "wein",
+    "varianten": 4,
+    "blaetter": 11,
+    "ausdehnung": 0.7,
+    "dicke": 0.18,
+    "blattgroesse": 0.1
+   },
+   "wein_fern": {
+    "blatt": [
+     "MAT_Blatt_Wein"
+    ],
+    "art": "wein",
+    "varianten": 3,
+    "blaetter": 9,
+    "ausdehnung": 1.1,
+    "dicke": 0.22,
+    "blattgroesse": 0.17
+   },
+   "kudzu_mittel": {
+    "blatt": [
+     "MAT_Blatt_Wein"
+    ],
+    "art": "kudzu",
+    "varianten": 4,
+    "blaetter": 9,
+    "ausdehnung": 0.9,
+    "dicke": 0.35,
+    "blattgroesse": 0.13
+   }
+  },
+  "fassaden": {
+   "anteil_seite": {
+    "N": 0.7,
+    "O": 0.65,
+    "S": 0.55,
+    "W": 0.5
+   },
+   "typen": {
+    "voll": {
+     "gewicht": 0.38,
+     "breite_m": [
+      40,
+      80
+     ],
+     "hoehe_anteil": [
+      0.85,
+      1.05
+     ],
+     "herd_abstand_m": 30,
+     "raster_faktor": 0.75
+    },
+    "hoch": {
+     "gewicht": 0.37,
+     "breite_m": [
+      4,
+      12
+     ],
+     "hoehe_anteil": [
+      0.5,
+      0.85
+     ],
+     "herd_abstand_m": 7
+    },
+    "niedrig": {
+     "gewicht": 0.25,
+     "breite_m": [
+      1.5,
+      5
+     ],
+     "hoehe_anteil": [
+      0.12,
+      0.35
+     ],
+     "herd_abstand_m": 5
+    }
+   },
+   "wein_anteil_sonnenseite": 0.45,
+   "lod_m": [
+    40,
+    100
+   ],
+   "raster_m": {
+    "nah": 0.26,
+    "mittel": 0.42,
+    "fern": 0.66
+   },
+   "haengend_anteil": {
+    "voll": 0.3,
+    "hoch": 0.5,
+    "niedrig": 0.15
+   },
+   "haengend_anzahl": [
+    2,
+    7
+   ],
+   "haengend_laenge_m": [
+    1.0,
+    5.0
+   ],
+   "front_bonus": 0.2
+  },
+  "kudzu": {
+   "haeuser": 2,
+   "raster_m": 0.55
+  },
+  "objekte": {
+   "dichte_pro_m2": 7.0,
+   "mast_anteil": 0.4,
+   "mast_hoehe_m": [
+    2.0,
+    9.0
+   ],
+   "heck_hoehe_m": 3.0,
+   "auto_anteil": 0.5,
+   "auto_hoehe_m": 0.8
+  }
+ },
+ "boden": {
+  "_info": "Freigabe 3A. Dichte = Erd-Bedeckung (Phase 2b) ^0.7 x Klasse x Flecken; bereiche: [x0, y0, x1, y1, faktor]. Hoehen in m.",
+  "bereiche": [
+   [
+    -100,
+    -60,
+    130,
+    60,
+    1.0
+   ],
+   [
+    130,
+    -12,
+    175,
+    12,
+    0.7
+   ],
+   [
+    -150,
+    -12,
+    -100,
+    12,
+    0.7
+   ]
+  ],
+  "raster_m": 0.36,
+  "grundwert": 0.06,
+  "kamera_frei_m": 3.5,
+  "flecken_m": 6.0,
+  "gruppen_noise_m": 3.2,
+  "wind_richtung_grad": 45,
+  "wind_neigung_grad": 7,
+  "klassen": [
+   [
+    "BOD_Erdschicht",
+    1.0
+   ],
+   [
+    "BOD_Moos",
+    0.85
+   ],
+   [
+    "BOD_Asphaltschollen",
+    0.4
+   ],
+   [
+    "GEO_",
+    1.0
+   ],
+   [
+    "STR_Baumscheiben",
+    1.0
+   ],
+   [
+    "STR_Block",
+    0.8
+   ],
+   [
+    "STR_Gehwegplatten",
+    0.65
+   ],
+   [
+    "STR_Platz_Wege",
+    0.3
+   ],
+   [
+    "STR_Platz",
+    0.8
+   ],
+   [
+    "STR_Gasse",
+    0.6
+   ],
+   [
+    "STR_Fahrbahn",
+    0.55
+   ],
+   [
+    "STR_Risse",
+    0.6
+   ],
+   [
+    "STR_Flickstellen",
+    0.5
+   ],
+   [
+    "STR_Pfuetzen",
+    0.0
+   ],
+   [
+    "STR_Schlagloecher",
+    0.4
+   ],
+   [
+    "STR_Markierungen",
+    0.45
+   ],
+   [
+    "STR_Gullideckel",
+    0.0
+   ],
+   [
+    "STR_Mittelgrund",
+    0.5
+   ],
+   [
+    "STR_",
+    0.3
+   ]
+  ],
+  "gruppen": {
+   "gras_gruen": {
+    "quelle": "PROTO_Gras",
+    "filter": "gruen",
+    "gewicht": 0.4,
+    "hoehe_m": [
+     0.3,
+     0.9
+    ],
+    "gruppierung": 0.6
+   },
+   "gras_trocken": {
+    "quelle": "PROTO_Gras",
+    "filter": "trocken",
+    "gewicht": 0.12,
+    "hoehe_m": [
+     0.3,
+     0.9
+    ],
+    "gruppierung": 1.0
+   },
+   "hochgras": {
+    "quelle": "PROTO_Gras",
+    "filter": "gruen",
+    "gewicht": 0.035,
+    "hoehe_m": [
+     1.2,
+     1.9
+    ]
+   },
+   "kraut": {
+    "modelle": [
+     "nettle_plant",
+     "weed_plant_02",
+     "shrub_sorrel_01"
+    ],
+    "gewicht": 0.08,
+    "skala": [
+     1.5,
+     3.0
+    ],
+    "skala_modell": {
+     "nettle_plant": [
+      2.5,
+      4.5
+     ],
+     "weed_plant_02": [
+      1.0,
+      2.0
+     ],
+     "shrub_sorrel_01": [
+      1.5,
+      3.0
+     ]
+    }
+   },
+   "farn": {
+    "modelle": [
+     "fern_02"
+    ],
+    "gewicht": 0.04,
+    "skala": [
+     1.0,
+     2.0
+    ]
+   },
+   "blumen": {
+    "modelle": [
+     "dandelion_01",
+     "celandine_01",
+     "periwinkle_plant"
+    ],
+    "gewicht": 0.08,
+    "skala": [
+     0.9,
+     1.5
+    ],
+    "max_hoehe_m": 0.5
+   },
+   "strauch": {
+    "modelle": [
+     "shrub_01",
+     "shrub_02",
+     "shrub_03",
+     "shrub_04"
+    ],
+    "gewicht": 0.08,
+    "skala": [
+     1.0,
+     1.8
+    ],
+    "gruppierung": 2.2,
+    "skala_modell": {
+     "shrub_01": [
+      2.0,
+      3.5
+     ],
+     "shrub_02": [
+      0.5,
+      0.9
+     ],
+     "shrub_03": [
+      2.0,
+      3.5
+     ],
+     "shrub_04": [
+      2.5,
+      4.5
+     ]
+    }
+   }
+  },
+  "_info_gruppen": "Gras-Prototypen 1 m normiert -> hoehe_m; Modelle in echter Groesse (Poly-Haven-Masse) x skala / skala_modell. Gazanie entfernt (Modellteile ohne passende Masse).",
+  "sichtkegel_m": 18.0,
+  "sichtkegel_steigung": 0.065,
+  "grasnarbe": {
+   "_info": "GN auf der Erdschicht (Phase 2b), Dichte = deckung^exponent x Noise; Gras-Prototypen 1 m -> hoehe_m",
+   "flaechen": [
+    "BOD_Erdschicht",
+    "BOD_Moosflaechen"
+   ],
+   "dichte_pro_m2": 28.0,
+   "deckung_exponent": 1.3,
+   "noise_skala": 0.35,
+   "hoehe_m": [
+    0.08,
+    0.3
+   ],
+   "seed": 7
+  }
+ },
+ "material": {
+  "_info": "Phase 4.2. ausnahmen = Material-Praefixe ohne MAT_Verwitterung (Overlay-Decals auf bereits verwitterten Flaechen, Wasser, Hilfsmaterialien). hsv: Farbangleich je Material (Standard: heruntergeladen_hsv).",
+  "ausnahmen": [
+   "MAT_Ausbluehung",
+   "MAT_Rostfahne",
+   "MAT_Russ",
+   "MAT_Schmutzfahne",
+   "MAT_Wasser",
+   "VEG_Unsichtbar",
+   "MAT_Blockout"
+  ],
+  "hsv": {
+   "MAT_Fahrzeug_Dunkel": [
+    0.5,
+    1.0,
+    1.0
+   ]
+  }
  }
 }

@@ -592,9 +592,9 @@ def material_einfaerben(mat, hsv=None):
         return mat
     nt = mat.node_tree
     bsdf = next((n for n in nt.nodes if n.type == "BSDF_PRINCIPLED"), None)
-    if bsdf is None:
-        return mat
     hsv = hsv or config("materialien.json")["verwitterung"]["heruntergeladen_hsv"]
+    if bsdf is None:
+        return _einfaerben_gruppe(mat, hsv)
     def quelle(inp):
         return inp.links[0].from_socket if inp.is_linked else None
     c_src, r_src, n_src = quelle(bsdf.inputs["Base Color"]), quelle(bsdf.inputs["Roughness"]), quelle(bsdf.inputs["Normal"])
@@ -620,6 +620,40 @@ def material_einfaerben(mat, hsv=None):
     nt.links.new(grp.outputs["Farbe"], bsdf.inputs["Base Color"])
     nt.links.new(grp.outputs["Rauheit"], bsdf.inputs["Roughness"])
     nt.links.new(grp.outputs["Normale"], bsdf.inputs["Normal"])
+    mat["verwittert"] = True
+    return mat
+
+
+def _einfaerben_gruppe(mat, hsv):
+    """Fallback fuer Materialien ohne Principled BSDF (z. B. Poly-Haven-Pflanzen mit eigener Shader-Gruppe):
+    Farbe und Rauheit, die in die Shader-Gruppe laufen, durch HSV + MAT_Verwitterung leiten."""
+    nt = mat.node_tree
+    farb_namen = ("Base Color", "Color", "Diffuse", "Diffuse Dead", "Albedo")
+    rau_namen = ("Roughness", "Rough")
+    ziele = [n for n in nt.nodes if n.type == "GROUP" and n.node_tree and n.node_tree.name != "MAT_Verwitterung"
+             and any(s.name in farb_namen for s in n.inputs)]
+    if not ziele:
+        return mat
+    geo = nt.nodes.new("ShaderNodeNewGeometry")
+    for z in ziele:
+        rau_in = next((s for s in z.inputs if s.name in rau_namen), None)
+        rau_src = rau_in.links[0].from_socket if rau_in is not None and rau_in.is_linked else None
+        for s in [s for s in z.inputs if s.name in farb_namen]:
+            if not s.is_linked:
+                continue
+            hs = nt.nodes.new("ShaderNodeHueSaturation")
+            for i, k in enumerate(("Hue", "Saturation", "Value")):
+                hs.inputs[k].default_value = hsv[i]
+            nt.links.new(s.links[0].from_socket, hs.inputs["Color"])
+            grp = nt.nodes.new("ShaderNodeGroup")
+            grp.node_tree = verwitterung_gruppe()
+            nt.links.new(hs.outputs["Color"], grp.inputs["Farbe"])
+            if rau_src is not None:
+                nt.links.new(rau_src, grp.inputs["Rauheit"])
+            nt.links.new(geo.outputs["Normal"], grp.inputs["Normale"])
+            nt.links.new(grp.outputs["Farbe"], s)
+            if rau_in is not None and rau_src is not None and s.name in ("Base Color", "Color", "Diffuse"):
+                nt.links.new(grp.outputs["Rauheit"], rau_in)
     mat["verwittert"] = True
     return mat
 

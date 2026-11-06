@@ -1,8 +1,8 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 4 läuft – 4.0 Assets fertig, 4.1a Bäume fertig (Skripte), weiter mit 4.1b Ranken
+- **Aktuelle Phase:** Phase 4 – 4.1 Vegetation und 4.2 Material-Prüfung fertig, offen: Konsistenz-Test 4.3, D1/D2, Freigabe-Fragen
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
-- **.blend-Version:** `viertel_v05.blend` (Phase 3 + Nacharbeit 2B/3B, 72,7 MB, Freigabe B: eine große Datei); Vorversion `viertel_v04.blend`
+- **.blend-Version:** `viertel_v06.blend` (Phase 4, 88,1 MB; Bäume aus assets/models verlinkt); Vorversion `viertel_v05.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 - **Lokal (Mac, 2026-11-05):** Blender 5.2.3 LTS unter /Applications/Blender-5.2.3.app, Metal-GPU (M4 Pro, 16 Kerne) erkannt, Assets geladen (356 Dateien, 1,7 GB)
