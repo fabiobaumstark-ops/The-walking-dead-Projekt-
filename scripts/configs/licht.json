@@ -1,0 +1,70 @@
+{
+ "_info": "Phase 5 (AUFTRAG 5.1-5.5, LOOK_BIBLE Licht). Winkel in Grad, Azimut Kompass (N=+Y, O=+X). Laengen in m.",
+ "licht": {
+  "hdri": "kloofendal_28d_misty_puresky_4k.hdr",
+  "hdri_staerke": 0.9,
+  "sonne_azimut": 265,
+  "sonne_hoehe": 25,
+  "sonne_staerke": 3.2,
+  "sonne_kelvin": 4800,
+  "sonne_winkel": 2.0
+ },
+ "feuertonne": {
+  "pos": [66.0, -3.2],
+  "radius": 0.29,
+  "hoehe": 0.88,
+  "kelvin": 2000,
+  "licht_w": 260,
+  "flackern": 0.35
+ },
+ "dunst": {
+  "mitte": [10.0, 0.0],
+  "groesse": [1700.0, 1700.0, 260.0],
+  "dichte": 0.0026,
+  "tiefe_faktor": 2.2,
+  "tiefe_m": 450.0,
+  "hoehe_abfall_m": 70.0,
+  "anisotropie": 0.45,
+  "farbe": "#C9C6BC"
+ },
+ "rauch": {
+  "radius": 11.0,
+  "hoehe": 230.0,
+  "dichte": 0.06,
+  "neigung_grad": 14,
+  "wind_azimut": 45,
+  "farbe": "#5E5A55"
+ },
+ "voegel": {
+  "anzahl_himmel": 5,
+  "kamera": ["CAM_Hero_01", "CAM_Hero_02", "CAM_Hero_04"],
+  "abstand_m": [45.0, 110.0],
+  "spannweite_m": 0.9,
+  "seed": 5
+ },
+ "kamera_fokus": {"CAM_Hero_01": "MIL_Panzer_A"},
+ "render": {
+  "aufloesung": [1920, 1080],
+  "samples": 1024,
+  "rauschschwelle": 0.01,
+  "bounces": 12,
+  "volumen_bounces": 2,
+  "clamp_indirekt": 10.0,
+  "look": "AgX - Base Contrast",
+  "nebel_start": 25.0,
+  "nebel_tiefe": 650.0
+ },
+ "compositor": {
+  "nebel_mix": 0.18,
+  "nebel_farbe": "#B4B2A8",
+  "lift": [0.985, 1.0, 1.03],
+  "gamma": [1.0, 1.01, 0.99],
+  "gain": [1.04, 1.02, 0.95],
+  "saettigung": 0.88,
+  "glare_schwelle": 1.2,
+  "glare_staerke": 0.12,
+  "dispersion": 0.006,
+  "vignette": 0.22,
+  "korn": 0.035
+ }
+}
