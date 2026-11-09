@@ -1,6 +1,6 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 4 fertig (4.1–4.3, D1/D2) – wartet auf Freigabe-Antworten, dann Phase 5
+- **Aktuelle Phase:** Phase 4 fertig und freigegeben (1B 2A 3A 4B) – wartet auf „weiter“ für Phase 5
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** `viertel_v07.blend` (Phase 4 inkl. Konsistenz, 88,1 MB; Bäume aus assets/models verlinkt); Vorversion `viertel_v06.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
@@ -57,15 +57,16 @@
   - Kirche und Lagerhalle noch ohne echte Fensteröffnungen
 
 ## Nächster konkreter Schritt
-1. Antworten auf die Phase-4-Fragen einarbeiten, auf „weiter“ warten, dann Phase 5 (Licht & Atmosphäre) laut AUFTRAG.md.
+1. Auf „weiter“ warten, dann Phase 5 (Licht & Atmosphäre) laut AUFTRAG.md.
 2. Ausgangsdatei: `viertel_v07.blend`. Lokal auf dem Mac: `/Applications/Blender-5.2.3.app/Contents/MacOS/Blender`, Assets liegen in assets/.
 3. Vorschau-Licht steckt nicht in der .blend (kommt erst in Phase 5): Renders über `scripts/phase1/render_blockout.py` oder `scripts/phase3/render_nah.py`, die es selbst anlegen.
 4. Bekannt offen (Qualitätsrunde): Panzer A zu kastenförmig, Kartons/Matratzen klotzig (siehe PROTOKOLL Phase 4.3); Hügel > 750 m kahl → Dunst in Phase 5.
 
 ## Offene Fragen an den Nutzer
-- Phase-4-Freigabe: Vegetationsmenge, künstlichstes Material, Farben vs. Look-Bible, Gesamteindruck
+- keine
 
 ## Bisherige Antworten/Freigaben
+- Phase 4 (2026-11-09): 1B Vegetation genau richtig, 2A Panzer-Form in der Qualitätsrunde überarbeiten, 3A Farben passen (Grading in Phase 5), 4B fast aus einem Guss
 - Netzwerk: FULL
 - Blender: normale Linux-Version
 - Branch: claude/zen-meitner-53hxe1

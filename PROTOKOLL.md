@@ -501,3 +501,4 @@
 | Licht & Stimmung | 4 | Vorschau-Licht flach, Phase 5 |
 | Komposition | 7 | Bewuchs rahmt die Hero-Kameras, Pfad frei |
 | Glaubwürdigkeit der Geschichte | 8 | 10–15 Jahre Verwilderung gut lesbar |
+- Freigabe (2026-11-09): alle Empfehlungen – 1B Vegetation genau richtig, 2A Panzer-Form → Qualitätsrunde, 3A Farben passen, 4B fast aus einem Guss
