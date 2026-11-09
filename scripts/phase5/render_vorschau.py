@@ -1,6 +1,6 @@
 """Phase 5 – Vorschau der Hero-Shots mit den finalen Einstellungen (Licht, Dunst, Compositor), nur kleiner/weniger Samples.
 
-Aufruf:  blender -b viertel_v08.blend --python scripts/phase5/render_vorschau.py -- --prefix phase5 [--samples 128] [--prozent 50] [--nur 1,3]
+Aufruf:  blender -b viertel_v08.blend --python scripts/phase5/render_vorschau.py -- --prefix phase5 [--samples 128] [--prozent 50] [--nur 1,3] [--cpu]
 """
 import os
 import sys
@@ -15,11 +15,14 @@ prozent = int(args[args.index("--prozent") + 1]) if "--prozent" in args else 50
 nur = [int(x) for x in args[args.index("--nur") + 1].split(",")] if "--nur" in args else [1, 2, 3, 4]
 
 sc = bpy.context.scene
-p = bpy.context.preferences.addons["cycles"].preferences
-p.compute_device_type = "METAL"
-p.get_devices()
-for d in p.devices:
-    d.use = True
+if "--cpu" in args:  # Metal kompiliert die Szenen-Kernel bei jedem Start neu -> fuer kleine Vorschauen ist die CPU schneller
+    sc.cycles.device = "CPU"
+else:
+    p = bpy.context.preferences.addons["cycles"].preferences
+    p.compute_device_type = "METAL"
+    p.get_devices()
+    for d in p.devices:
+        d.use = True
 sc.cycles.samples = samples
 sc.cycles.adaptive_threshold = 0.03
 sc.render.resolution_percentage = prozent

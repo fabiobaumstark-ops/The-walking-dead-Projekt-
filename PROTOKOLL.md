@@ -502,3 +502,53 @@
 | Komposition | 7 | Bewuchs rahmt die Hero-Kameras, Pfad frei |
 | Glaubwürdigkeit der Geschichte | 8 | 10–15 Jahre Verwilderung gut lesbar |
 - Freigabe (2026-11-09): alle Empfehlungen – 1B Vegetation genau richtig, 2A Panzer-Form → Qualitätsrunde, 3A Farben passen, 4B fast aus einem Guss
+
+## Phase 5 – Licht, Atmosphäre, Kameras, Render-Setup (2026-11-09, lokal auf dem Mac)
+- Skripte: scripts/phase5/build_phase5.py (Teile Licht, Atmosphaere, Kameras, Render, Compositor), render_vorschau.py; Parameter scripts/configs/licht.json
+- 5.1 Licht:
+  - HDRI kloofendal_28d_misty (Stärke 0,9), auf die Sonne ausgerichtet
+  - Sonne: Azimut 215° (Südwest), 30° hoch, 4800 K, Winkel 2°, Stärke 4,5
+  - Befund: Bei 265° lag die Straße von CAM 1 komplett im Schatten des Bürohauses B09 (Test „nur Sonne“). Mit 215° liegt Licht in der Straße und CAM 3 bekommt Gegenlicht.
+  - Feuertonne am Checkpoint: Rostfass, Flamme als Volumen-Emission (2000 K), Punktlicht 260 W mit Flacker-Noise, Rauchfahne
+- 5.2 Atmosphäre:
+  - Dunst-Volumen 1700 × 1700 × 180 m, Dichte 0,0013 × Höhenabfall (70 m) × Tiefenfaktor (bis 2,4 × in 450 m)
+  - Erster Versuch zu dicht (0,0026), „Nebelwand“ in CAM 2 → halbiert
+  - 2 Rauchsäulen am Horizont (420/120, 380/−170), vom Wind nach NO geneigt
+  - 9 Krähen-Silhouetten am Himmel (CAM 1, 2, 4)
+  - Positions-Empties der Rauchsäulen wurden beim ersten Bau mitgelöscht (Präfix) → Aufräumen schließt „_Position“ jetzt aus
+- 5.3 Kameras: CAM 1 fokussiert auf Panzer A; CAM 3 auf die vordersten Sandsäcke (Strahl, 2,3 m); Marker Hero_01–04 auf Bild 1–4 binden die Kameras
+- 5.4 Render (in der .blend):
+  - Cycles GPU, 1920 × 1080, 1024 Samples, Rauschschwelle 0,01, OIDN
+  - Bounces 12, Volumen 2, Clamp indirekt 10
+  - AgX „Medium High Contrast“
+  - Passes Mist, AO, Denoising
+  - Ausgabe: EXR-Multilayer `renders/final/hero_##_` + PNG `hero_##_bearbeitet.png`
+- 5.5 Compositor (CMP_Look): Mist-Dunst 5 %, Lift kühl / Gain warm, Sättigung 0,96, Fog Glow, Dispersion 0,006, Vignette 22 %, Filmkorn (gepacktes Rauschbild 960 × 540)
+- Blender-5.2-Details: Multilayer-EXR über `media_type = MULTI_LAYER_IMAGE`; Compositor als Node-Gruppe (`scene.compositing_node_group`)
+- Leistung:
+  - Metal-GPU kompiliert die Szenen-Kernel bei jedem Start neu: Mini-Bild GPU 142 s, CPU 20 s → Vorschauen auf CPU (`--cpu`)
+  - Für die finalen Bilder bleibt die GPU eingestellt (die Kompilierzeit fällt dann pro Bild kaum ins Gewicht)
+  - Ein Vorschau-Render mit GPU und 64 Samples hing über 30 min → abgebrochen
+- Renderzeiten Vorschau (CPU, 960 × 540, 64 Samples, mit Dunst): CAM 1 113 s, CAM 2 81 s, CAM 3 106 s, CAM 4 94 s
+- Speicher (Teil C): Blender-Prozess ca. 5,5 GB beim Render (Texturen ohne Limit) → passt in einen M4 Pro mit 24 GB
+- Datei: viertel_v08.blend 88,2 MB; viertel_v06.blend entfernt (A3)
+
+### D1-Checkliste Phase 5
+- [x] Himmel: misty HDRI, brennt nicht aus (AgX)
+- [x] Schatten weich, nicht schwarz; Sonne 30°, 4800 K
+- [x] Dunst nimmt mit der Tiefe zu, keine Wand mehr
+- [~] Rauchsäulen: am Horizont, aber nur schwach sichtbar
+- [~] Feuertonne: warmer Lichtakzent da, Flamme selbst zu schwach
+- [x] Vertikalen senkrecht (Shift), Brennweiten/Blenden laut 5.3
+- [ ] CAM 4: Hubschrauber vor der Fassade statt vor dem Himmel, im Schatten → Komposition offen
+- [x] Grading dezent: Schatten kühl, Lichter warm, Korn, Vignette
+
+### D2-Qualitätsbewertung Phase 5 (ehrlich)
+| Kriterium | Note | Begründung |
+|---|---|---|
+| Realismus Geometrie | 7 | unverändert; Panzer/Kleinkram → Qualitätsrunde |
+| Realismus Materialien | 7 | unverändert |
+| Einheitlicher Look | 8 | ein Licht, ein Dunst, ein Grading verbindet alles |
+| Licht & Stimmung | 7 | warme Südwestsonne, Tiefendunst; es fehlen noch Lichtstrahlen |
+| Komposition | 6 | CAM 1–3 gut, CAM 4 schwach |
+| Glaubwürdigkeit der Geschichte | 8 | Feuertonne, Rauch, Krähen ergänzen die Erzählung |

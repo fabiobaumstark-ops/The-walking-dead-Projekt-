@@ -1,8 +1,8 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 4 fertig und freigegeben (1B 2A 3A 4B) – wartet auf „weiter“ für Phase 5
+- **Aktuelle Phase:** Phase 5 gebaut (5.1–5.5, 5.7 Anleitung) – wartet auf Freigabe-Antworten; danach 5.8 Qualitätsrunde
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
-- **.blend-Version:** `viertel_v07.blend` (Phase 4 inkl. Konsistenz, 88,1 MB; Bäume aus assets/models verlinkt); Vorversion `viertel_v06.blend`
+- **.blend-Version:** `viertel_v08.blend` (Phase 5, 88,2 MB, finale Render-Einstellungen gespeichert); Vorversion `viertel_v07.blend`
 - **Branch:** `claude/zen-meitner-53hxe1`
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 - **Lokal (Mac, 2026-11-05):** Blender 5.2.3 LTS unter /Applications/Blender-5.2.3.app, Metal-GPU (M4 Pro, 16 Kerne) erkannt, Assets geladen (356 Dateien, 1,7 GB)
@@ -57,13 +57,13 @@
   - Kirche und Lagerhalle noch ohne echte Fensteröffnungen
 
 ## Nächster konkreter Schritt
-1. Auf „weiter“ warten, dann Phase 5 (Licht & Atmosphäre) laut AUFTRAG.md.
-2. Ausgangsdatei: `viertel_v07.blend`. Lokal auf dem Mac: `/Applications/Blender-5.2.3.app/Contents/MacOS/Blender`, Assets liegen in assets/.
-3. Vorschau-Licht steckt nicht in der .blend (kommt erst in Phase 5): Renders über `scripts/phase1/render_blockout.py` oder `scripts/phase3/render_nah.py`, die es selbst anlegen.
+1. Phase-5-Antworten einarbeiten, dann 5.8 Qualitätsrunde (Panzer-Form, Kartons/Matratzen, Flamme, Rauchsäulen, CAM 4).
+2. Ausgangsdatei: `viertel_v08.blend`. Phase 5 neu bauen immer aus v07: `build_phase5.py` (siehe Skriptliste). Lokal auf dem Mac: `/Applications/Blender-5.2.3.app/Contents/MacOS/Blender`, Assets liegen in assets/.
+3. Licht steckt jetzt in der .blend. Vorschau: `scripts/phase5/render_vorschau.py -- --cpu` (Metal-GPU kompiliert bei jedem Start neu, für kleine Bilder ist die CPU schneller).
 4. Bekannt offen (Qualitätsrunde): Panzer A zu kastenförmig, Kartons/Matratzen klotzig (siehe PROTOKOLL Phase 4.3); Hügel > 750 m kahl → Dunst in Phase 5.
 
 ## Offene Fragen an den Nutzer
-- keine
+- Phase-5-Freigabe: bester/schwächster Shot, Licht/Nebel, 1080p oder 4K, Animation ja/nein
 
 ## Bisherige Antworten/Freigaben
 - Phase 4 (2026-11-09): 1B Vegetation genau richtig, 2A Panzer-Form in der Qualitätsrunde überarbeiten, 3A Farben passen (Grading in Phase 5), 4B fast aus einem Guss
@@ -122,3 +122,5 @@
 19. Phase 4: `blender -b viertel_v05.blend --python scripts/phase4/build_phase4.py -- --version 06 [--nur Baeume,Ranken,Boden]` → viertel_v06.blend (Bäume sind aus assets/models VERLINKT, assets/ muss vorhanden sein)
 20. `blender -b viertel_v06.blend --python scripts/phase4/build_phase4.py -- --version 07 --nur Konsistenz` → viertel_v07.blend
 21. `blender -b viertel_v07.blend --python scripts/phase3/render_nah.py -- --prefix phase4 --nur konsistenz_auto,konsistenz_panzer,konsistenz_baum_fassade,konsistenz_wandfuss`; Hero-Kameras: `render_blockout.py -- --prefix phase4 --nur CAM_Hero_01,CAM_Hero_02,CAM_Hero_03,CAM_Hero_04,draufsicht` (aus v06, Konsistenz-Änderungen dort nur minimal)
+22. Phase 5: `blender -b viertel_v07.blend --python scripts/phase5/build_phase5.py -- --version 08` → viertel_v08.blend (Parameter licht.json)
+23. `blender -b viertel_v08.blend --python scripts/phase5/render_vorschau.py -- --prefix phase5 --samples 64 --prozent 50 --cpu` → renders/test/phase5_cam1–4.png

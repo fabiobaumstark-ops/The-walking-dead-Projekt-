@@ -31,7 +31,7 @@ def col():
 
 
 def weg(praefixe):
-    for o in [o for o in bpy.data.objects if o.name.startswith(tuple(praefixe))]:
+    for o in [o for o in bpy.data.objects if o.name.startswith(tuple(praefixe)) and "_Position" not in o.name]:
         bpy.data.objects.remove(o)
 
 
@@ -62,7 +62,7 @@ def licht():
     feuertonne()
 
 
-def _volumen_mat(name, dichte, farbe, emission=0.0, kelvin=2000, noise=1.5, radial=True):
+def _volumen_mat(name, dichte, farbe, emission=0.0, kelvin=2000, noise=1.5, radial=True, oben=0.15):
     """Volumen mit Noise; radial: Dichte faellt zum Rand des (Einheits-)Objekts ab, nach oben duenner."""
     m, nt = mat_neu(name)
     out = nt.nodes.new("ShaderNodeOutputMaterial")
@@ -89,7 +89,7 @@ def _volumen_mat(name, dichte, farbe, emission=0.0, kelvin=2000, noise=1.5, radi
     nt.links.new(ln.outputs["Value"], rr.inputs["Value"])
     zz = nt.nodes.new("ShaderNodeMapRange")
     zz.inputs["From Min"].default_value, zz.inputs["From Max"].default_value = 0.0, 1.0
-    zz.inputs["To Min"].default_value, zz.inputs["To Max"].default_value = 1.0, 0.15
+    zz.inputs["To Min"].default_value, zz.inputs["To Max"].default_value = 1.0, oben
     nt.links.new(sep.outputs["Z"], zz.inputs["Value"])
     nm = nt.nodes.new("ShaderNodeMapRange")
     nm.inputs["From Min"].default_value, nm.inputs["From Max"].default_value = 0.42, 0.75
@@ -108,9 +108,12 @@ def _volumen_mat(name, dichte, farbe, emission=0.0, kelvin=2000, noise=1.5, radi
     nt.links.new(m2.outputs[0], m3.inputs[0])
     nt.links.new(m3.outputs[0], pv.inputs["Density"])
     if emission:
-        nt.links.new(m2.outputs[0], pv.inputs["Blackbody Intensity"])
+        em = nt.nodes.new("ShaderNodeMath")
+        em.operation = "MULTIPLY"
+        em.inputs[1].default_value = emission
+        nt.links.new(m2.outputs[0], em.inputs[0])
+        nt.links.new(em.outputs[0], pv.inputs["Blackbody Intensity"])
         pv.inputs["Temperature"].default_value = kelvin
-        pv.inputs["Blackbody Intensity"].default_value = emission
     nt.links.new(pv.outputs[0], out.inputs["Volume"])
     return m
 
@@ -157,8 +160,8 @@ def feuertonne():
     m = tonne.modifiers.new("Wand", "SOLIDIFY")
     m.thickness = 0.012
     # Flamme (Volumen-Emission) und Rauchfahne
-    fl = _zylinder("FX_Flamme", F["radius"] * 0.85, 0.75, _volumen_mat("MAT_FX_Flamme", 9.0, "#FF8A3D", emission=6.0,
-                                                                       kelvin=F["kelvin"], noise=3.5), p + Vector((0, 0, F["hoehe"] - 0.25)))
+    fl = _zylinder("FX_Flamme", F["radius"] * 0.8, 0.5, _volumen_mat("MAT_FX_Flamme", 1.2, "#2E2A27", emission=14.0, oben=0.0,
+                                                                       kelvin=F["kelvin"], noise=3.5), p + Vector((0, 0, F["hoehe"] - 0.12)))
     fl.visible_shadow = False
     _zylinder("FX_Rauch_Tonne", 0.9, 9.0, _volumen_mat("MAT_FX_Rauch_Tonne", 0.35, "#4E4B48", noise=1.2),
               p + Vector((0, 0, F["hoehe"] + 0.3)), neigung=(math.radians(12), 0, math.radians(-135)))
@@ -232,10 +235,12 @@ def atmosphaere():
     w.visible_shadow = True
     # Rauchsaeulen an den Positionen aus Phase 1, vom Wind nach NO geneigt
     R = C["rauch"]
-    rm = _volumen_mat("MAT_FX_Rauchsaeule", R["dichte"], R["farbe"], noise=2.2)
+    rm = _volumen_mat("MAT_FX_Rauchsaeule", R["dichte"], R["farbe"], noise=R["noise"])
     az = math.radians(R["wind_azimut"])
-    for i, e in enumerate(o for o in bpy.data.objects if o.name.startswith("FX_Rauchsaeule_Position")):
-        p = e.matrix_world.translation.copy()
+    for i, e in enumerate(sorted((o for o in bpy.data.objects if o.name.startswith("FX_Rauchsaeule_Position")), key=lambda o: o.name)):
+        if i < len(R.get("positionen", [])):  # Positionen aus Phase 1 hier ueberschreibbar (Horizont von CAM 2)
+            e.location.x, e.location.y = R["positionen"][i]
+        p = e.location.copy()  # Empty ohne Eltern; matrix_world waere hier noch nicht aktualisiert
         b = VB.Strahl().boden(p.x, p.y)
         p.z = b[0] if b else p.z
         z = _zylinder(f"FX_Rauchsaeule_{i + 1}", R["radius"], R["hoehe"], rm, p)
@@ -293,6 +298,26 @@ def voegel():
 def kameras():
     for cname, ziel in C["kamera_fokus"].items():
         bpy.data.objects[cname].data.dof.focus_object = bpy.data.objects[ziel]
+    dg = bpy.context.evaluated_depsgraph_get()
+    for cname, hoehe in C["fokus_strahl"].items():
+        if cname.startswith("_"):
+            continue
+        cam = bpy.data.objects[cname]
+        fr = [cam.matrix_world @ v for v in cam.data.view_frame(scene=sc)]  # oben rechts, unten rechts, unten links, oben links
+        start = cam.matrix_world.translation
+        naechster = None  # naechster Treffer in einem Band bis zur angegebenen Bildhoehe (vorderste Sandsaecke)
+        for u in (0.2, 0.35, 0.5, 0.65, 0.8):
+            for k in range(1, 5):
+                v = hoehe * k / 4
+                unten = fr[2] + (fr[1] - fr[2]) * u
+                ziel = unten + ((fr[3] + (fr[0] - fr[3]) * u) - unten) * v
+                treffer, ort, _, _, o, _ = sc.ray_cast(dg, start, (ziel - start).normalized(), distance=200)
+                if treffer and (naechster is None or (ort - start).length < naechster[0]):
+                    naechster = ((ort - start).length, o.name)
+        if naechster:
+            cam.data.dof.focus_object = None
+            cam.data.dof.focus_distance = naechster[0] + 0.25
+            print("FOKUS", cname, naechster[1], round(naechster[0] + 0.25, 2))
     for c in [o for o in bpy.data.objects if o.name.startswith("CAM_Hero")]:
         c.data.sensor_width, c.data.sensor_fit = 36.0, "HORIZONTAL"
     for m in list(sc.timeline_markers):
@@ -389,7 +414,13 @@ def compositor():
     hs.inputs["Saturation"].default_value = K["saettigung"]
     L.new(cb.outputs[0], hs.inputs["Image"])
     gl = N.new("CompositorNodeGlare")
-    gl.inputs["Type"].default_value = "Fog Glow"
+    for wert in ("FOG_GLOW", "Fog Glow", "BLOOM", "Bloom"):
+        try:
+            gl.inputs["Type"].default_value = wert
+            break
+        except Exception:  # noqa: BLE001 - Menue-Namen je nach Blender-Version
+            continue
+    print("GLARE", gl.inputs["Type"].default_value)
     gl.inputs["Threshold"].default_value = K["glare_schwelle"]
     gl.inputs["Strength"].default_value = K["glare_staerke"]
     L.new(hs.outputs[0], gl.inputs["Image"])
@@ -423,13 +454,13 @@ def compositor():
     # zusaetzlich bearbeitetes PNG nach renders/final/
     fo = N.new("CompositorNodeOutputFile")
     fo.directory = "//renders/final/"
-    fo.file_name = "hero_png_"
+    fo.file_name = "hero_##"
     if hasattr(fo, "use_custom_format"):
         fo.use_custom_format = True
     fo.format.media_type = "IMAGE"
     fo.format.file_format = "PNG"
     try:
-        fo.file_output_items.new("RGBA", "Bild")
+        fo.file_output_items.new("RGBA", "_bearbeitet")
     except Exception as e:  # noqa: BLE001
         print("COMPOSITOR file_output_items", e)
     L.new(bild, fo.inputs[0])

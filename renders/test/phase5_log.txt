@@ -1,0 +1,16 @@
+00:00.300  blend            | Read blend: "/Users/fabiobaumstark/Claude/twd/viertel_v08.blend"
+00:00.726  reports          | Read library: '/Users/fabiobaumstark/Claude/twd/assets/models/island_tree_01/island_tree_01_2k.blend', '//assets/models/island_tree_01/island_tree_01_2k.blend', parent '<direct>'
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:31:22)
+00:00.812  reports          | Read library: '/Users/fabiobaumstark/Claude/twd/assets/models/island_tree_02/island_tree_02_2k.blend', '//assets/models/island_tree_02/island_tree_02_2k.blend', parent '<direct>'
+00:00.870  reports          | Read library: '/Users/fabiobaumstark/Claude/twd/assets/models/tree_small_02/tree_small_02_2k.blend', '//assets/models/tree_small_02/tree_small_02_2k.blend', parent '<direct>'
+01:55.197  render           | Saved: '/Users/fabiobaumstark/Claude/twd/renders/final/hero_01_bearbeitet.png'
+01:55.223  render           | Saved: '/Users/fabiobaumstark/Claude/twd/renders/test/phase5_cam1.png'
+03:15.893  render           | Saved: '/Users/fabiobaumstark/Claude/twd/renders/final/hero_02_bearbeitet.png'
+03:15.918  render           | Saved: '/Users/fabiobaumstark/Claude/twd/renders/test/phase5_cam2.png'
+05:01.610  render           | Saved: '/Users/fabiobaumstark/Claude/twd/renders/final/hero_03_bearbeitet.png'
+05:01.634  render           | Saved: '/Users/fabiobaumstark/Claude/twd/renders/test/phase5_cam3.png'
+06:35.482  render           | Saved: '/Users/fabiobaumstark/Claude/twd/renders/final/hero_04_bearbeitet.png'
+06:35.507  render           | Saved: '/Users/fabiobaumstark/Claude/twd/renders/test/phase5_cam4.png'
+RENDERZEITEN {1: 113.4, 2: 80.7, 3: 105.7, 4: 93.9}
+
+Blender quit
