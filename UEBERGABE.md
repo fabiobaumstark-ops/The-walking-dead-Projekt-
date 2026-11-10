@@ -1,6 +1,6 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** 5.8 Qualitätsrunde, Teil 1 fertig (2026-11-10) – wartet auf Rückmeldung; danach Teil 2 und Animation 5.6
+- **Aktuelle Phase:** Phase 6.1 Unreal-Pipeline-Test gebaut (2026-11-10) – wartet auf den Test des Nutzers auf dem Mac (UNREAL_ANLEITUNG.md). 5.8 Teil 1 fertig, 5.6 Animation gestrichen
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** `viertel_v10.blend` (5.8 Teil 1, 89,7 MB – Ziel unter 90 MB fast ausgeschöpft); Vorversion `viertel_v09.blend`
 - **Branch:** `claude/zealous-ride-c12e2z` (neu ab 2026-11-10; gleicher Stand wie zuvor `claude/zen-meitner-53hxe1`)
@@ -57,18 +57,22 @@
   - Kirche und Lagerhalle noch ohne echte Fensteröffnungen
 
 ## Nächster konkreter Schritt
-1. Rückmeldung abwarten: Öffnet `viertel_v10.blend` auf dem Mac flüssig? Passt der stärkere Nebel, passt die neue CAM 4?
-2. 5.8 Teil 2 (offen): Matratzen/Kartons (Scans cardboard_box_01 und trashbag liegen in assets/models), Sandsack-Material, Flachdächer, Lichtstrahlen, CAM 4 aufhellen. Danach 5.6 Animation (freigegeben mit Antwort 4B).
-3. Ausgangsdatei: `viertel_v10.blend`. Reihenfolge nach einem Neubau älterer Phasen: nacharbeit_militaer.py → build_phase4.py --nur Konsistenz → build_phase5.py → qualitaet.py (macht Bäume zu Instanzen, Pfade relativ, Fenster leicht).
-4. Vorschau in der Cloud (16 GB RAM): `render_vorschau.py -- --cpu --sparsam --nur <Nr>`, jede Kamera in einem eigenen Blender-Aufruf. Zwei Blender-Prozesse gleichzeitig sprengen den Speicher.
-5. Speicher: Render-Szene braucht ohne Texturen ca. 11,7 GB (gemessen), mit Texturen geschätzt 13–16 GB. Auf dem Mac (24 GB) beim finalen Render andere Programme schließen.
-6. MPFB-Paket: Server sehr langsam; bei Bedarf in Teilstücken parallel laden (Range-Anfragen), Zielgröße 280.737.770 Byte.
+1. Rückmeldung zum Unreal-Test abwarten (Screenshots Draufsicht/Spiel, fps, Output Log „VIERTEL“). Danach:
+   - falls gespiegelt/gedreht: KONV in scripts/phase6/export_unreal.py anpassen (Achsen-Konvention ist eine ANNAHME, ungeprüft)
+   - falls Import-Fehler: ue_import.py nach den Log-Zeilen korrigieren (Unreal-Python-API nicht getestet, nur Syntax geprüft)
+2. Dann 6.2: Vollexport `-- --alles` (geschätzt mehrere GB), Leistung messen, Hintergrund vereinfachen.
+3. Phasenplan 6.1–6.8 steht in AUFTRAG.md (Phase 6). Blender-Seite: export_unreal.py, referenz_draufsicht.py; Unreal-Seite: ue_import.py.
+4. Blender-Ausgangsdatei unverändert `viertel_v10.blend` (der Export ändert die .blend nicht).
+5. Weiterhin gültig für Blender-Vorschauen: `render_vorschau.py -- --cpu --sparsam --nur <Nr>`, je Kamera ein Aufruf.
 
 ## Offene Fragen an den Nutzer
+- Unreal-Test (UNREAL_ANLEITUNG.md, Abschnitt 7): Screenshots, fps, Log
 - Öffnet v10 auf dem Mac? (falls nein: was passiert genau)
 - 5.8 Teil 1: Nebelstärke, neue CAM 4, Panzerturm in Ordnung?
 
 ## Bisherige Antworten/Freigaben
+- Unreal (2026-11-10): B begehbares Level → genauer: C richtiges Spiel, Blender-Animation gestrichen (A), Unreal 5.8 neu installieren (A), möglichst alles begehbar (C)
+- Meldung 2026-11-10: „Datei kaum zu öffnen auf dem Mac“ → v09/v10 entlastet (Instanzen, Fenster-Anzeige); Bestätigung steht aus
 - Phase 5 (2026-11-10): 1A CAM 1 am besten, CAM 4 am schwächsten (neu komponieren), 2C Nebel zu schwach → mehr Dunst in der Tiefe, 3A final 1080p, 4B Animation ja, aber erst nach der Qualitätsrunde
 - Phase 4 (2026-11-09): 1B Vegetation genau richtig, 2A Panzer-Form in der Qualitätsrunde überarbeiten, 3A Farben passen (Grading in Phase 5), 4B fast aus einem Guss
 - Netzwerk: FULL
@@ -131,3 +135,6 @@
 24. 5.8: `blender -b viertel_v08.blend --python scripts/phase5/qualitaet.py -- --version 09` (Instanzen, Pfade), dann `build_phase5.py -- --version 09 --nur Licht,Atmosphaere,Compositor` und `--nur Kameras,Atmosphaere`, `qualitaet.py -- --version 09 --nur Ansicht,Pfade`
 25. Panzer: `blender -b viertel_v09.blend --python scripts/phase3/nacharbeit_militaer.py -- --version 10`, dann auf v10: `build_phase4.py -- --version 10 --nur Konsistenz`, `build_phase5.py -- --version 10 --nur Kameras,Atmosphaere`, `qualitaet.py -- --version 10`
 26. Vorschau: je Kamera `blender -b viertel_v10.blend --python scripts/phase5/render_vorschau.py -- --prefix phase58 --samples 64 --prozent 50 --cpu --sparsam --nur <1-4>` (CAM 2 und 3 stammen aus v09, dort identisch bis auf den Panzer)
+27. Phase 6.1: `blender -b viertel_v10.blend --python scripts/phase6/export_unreal.py -- --test` → export/unreal_test (1034 Formen, 46.178 Platzierungen, 205 Materialien, 55 s, 739 MB; nicht im Repo)
+28. `blender -b viertel_v10.blend --python scripts/phase6/referenz_draufsicht.py` → renders/test/phase6_referenz_draufsicht.png
+29. Auf dem Mac in Unreal 5.8: Tools → Execute Python Script → scripts/phase6/ue_import.py (noch nicht ausgeführt)

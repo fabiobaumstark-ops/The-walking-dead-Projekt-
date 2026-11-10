@@ -16,3 +16,6 @@ __pycache__/
 # Test-Builds
 viertel_v*test.blend
 viertel_fz_*.blend
+
+# Unreal-Export (wird lokal mit scripts/phase6/export_unreal.py erzeugt)
+export/

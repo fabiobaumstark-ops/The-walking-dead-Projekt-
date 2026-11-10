@@ -1177,3 +1177,33 @@ TEIL E – ABSCHLUSSBERICHT
 - UEBERGABE.md auf "Projekt abgeschlossen" setzen
 ======================================================================
 ```
+
+----------------------------------------------------------------------
+PHASE 6 – UNREAL ENGINE: BEGEHBARES SPIEL (Ergänzung vom 2026-11-10)
+----------------------------------------------------------------------
+Entscheidungen des Nutzers (2026-11-10):
+- Unreal-Version: 5.8 (aktuelle stabile Version laut Recherche), auf dem Mac (M4 Pro)
+- Spielart: C – richtiges Spiel (Kampf, Leben, Gegenstände)
+- Begehbar: C – möglichst alles (auch Treppenhäuser, obere Stockwerke, Dächer)
+- Blender: Animation 5.6 gestrichen; Standbilder bleiben mit v10 renderbar.
+  Verbesserungen (Matratzen/Kartons usw.) fließen in den Unreal-Export ein.
+Rahmen:
+- Claude kann Unreal in der Cloud NICHT starten. Jeder Schritt wird auf dem Mac getestet,
+  Rückmeldung (Output Log, Screenshot, fps) → Korrektur. Deshalb kleine, testbare Schritte.
+- Alles bleibt als Text im Repo (Python-Skripte, später C++), keine von Hand gebauten Binärdateien.
+  Große Exporte (export/) und das Unreal-Projekt selbst kommen NICHT ins Repo.
+- Lizenzen wie bisher (A1b): nur eindeutig freie Assets, jede Quelle in LIZENZEN.txt.
+- Keine Namen, Figuren oder Inhalte aus Serien/Filmen/Spielen (auch nicht im Spieltitel).
+Teilphasen (nach jeder STOPP):
+6.1 Pipeline-Test: Testpaket (30 m um Panzer A) Blender → FBX + szene.json → Unreal-Python-Import,
+    Achsen-/Maßstabsprüfung mit TEST_Achsen und Referenz-Draufsicht, erste Leistungsmessung
+6.2 Ganzes Viertel: Vollexport, Kollision, Nanite/LOD, Hintergrund vereinfachen, Leistung (Ziel: flüssig spielbar,
+    Richtwert 30+ fps auf dem M4 Pro – wird gemessen, nicht versprochen)
+6.3 Look in Unreal: Mastermaterial mit Verwitterung (Staub, Schmutz, Moos, Kanten), Lumen, Nebel, Rauch/Feuer (Niagara),
+    Abgleich mit den Blender-Hero-Shots
+6.4 Begehbare Gebäude: Generator für Innenräume (Geschossdecken, Treppenhäuser, Räume, Türen, Möbel, Dächer) in Blender,
+    Matratzen/Kartons durch bessere Modelle ersetzen
+6.5 Spieler (C++, Xcode nötig): Ego-Steuerung, Leben, Ausdauer, Inventar, Gegenstände aufheben, Türen
+6.6 Gegner: Figuren mit Skelett (MPFB-Rig), Animationen (nur freie Lizenzen), KI (Umherirren, Hören/Sehen, Verfolgen)
+6.7 Kampf: Nahkampf und Waffen, Treffer, Geräusche (freie Lizenzen), Bedienoberfläche (HUD, Menü)
+6.8 Fertiges Spiel als Mac-App bauen und testen

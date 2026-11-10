@@ -592,3 +592,20 @@
 | Komposition | 7 | CAM 4 jetzt mit klarem Motiv vor dem Himmel, aber sehr dunkel |
 | Glaubwürdigkeit der Geschichte | 8 | unverändert |
 - Ziel 8–9 je Kriterium ist noch nicht erreicht.
+
+## Phase 6.1 – Unreal-Pipeline-Test (2026-11-10, Cloud-Sitzung)
+- Entscheidungen: Spielart C (richtiges Spiel), alles begehbar (C), Unreal 5.8, Blender-Animation gestrichen → AUFTRAG.md Phase 6 (6.1–6.8)
+- Recherche (Stand 2026-11-10, Quellen: Epic „macOS Development Requirements“, Wikipedia „Unreal Engine 5“):
+  - Aktuelle stabile Version: UE 5.8 (17.06.2026); laut einer einzelnen Blog-Quelle gibt es eine 5.9-Vorschau (nicht geprüft)
+  - Mac: Nanite + Virtual Shadow Maps auf Apple Silicon M2+ als „Beta“, Lumen nur mit Software-Raytracing; 5.8 braucht mindestens macOS 14.5
+  - Blender → Unreal: FBX ist der verbreitete Weg; Instanzen überträgt FBX schlecht. Deshalb eigenes Verfahren: jede Form einmal als FBX + Platzierungsliste (szene.json), Unreal setzt Instanzen (HISM) selbst
+- Blender-Seite (scripts/phase6/export_unreal.py):
+  - Render-Zustand nur im Speicher (Pflanzen-Generatoren an); Formen-Schlüssel = Mesh-Daten + Materialien (bzw. Objekt bei Modifiern)
+  - N-Gons werden trianguliert (Tangenten für Normalmaps)
+  - Texturen werden nach Dateinamen zugeordnet (farbe/rau/normal/maske). Erster Versuch über die Knotenverbindungen lieferte falsche Bilder (die Gruppe MAT_Verwitterung bündelt alle Eingänge, das Moos-Bild aus der Gruppe landete überall) → Gruppe wird ausgelassen. OpenGL-Normalen (Poly Haven nor_gl, ambientCG NormalGL) sind markiert
+  - Koordinaten (ANNAHME, ungeprüft): x/−y/z × 100, Roll = rx, Pitch = −ry, Yaw = −rz; Sonne/Start als Blickrichtung
+  - Testpaket: 30 m um Panzer A → 1034 Formen (758 Fahrzeugteile), 46.178 Platzierungen, 205 Materialien, 55 s, 739 MB
+  - Testobjekt TEST_Achsen (Pfeil +X 2 m, Stab +Y 1 m, Würfel, 30° gedreht) + Referenz-Draufsicht renders/test/phase6_referenz_draufsicht.png
+- Unreal-Seite (scripts/phase6/ue_import.py): Texturen, 2 Mastermaterialien (Basis, Maske), Materialinstanzen, FBX-Import, Kollision je Kategorie (Gebäude/Fahrzeuge „complex as simple“, Pflanzen ohne), Nanite ab 50.000 Flächen, Level mit Einzel-Actors bzw. HISM ab 9 gleichen Formen, Sonne/Himmel/Nebel/Feuerlicht/PlayerStart
+- Ehrlich: ue_import.py ist nur auf Python-Syntax geprüft. Die Unreal-Python-Aufrufe stammen aus meinem Wissen zur UE-5-API und sind ungetestet; Fehler sind wahrscheinlich und werden nach dem Output Log des Nutzers korrigiert
+- Bekannte Grenzen des Tests: Verwitterungs-Look fehlt in Unreal noch (6.3), Glas undurchsichtig, Volumen-Dunst/Rauch nicht übertragen (in Unreal: Höhennebel), Figuren ohne Skelett, Gebäude innen nicht begehbar (6.4)
