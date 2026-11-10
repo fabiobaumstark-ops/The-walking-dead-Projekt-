@@ -1,0 +1,371 @@
+[
+ {
+  "id": "B01",
+  "name": "BLD_Geschaeftshaus_01",
+  "ebenen": 5,
+  "laufen": 5,
+  "springen": 5,
+  "dach": true,
+  "zeit_s": 2.9
+ },
+ {
+  "id": "B02",
+  "name": "BLD_Geschaeftshaus_02",
+  "ebenen": 4,
+  "laufen": 4,
+  "springen": 4,
+  "dach": true,
+  "zeit_s": 1.6
+ },
+ {
+  "id": "B03",
+  "name": "BLD_Geschaeftshaus_03",
+  "ebenen": 6,
+  "laufen": 6,
+  "springen": 6,
+  "dach": true,
+  "zeit_s": 2.1
+ },
+ {
+  "id": "B04",
+  "name": "BLD_Geschaeftshaus_04",
+  "ebenen": 4,
+  "laufen": 4,
+  "springen": 4,
+  "dach": true,
+  "zeit_s": 1.7
+ },
+ {
+  "id": "B05",
+  "name": "BLD_Geschaeftshaus_05",
+  "ebenen": 5,
+  "laufen": 5,
+  "springen": 5,
+  "dach": true,
+  "zeit_s": 1.5
+ },
+ {
+  "id": "B06",
+  "name": "BLD_Geschaeftshaus_06",
+  "ebenen": 6,
+  "laufen": 6,
+  "springen": 6,
+  "dach": true,
+  "zeit_s": 2.2
+ },
+ {
+  "id": "B07",
+  "name": "BLD_Geschaeftshaus_07",
+  "ebenen": 5,
+  "laufen": 5,
+  "springen": 5,
+  "dach": true,
+  "zeit_s": 1.8
+ },
+ {
+  "id": "B08",
+  "name": "BLD_Geschaeftshaus_08",
+  "ebenen": 4,
+  "laufen": 4,
+  "springen": 4,
+  "dach": true,
+  "zeit_s": 1.5
+ },
+ {
+  "id": "B09",
+  "name": "BLD_Buero_1",
+  "ebenen": 9,
+  "laufen": 9,
+  "springen": 9,
+  "dach": true,
+  "zeit_s": 13.2
+ },
+ {
+  "id": "B10",
+  "name": "BLD_Feuerwache",
+  "ebenen": 3,
+  "laufen": 3,
+  "springen": 3,
+  "dach": true,
+  "zeit_s": 3.0
+ },
+ {
+  "id": "B11",
+  "name": "BLD_Wohnhaus_Ziegel_01",
+  "ebenen": 5,
+  "laufen": 5,
+  "springen": 5,
+  "dach": true,
+  "zeit_s": 1.9
+ },
+ {
+  "id": "B12",
+  "name": "BLD_Wohnhaus_Ziegel_02",
+  "ebenen": 6,
+  "laufen": 6,
+  "springen": 6,
+  "dach": true,
+  "zeit_s": 3.1
+ },
+ {
+  "id": "B13",
+  "name": "BLD_Buero_4",
+  "ebenen": 8,
+  "laufen": 7,
+  "springen": 7,
+  "dach": false,
+  "zeit_s": 6.7
+ },
+ {
+  "id": "B14",
+  "name": "BLD_Wohnhaus_Ziegel_03",
+  "ebenen": 5,
+  "laufen": 5,
+  "springen": 5,
+  "dach": true,
+  "zeit_s": 1.8
+ },
+ {
+  "id": "B15",
+  "name": "BLD_Krankenhaus",
+  "ebenen": 7,
+  "laufen": 7,
+  "springen": 7,
+  "dach": true,
+  "zeit_s": 59.5
+ },
+ {
+  "id": "B16",
+  "name": "BLD_Parkhaus",
+  "ebenen": 5,
+  "laufen": 0,
+  "springen": 0,
+  "dach": false,
+  "zeit_s": 4.7
+ },
+ {
+  "id": "B17",
+  "name": "BLD_Wohnhaus_Ziegel_04",
+  "ebenen": 6,
+  "laufen": 0,
+  "springen": 0,
+  "dach": false,
+  "zeit_s": 2.8
+ },
+ {
+  "id": "B18",
+  "name": "BLD_Geschaeftshaus_09",
+  "ebenen": 6,
+  "laufen": 6,
+  "springen": 6,
+  "dach": true,
+  "zeit_s": 2.2
+ },
+ {
+  "id": "B19",
+  "name": "BLD_Buero_3",
+  "ebenen": 7,
+  "laufen": 7,
+  "springen": 7,
+  "dach": true,
+  "zeit_s": 6.7
+ },
+ {
+  "id": "B20",
+  "name": "BLD_Wohnhaus_Ziegel_05",
+  "ebenen": 5,
+  "laufen": 4,
+  "springen": 4,
+  "dach": false,
+  "zeit_s": 2.0
+ },
+ {
+  "id": "B21",
+  "name": "BLD_Wohnhaus_Hubschrauber",
+  "ebenen": 5,
+  "laufen": 5,
+  "springen": 5,
+  "dach": true,
+  "zeit_s": 4.5
+ },
+ {
+  "id": "B22",
+  "name": "BLD_Geschaeftshaus_10",
+  "ebenen": 6,
+  "laufen": 0,
+  "springen": 0,
+  "dach": false,
+  "zeit_s": 3.3
+ },
+ {
+  "id": "B23",
+  "name": "BLD_Buero_2",
+  "ebenen": 11,
+  "laufen": 11,
+  "springen": 11,
+  "dach": true,
+  "zeit_s": 11.4
+ },
+ {
+  "id": "B24",
+  "name": "BLD_Wohnhaus_Ziegel_07",
+  "ebenen": 6,
+  "laufen": 6,
+  "springen": 6,
+  "dach": true,
+  "zeit_s": 3.0
+ },
+ {
+  "id": "B25",
+  "name": "BLD_Schule",
+  "ebenen": 3,
+  "laufen": 3,
+  "springen": 3,
+  "dach": true,
+  "zeit_s": 7.8
+ },
+ {
+  "id": "B26",
+  "name": "BLD_Holzhaus_Veranda_01",
+  "ebenen": 1,
+  "laufen": 1,
+  "springen": 1,
+  "dach": true,
+  "zeit_s": 0.5
+ },
+ {
+  "id": "B27",
+  "name": "BLD_Holzhaus_Veranda_02",
+  "ebenen": 1,
+  "laufen": 1,
+  "springen": 1,
+  "dach": true,
+  "zeit_s": 0.5
+ },
+ {
+  "id": "B28",
+  "name": "BLD_Holzhaus_Veranda_03",
+  "ebenen": 1,
+  "laufen": 1,
+  "springen": 1,
+  "dach": true,
+  "zeit_s": 0.6
+ },
+ {
+  "id": "B29",
+  "name": "BLD_Geschaeftshaus_11",
+  "ebenen": 5,
+  "laufen": 5,
+  "springen": 5,
+  "dach": true,
+  "zeit_s": 2.3
+ },
+ {
+  "id": "B30",
+  "name": "BLD_Wohnhaus_Ziegel_08",
+  "ebenen": 6,
+  "laufen": 6,
+  "springen": 6,
+  "dach": true,
+  "zeit_s": 1.5
+ },
+ {
+  "id": "B31",
+  "name": "BLD_Kirche",
+  "ebenen": 2,
+  "laufen": 0,
+  "springen": 0,
+  "dach": false,
+  "zeit_s": 0.4
+ },
+ {
+  "id": "B32",
+  "name": "BLD_Holzhaus_Veranda_04",
+  "ebenen": 2,
+  "laufen": 2,
+  "springen": 2,
+  "dach": true,
+  "zeit_s": 1.1
+ },
+ {
+  "id": "B33",
+  "name": "BLD_Holzhaus_Veranda_05",
+  "ebenen": 2,
+  "laufen": 2,
+  "springen": 2,
+  "dach": true,
+  "zeit_s": 1.2
+ },
+ {
+  "id": "B34",
+  "name": "BLD_Tankstelle",
+  "ebenen": 3,
+  "laufen": 1,
+  "springen": 1,
+  "dach": false,
+  "zeit_s": 1.5
+ },
+ {
+  "id": "B35",
+  "name": "BLD_Holzhaus_Veranda_06",
+  "ebenen": 2,
+  "laufen": 2,
+  "springen": 2,
+  "dach": true,
+  "zeit_s": 0.9
+ },
+ {
+  "id": "B36",
+  "name": "BLD_Holzhaus_Veranda_07",
+  "ebenen": 1,
+  "laufen": 0,
+  "springen": 1,
+  "dach": false,
+  "zeit_s": 0.5
+ },
+ {
+  "id": "B37",
+  "name": "BLD_Holzhaus_Veranda_08",
+  "ebenen": 1,
+  "laufen": 0,
+  "springen": 0,
+  "dach": false,
+  "zeit_s": 0.5
+ },
+ {
+  "id": "B38",
+  "name": "BLD_Wohnhaus_Ziegel_09",
+  "ebenen": 4,
+  "laufen": 0,
+  "springen": 0,
+  "dach": false,
+  "zeit_s": 1.6
+ },
+ {
+  "id": "B39",
+  "name": "BLD_Geschaeftshaus_12",
+  "ebenen": 4,
+  "laufen": 4,
+  "springen": 4,
+  "dach": true,
+  "zeit_s": 1.4
+ },
+ {
+  "id": "B40",
+  "name": "BLD_Wohnhaus_Ziegel_10",
+  "ebenen": 6,
+  "laufen": 6,
+  "springen": 6,
+  "dach": true,
+  "zeit_s": 4.4
+ },
+ {
+  "id": "B41",
+  "name": "BLD_Wohnhaus_Ziegel_11",
+  "ebenen": 6,
+  "laufen": 6,
+  "springen": 6,
+  "dach": true,
+  "zeit_s": 3.3
+ }
+]

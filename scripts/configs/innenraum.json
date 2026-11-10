@@ -1,0 +1,21 @@
+{
+ "_info": "Phase 6.4 – begehbare Gebaeude (scripts/phase6/innenraum.py). Masse in m. Treppe nach ueblichen Bauregeln: Steigung max. 0,18 m, Auftritt 0,28 m, Laufbreite 1,1 m (Richtwerte, z. B. DIN 18065 fuer Wohngebaeude ca. 0,8-1,0 m Mindestbreite).",
+ "seed": 64,
+ "typen": [1, 2, 3, 5, 6, 8],
+ "ausnahmen": {},
+ "kern_einzug": 4.2,
+ "moebel_abstand": 0.4,
+ "dachausstieg": true,
+ "treppe": {
+  "steigung_max": 0.18,
+  "auftritt": 0.28,
+  "laufplatte": 0.2,
+  "laufbreite": 1.1,
+  "auge": 0.2,
+  "podest": 1.2,
+  "gelaender": 0.95,
+  "tuer_breite": 1.0,
+  "tuer_hoehe": 2.1,
+  "dachhaus_hoehe": 2.5
+ }
+}
