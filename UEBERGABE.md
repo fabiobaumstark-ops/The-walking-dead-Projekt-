@@ -72,6 +72,7 @@
 - 5.8 Teil 1: Nebelstärke, neue CAM 4, Panzerturm in Ordnung?
 
 ## Bisherige Antworten/Freigaben
+- 6.4 Teil 1 (2026-11-10): 1B Dachzugang als Dachluke + Leiter statt Treppenhaus-Aufbau (CAM 2 bleibt wie freigegeben), 2A Teil 2 = Räume + Innenmaterialien + Scan-Möbel, erst an 2 Gebäuden zeigen, 3A Kirche und Tankstellen-Shop in Teil 2 neu bauen
 - 2026-11-10: iPad – Unreal-Installation durch Claude nicht möglich (kein Zugriff auf den Mac); Antwort A: Innenräume zuerst. Vorgabe: Innen „selber Realismus wie außen“
 - Unreal (2026-11-10): B begehbares Level → genauer: C richtiges Spiel, Blender-Animation gestrichen (A), Unreal 5.8 neu installieren (A), möglichst alles begehbar (C)
 - Meldung 2026-11-10: „Datei kaum zu öffnen auf dem Mac“ → v09/v10 entlastet (Instanzen, Fenster-Anzeige); Bestätigung steht aus
