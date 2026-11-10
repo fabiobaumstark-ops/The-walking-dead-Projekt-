@@ -1,16 +1,39 @@
 {
  "_info": "Phase 6.4 – begehbare Gebaeude (scripts/phase6/innenraum.py). Masse in m. Treppe nach ueblichen Bauregeln: Steigung max. 0,18 m, Auftritt 0,28 m, Laufbreite 1,1 m (Richtwerte, z. B. DIN 18065 fuer Wohngebaeude ca. 0,8-1,0 m Mindestbreite).",
  "seed": 64,
- "typen": [1, 2, 3, 5, 6, 8],
+ "typen": [
+  1,
+  2,
+  3,
+  5,
+  6,
+  8
+ ],
  "ausnahmen": {},
  "kern_einzug": 4.2,
  "moebel_abstand": 0.4,
  "dachausstieg": true,
  "dachzugang": "luke",
  "_info_dachzugang": "Nutzer 6.4 (1B): Dachluke + Steigleiter statt Treppenhaus-Aufbau (CAM 2 bleibt wie freigegeben). Ausnahme: Treppe endet im vorhandenen Maschinenraum (Typ 5).",
- "luke": {"sprosse_abstand": 0.28, "holm_ueber_dach": 1.0, "aufkantung": 0.3},
- "parkhaus": {"_info": "Phase-1-Rampen (u0, u1, v0, v1) enden 0,3 m unter der naechsten Decke und haben kein Deckenloch -> korrigiert", "rampe": [10.5, 15.5, 8.0, 22.0], "rampe_hoeher": 0.3},
- "aussentreppe": {"steigung": 0.17, "auftritt": 0.30},
+ "luke": {
+  "sprosse_abstand": 0.28,
+  "holm_ueber_dach": 1.0,
+  "aufkantung": 0.3
+ },
+ "parkhaus": {
+  "_info": "Phase-1-Rampen (u0, u1, v0, v1) enden 0,3 m unter der naechsten Decke und haben kein Deckenloch -> korrigiert",
+  "rampe": [
+   10.5,
+   15.5,
+   8.0,
+   22.0
+  ],
+  "rampe_hoeher": 0.3
+ },
+ "aussentreppe": {
+  "steigung": 0.17,
+  "auftritt": 0.3
+ },
  "treppe": {
   "steigung_max": 0.18,
   "auftritt": 0.28,
@@ -22,5 +45,161 @@
   "tuer_breite": 1.0,
   "tuer_hoehe": 2.1,
   "dachhaus_hoehe": 2.5
+ },
+ "innenausbau": {
+  "_info": "Phase 6.4 Teil 2 (scripts/phase6/innenausbau.py). Erst Mustergebaeude (Nutzer 2A), dann alle. Moebel: Poly Haven CC0, Vorderseite -Y.",
+  "gebaeude": [
+   "B11",
+   "B05"
+  ],
+  "extra_materialien": [
+   "MAT_Innen_Tapete",
+   "MAT_Innen_Farbe_Abblaetternd",
+   "MAT_Innen_Putz_Rissig",
+   "MAT_Innen_Putz_Alt",
+   "MAT_Boden_Dielen_Alt",
+   "MAT_Boden_Linoleum",
+   "MAT_Boden_Fliesen_Alt",
+   "MAT_Boden_Beton_Alt",
+   "MAT_Boden_Laminat",
+   "MAT_Teppich"
+  ],
+  "slot_tausch": {
+   "InnenDecke": "MAT_Innen_Putz_Rissig",
+   "InnenWand": "MAT_Innen_Putz_Alt"
+  },
+  "raumfolge": [
+   "wohnen",
+   "kueche",
+   "bad",
+   "schlafen",
+   "schlafen"
+  ],
+  "raumtiefen": [
+   5.0,
+   3.0,
+   2.3,
+   4.0,
+   3.6
+  ],
+  "zimmer_min_breite": 2.4,
+  "zimmer_min_tiefe": 2.2,
+  "tuer_breite": 0.9,
+  "tuer_breite_bad": 0.8,
+  "fenster_hoehe_frei": 1.0,
+  "umgekippt_anteil": 0.12,
+  "verdreht_grad": 6,
+  "raeume": {
+   "flur": {
+    "wand": "MAT_Innen_Putz_Rissig",
+    "boden": "MAT_Boden_Linoleum"
+   },
+   "wohnen": {
+    "wand": "MAT_Innen_Tapete",
+    "boden": "MAT_Boden_Dielen_Alt"
+   },
+   "kueche": {
+    "wand": "MAT_Innen_Farbe_Abblaetternd",
+    "boden": "MAT_Boden_Linoleum"
+   },
+   "bad": {
+    "wand": "MAT_Boden_Fliesen_Alt",
+    "boden": "MAT_Boden_Fliesen_Alt"
+   },
+   "schlafen": {
+    "wand": "MAT_Innen_Putz_Alt",
+    "boden": "MAT_Teppich"
+   }
+  },
+  "moebel": {
+   "wohnen": [
+    {
+     "asset": [
+      "sofa_02",
+      "sofa_03"
+     ]
+    },
+    {
+     "asset": "ArmChair_01",
+     "chance": 0.8
+    },
+    {
+     "asset": [
+      "wooden_bookshelf_worn",
+      "Shelf_01"
+     ]
+    },
+    {
+     "asset": "side_table_01",
+     "chance": 0.6
+    },
+    {
+     "asset": "CoffeeTable_01",
+     "wo": "mitte",
+     "chance": 0.8
+    }
+   ],
+   "kueche": [
+    {
+     "asset": [
+      "drawer_cabinet",
+      "painted_wooden_cabinet"
+     ]
+    },
+    {
+     "asset": "dining_table",
+     "wo": "mitte",
+     "stuehle": "dining_chair_02"
+    }
+   ],
+   "bad": [],
+   "schlafen": [
+    {
+     "asset": "old_bed_frame"
+    },
+    {
+     "asset": "ClassicNightstand_01",
+     "chance": 0.7
+    },
+    {
+     "asset": [
+      "vintage_cabinet_01",
+      "painted_wooden_cabinet",
+      "drawer_cabinet"
+     ]
+    }
+   ],
+   "laden": [
+    {
+     "asset": [
+      "steel_frame_shelves_01",
+      "steel_frame_shelves_02",
+      "worn_metal_rack"
+     ],
+     "anzahl": [
+      4,
+      7
+     ]
+    },
+    {
+     "asset": "wooden_display_shelves_01",
+     "anzahl": [
+      1,
+      2
+     ]
+    }
+   ]
+  },
+  "kleinkram": [
+   "cardboard_box_01",
+   "trashbag"
+  ],
+  "kleinkram_anzahl": [
+   1,
+   4
+  ],
+  "laden": {
+   "aktiv": true
+  }
  }
 }

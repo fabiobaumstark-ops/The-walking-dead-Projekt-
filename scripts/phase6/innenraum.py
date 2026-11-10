@@ -24,12 +24,15 @@ import bpy
 from mathutils import Vector
 
 HIER = os.path.dirname(os.path.abspath(__file__))
-for p in ("lib", "phase1", "phase2"):
+for p in ("lib", "phase1", "phase2", "phase4"):
     sys.path.insert(0, os.path.join(HIER, "..", p))
+sys.path.insert(0, HIER)
 import viertel_lib as V  # noqa: E402
 import blockout_gebaeude as P1  # noqa: E402
 import gebaeude2 as G2  # noqa: E402
 import fassaden_details as FD  # noqa: E402
+import veg_basis as VB  # noqa: E402
+import innenausbau as IA  # noqa: E402
 
 S = G2.S
 args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
@@ -49,6 +52,7 @@ class Bau3(G2.Bau2):
         self.log = {"decken_geloch": 0, "kern_hohl": 0}
         self.tueren = []
         self.oeffnungen = []
+        self.moebel = []
         self.ladentuer = None
 
     def schiefe_platte(self, u0, u1, v0, z_v0, v1, z_v1, dicke, mat):
@@ -137,6 +141,8 @@ def erzeugen(cfg, g, plan_fn=None, masten=None):
         b.plan["ebenen"] = sorted(b.plan.get("decken", []))
     if b.plan and b.plan.get("achse"):
         treppenhaus(b, b.plan)
+        if g["id"] in C.get("innenausbau", {}).get("gebaeude", []):
+            b.plan["ausbau"] = IA.ausbauen(b, b.plan, C, S, G2, V, VB)
         b.plan["durchgang_weg"] = durchgaenge_frei(b)
         b.plan["stufen_neu"] = stufen_ergaenzen(b)
     orig = Vector((x0, y0, z0))
@@ -937,17 +943,25 @@ def main():
         b.deko.free()
         for m in ob.data.materials:
             me.materials.append(m)
+        if (b.plan or {}).get("ausbau"):  # Zusatz-Slots (Innenmaterialien) + Tausch der Innen-Slots
+            for mn in IA.extra_materialien(C):
+                me.materials.append(V.material(mn))
+            for sl, mn in C["innenausbau"].get("slot_tausch", {}).items():
+                me.materials[S[sl]] = V.material(mn)
         alt = ob.data
         ob.data = me
         if alt.users == 0:
             bpy.data.meshes.remove(alt)
         p = b.plan or {}
         n_t = tueren_bauen(b, g["id"], name, orig, ob)
+        if b.moebel:
+            p["moebel_gesetzt"] = IA.moebel_setzen(V, VB, g["id"], b, b.moebel, "12_Innenraum/Moebel")
         ebenen = p.get("ebenen") or list((b.info or {}).get("geschosse", []))
         if ebenen:
             ob["ebenen_z"] = [round(z, 3) for z in ebenen]  # Weltkoordinaten (Mesh ist bei orig verankert, z identisch)
         ergebnis.append((g["id"], name, bool(b.plan), b.log, p.get("achse"), p.get("moebel_weg"), p.get("dachhaus", False), "tueren", n_t,
-                         "stufen", p.get("stufen_neu"), "durchgang", p.get("durchgang_weg")))
+                         "stufen", p.get("stufen_neu"), "durchgang", p.get("durchgang_weg"), "ausbau", p.get("ausbau"),
+                         "moebel", p.get("moebel_gesetzt")))
     for e in ergebnis:
         print("GEB", *e, flush=True)
     if PRUEFEN or "--pruefen-zufall" in args:
