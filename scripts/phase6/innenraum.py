@@ -122,6 +122,8 @@ def erzeugen(cfg, g, plan_fn=None, masten=None):
     finally:
         G2._tuer = _TUER_ORIG
         G2._schaufenster = _SCHAUFENSTER_ORIG
+    if b.plan is not None and g["typ"] == 1 and C.get("hinterausgang_typ1", True):
+        b.plan["hinterausgang"] = hinterausgang_typ1(b)
     if b.plan is not None and g["typ"] == 2:
         b.plan["eingang"] = eingang_typ2(b)
     if b.plan is not None and g["typ"] == 5:
@@ -147,6 +149,17 @@ def objektname(cfg, g, zaehler):
     tname = cfg["typnamen"][str(g["typ"])]
     zaehler[tname] = zaehler.get(tname, 0) + 1
     return f"BLD_{g['name']}" if g.get("name") else f"BLD_{tname}_{zaehler[tname]:02d}"
+
+
+def uv_abdruck(me_or_bm):
+    """Hash der sortierten UV-Koordinaten (Texturen sitzen gleich)."""
+    if isinstance(me_or_bm, bmesh.types.BMesh):
+        uvl = me_or_bm.loops.layers.uv.active
+        uv = sorted((round(l[uvl].uv.x, 3), round(l[uvl].uv.y, 3)) for f in me_or_bm.faces for l in f.loops) if uvl else []
+    else:
+        lay = me_or_bm.uv_layers.active
+        uv = sorted((round(d.uv[0], 3), round(d.uv[1], 3)) for d in lay.data) if lay else []
+    return (hashlib.md5(str(uv).encode()).hexdigest()[:10],)
 
 
 def fingerabdruck(me_or_bm):
@@ -463,6 +476,41 @@ def stufen_ergaenzen(b):
     return neu
 
 
+def hinterausgang_typ1(b):
+    """Wohnhaus: Hintertuer zum Hof (Erdgeschoss), dort wo in der Rueckwand kein Fenster ist."""
+    info = b.info or {}
+    eg = info.get("geschosse", [b.z0])[0]
+    w = b.wand("hinten")
+    fenster = sorted((o["s0"], o["s1"]) for o in info.get("ops", {}).get("hinten", []) if o["z0"] < eg + 2.3 and o["z1"] > eg)
+    breite, rand = 1.0, 0.9
+    kandidaten = []
+    a = w.s0 + rand
+    for (f0, f1) in fenster + [(w.s1 - rand, w.s1)]:
+        if f0 - 0.25 - a >= breite:
+            kandidaten.append((a + (f0 - 0.25 - a - breite) / 2))
+        a = max(a, f1 + 0.25)
+    if not kandidaten:
+        return None
+    mitte = (w.s0 + w.s1) / 2
+    s0 = min(kandidaten, key=lambda k: abs(k + breite / 2 - mitte))
+    s1 = s0 + breite
+    eingang_schneiden(b, w, s0, s1, eg, eg + 2.2, z_laibung=eg + 2.2)
+    for (aa, cc, d, e) in [(s0, s0 + 0.08, eg, eg + 2.2), (s1 - 0.08, s1, eg, eg + 2.2), (s0, s1, eg + 2.12, eg + 2.2)]:
+        G2.FA.box_welt(b.bm, w, aa, cc, 0.12, 0.2, d, e, S["Rahmen"])  # Zarge
+    G2.FA.box_welt(b.bm, w, s0 - 0.05, s1 + 0.05, -0.02, w.d + 0.02, eg + 2.2, eg + 2.45, S["Beton"])  # Sturz
+    en = (w.welt(0, 1, 0) - w.welt(0, 0, 0)).normalized()
+    b.oeffnungen.append((w.welt((s0 + s1) / 2, 0, eg), -en, breite))
+    rnd = b.plan["rnd"]
+    p0 = w.welt(s0 + 0.08, 0.16, eg)
+    ex = (w.welt(s0 + 1.08, 0.16, eg) - p0).normalized()
+    ey = (w.welt(s0 + 0.08, 1.16, eg) - p0).normalized()
+    zust = rnd.choice(["zu", "offen", "offen"])
+    b.tueren.append({"p0": p0, "ex": ex, "ey": ey, "breite": breite - 0.16, "z0": eg, "z1": eg + 2.2,
+                     "zustand": zust, "winkel": 0.0 if zust == "zu" else rnd.uniform(0.4, 1.3), "richtung": 1.0,
+                     "mat": "Holz", "dicke": 0.045})
+    return round(s0, 2)
+
+
 def eingang_typ5(b):
     """Buero: massiver Drehtuer-Zylinder weg, Glasfassade in der Mitte 2,4 m breit bis zum Boden offen, Kaempfer."""
     W = b.r.W
@@ -560,6 +608,11 @@ def plan_erstellen(b, g):
             plan.update(achse="u", u0=W - d - laenge, v0=d)
         else:
             return None
+    if g["typ"] == 5 and not g.get("kamera_dach"):  # Dachaufbau (Maschinenraum) aus gebaeude2.typ5
+        (ru0, rv0, ru1, rv1), _ = _rechteck(plan)
+        mu0, mv0, mu1, mv1 = W * 0.35, D * 0.35, W * 0.65, D * 0.65
+        if mu0 < ru1 and mu1 > ru0 and mv0 < rv1 and mv1 > rv0:
+            plan["dachraum_plan"] = True
     return plan
 
 
@@ -572,6 +625,23 @@ def _rechteck(p):
         r = (p["u0"], p["v0"], p["u0"] + p["laenge"], p["v0"] + p["breite"])
         loch = (r[0], r[1], r[2] - C["treppe"]["podest"], r[3])  # Antritt liegt bei u1 (Laeufe laufen nach -u)
     return r, loch
+
+
+def _luke(p):
+    """Dachluke (0,8 x 0,8 m) ueber dem Antrittspodest des obersten Geschosses, an der Wand (Leiter dort)."""
+    if p["achse"] == "v":
+        return (p["u0"] + 0.05, p["v0"] + 0.2, p["u0"] + 0.85, p["v0"] + 1.0)
+    u1 = p["u0"] + p["laenge"]
+    return (u1 - 1.0, p["v0"] + 0.05, u1 - 0.2, p["v0"] + 0.85)
+
+
+def _ist_dach(b, zb):
+    info = b.info or {}
+    return info.get("top") is not None and abs(zb - info["top"]) < 0.01
+
+
+def _luke_modus(p):
+    return C.get("dachzugang", "luke") == "luke" and not p.get("dachraum_plan")
 
 
 # ------------------------------------------------------------------ Eingriffe in box()
@@ -591,6 +661,8 @@ def _ist_dachraum(b, p, u0, v0, u1, v1, za, zb, mat):
 
 def _ist_decke(b, p, u0, v0, u1, v1, za, zb, mat):
     _, (lu0, lv0, lu1, lv1) = _rechteck(p)
+    if _ist_dach(b, zb) and _luke_modus(p):
+        lu0, lv0, lu1, lv1 = _luke(p)
     if mat != S["InnenDecke"] or not (0.12 <= zb - za <= 0.35):
         return False
     if not (min(u0, u1) <= lu0 and max(u0, u1) >= lu1 and min(v0, v1) <= lv0 and max(v0, v1) >= lv1):
@@ -606,6 +678,9 @@ def _ist_decke(b, p, u0, v0, u1, v1, za, zb, mat):
 
 def decke_mit_loch(b, p, u0, v0, u1, v1, za, zb, mat, top):
     _, (lu0, lv0, lu1, lv1) = _rechteck(p)
+    if _ist_dach(b, zb) and _luke_modus(p):  # Nutzer 6.4 (1B): Dachluke statt Treppenhaus-Aufbau
+        lu0, lv0, lu1, lv1 = _luke(p)
+        p["luke"] = True
     u0, u1, v0, v1 = min(u0, u1), max(u0, u1), min(v0, v1), max(v0, v1)
     fs = []
     for (a, c, d_, e_) in ((u0, v0, lu0, v1), (lu1, v0, u1, v1), (lu0, v0, lu1, lv0), (lu0, lv1, lu1, v1)):
@@ -695,7 +770,8 @@ def treppenhaus(b, p):
     u0, v0, u1, v1 = r
     stufen_mat, wand_mat = S["Beton"], S["InnenWand"]
     # Dach nur, wenn die Dachplatte wirklich ein Loch bekommen hat (eingestuerzte Daecher: Platte in Teilen)
-    dach = C["dachausstieg"] and b.g["typ"] != 2 and any(abs(z - top) < 0.01 for z in p.get("decken", []))
+    dach = C["dachausstieg"] and b.g["typ"] != 2 and any(abs(z - top) < 0.01 for z in p.get("decken", [])) \
+        and not p.get("luke")
     hoch = sorted(set([round(z, 4) for z in ebenen] + ([round(top, 4)] if dach else [])))
     if len(hoch) < 2:
         return
@@ -756,6 +832,8 @@ def treppenhaus(b, p):
                     _wand_mit_tueren(b, "v", fest, a0, a1, dk, za, zb, [(m, m + T["tuer_breite"], T["tuer_hoehe"])], wand_mat)
                 p["tueren"].append((seite, za))
         # Kerndach wie vorher (Oberseite war InnenDecke)
+    if p.get("luke"):
+        leiter_und_luke(b, p, max(ebenen), top)
     # Dachausstieg: kleines Treppenhaus-Haus ueber dem Loch mit Tuer zum Dach
     if dach and p.get("dachraum"):  # Maschinenraum hohl: Huelle um Aufbau + Treppenhaus, Tuer zum Dach
         du0, dv0, du1, dv1, za, zb = p["dachraum"]
@@ -786,6 +864,40 @@ def treppenhaus(b, p):
         p["dachhaus"] = True
 
 
+def leiter_und_luke(b, p, z_boden, top):
+    """Steigleiter vom obersten Geschoss durch die Dachluke, Aufkantung (0,3 m) und aufgeklappter Deckel auf dem Dach."""
+    T = C["luke"]
+    lu0, lv0, lu1, lv1 = _luke(p)
+    za, zb = z_boden, top + T["holm_ueber_dach"]
+    sprossen = [z_boden + k * T["sprosse_abstand"] for k in range(1, int((top - z_boden) / T["sprosse_abstand"]) + 1)]
+    if p["achse"] == "v":  # Leiter an der Wand u = u0, Sprossen quer (v-Richtung)
+        uu = p["u0"] + 0.15
+        for vv in (lv0 + 0.15, lv1 - 0.15):
+            _box(b, uu - 0.025, vv - 0.025, uu + 0.025, vv + 0.025, za, zb, S["Metall"])
+        for z in sprossen:
+            _box(b, uu - 0.015, lv0 + 0.15, uu + 0.015, lv1 - 0.15, z - 0.015, z + 0.015, S["Metall"])
+        for vv in (lv0 + 0.15, lv1 - 0.15):  # Wandhalter
+            _box(b, p["u0"], vv - 0.02, uu, vv + 0.02, za + 1.0, za + 1.04, S["Metall"])
+    else:  # Leiter an der Wand v = v0
+        vv = p["v0"] + 0.15
+        for uu in (lu0 + 0.15, lu1 - 0.15):
+            _box(b, uu - 0.025, vv - 0.025, uu + 0.025, vv + 0.025, za, zb, S["Metall"])
+        for z in sprossen:
+            _box(b, lu0 + 0.15, vv - 0.015, lu1 - 0.15, vv + 0.015, z - 0.015, z + 0.015, S["Metall"])
+        for uu in (lu0 + 0.15, lu1 - 0.15):
+            _box(b, uu - 0.02, p["v0"], uu + 0.02, vv, za + 1.0, za + 1.04, S["Metall"])
+    k, h = 0.1, T["aufkantung"]  # Aufkantung
+    for (a, c, d_, e_) in ((lu0 - k, lv0 - k, lu1 + k, lv0), (lu0 - k, lv1, lu1 + k, lv1 + k),
+                           (lu0 - k, lv0, lu0, lv1), (lu1, lv0, lu1 + k, lv1)):
+        _box(b, a, c, d_, e_, top, top + h, S["Metall"])
+    # Deckel aufgeklappt (steht an der Scharnierseite fast senkrecht)
+    if p["achse"] == "v":
+        _box(b, lu1 + k, lv0 - 0.02, lu1 + k + 0.05, lv1 + 0.02, top + h, top + h + (lu1 - lu0) + 0.1, S["Metall"])
+    else:
+        _box(b, lu0 - 0.02, lv1 + k, lu1 + 0.02, lv1 + k + 0.05, top + h, top + h + (lv1 - lv0) + 0.1, S["Metall"])
+    p["dachhaus"] = "luke"
+
+
 # ------------------------------------------------------------------ Ablauf
 def main():
     t0 = time.time()
@@ -811,18 +923,20 @@ def main():
             continue
         b, orig = erzeugen(cfg, g, None if PRUEFEN else plan_erstellen, masten)
         if PRUEFEN:
-            alt, neu = fingerabdruck(ob.data), fingerabdruck(b.bm)
+            V.uv_welt(b.bm)
+            alt, neu = fingerabdruck(ob.data) + uv_abdruck(ob.data), fingerabdruck(b.bm) + uv_abdruck(b.bm)
             ergebnis.append((g["id"], name, alt == neu, alt, neu))
             b.bm.free()
             b.deko.free()
             continue
         me = bpy.data.meshes.new(ob.data.name + "_i")
+        V.uv_welt(b.bm)  # wie V.objekt_aus_bmesh in gebaeude2.bauen (Box-UV in Metern) - sonst keine Texturen
+        b.bm.normal_update()
         b.bm.to_mesh(me)
         b.bm.free()
         b.deko.free()
         for m in ob.data.materials:
             me.materials.append(m)
-        V.uv_welt_mesh(me) if hasattr(V, "uv_welt_mesh") else None
         alt = ob.data
         ob.data = me
         if alt.users == 0:

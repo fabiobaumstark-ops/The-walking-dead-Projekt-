@@ -6,6 +6,9 @@
  "kern_einzug": 4.2,
  "moebel_abstand": 0.4,
  "dachausstieg": true,
+ "dachzugang": "luke",
+ "_info_dachzugang": "Nutzer 6.4 (1B): Dachluke + Steigleiter statt Treppenhaus-Aufbau (CAM 2 bleibt wie freigegeben). Ausnahme: Treppe endet im vorhandenen Maschinenraum (Typ 5).",
+ "luke": {"sprosse_abstand": 0.28, "holm_ueber_dach": 1.0, "aufkantung": 0.3},
  "parkhaus": {"_info": "Phase-1-Rampen (u0, u1, v0, v1) enden 0,3 m unter der naechsten Decke und haben kein Deckenloch -> korrigiert", "rampe": [10.5, 15.5, 8.0, 22.0], "rampe_hoeher": 0.3},
  "aussentreppe": {"steigung": 0.17, "auftritt": 0.30},
  "treppe": {

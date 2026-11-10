@@ -634,3 +634,10 @@
   - Ergebnis viertel_v11.blend: **39 von 41 Gebäuden in allen Ebenen begehbar** (inkl. Dach, wo es ein Flachdach gibt). Nicht begehbar: Kirche (B31) und Tankstellen-Shop (B34) – beide sind innen massive Blockout-Körper
 - Datei: viertel_v11.blend 88,5 MB; v09 entfernt (A3)
 - Noch offen (Teil 2, Vorgabe „Realismus wie außen“): Innenwände/Räume (Wohnungen, Flure), echte Innenmaterialien (Putz mit Schäden, Tapete, Fliesen, Holzböden), Möbel als Scans statt Kästen, Licht durch Fenster prüfen, Kirche und Tankstellen-Shop neu modellieren mit Innenraum
+
+### 6.4 Teil 1 – Nachtrag (2026-11-10)
+- **Fehler gefunden und behoben:** Die erste viertel_v11.blend hatte bei allen umgebauten Gebäuden keine Texturkoordinaten mehr (nur ca. 1 % der Ecken belegt) – die Box-UV-Projektion aus V.objekt_aus_bmesh fehlte im Umbau. Jetzt wie in gebaeude2.bauen; der Identitätstest prüft zusätzlich die UVs (41/41 identisch)
+- Dachzugang nach Antwort 1B: Dachluke 0,8 × 0,8 m über dem obersten Treppenpodest, Steigleiter (Sprossen 0,28 m, Holme 1 m über Dach), Aufkantung 0,3 m, aufgeklappter Deckel; Treppen enden im obersten Geschoss. B13: Treppe endet im vorhandenen Maschinenraum (hohl, mit Tür)
+- Wohnhäuser (Typ 1) haben einen Hinterausgang zum Hof (Rückwand, Erdgeschoss, wo kein Fenster ist) – nötig, weil die Haustür von B17 hinter Panzer B liegt (der Boolean-Wanddurchbruch schneidet mit korrekten Normalen jetzt auch die Eingangsstufen weg)
+- Ergebnis: weiterhin 39 von 41 begehbar (Dach jetzt über Leiter; Leiter klettern kommt mit dem Spieler in 6.5). Datei 90,7 MB (Ziel 90 MB knapp überschritten, GitHub-Grenze 100 MB) → Möbel in Teil 2 als verlinkte Instanzen, nicht in die .blend kopieren
+- Neue Assets (Poly Haven, CC0) für Teil 2: 9 Innen-Texturen (Tapete, abblätternde Farbe, rissiger/alter Putz, alte Dielen, Linoleum, Fliesen, Betonboden, Laminat) und 21 Möbel-Scans; Manifest 117 Assets, LIZENZEN.txt aktualisiert

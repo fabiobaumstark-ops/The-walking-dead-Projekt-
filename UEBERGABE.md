@@ -2,7 +2,7 @@
 
 - **Aktuelle Phase:** Phase 6.4 Teil 1 fertig (begehbare Gebäude, 39/41) – als Nächstes 6.4 Teil 2 (Innen-Realismus); 6.1 Unreal-Test wartet weiter auf den Mac
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
-- **.blend-Version:** `viertel_v11.blend` (6.4 Teil 1, 88,5 MB); Vorversion `viertel_v10.blend`
+- **.blend-Version:** `viertel_v11.blend` (6.4 Teil 1, 90,7 MB – knapp über dem Ziel 90 MB); Vorversion `viertel_v10.blend`
 - **Branch:** `claude/zealous-ride-c12e2z` (neu ab 2026-11-10; gleicher Stand wie zuvor `claude/zen-meitner-53hxe1`)
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 - **Lokal (Mac, 2026-11-05):** Blender 5.2.3 LTS unter /Applications/Blender-5.2.3.app, Metal-GPU (M4 Pro, 16 Kerne) erkannt, Assets geladen (356 Dateien, 1,7 GB)
@@ -74,6 +74,7 @@
 ## Bisherige Antworten/Freigaben
 - 6.4 Teil 1 (2026-11-10): 1B Dachzugang als Dachluke + Leiter statt Treppenhaus-Aufbau (CAM 2 bleibt wie freigegeben), 2A Teil 2 = Räume + Innenmaterialien + Scan-Möbel, erst an 2 Gebäuden zeigen, 3A Kirche und Tankstellen-Shop in Teil 2 neu bauen
 - 2026-11-10: iPad – Unreal-Installation durch Claude nicht möglich (kein Zugriff auf den Mac); Antwort A: Innenräume zuerst. Vorgabe: Innen „selber Realismus wie außen“
+- Unreal-Installation auf dem Mac (2026-11-10): Fehler IS-0007 im Epic Launcher, auch nach Hinweisen nicht gelöst → Unreal pausiert, Nutzer: „mach weiter“ (Innenräume). Godot als Alternative angeboten, nicht gewählt
 - Unreal (2026-11-10): B begehbares Level → genauer: C richtiges Spiel, Blender-Animation gestrichen (A), Unreal 5.8 neu installieren (A), möglichst alles begehbar (C)
 - Meldung 2026-11-10: „Datei kaum zu öffnen auf dem Mac“ → v09/v10 entlastet (Instanzen, Fenster-Anzeige); Bestätigung steht aus
 - Phase 5 (2026-11-10): 1A CAM 1 am besten, CAM 4 am schwächsten (neu komponieren), 2C Nebel zu schwach → mehr Dunst in der Tiefe, 3A final 1080p, 4B Animation ja, aber erst nach der Qualitätsrunde

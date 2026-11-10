@@ -1,8 +1,8 @@
 {
  "_info": "Liste aller externen Assets. Laden mit: python3 download_assets.py",
- "erstellt": "2026-11-05",
- "groesse_gesamt_mb": 2205,
- "groesse_basis_mb": 2022,
+ "erstellt": "2026-11-10",
+ "groesse_gesamt_mb": 2573,
+ "groesse_basis_mb": 2390,
  "selbst_gebaut": [
   "Asphaltschindeln (keine CC0-Fototextur gefunden: prozedurale Schindel-Geometrie + Fotobasis tarred_gravel)",
   "Betontruemmer",
@@ -2005,6 +2005,459 @@
      "size": 15211530,
      "md5": null,
      "entpacken": true
+    }
+   ]
+  },
+  {
+   "name": "MAT_Innen_Tapete",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "decrepit_wallpaper",
+   "seite": "https://polyhaven.com/a/decrepit_wallpaper",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Rob Tuytel"
+   ],
+   "zielpfad": "assets/textures/decrepit_wallpaper",
+   "masse_m": [
+    2.5,
+    2.5
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/decrepit_wallpaper/decrepit_wallpaper_diff_2k.jpg",
+     "ziel": "assets/textures/decrepit_wallpaper/decrepit_wallpaper_diff_2k.jpg",
+     "size": 3325490,
+     "md5": "6d8cef16eecb7b4c84d77008ffc375b5"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/decrepit_wallpaper/decrepit_wallpaper_rough_2k.jpg",
+     "ziel": "assets/textures/decrepit_wallpaper/decrepit_wallpaper_rough_2k.jpg",
+     "size": 1660507,
+     "md5": "08511294c9cdbaa4e50c28ac05ae2248"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/decrepit_wallpaper/decrepit_wallpaper_nor_gl_2k.jpg",
+     "ziel": "assets/textures/decrepit_wallpaper/decrepit_wallpaper_nor_gl_2k.jpg",
+     "size": 2906832,
+     "md5": "8ae2cd9b5d40327c6a0193fa9fd97058"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/decrepit_wallpaper/decrepit_wallpaper_disp_2k.png",
+     "ziel": "assets/textures/decrepit_wallpaper/decrepit_wallpaper_disp_2k.png",
+     "size": 5448717,
+     "md5": "a22d6712db59f57f6d81e7d5c66c76cb"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/decrepit_wallpaper/decrepit_wallpaper_ao_2k.jpg",
+     "ziel": "assets/textures/decrepit_wallpaper/decrepit_wallpaper_ao_2k.jpg",
+     "size": 1770378,
+     "md5": "b3dadef9acd1a727e459d7a08bdc6e9f"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Innen_Farbe_Abblaetternd",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "peeling_painted_wall",
+   "seite": "https://polyhaven.com/a/peeling_painted_wall",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Dimitrios Savva"
+   ],
+   "zielpfad": "assets/textures/peeling_painted_wall",
+   "masse_m": [
+    1.8,
+    1.8
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/peeling_painted_wall/peeling_painted_wall_diff_2k.jpg",
+     "ziel": "assets/textures/peeling_painted_wall/peeling_painted_wall_diff_2k.jpg",
+     "size": 1742944,
+     "md5": "d9dab051d395f410f7644fd8cabe58a4"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/peeling_painted_wall/peeling_painted_wall_rough_2k.jpg",
+     "ziel": "assets/textures/peeling_painted_wall/peeling_painted_wall_rough_2k.jpg",
+     "size": 514284,
+     "md5": "9fc58f17b399ed53e96917f58c911ab5"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/peeling_painted_wall/peeling_painted_wall_nor_gl_2k.jpg",
+     "ziel": "assets/textures/peeling_painted_wall/peeling_painted_wall_nor_gl_2k.jpg",
+     "size": 4067269,
+     "md5": "fa989e75ef10c84a347a841128c58e21"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/peeling_painted_wall/peeling_painted_wall_disp_2k.png",
+     "ziel": "assets/textures/peeling_painted_wall/peeling_painted_wall_disp_2k.png",
+     "size": 6189561,
+     "md5": "43fd82452efefbcc409c09e0540390a5"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/peeling_painted_wall/peeling_painted_wall_ao_2k.jpg",
+     "ziel": "assets/textures/peeling_painted_wall/peeling_painted_wall_ao_2k.jpg",
+     "size": 3671013,
+     "md5": "4dfab0544590ffd586d0de0f20857d16"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Innen_Putz_Rissig",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "worn_cracked_plaster",
+   "seite": "https://polyhaven.com/a/worn_cracked_plaster",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Amal Kumar"
+   ],
+   "zielpfad": "assets/textures/worn_cracked_plaster",
+   "masse_m": [
+    1.8,
+    1.8
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_cracked_plaster/worn_cracked_plaster_diff_2k.jpg",
+     "ziel": "assets/textures/worn_cracked_plaster/worn_cracked_plaster_diff_2k.jpg",
+     "size": 3773492,
+     "md5": "6f8be501897694a4d197b5f009e6e409"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_cracked_plaster/worn_cracked_plaster_rough_2k.jpg",
+     "ziel": "assets/textures/worn_cracked_plaster/worn_cracked_plaster_rough_2k.jpg",
+     "size": 1996497,
+     "md5": "08210a56823092284858b44375b8e3b1"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_cracked_plaster/worn_cracked_plaster_nor_gl_2k.jpg",
+     "ziel": "assets/textures/worn_cracked_plaster/worn_cracked_plaster_nor_gl_2k.jpg",
+     "size": 3418770,
+     "md5": "07789f3dd26dc666fb3a88ba32b6db6c"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/worn_cracked_plaster/worn_cracked_plaster_disp_2k.png",
+     "ziel": "assets/textures/worn_cracked_plaster/worn_cracked_plaster_disp_2k.png",
+     "size": 6715377,
+     "md5": "35d090e64864cccc239a83c0a69f52d9"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_cracked_plaster/worn_cracked_plaster_ao_2k.jpg",
+     "ziel": "assets/textures/worn_cracked_plaster/worn_cracked_plaster_ao_2k.jpg",
+     "size": 1872471,
+     "md5": "1639f66822935102d4130cffb4294294"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Innen_Putz_Alt",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "worn_plaster_wall",
+   "seite": "https://polyhaven.com/a/worn_plaster_wall",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Dimitrios Savva"
+   ],
+   "zielpfad": "assets/textures/worn_plaster_wall",
+   "masse_m": [
+    1.8,
+    1.8
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_plaster_wall/worn_plaster_wall_diff_2k.jpg",
+     "ziel": "assets/textures/worn_plaster_wall/worn_plaster_wall_diff_2k.jpg",
+     "size": 3096042,
+     "md5": "113c336124507f4b3fc7d440f6fd8346"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_plaster_wall/worn_plaster_wall_rough_2k.jpg",
+     "ziel": "assets/textures/worn_plaster_wall/worn_plaster_wall_rough_2k.jpg",
+     "size": 1012956,
+     "md5": "221e1f80b2b21b7ee68636003a8edb1b"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_plaster_wall/worn_plaster_wall_nor_gl_2k.jpg",
+     "ziel": "assets/textures/worn_plaster_wall/worn_plaster_wall_nor_gl_2k.jpg",
+     "size": 2935964,
+     "md5": "737e4eb8ec9af427c8aafe46675409d9"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/worn_plaster_wall/worn_plaster_wall_disp_2k.png",
+     "ziel": "assets/textures/worn_plaster_wall/worn_plaster_wall_disp_2k.png",
+     "size": 3892260,
+     "md5": "8f0b6c24d95f9d27d43be0559406d919"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_plaster_wall/worn_plaster_wall_ao_2k.jpg",
+     "ziel": "assets/textures/worn_plaster_wall/worn_plaster_wall_ao_2k.jpg",
+     "size": 1675976,
+     "md5": "22a2cdc5ab466d67bae52d04de8a09b2"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Boden_Dielen_Alt",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "old_wooden_floor_02",
+   "seite": "https://polyhaven.com/a/old_wooden_floor_02",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Charlotte Baglioni",
+    "Jenelle van Heerden"
+   ],
+   "zielpfad": "assets/textures/old_wooden_floor_02",
+   "masse_m": [
+    2.03,
+    2.03
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/old_wooden_floor_02/old_wooden_floor_02_diff_2k.jpg",
+     "ziel": "assets/textures/old_wooden_floor_02/old_wooden_floor_02_diff_2k.jpg",
+     "size": 3473257,
+     "md5": "67d884bf7bd011fac3bb711db9f1baa3"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/old_wooden_floor_02/old_wooden_floor_02_rough_2k.jpg",
+     "ziel": "assets/textures/old_wooden_floor_02/old_wooden_floor_02_rough_2k.jpg",
+     "size": 1205461,
+     "md5": "6feeaa79b245928f53ac54133e0ef562"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/old_wooden_floor_02/old_wooden_floor_02_nor_gl_2k.jpg",
+     "ziel": "assets/textures/old_wooden_floor_02/old_wooden_floor_02_nor_gl_2k.jpg",
+     "size": 2455839,
+     "md5": "145e5193a9e3945d959fa101bbbb4c9b"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/old_wooden_floor_02/old_wooden_floor_02_disp_2k.png",
+     "ziel": "assets/textures/old_wooden_floor_02/old_wooden_floor_02_disp_2k.png",
+     "size": 5104277,
+     "md5": "06112e9097a2d619aab99e0a41753ecc"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/old_wooden_floor_02/old_wooden_floor_02_ao_2k.jpg",
+     "ziel": "assets/textures/old_wooden_floor_02/old_wooden_floor_02_ao_2k.jpg",
+     "size": 1885883,
+     "md5": "520bcf08e09a4006bbd6c70b9ae6319f"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Boden_Linoleum",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "old_linoleum_flooring_01",
+   "seite": "https://polyhaven.com/a/old_linoleum_flooring_01",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Charlotte Baglioni"
+   ],
+   "zielpfad": "assets/textures/old_linoleum_flooring_01",
+   "masse_m": [
+    1.99,
+    1.99
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/old_linoleum_flooring_01/old_linoleum_flooring_01_diff_2k.jpg",
+     "ziel": "assets/textures/old_linoleum_flooring_01/old_linoleum_flooring_01_diff_2k.jpg",
+     "size": 2702594,
+     "md5": "9d503eab059374f985e25210967ca816"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/old_linoleum_flooring_01/old_linoleum_flooring_01_rough_2k.jpg",
+     "ziel": "assets/textures/old_linoleum_flooring_01/old_linoleum_flooring_01_rough_2k.jpg",
+     "size": 1932827,
+     "md5": "d37f6b6f5d84b2684d91f0a231cad9d3"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/old_linoleum_flooring_01/old_linoleum_flooring_01_nor_gl_2k.jpg",
+     "ziel": "assets/textures/old_linoleum_flooring_01/old_linoleum_flooring_01_nor_gl_2k.jpg",
+     "size": 1768391,
+     "md5": "e229e73b51297087828b9fc941167251"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/old_linoleum_flooring_01/old_linoleum_flooring_01_disp_2k.png",
+     "ziel": "assets/textures/old_linoleum_flooring_01/old_linoleum_flooring_01_disp_2k.png",
+     "size": 6726568,
+     "md5": "5a2fa4d7feee3c3b5cf5b54f63d17657"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/old_linoleum_flooring_01/old_linoleum_flooring_01_ao_2k.jpg",
+     "ziel": "assets/textures/old_linoleum_flooring_01/old_linoleum_flooring_01_ao_2k.jpg",
+     "size": 1315438,
+     "md5": "de7f6ffafaefd2a21bbf5bcbba1abd1d"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Boden_Fliesen_Alt",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "worn_tile_floor",
+   "seite": "https://polyhaven.com/a/worn_tile_floor",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Dimitrios Savva"
+   ],
+   "zielpfad": "assets/textures/worn_tile_floor",
+   "masse_m": [
+    2.0,
+    2.0
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_tile_floor/worn_tile_floor_diff_2k.jpg",
+     "ziel": "assets/textures/worn_tile_floor/worn_tile_floor_diff_2k.jpg",
+     "size": 3325063,
+     "md5": "ca9b855f7a59fd3c16ac572262fb197e"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_tile_floor/worn_tile_floor_rough_2k.jpg",
+     "ziel": "assets/textures/worn_tile_floor/worn_tile_floor_rough_2k.jpg",
+     "size": 2904794,
+     "md5": "bcc4837c97b340d85a5a4300bb56ec21"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_tile_floor/worn_tile_floor_nor_gl_2k.jpg",
+     "ziel": "assets/textures/worn_tile_floor/worn_tile_floor_nor_gl_2k.jpg",
+     "size": 2668016,
+     "md5": "40bb017d08d3c13bfbcf7949f36d9c7d"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/worn_tile_floor/worn_tile_floor_disp_2k.png",
+     "ziel": "assets/textures/worn_tile_floor/worn_tile_floor_disp_2k.png",
+     "size": 6192267,
+     "md5": "dbad9fd6d2e8cefa1991c8c20ace20ef"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/worn_tile_floor/worn_tile_floor_ao_2k.jpg",
+     "ziel": "assets/textures/worn_tile_floor/worn_tile_floor_ao_2k.jpg",
+     "size": 2937696,
+     "md5": "e1ced2d58fd948a161f83d668156b7da"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Boden_Beton_Alt",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "concrete_floor_worn_001",
+   "seite": "https://polyhaven.com/a/concrete_floor_worn_001",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Dimitrios Savva",
+    "Rico Cilliers"
+   ],
+   "zielpfad": "assets/textures/concrete_floor_worn_001",
+   "masse_m": [
+    3.0,
+    3.0
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/concrete_floor_worn_001/concrete_floor_worn_001_diff_2k.jpg",
+     "ziel": "assets/textures/concrete_floor_worn_001/concrete_floor_worn_001_diff_2k.jpg",
+     "size": 482906,
+     "md5": "6a3645f19f2ac4b7f60f43419c5d09ec"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/concrete_floor_worn_001/concrete_floor_worn_001_rough_2k.jpg",
+     "ziel": "assets/textures/concrete_floor_worn_001/concrete_floor_worn_001_rough_2k.jpg",
+     "size": 735249,
+     "md5": "169cac76d6499d7d70d1dbb237fcc976"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/concrete_floor_worn_001/concrete_floor_worn_001_nor_gl_2k.jpg",
+     "ziel": "assets/textures/concrete_floor_worn_001/concrete_floor_worn_001_nor_gl_2k.jpg",
+     "size": 870609,
+     "md5": "210fbc9fe40492177e79fdb4afda268e"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/concrete_floor_worn_001/concrete_floor_worn_001_disp_2k.png",
+     "ziel": "assets/textures/concrete_floor_worn_001/concrete_floor_worn_001_disp_2k.png",
+     "size": 9906565,
+     "md5": "944f6bdc45f4d36f5a9ec7904c5421d5"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/concrete_floor_worn_001/concrete_floor_worn_001_ao_2k.jpg",
+     "ziel": "assets/textures/concrete_floor_worn_001/concrete_floor_worn_001_ao_2k.jpg",
+     "size": 689586,
+     "md5": "2515023779ca2c7a1e55721001859ecf"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Boden_Laminat",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "laminate_floor_02",
+   "seite": "https://polyhaven.com/a/laminate_floor_02",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Dario Barresi",
+    "Charlotte Baglioni"
+   ],
+   "zielpfad": "assets/textures/laminate_floor_02",
+   "masse_m": [
+    1.7,
+    1.7
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/laminate_floor_02/laminate_floor_02_diff_2k.jpg",
+     "ziel": "assets/textures/laminate_floor_02/laminate_floor_02_diff_2k.jpg",
+     "size": 3225117,
+     "md5": "e106d121c9abb78f80e72cb5bd003295"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/laminate_floor_02/laminate_floor_02_rough_2k.jpg",
+     "ziel": "assets/textures/laminate_floor_02/laminate_floor_02_rough_2k.jpg",
+     "size": 2545321,
+     "md5": "06663cee617c49b117e0e9466fd1486d"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/laminate_floor_02/laminate_floor_02_nor_gl_2k.jpg",
+     "ziel": "assets/textures/laminate_floor_02/laminate_floor_02_nor_gl_2k.jpg",
+     "size": 2420220,
+     "md5": "ef2dc661cf7a24fa1c2577fd10754014"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/laminate_floor_02/laminate_floor_02_disp_2k.png",
+     "ziel": "assets/textures/laminate_floor_02/laminate_floor_02_disp_2k.png",
+     "size": 7100044,
+     "md5": "6ee0a3b944c51640689c57595565c47e"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/laminate_floor_02/laminate_floor_02_ao_2k.jpg",
+     "ziel": "assets/textures/laminate_floor_02/laminate_floor_02_ao_2k.jpg",
+     "size": 1845680,
+     "md5": "0d3d97745fa659cce852caf5e3a3046b"
     }
    ]
   },
@@ -4138,6 +4591,984 @@
      "ziel": "assets/models/shrub_sorrel_01/textures/shrub_sorrel_01_nor_gl_2k.exr",
      "size": 3640028,
      "md5": "43d97b0bd6f0e8dc56dd22dd356c2a7b"
+    }
+   ]
+  },
+  {
+   "name": "sofa_02",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "sofa_02",
+   "seite": "https://polyhaven.com/a/sofa_02",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Kirill Sannikov"
+   ],
+   "zielpfad": "assets/models/sofa_02",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/sofa_02/sofa_02_2k.blend",
+     "ziel": "assets/models/sofa_02/sofa_02_2k.blend",
+     "size": 247569,
+     "md5": "eb0babe3e46fe208f16c51098ce7030f"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/sofa_02/sofa_02_nor_gl_2k.exr",
+     "ziel": "assets/models/sofa_02/textures/sofa_02_nor_gl_2k.exr",
+     "size": 4916874,
+     "md5": "c803f44b48c70780d53dc84ad7eb9a48"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/sofa_02/sofa_02_diff_2k.jpg",
+     "ziel": "assets/models/sofa_02/textures/sofa_02_diff_2k.jpg",
+     "size": 323319,
+     "md5": "37808357cc7d00fd62bda197cf89e6ae"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/sofa_02/sofa_02_roughness_2k.jpg",
+     "ziel": "assets/models/sofa_02/textures/sofa_02_roughness_2k.jpg",
+     "size": 405582,
+     "md5": "1f8b1f14c6309a419e3a9ad6a50f4b58"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/sofa_02/sofa_02_metallic_2k.exr",
+     "ziel": "assets/models/sofa_02/textures/sofa_02_metallic_2k.exr",
+     "size": 13296,
+     "md5": "6ba70e5f38cbc934581ca7583721446b"
+    }
+   ]
+  },
+  {
+   "name": "sofa_03",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "sofa_03",
+   "seite": "https://polyhaven.com/a/sofa_03",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Fran Calvente"
+   ],
+   "zielpfad": "assets/models/sofa_03",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/sofa_03/sofa_03_2k.blend",
+     "ziel": "assets/models/sofa_03/sofa_03_2k.blend",
+     "size": 354285,
+     "md5": "e4eeac30af6205cd3b78db9b3dc58de8"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/sofa_03/sofa_03_rough_2k.jpg",
+     "ziel": "assets/models/sofa_03/textures/sofa_03_rough_2k.jpg",
+     "size": 613551,
+     "md5": "258efb972b9f20676a4cad3405f44ae6"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/sofa_03/sofa_03_opacity_2k.png",
+     "ziel": "assets/models/sofa_03/textures/sofa_03_opacity_2k.png",
+     "size": 61632,
+     "md5": "93ea48feb6a5b95708c3fc63935eae41"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/sofa_03/sofa_03_diff_2k.jpg",
+     "ziel": "assets/models/sofa_03/textures/sofa_03_diff_2k.jpg",
+     "size": 563414,
+     "md5": "38aeca485a17eb8345a2e6a623d0294c"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/sofa_03/sofa_03_nor_gl_2k.exr",
+     "ziel": "assets/models/sofa_03/textures/sofa_03_nor_gl_2k.exr",
+     "size": 1763068,
+     "md5": "c27a0bea6175d5689b69494337000a22"
+    }
+   ]
+  },
+  {
+   "name": "ArmChair_01",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "ArmChair_01",
+   "seite": "https://polyhaven.com/a/ArmChair_01",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Kirill Sannikov"
+   ],
+   "zielpfad": "assets/models/ArmChair_01",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/ArmChair_01/ArmChair_01_2k.blend",
+     "ziel": "assets/models/ArmChair_01/ArmChair_01_2k.blend",
+     "size": 344664,
+     "md5": "77bf216d41e7956eb10c4db8aa397488"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/ArmChair_01/Armchair_01_roughness_2k.jpg",
+     "ziel": "assets/models/ArmChair_01/textures/Armchair_01_roughness_2k.jpg",
+     "size": 372858,
+     "md5": "50a9778c3d1d08d58fae3b0db769679a"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/ArmChair_01/Armchair_01_metallic_2k.exr",
+     "ziel": "assets/models/ArmChair_01/textures/Armchair_01_metallic_2k.exr",
+     "size": 13296,
+     "md5": "8955f6c71edd547d7cc6ade22713eff2"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/ArmChair_01/Armchair_01_diff_2k.jpg",
+     "ziel": "assets/models/ArmChair_01/textures/Armchair_01_diff_2k.jpg",
+     "size": 723200,
+     "md5": "7b296bc92e165460d73b69a03dabb897"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/ArmChair_01/Armchair_01_nor_gl_2k.exr",
+     "ziel": "assets/models/ArmChair_01/textures/Armchair_01_nor_gl_2k.exr",
+     "size": 8865448,
+     "md5": "20eb3760536124d1c6024a297cfb9e61"
+    }
+   ]
+  },
+  {
+   "name": "CoffeeTable_01",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "CoffeeTable_01",
+   "seite": "https://polyhaven.com/a/CoffeeTable_01",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Fernando Quinn"
+   ],
+   "zielpfad": "assets/models/CoffeeTable_01",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/CoffeeTable_01/CoffeeTable_01_2k.blend",
+     "ziel": "assets/models/CoffeeTable_01/CoffeeTable_01_2k.blend",
+     "size": 432339,
+     "md5": "03b71dc95892b772bb86cabcdb494a2a"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/CoffeeTable_01/CoffeeTable_01_nor_gl_2k.exr",
+     "ziel": "assets/models/CoffeeTable_01/textures/CoffeeTable_01_nor_gl_2k.exr",
+     "size": 4359812,
+     "md5": "35536b2d856cd2b417564923a38241ec"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/CoffeeTable_01/CoffeeTable_01_roughness_2k.jpg",
+     "ziel": "assets/models/CoffeeTable_01/textures/CoffeeTable_01_roughness_2k.jpg",
+     "size": 563129,
+     "md5": "9173375b0fdef90d1347700f4d6d820d"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/CoffeeTable_01/CoffeeTable_01_diff_2k.jpg",
+     "ziel": "assets/models/CoffeeTable_01/textures/CoffeeTable_01_diff_2k.jpg",
+     "size": 639146,
+     "md5": "2df67a73e20e4ec4559db42cdae0b90d"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/CoffeeTable_01/CoffeeTable_01_metallic_2k.exr",
+     "ziel": "assets/models/CoffeeTable_01/textures/CoffeeTable_01_metallic_2k.exr",
+     "size": 60814,
+     "md5": "8e452216e9e6d2f9e4dd035d77d4e621"
+    }
+   ]
+  },
+  {
+   "name": "dining_table",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "dining_table",
+   "seite": "https://polyhaven.com/a/dining_table",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Aron Łyczek"
+   ],
+   "zielpfad": "assets/models/dining_table",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/dining_table/dining_table_2k.blend",
+     "ziel": "assets/models/dining_table/dining_table_2k.blend",
+     "size": 150500,
+     "md5": "e86dfbf95e1a7cc30ee48c3c0d1cc4f3"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/dining_table/dining_table_diff_2k.jpg",
+     "ziel": "assets/models/dining_table/textures/dining_table_diff_2k.jpg",
+     "size": 3345927,
+     "md5": "dbe81f446c425edceafc4dd09f81cb8a"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/dining_table/dining_table_nor_gl_2k.exr",
+     "ziel": "assets/models/dining_table/textures/dining_table_nor_gl_2k.exr",
+     "size": 7281319,
+     "md5": "5484e6b4219c4eaca30720f2fce96655"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/dining_table/dining_table_rough_2k.exr",
+     "ziel": "assets/models/dining_table/textures/dining_table_rough_2k.exr",
+     "size": 2028469,
+     "md5": "d588b522653314d9271e7af91d0ce72d"
+    }
+   ]
+  },
+  {
+   "name": "dining_chair_02",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "dining_chair_02",
+   "seite": "https://polyhaven.com/a/dining_chair_02",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "James Ray Cock"
+   ],
+   "zielpfad": "assets/models/dining_chair_02",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/dining_chair_02/dining_chair_02_2k.blend",
+     "ziel": "assets/models/dining_chair_02/dining_chair_02_2k.blend",
+     "size": 798159,
+     "md5": "a817aab27f6cf6d565daf9a13eeb0d4e"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/dining_chair_02/dining_chair_02_rough_2k.jpg",
+     "ziel": "assets/models/dining_chair_02/textures/dining_chair_02_rough_2k.jpg",
+     "size": 615889,
+     "md5": "0bd4578133e1e0493706422f19c3aa94"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/dining_chair_02/dining_chair_02_diff_2k.jpg",
+     "ziel": "assets/models/dining_chair_02/textures/dining_chair_02_diff_2k.jpg",
+     "size": 332586,
+     "md5": "be041803606b5bf7869f08ab58a1581f"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/dining_chair_02/dining_chair_02_metal_2k.exr",
+     "ziel": "assets/models/dining_chair_02/textures/dining_chair_02_metal_2k.exr",
+     "size": 21649,
+     "md5": "1463eb9adcff1ace0d4bf3e124df5500"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/dining_chair_02/dining_chair_02_nor_gl_2k.exr",
+     "ziel": "assets/models/dining_chair_02/textures/dining_chair_02_nor_gl_2k.exr",
+     "size": 5235765,
+     "md5": "e3151409207335aa92c19146994b2c53"
+    }
+   ]
+  },
+  {
+   "name": "old_bed_frame",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "old_bed_frame",
+   "seite": "https://polyhaven.com/a/old_bed_frame",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Luca B"
+   ],
+   "zielpfad": "assets/models/old_bed_frame",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/old_bed_frame/old_bed_frame_2k.blend",
+     "ziel": "assets/models/old_bed_frame/old_bed_frame_2k.blend",
+     "size": 865386,
+     "md5": "315a005e5a2f623795927de7867e6d59"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/old_bed_frame/old_bed_frame_diff_2k.jpg",
+     "ziel": "assets/models/old_bed_frame/textures/old_bed_frame_diff_2k.jpg",
+     "size": 2615779,
+     "md5": "ee2dd16be19a6dd2b84fb347e27d693b"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/old_bed_frame/old_bed_frame_metal_2k.exr",
+     "ziel": "assets/models/old_bed_frame/textures/old_bed_frame_metal_2k.exr",
+     "size": 1713875,
+     "md5": "c7591386e2b0ccc61145e44b573f796a"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/old_bed_frame/old_bed_frame_nor_gl_2k.exr",
+     "ziel": "assets/models/old_bed_frame/textures/old_bed_frame_nor_gl_2k.exr",
+     "size": 5893634,
+     "md5": "73731ba30f98b757ab488569085c2b19"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/old_bed_frame/old_bed_frame_rough_2k.exr",
+     "ziel": "assets/models/old_bed_frame/textures/old_bed_frame_rough_2k.exr",
+     "size": 2430151,
+     "md5": "ac8072f330b1fa0f047053b9f0a423cc"
+    }
+   ]
+  },
+  {
+   "name": "ClassicNightstand_01",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "ClassicNightstand_01",
+   "seite": "https://polyhaven.com/a/ClassicNightstand_01",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Kirill Sannikov"
+   ],
+   "zielpfad": "assets/models/ClassicNightstand_01",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/ClassicNightstand_01/ClassicNightstand_01_2k.blend",
+     "ziel": "assets/models/ClassicNightstand_01/ClassicNightstand_01_2k.blend",
+     "size": 203281,
+     "md5": "45ce67d1368a45b4fd0ead9a9ba14ea1"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/ClassicNightstand_01/ClassicNightstand_01_nor_gl_2k.exr",
+     "ziel": "assets/models/ClassicNightstand_01/textures/ClassicNightstand_01_nor_gl_2k.exr",
+     "size": 4339911,
+     "md5": "9406ecf64cf1be4021d663af48c260bb"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/ClassicNightstand_01/ClassicNightstand_01_roughness_2k.jpg",
+     "ziel": "assets/models/ClassicNightstand_01/textures/ClassicNightstand_01_roughness_2k.jpg",
+     "size": 490470,
+     "md5": "4c39555e58f20283ab74f3bbd26c33e0"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/ClassicNightstand_01/ClassicNightstand_01_diff_2k.jpg",
+     "ziel": "assets/models/ClassicNightstand_01/textures/ClassicNightstand_01_diff_2k.jpg",
+     "size": 379963,
+     "md5": "74fd48f2236b8aae5189f1c62df45ced"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/ClassicNightstand_01/ClassicNightstand_01_metallic_2k.exr",
+     "ziel": "assets/models/ClassicNightstand_01/textures/ClassicNightstand_01_metallic_2k.exr",
+     "size": 13296,
+     "md5": "a726025017b59eb1fa2100f098b2bccc"
+    }
+   ]
+  },
+  {
+   "name": "drawer_cabinet",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "drawer_cabinet",
+   "seite": "https://polyhaven.com/a/drawer_cabinet",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Ulan Cabanilla"
+   ],
+   "zielpfad": "assets/models/drawer_cabinet",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/drawer_cabinet/drawer_cabinet_2k.blend",
+     "ziel": "assets/models/drawer_cabinet/drawer_cabinet_2k.blend",
+     "size": 709286,
+     "md5": "090ff9958a82f394b7de353a98d65caa"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/drawer_cabinet/drawer_cabinet_metallic_2k.exr",
+     "ziel": "assets/models/drawer_cabinet/textures/drawer_cabinet_metallic_2k.exr",
+     "size": 27066,
+     "md5": "a6619c101153f2bfe0e86126696b00ce"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/drawer_cabinet/drawer_cabinet_nor_gl_2k.exr",
+     "ziel": "assets/models/drawer_cabinet/textures/drawer_cabinet_nor_gl_2k.exr",
+     "size": 3263324,
+     "md5": "ad39960a25913609ed1519d7e2f2f872"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/drawer_cabinet/drawer_cabinet_roughness_2k.jpg",
+     "ziel": "assets/models/drawer_cabinet/textures/drawer_cabinet_roughness_2k.jpg",
+     "size": 309038,
+     "md5": "f7ce6e7703fcd1886486fccd77577588"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/drawer_cabinet/drawer_cabinet_diff_2k.jpg",
+     "ziel": "assets/models/drawer_cabinet/textures/drawer_cabinet_diff_2k.jpg",
+     "size": 541585,
+     "md5": "ecf30786b237f49412c4026e9d9eb7bd"
+    }
+   ]
+  },
+  {
+   "name": "vintage_cabinet_01",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "vintage_cabinet_01",
+   "seite": "https://polyhaven.com/a/vintage_cabinet_01",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Rico Cilliers"
+   ],
+   "zielpfad": "assets/models/vintage_cabinet_01",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/vintage_cabinet_01/vintage_cabinet_01_2k.blend",
+     "ziel": "assets/models/vintage_cabinet_01/vintage_cabinet_01_2k.blend",
+     "size": 3207550,
+     "md5": "965d61524582cd614aef8c212829a191"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/vintage_cabinet_01/vintage_cabinet_01_a_rough_2k.png",
+     "ziel": "assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_rough_2k.png",
+     "size": 5035310,
+     "md5": "a7eadb7da300bf41f42bbdc11d12f453"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/vintage_cabinet_01/vintage_cabinet_01_a_nor_gl_2k.png",
+     "ziel": "assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_nor_gl_2k.png",
+     "size": 13825998,
+     "md5": "da48866128463ace2406e0a663b19da8"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/vintage_cabinet_01/vintage_cabinet_01_b_rough_2k.png",
+     "ziel": "assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_b_rough_2k.png",
+     "size": 5495142,
+     "md5": "f62803f585babcf9a6c12e54ed97ecab"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/vintage_cabinet_01/vintage_cabinet_01_a_metal_2k.png",
+     "ziel": "assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_metal_2k.png",
+     "size": 12664,
+     "md5": "4d6bda563a76267b286e2a05fb16c7c1"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/vintage_cabinet_01/vintage_cabinet_01_a_diff_2k.png",
+     "ziel": "assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_diff_2k.png",
+     "size": 17631467,
+     "md5": "582aac17540cf6955f3da419a5fa1171"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/vintage_cabinet_01/vintage_cabinet_01_b_nor_gl_2k.png",
+     "ziel": "assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_b_nor_gl_2k.png",
+     "size": 13434751,
+     "md5": "0d4d5c13aae4ba8db3ca5dfcfcd0aa5f"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/2k/vintage_cabinet_01/vintage_cabinet_01_b_diff_2k.png",
+     "ziel": "assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_b_diff_2k.png",
+     "size": 15645729,
+     "md5": "64e62404712d8c5b8b98feb38f7b06e1"
+    }
+   ]
+  },
+  {
+   "name": "wooden_bookshelf_worn",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "wooden_bookshelf_worn",
+   "seite": "https://polyhaven.com/a/wooden_bookshelf_worn",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Ulan Cabanilla"
+   ],
+   "zielpfad": "assets/models/wooden_bookshelf_worn",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/wooden_bookshelf_worn/wooden_bookshelf_worn_2k.blend",
+     "ziel": "assets/models/wooden_bookshelf_worn/wooden_bookshelf_worn_2k.blend",
+     "size": 373651,
+     "md5": "77c0c2fb5fc715c34a2a616d39a3e610"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/wooden_bookshelf_worn/wooden_bookshelf_worn_diff_2k.jpg",
+     "ziel": "assets/models/wooden_bookshelf_worn/textures/wooden_bookshelf_worn_diff_2k.jpg",
+     "size": 3196349,
+     "md5": "d30c5d793a1c7301a2096f070aef0941"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/wooden_bookshelf_worn/wooden_bookshelf_worn_metal_2k.exr",
+     "ziel": "assets/models/wooden_bookshelf_worn/textures/wooden_bookshelf_worn_metal_2k.exr",
+     "size": 58266,
+     "md5": "dd18b348a73186b1d5e204a108a3676a"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/wooden_bookshelf_worn/wooden_bookshelf_worn_nor_gl_2k.exr",
+     "ziel": "assets/models/wooden_bookshelf_worn/textures/wooden_bookshelf_worn_nor_gl_2k.exr",
+     "size": 8264489,
+     "md5": "d0eed59f74608c77f865fd639ffbc6b9"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/wooden_bookshelf_worn/wooden_bookshelf_worn_rough_2k.exr",
+     "ziel": "assets/models/wooden_bookshelf_worn/textures/wooden_bookshelf_worn_rough_2k.exr",
+     "size": 3652129,
+     "md5": "fd6bbe7e7c91ee485bad4d915a9aa779"
+    }
+   ]
+  },
+  {
+   "name": "Shelf_01",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "Shelf_01",
+   "seite": "https://polyhaven.com/a/Shelf_01",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Gabriel Radić"
+   ],
+   "zielpfad": "assets/models/Shelf_01",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/Shelf_01/Shelf_01_2k.blend",
+     "ziel": "assets/models/Shelf_01/Shelf_01_2k.blend",
+     "size": 125360,
+     "md5": "c9574e159e2faa2d2295a6cbada8c295"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/Shelf_01/Shelf_01_roughness_2k.jpg",
+     "ziel": "assets/models/Shelf_01/textures/Shelf_01_roughness_2k.jpg",
+     "size": 903768,
+     "md5": "3a9c11fe4a300c07b7452bdb86555d1e"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/Shelf_01/Shelf_01_nor_gl_2k.exr",
+     "ziel": "assets/models/Shelf_01/textures/Shelf_01_nor_gl_2k.exr",
+     "size": 8466827,
+     "md5": "adb3557bcb477fa73780f943a9ac7420"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/Shelf_01/Shelf_01_metallic_2k.exr",
+     "ziel": "assets/models/Shelf_01/textures/Shelf_01_metallic_2k.exr",
+     "size": 13296,
+     "md5": "3d165716bf628fb3aef868967f1d8e34"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/Shelf_01/Shelf_01_diff_2k.jpg",
+     "ziel": "assets/models/Shelf_01/textures/Shelf_01_diff_2k.jpg",
+     "size": 569169,
+     "md5": "0dec8a0fb92a5a45b3f8d15694ab3520"
+    }
+   ]
+  },
+  {
+   "name": "side_table_01",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "side_table_01",
+   "seite": "https://polyhaven.com/a/side_table_01",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "James Ray Cock"
+   ],
+   "zielpfad": "assets/models/side_table_01",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/side_table_01/side_table_01_2k.blend",
+     "ziel": "assets/models/side_table_01/side_table_01_2k.blend",
+     "size": 216075,
+     "md5": "c652d3ed7e0f5c23d5d1e1c1dfa0ef7b"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/side_table_01/side_table_01_nor_gl_2k.exr",
+     "ziel": "assets/models/side_table_01/textures/side_table_01_nor_gl_2k.exr",
+     "size": 1859604,
+     "md5": "f1fa4182634bf711aa3dfef77b380e7a"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/side_table_01/side_table_01_rough_2k.jpg",
+     "ziel": "assets/models/side_table_01/textures/side_table_01_rough_2k.jpg",
+     "size": 596101,
+     "md5": "75d7c54ac815c85728c82fc4dd78a37e"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/side_table_01/side_table_01_diff_2k.jpg",
+     "ziel": "assets/models/side_table_01/textures/side_table_01_diff_2k.jpg",
+     "size": 703996,
+     "md5": "6b089b2549278cde518e1c22d9a5c54e"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/side_table_01/side_table_01_metal_2k.exr",
+     "ziel": "assets/models/side_table_01/textures/side_table_01_metal_2k.exr",
+     "size": 46222,
+     "md5": "5ef47823cad0b86dad85d732630bf944"
+    }
+   ]
+  },
+  {
+   "name": "metal_office_desk",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "metal_office_desk",
+   "seite": "https://polyhaven.com/a/metal_office_desk",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Ulan Cabanilla"
+   ],
+   "zielpfad": "assets/models/metal_office_desk",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/metal_office_desk/metal_office_desk_2k.blend",
+     "ziel": "assets/models/metal_office_desk/metal_office_desk_2k.blend",
+     "size": 233807,
+     "md5": "dccf56aa1961e0165226d83bc2ee0aa4"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/metal_office_desk/metal_office_desk_diff_2k.jpg",
+     "ziel": "assets/models/metal_office_desk/textures/metal_office_desk_diff_2k.jpg",
+     "size": 1787420,
+     "md5": "62e40035b94716516bd932f83e76ba0c"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/metal_office_desk/metal_office_desk_metal_2k.exr",
+     "ziel": "assets/models/metal_office_desk/textures/metal_office_desk_metal_2k.exr",
+     "size": 282466,
+     "md5": "061f60911c7e9ba7b5910ed23223e628"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/metal_office_desk/metal_office_desk_nor_gl_2k.exr",
+     "ziel": "assets/models/metal_office_desk/textures/metal_office_desk_nor_gl_2k.exr",
+     "size": 809769,
+     "md5": "65b2de988b9360721c12fe7c61ddb9c8"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/metal_office_desk/metal_office_desk_rough_2k.exr",
+     "ziel": "assets/models/metal_office_desk/textures/metal_office_desk_rough_2k.exr",
+     "size": 2877588,
+     "md5": "4aba8bbdc37b2a5e2a2bdaf7580894d2"
+    }
+   ]
+  },
+  {
+   "name": "SchoolDesk_01",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "SchoolDesk_01",
+   "seite": "https://polyhaven.com/a/SchoolDesk_01",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Ethan Place"
+   ],
+   "zielpfad": "assets/models/SchoolDesk_01",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/SchoolDesk_01/SchoolDesk_01_2k.blend",
+     "ziel": "assets/models/SchoolDesk_01/SchoolDesk_01_2k.blend",
+     "size": 228036,
+     "md5": "56eb9e55fc0431d38d2d02c19471883e"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/SchoolDesk_01/SchoolDesk_01_nor_gl_2k.exr",
+     "ziel": "assets/models/SchoolDesk_01/textures/SchoolDesk_01_nor_gl_2k.exr",
+     "size": 3366541,
+     "md5": "77233e022135ba273806a75cb19fc240"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/SchoolDesk_01/SchoolDesk_01_roughness_2k.jpg",
+     "ziel": "assets/models/SchoolDesk_01/textures/SchoolDesk_01_roughness_2k.jpg",
+     "size": 398745,
+     "md5": "d70d72a04cb1c0ad328ae079aad6865b"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/SchoolDesk_01/SchoolDesk_01_diff_2k.jpg",
+     "ziel": "assets/models/SchoolDesk_01/textures/SchoolDesk_01_diff_2k.jpg",
+     "size": 259340,
+     "md5": "da3cc4cb40e44b04a79f77c2bbb4c4ff"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/SchoolDesk_01/SchoolDesk_01_metallic_2k.exr",
+     "ziel": "assets/models/SchoolDesk_01/textures/SchoolDesk_01_metallic_2k.exr",
+     "size": 197339,
+     "md5": "9ad073669092f5ec8b4e8645321fb36d"
+    }
+   ]
+  },
+  {
+   "name": "SchoolChair_01",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "SchoolChair_01",
+   "seite": "https://polyhaven.com/a/SchoolChair_01",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Ethan Place"
+   ],
+   "zielpfad": "assets/models/SchoolChair_01",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/SchoolChair_01/SchoolChair_01_2k.blend",
+     "ziel": "assets/models/SchoolChair_01/SchoolChair_01_2k.blend",
+     "size": 277922,
+     "md5": "7ad1c7bb1d9796bc1b8bfba6ec2bae16"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/SchoolChair_01/SchoolChair_01_roughness_2k.jpg",
+     "ziel": "assets/models/SchoolChair_01/textures/SchoolChair_01_roughness_2k.jpg",
+     "size": 288809,
+     "md5": "5354f5284956038c2c1f8579f54f7645"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/SchoolChair_01/SchoolChair_01_metallic_2k.exr",
+     "ziel": "assets/models/SchoolChair_01/textures/SchoolChair_01_metallic_2k.exr",
+     "size": 728540,
+     "md5": "1604424b2cba8670caafe99be881508f"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/SchoolChair_01/SchoolChair_01_diff_2k.jpg",
+     "ziel": "assets/models/SchoolChair_01/textures/SchoolChair_01_diff_2k.jpg",
+     "size": 174857,
+     "md5": "f21246498e86dd86c79fdc8e24591def"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/SchoolChair_01/SchoolChair_01_nor_gl_2k.exr",
+     "ziel": "assets/models/SchoolChair_01/textures/SchoolChair_01_nor_gl_2k.exr",
+     "size": 6746421,
+     "md5": "f74c4ecc1b9c3d88ed9697b8e4e158b3"
+    }
+   ]
+  },
+  {
+   "name": "steel_frame_shelves_01",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "steel_frame_shelves_01",
+   "seite": "https://polyhaven.com/a/steel_frame_shelves_01",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "James Ray Cock"
+   ],
+   "zielpfad": "assets/models/steel_frame_shelves_01",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/steel_frame_shelves_01/steel_frame_shelves_01_2k.blend",
+     "ziel": "assets/models/steel_frame_shelves_01/steel_frame_shelves_01_2k.blend",
+     "size": 223024,
+     "md5": "907e2f86c48af0c30c106870f29fdef4"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/steel_frame_shelves_01/steel_frame_shelves_01_nor_gl_2k.exr",
+     "ziel": "assets/models/steel_frame_shelves_01/textures/steel_frame_shelves_01_nor_gl_2k.exr",
+     "size": 3043577,
+     "md5": "374244add253805ce6184847312cf1e9"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/steel_frame_shelves_01/steel_frame_shelves_01_diff_2k.jpg",
+     "ziel": "assets/models/steel_frame_shelves_01/textures/steel_frame_shelves_01_diff_2k.jpg",
+     "size": 1679686,
+     "md5": "fe1269a8e9cdbe3bd7359269c5f56510"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/steel_frame_shelves_01/steel_frame_shelves_01_metal_2k.exr",
+     "ziel": "assets/models/steel_frame_shelves_01/textures/steel_frame_shelves_01_metal_2k.exr",
+     "size": 452320,
+     "md5": "7f8f31df9ad25f8994ae990b18dedece"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/steel_frame_shelves_01/steel_frame_shelves_01_rough_2k.exr",
+     "ziel": "assets/models/steel_frame_shelves_01/textures/steel_frame_shelves_01_rough_2k.exr",
+     "size": 2892710,
+     "md5": "f0414e0170bfb708789ed68ad497691d"
+    }
+   ]
+  },
+  {
+   "name": "steel_frame_shelves_02",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "steel_frame_shelves_02",
+   "seite": "https://polyhaven.com/a/steel_frame_shelves_02",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "James Ray Cock"
+   ],
+   "zielpfad": "assets/models/steel_frame_shelves_02",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/steel_frame_shelves_02/steel_frame_shelves_02_2k.blend",
+     "ziel": "assets/models/steel_frame_shelves_02/steel_frame_shelves_02_2k.blend",
+     "size": 277318,
+     "md5": "3e75fff2ea9443151cb29f87eacf4983"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/steel_frame_shelves_02/steel_frame_shelves_02_nor_gl_2k.exr",
+     "ziel": "assets/models/steel_frame_shelves_02/textures/steel_frame_shelves_02_nor_gl_2k.exr",
+     "size": 3131828,
+     "md5": "ecb3fd061692fa4552d703e6a2a96207"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/steel_frame_shelves_02/steel_frame_shelves_02_metal_2k.exr",
+     "ziel": "assets/models/steel_frame_shelves_02/textures/steel_frame_shelves_02_metal_2k.exr",
+     "size": 437039,
+     "md5": "c28773005951c553fd45944f1afe051e"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/steel_frame_shelves_02/steel_frame_shelves_02_rough_2k.jpg",
+     "ziel": "assets/models/steel_frame_shelves_02/textures/steel_frame_shelves_02_rough_2k.jpg",
+     "size": 627436,
+     "md5": "fa6bfbf9f47abdcb318ae5e37f85d9b9"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/steel_frame_shelves_02/steel_frame_shelves_02_diff_2k.jpg",
+     "ziel": "assets/models/steel_frame_shelves_02/textures/steel_frame_shelves_02_diff_2k.jpg",
+     "size": 466475,
+     "md5": "6954cb2d3fffb560feb2e7bbff3f02cc"
+    }
+   ]
+  },
+  {
+   "name": "worn_metal_rack",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "worn_metal_rack",
+   "seite": "https://polyhaven.com/a/worn_metal_rack",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Luca B"
+   ],
+   "zielpfad": "assets/models/worn_metal_rack",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/worn_metal_rack/worn_metal_rack_2k.blend",
+     "ziel": "assets/models/worn_metal_rack/worn_metal_rack_2k.blend",
+     "size": 214962,
+     "md5": "bfbfb4377df6d36aee9c384973d379cd"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/worn_metal_rack/worn_metal_rack_diff_2k.jpg",
+     "ziel": "assets/models/worn_metal_rack/textures/worn_metal_rack_diff_2k.jpg",
+     "size": 2201125,
+     "md5": "93a7ce5bf674a9dbcaedfe16d60b19fe"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/worn_metal_rack/worn_metal_rack_metal_2k.exr",
+     "ziel": "assets/models/worn_metal_rack/textures/worn_metal_rack_metal_2k.exr",
+     "size": 3268547,
+     "md5": "3c6eab93b89fe51fac9bbf7ffd2a1eff"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/worn_metal_rack/worn_metal_rack_nor_gl_2k.exr",
+     "ziel": "assets/models/worn_metal_rack/textures/worn_metal_rack_nor_gl_2k.exr",
+     "size": 4097576,
+     "md5": "0ce153082924e4c8b85d65db46bbef21"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/worn_metal_rack/worn_metal_rack_rough_2k.exr",
+     "ziel": "assets/models/worn_metal_rack/textures/worn_metal_rack_rough_2k.exr",
+     "size": 2115195,
+     "md5": "43a91fc5375c018208f97e8017ede6b6"
+    }
+   ]
+  },
+  {
+   "name": "wooden_display_shelves_01",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "wooden_display_shelves_01",
+   "seite": "https://polyhaven.com/a/wooden_display_shelves_01",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "James Ray Cock"
+   ],
+   "zielpfad": "assets/models/wooden_display_shelves_01",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/wooden_display_shelves_01/wooden_display_shelves_01_2k.blend",
+     "ziel": "assets/models/wooden_display_shelves_01/wooden_display_shelves_01_2k.blend",
+     "size": 226011,
+     "md5": "b9396d257fa78d70819c71f253f5a487"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/wooden_display_shelves_01/wooden_display_shelves_01_nor_gl_2k.exr",
+     "ziel": "assets/models/wooden_display_shelves_01/textures/wooden_display_shelves_01_nor_gl_2k.exr",
+     "size": 2799961,
+     "md5": "94f5ae7c5937b7e5abe6de68241bb32b"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/wooden_display_shelves_01/wooden_display_shelves_01_diff_2k.jpg",
+     "ziel": "assets/models/wooden_display_shelves_01/textures/wooden_display_shelves_01_diff_2k.jpg",
+     "size": 474742,
+     "md5": "5cc9c95761700c0118572247d8e530cf"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/wooden_display_shelves_01/wooden_display_shelves_01_metal_2k.exr",
+     "ziel": "assets/models/wooden_display_shelves_01/textures/wooden_display_shelves_01_metal_2k.exr",
+     "size": 13916,
+     "md5": "bdc53ce9657bbd9dcd03dc886438d047"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/wooden_display_shelves_01/wooden_display_shelves_01_rough_2k.jpg",
+     "ziel": "assets/models/wooden_display_shelves_01/textures/wooden_display_shelves_01_rough_2k.jpg",
+     "size": 578575,
+     "md5": "7eda106bb0e40204a38db0f1d346210c"
+    }
+   ]
+  },
+  {
+   "name": "painted_wooden_cabinet",
+   "typ": "modell",
+   "quelle": "Poly Haven",
+   "asset_id": "painted_wooden_cabinet",
+   "seite": "https://polyhaven.com/a/painted_wooden_cabinet",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Kirill Sannikov"
+   ],
+   "zielpfad": "assets/models/painted_wooden_cabinet",
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/painted_wooden_cabinet/painted_wooden_cabinet_2k.blend",
+     "ziel": "assets/models/painted_wooden_cabinet/painted_wooden_cabinet_2k.blend",
+     "size": 168288,
+     "md5": "d3dc5501b7f95cde2e5049ceab5f0a83"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/painted_wooden_cabinet/painted_wooden_cabinet_rough_2k.exr",
+     "ziel": "assets/models/painted_wooden_cabinet/textures/painted_wooden_cabinet_rough_2k.exr",
+     "size": 2005889,
+     "md5": "59e319d8df06ac41e3ec9a7244697911"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/painted_wooden_cabinet/painted_wooden_cabinet_diff_2k.jpg",
+     "ziel": "assets/models/painted_wooden_cabinet/textures/painted_wooden_cabinet_diff_2k.jpg",
+     "size": 2638553,
+     "md5": "a3d5e6f643b052e618212949f86ca81e"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/painted_wooden_cabinet/painted_wooden_cabinet_metal_2k.exr",
+     "ziel": "assets/models/painted_wooden_cabinet/textures/painted_wooden_cabinet_metal_2k.exr",
+     "size": 218524,
+     "md5": "ddefc76eb1325355f5c5da105a910248"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Models/exr/2k/painted_wooden_cabinet/painted_wooden_cabinet_nor_gl_2k.exr",
+     "ziel": "assets/models/painted_wooden_cabinet/textures/painted_wooden_cabinet_nor_gl_2k.exr",
+     "size": 3951608,
+     "md5": "9a0f1d41e8207b9a68a823f365ab9a10"
     }
    ]
   },

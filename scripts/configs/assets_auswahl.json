@@ -252,6 +252,69 @@
    "quelle": "ambientcg",
    "id": "LeafSet024",
    "res": "2k"
+  },
+  {
+   "mat": "MAT_Innen_Tapete",
+   "quelle": "polyhaven",
+   "id": "decrepit_wallpaper",
+   "res": "2k",
+   "_info": "Phase 6.4 Innenraeume"
+  },
+  {
+   "mat": "MAT_Innen_Farbe_Abblaetternd",
+   "quelle": "polyhaven",
+   "id": "peeling_painted_wall",
+   "res": "2k",
+   "_info": "Phase 6.4 Innenraeume"
+  },
+  {
+   "mat": "MAT_Innen_Putz_Rissig",
+   "quelle": "polyhaven",
+   "id": "worn_cracked_plaster",
+   "res": "2k",
+   "_info": "Phase 6.4 Innenraeume"
+  },
+  {
+   "mat": "MAT_Innen_Putz_Alt",
+   "quelle": "polyhaven",
+   "id": "worn_plaster_wall",
+   "res": "2k",
+   "_info": "Phase 6.4 Innenraeume"
+  },
+  {
+   "mat": "MAT_Boden_Dielen_Alt",
+   "quelle": "polyhaven",
+   "id": "old_wooden_floor_02",
+   "res": "2k",
+   "_info": "Phase 6.4 Innenraeume"
+  },
+  {
+   "mat": "MAT_Boden_Linoleum",
+   "quelle": "polyhaven",
+   "id": "old_linoleum_flooring_01",
+   "res": "2k",
+   "_info": "Phase 6.4 Innenraeume"
+  },
+  {
+   "mat": "MAT_Boden_Fliesen_Alt",
+   "quelle": "polyhaven",
+   "id": "worn_tile_floor",
+   "res": "2k",
+   "_info": "Phase 6.4 Innenraeume"
+  },
+  {
+   "mat": "MAT_Boden_Beton_Alt",
+   "quelle": "polyhaven",
+   "id": "concrete_floor_worn_001",
+   "res": "2k",
+   "_info": "Phase 6.4 Innenraeume"
+  },
+  {
+   "mat": "MAT_Boden_Laminat",
+   "quelle": "polyhaven",
+   "id": "laminate_floor_02",
+   "res": "2k",
+   "_info": "Phase 6.4 Innenraeume"
   }
  ],
  "hdris": [
@@ -318,7 +381,28 @@
   "periwinkle_plant",
   "flower_gazania",
   "moss_01",
-  "shrub_sorrel_01"
+  "shrub_sorrel_01",
+  "sofa_02",
+  "sofa_03",
+  "ArmChair_01",
+  "CoffeeTable_01",
+  "dining_table",
+  "dining_chair_02",
+  "old_bed_frame",
+  "ClassicNightstand_01",
+  "drawer_cabinet",
+  "vintage_cabinet_01",
+  "wooden_bookshelf_worn",
+  "Shelf_01",
+  "side_table_01",
+  "metal_office_desk",
+  "SchoolDesk_01",
+  "SchoolChair_01",
+  "steel_frame_shelves_01",
+  "steel_frame_shelves_02",
+  "worn_metal_rack",
+  "wooden_display_shelves_01",
+  "painted_wooden_cabinet"
  ],
  "selbst_bauen": [
   "Asphaltschindeln (keine CC0-Fototextur gefunden: prozedurale Schindel-Geometrie + Fotobasis tarred_gravel)",
