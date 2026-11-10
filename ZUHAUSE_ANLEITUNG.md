@@ -7,7 +7,7 @@ So renderst du das Viertel auf deinem Mac. Alle Befehle tippst du im **Terminal*
 Einmalig das Projekt holen:
 
 ```bash
-git clone -b claude/zen-meitner-53hxe1 https://github.com/fabiobaumstark-ops/The-walking-dead-Projekt-.git twd
+git clone -b claude/zealous-ride-c12e2z https://github.com/fabiobaumstark-ops/The-walking-dead-Projekt-.git twd
 ```
 
 ```bash

@@ -1,9 +1,9 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 5 gebaut (5.1–5.5, 5.7 Anleitung) – wartet auf Freigabe-Antworten; danach 5.8 Qualitätsrunde
+- **Aktuelle Phase:** Phase 5 freigegeben (2026-11-10) – 5.8 Qualitätsrunde läuft (Cloud-Sitzung)
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
 - **.blend-Version:** `viertel_v08.blend` (Phase 5, 88,2 MB, finale Render-Einstellungen gespeichert); Vorversion `viertel_v07.blend`
-- **Branch:** `claude/zen-meitner-53hxe1`
+- **Branch:** `claude/zealous-ride-c12e2z` (neu ab 2026-11-10; gleicher Stand wie zuvor `claude/zen-meitner-53hxe1`)
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 - **Lokal (Mac, 2026-11-05):** Blender 5.2.3 LTS unter /Applications/Blender-5.2.3.app, Metal-GPU (M4 Pro, 16 Kerne) erkannt, Assets geladen (356 Dateien, 1,7 GB)
 
@@ -63,9 +63,10 @@
 4. Bekannt offen (Qualitätsrunde): Panzer A zu kastenförmig, Kartons/Matratzen klotzig (siehe PROTOKOLL Phase 4.3); Hügel > 750 m kahl → Dunst in Phase 5.
 
 ## Offene Fragen an den Nutzer
-- Phase-5-Freigabe: bester/schwächster Shot, Licht/Nebel, 1080p oder 4K, Animation ja/nein
+- keine
 
 ## Bisherige Antworten/Freigaben
+- Phase 5 (2026-11-10): 1A CAM 1 am besten, CAM 4 am schwächsten (neu komponieren), 2C Nebel zu schwach → mehr Dunst in der Tiefe, 3A final 1080p, 4B Animation ja, aber erst nach der Qualitätsrunde
 - Phase 4 (2026-11-09): 1B Vegetation genau richtig, 2A Panzer-Form in der Qualitätsrunde überarbeiten, 3A Farben passen (Grading in Phase 5), 4B fast aus einem Guss
 - Netzwerk: FULL
 - Blender: normale Linux-Version
