@@ -979,6 +979,23 @@ def prototypen(name):
     return col
 
 
+def pfade_relativ():
+    """Absolute Bild-/Bibliothekspfade auf //assets/... umstellen (AUFTRAG A3). Vor jedem Speichern aufrufen."""
+    n = 0
+    for sammlung in (bpy.data.images, bpy.data.libraries):
+        for d in sammlung:
+            fp = (d.filepath or "").replace("\\", "/")
+            if not fp or fp.startswith("//") or getattr(d, "packed_file", None):
+                continue
+            if "/assets/" in fp:
+                d.filepath = "//assets/" + fp.split("/assets/", 1)[1]
+                n += 1
+    rest = [d.filepath for s_ in (bpy.data.images, bpy.data.libraries) for d in s_
+            if d.filepath and not d.filepath.startswith("//") and not getattr(d, "packed_file", None)]
+    print("PFADE", {"relativ_gemacht": n, "noch_absolut": rest}, flush=True)
+    return n, rest
+
+
 def instanzen(name, punkte, quelle_col, ziel_col):
     """punkte: Liste (pos, rot_euler, skal, idx). Erzeugt ein Punkt-Mesh mit GN_Instanzen_Punkte."""
     me = bpy.data.meshes.new(name)

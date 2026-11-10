@@ -160,8 +160,9 @@ def feuertonne():
     m = tonne.modifiers.new("Wand", "SOLIDIFY")
     m.thickness = 0.012
     # Flamme (Volumen-Emission) und Rauchfahne
-    fl = _zylinder("FX_Flamme", F["radius"] * 0.8, 0.5, _volumen_mat("MAT_FX_Flamme", 1.2, "#2E2A27", emission=14.0, oben=0.0,
-                                                                       kelvin=F["kelvin"], noise=3.5), p + Vector((0, 0, F["hoehe"] - 0.12)))
+    fl = _zylinder("FX_Flamme", F["radius"] * 0.8, F.get("flamme_hoehe", 0.5),
+                   _volumen_mat("MAT_FX_Flamme", F.get("flamme_dichte", 1.2), "#2E2A27", emission=F.get("flamme_emission", 14.0),
+                                oben=0.0, kelvin=F["kelvin"], noise=3.5), p + Vector((0, 0, F["hoehe"] - 0.12)))
     fl.visible_shadow = False
     _zylinder("FX_Rauch_Tonne", 0.9, 9.0, _volumen_mat("MAT_FX_Rauch_Tonne", 0.35, "#4E4B48", noise=1.2),
               p + Vector((0, 0, F["hoehe"] + 0.3)), neigung=(math.radians(12), 0, math.radians(-135)))
@@ -221,7 +222,40 @@ def atmosphaere():
     m2.operation = "MULTIPLY"
     m2.inputs[1].default_value = D["dichte"]
     nt.links.new(m1.outputs[0], m2.inputs[0])
-    nt.links.new(m2.outputs[0], pv.inputs["Density"])
+    dichte = m2.outputs[0]
+    B = D.get("bodennebel")
+    if B:  # dichte_b * exp(-(z - z0) / abfall) * Flecken (Noise, grob)
+        bz = nt.nodes.new("ShaderNodeMath")
+        bz.operation = "MULTIPLY_ADD"
+        bz.inputs[1].default_value = -1.0 / B["hoehe_abfall_m"]
+        bz.inputs[2].default_value = B.get("z0", 0.0) / B["hoehe_abfall_m"]
+        nt.links.new(sep.outputs["Z"], bz.inputs[0])
+        be = nt.nodes.new("ShaderNodeMath")
+        be.operation = "EXPONENT"
+        nt.links.new(bz.outputs[0], be.inputs[0])
+        bmin = nt.nodes.new("ShaderNodeMath")
+        bmin.operation = "MINIMUM"
+        bmin.inputs[1].default_value = 1.0
+        nt.links.new(be.outputs[0], bmin.inputs[0])
+        nz = nt.nodes.new("ShaderNodeTexNoise")
+        nz.inputs["Scale"].default_value = 1.0 / B["flecken_m"]
+        nz.inputs["Detail"].default_value = 3
+        nt.links.new(geo.outputs["Position"], nz.inputs["Vector"])
+        nr = nt.nodes.new("ShaderNodeMapRange")
+        nr.inputs["From Min"].default_value, nr.inputs["From Max"].default_value = 0.35, 0.7
+        nr.inputs["To Min"].default_value, nr.inputs["To Max"].default_value = B["flecken_min"], 1.0
+        nt.links.new(nz.outputs["Fac"], nr.inputs["Value"])
+        bm_ = nt.nodes.new("ShaderNodeMath")
+        bm_.operation = "MULTIPLY"
+        nt.links.new(bmin.outputs[0], bm_.inputs[0])
+        nt.links.new(nr.outputs[0], bm_.inputs[1])
+        bd = nt.nodes.new("ShaderNodeMath")
+        bd.operation = "MULTIPLY_ADD"
+        bd.inputs[1].default_value = B["dichte"]
+        nt.links.new(bm_.outputs[0], bd.inputs[0])
+        nt.links.new(dichte, bd.inputs[2])
+        dichte = bd.outputs[0]
+    nt.links.new(dichte, pv.inputs["Density"])
     nt.links.new(pv.outputs[0], out.inputs["Volume"])
     gx, gy, gz = D["groesse"]
     bpy.ops.mesh.primitive_cube_add(size=1.0, location=(*D["mitte"], gz / 2 - 20))
@@ -296,6 +330,24 @@ def voegel():
 
 # ---------------------------------------------------------------- 5.3 Kameras
 def kameras():
+    K = json.load(open(os.path.join(HIER, "..", "configs", "kameras.json")))
+    for k in K["kameras"]:
+        if not k.get("neu_setzen"):
+            continue
+        cam = bpy.data.objects[k["name"]]
+        x, y, dz = k["pos"]
+        b = VB.Strahl().boden(x, y)
+        cam.location = (x, y, (b[0] if b else 0.0) + dz)
+        tx, ty = k["ziel"]
+        cam.rotation_euler = (math.radians(90), 0, math.atan2(ty - y, tx - x) - math.pi / 2)
+        cam.data.lens, cam.data.shift_y = k["brennweite"], k["shift_y"]
+        cam.data.dof.aperture_fstop, cam.data.dof.focus_distance = k["blende"], k["fokus_m"]
+        cam.data.dof.focus_object = None
+        print("KAMERA neu", k["name"], [round(c, 2) for c in cam.location])
+    bpy.context.view_layer.update()
+    for k in K["kameras"]:
+        if "blende_phase5" in k:
+            bpy.data.objects[k["name"]].data.dof.aperture_fstop = k["blende_phase5"]
     for cname, ziel in C["kamera_fokus"].items():
         bpy.data.objects[cname].data.dof.focus_object = bpy.data.objects[ziel]
     dg = bpy.context.evaluated_depsgraph_get()
@@ -476,5 +528,6 @@ if __name__ == "__main__":
         print("TEIL", teil, "fertig", flush=True)
     if "--ohne-speichern" not in args:
         pfad = os.path.join(V.ROOT, f"viertel_v{version}.blend")
+        V.pfade_relativ()
         bpy.ops.wm.save_as_mainfile(filepath=pfad, compress=True, relative_remap=True)
         print("GESPEICHERT", pfad, round(os.path.getsize(pfad) / 1e6, 1), "MB")

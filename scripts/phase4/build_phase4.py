@@ -67,5 +67,6 @@ if __name__ == "__main__":
         print("ZEIT", teil, round(time.time() - t0, 1), "s", flush=True)
     if "--ohne-speichern" not in args:
         pfad = os.path.join(V.ROOT, f"viertel_v{version}.blend")
+        V.pfade_relativ()
         bpy.ops.wm.save_as_mainfile(filepath=pfad, compress=True, relative_remap=True)
         print("GESPEICHERT", pfad, round(os.path.getsize(pfad) / 1e6, 1), "MB")

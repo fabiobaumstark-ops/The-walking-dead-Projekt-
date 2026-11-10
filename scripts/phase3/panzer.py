@@ -397,10 +397,19 @@ def _einfuegen(bm, tmp):
 def turm_bauen(name, C, col, M, opt, rnd):
     P = C["panzer_masse"]
     h = P["turm_dach_z"] - P["deck_z"]
-    unten = [(1.95, 0.0), (1.92, 0.82), (1.38, 1.56), (-0.6, 1.68), (-2.12, 1.50), (-2.42, 1.10), (-2.42, -1.10),
-             (-2.12, -1.50), (-0.6, -1.68), (1.38, -1.56), (1.92, -0.82)]
-    oben = [(1.80, 0.0), (1.77, 0.74), (1.27, 1.42), (-0.6, 1.55), (-2.02, 1.38), (-2.30, 1.02), (-2.30, -1.02),
-            (-2.02, -1.38), (-0.6, -1.55), (1.27, -1.42), (1.77, -0.74)]
+    # 5.8 Qualitaetsrunde: Keilform statt Kasten - Front 42 Grad geneigt, Seiten 15 Grad, Heck 8 Grad
+    # (vorher fast senkrechte Waende: unten 1.95/1.68, oben 1.80/1.55)
+    unten = [(2.05, 0.0), (1.98, 0.70), (1.28, 1.52), (-0.6, 1.68), (-2.12, 1.50), (-2.42, 1.10), (-2.42, -1.10),
+             (-2.12, -1.50), (-0.6, -1.68), (1.28, -1.52), (1.98, -0.70)]
+    oben = [(1.30, 0.0), (1.25, 0.55), (0.82, 1.20), (-0.6, 1.45), (-2.00, 1.30), (-2.30, 0.98), (-2.30, -0.98),
+            (-2.00, -1.30), (-0.6, -1.45), (0.82, -1.20), (1.25, -0.55)]
+    nseite = math.atan2(1.68 - 1.45, h)  # Seitenneigung
+
+    def ywand(z, x=-0.6):
+        """y der Seitenwand in Hoehe z (bei x), fuer Anbauten, die an der schraegen Wand sitzen."""
+        yu = 1.68 if x <= -0.6 else 1.68 - (x + 0.6) * (1.68 - 1.52) / 1.88
+        yo = 1.45 if x <= -0.6 else 1.45 - (x + 0.6) * (1.45 - 1.20) / 1.42
+        return yu + (yo - yu) * z / h
     tr = bpy.data.objects.new(f"{name}_Turm", None)
     col.objects.link(tr)
     bm = bmesh.new()
@@ -415,18 +424,27 @@ def turm_bauen(name, C, col, M, opt, rnd):
     ZY(bm, (0, 0, -0.06), (0, 0, 0.02), 1.15, 40, 0)
     # Staukaesten an den Seiten
     for s in (1, -1):
-        Q(bm, (-1.15, s * 1.70, 0.45), (1.1, 0.16, 0.36), 0)
-        for x in (0.6, -0.9, -1.9):
-            ZY(bm, (x, s * 1.55, h + 0.0), (x, s * 1.55, h + 0.07), 0.035, 8, 0)  # Haken
+        Q(bm, (-1.15, s * (ywand(0.45) + 0.07), 0.45), (1.1, 0.16, 0.36), 0, Matrix.Rotation(s * nseite, 3, "X"))
+        for x in (0.3, -0.9, -1.9):
+            ZY(bm, (x, s * 1.22, h + 0.0), (x, s * 1.22, h + 0.07), 0.035, 8, 0)  # Haken
     # Zusatzpanzerung an den Turmseiten (Module mit Schraubenreihen), Schweissnaehte an der Turmkante
     for s in (1, -1):
         for k, (x0_, x1_) in enumerate(((1.30, 0.45), (0.40, -0.45))):
-            yy = s * (1.60 + 0.06 * (1 - k)) + s * 0.03
-            Q(bm, ((x0_ + x1_) / 2, yy, 0.42), (abs(x1_ - x0_) - 0.04, 0.07, 0.62), 0)
+            xm = (x0_ + x1_) / 2
+            rs = Matrix.Rotation(s * nseite, 3, "X")
+            yy = s * (ywand(0.42, xm) + 0.05)
+            Q(bm, (xm, yy, 0.42), (abs(x1_ - x0_) - 0.04, 0.07, 0.62), 0, rs)
             for i in range(5):
                 for zz in (0.16, 0.68):
                     xb = x1_ + (x0_ - x1_) * (i + 0.5) / 5
-                    ZY(bm, (xb, yy + s * 0.035, zz), (xb, yy + s * 0.05, zz), 0.018, 6, 0)
+                    c = Vector((xb, s * (ywand(zz, xm) + 0.05), zz))
+                    ZY(bm, c + rs @ Vector((0, s * 0.035, 0)), c + rs @ Vector((0, s * 0.05, 0)), 0.018, 6, 0)
+        # Keil-Zusatzpanzerung an den Turmwangen links/rechts der Kanone (schraeg nach hinten-aussen)
+        wu = [(2.16, s * 0.58), (2.40, s * 0.66), (1.52, s * 1.70), (1.24, s * 1.56)]
+        wo = [(1.62, s * 0.50), (1.84, s * 0.56), (1.10, s * 1.40), (0.86, s * 1.26)]
+        if s < 0:
+            wu, wo = wu[::-1], wo[::-1]
+        loft2(bm, wu, wo, 0.05, 0.76, 0)
     for (xa_, ya_), (xb_, yb_) in zip(oben + oben[:1], oben[1:] + oben[:1]):
         ZY(bm, (xa_, ya_, h + 0.004), (xb_, yb_, h + 0.004), 0.012, 5, 0)
     for k in range(18):  # Schrauben am Dachrand
@@ -459,7 +477,7 @@ def turm_bauen(name, C, col, M, opt, rnd):
     body.modifiers.move(len(body.modifiers) - 1, 0)
     # Blende + Rohr (Waermeschutzhuelle in Segmenten, Rauchabsauger, Muendung, Muendungsreferenz)
     bm = bmesh.new()
-    Q(bm, (2.05, 0, 0.42), (0.40, 0.86, 0.44), 0)
+    prisma(bm, [(1.50, 0.12), (2.26, 0.24), (2.32, 0.42), (2.26, 0.60), (1.42, 0.78)], -0.46, 0.46, 0)  # Keilblende
     L = P["rohr_l"]
     x0 = 2.25
     ZY(bm, (x0, 0, 0.42), (x0 + L, 0, 0.42), 0.075, 20, 0)
@@ -500,8 +518,8 @@ def turm_bauen(name, C, col, M, opt, rnd):
         v.co = c0 + dk @ (v.co + Vector((0.32, 0, 0)))
     _einfuegen(bm, tmp)
     # Richtschuetzen-Optik (Glas zerbrochen) + Kommandanten-Rundblickoptik
-    Q(bm, (1.18, -0.82, h + 0.16), (0.46, 0.36, 0.32), 0)
-    Q(bm, (1.42, -0.82, h + 0.20), (0.02, 0.26, 0.16), 2)
+    Q(bm, (0.62, -0.72, h + 0.16), (0.46, 0.36, 0.32), 0)
+    Q(bm, (0.86, -0.72, h + 0.20), (0.02, 0.26, 0.16), 2)
     ZY(bm, (0.15, -0.05, h), (0.15, -0.05, h + 0.32), 0.06, 12, 0)
     Q(bm, (0.15, -0.05, h + 0.45), (0.30, 0.26, 0.26), 0)
     Q(bm, (0.30, -0.05, h + 0.47), (0.02, 0.18, 0.12), 2)
@@ -513,7 +531,8 @@ def turm_bauen(name, C, col, M, opt, rnd):
     for s in (1, -1):
         for k in range(6):
             r = Matrix.Rotation(math.radians(55), 3, "Y") @ Matrix.Rotation(math.radians(s * (20 + k * 9)), 3, "X")
-            p = Vector((0.95 - (k % 3) * 0.14, s * (1.52 - (k // 3) * 0.10), 0.62 + (k // 3) * 0.11))
+            xk, zk = 0.55 - (k % 3) * 0.14, 0.56 + (k // 3) * 0.11
+            p = Vector((xk, s * (ywand(zk, xk) + 0.04), zk))
             ZY(bm, p, p + r @ Vector((0, 0, 0.24)), 0.042, 10, 0)
             ZY(bm, p + r @ Vector((0, 0, 0.235)), p + r @ Vector((0, 0, 0.245)), 0.032, 10, 1)
     OB(f"{name}_Turm_Aufbauten", bm, col, [M["tarn"], M["dunkel"], M["glas"], M["rost"]], tr, glatt=False)
@@ -553,11 +572,11 @@ def turm_bauen(name, C, col, M, opt, rnd):
     # Schablonen-Nummer (erfunden), verblasst
     bm = bmesh.new()
     for s in (1, -1):
-        n = Vector((-0.06, s, 0.12)).normalized()
+        n = Vector((0.0, s, math.tan(nseite))).normalized()
         up = Vector((0, 0, 1))
         lese = up.cross(n).normalized()
         mx = Matrix((lese, up, n)).transposed().to_4x4()
-        mx.translation = Vector((-0.4, s * 1.615, 0.42))
+        mx.translation = Vector((-0.02, s * (ywand(0.42, -0.025) + 0.089), 0.42))  # auf dem hinteren Zusatzmodul
         V.text_mesh(bm, opt.get("nummer", "K-00"), 0.22, mx, 0, extrude=0.001, aufloesung=3)
     OB(f"{name}_Nummer", bm, col, [M["schrift"]], tr)
     _ = (korb, netz)

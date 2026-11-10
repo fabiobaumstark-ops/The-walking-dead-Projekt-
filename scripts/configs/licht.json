@@ -18,8 +18,11 @@
   "radius": 0.29,
   "hoehe": 0.88,
   "kelvin": 2000,
-  "licht_w": 260,
-  "flackern": 0.35
+  "licht_w": 420,
+  "flackern": 0.35,
+  "flamme_hoehe": 0.8,
+  "flamme_dichte": 0.8,
+  "flamme_emission": 90.0
  },
  "dunst": {
   "mitte": [
@@ -31,20 +34,28 @@
    1700.0,
    180.0
   ],
-  "dichte": 0.0013,
-  "tiefe_faktor": 1.4,
-  "tiefe_m": 450.0,
+  "dichte": 0.0017,
+  "tiefe_faktor": 2.8,
+  "tiefe_m": 380.0,
   "hoehe_abfall_m": 70.0,
-  "anisotropie": 0.45,
-  "farbe": "#C9C6BC"
+  "anisotropie": 0.6,
+  "farbe": "#C9C6BC",
+  "_info_58": "Freigabe Phase 5, Antwort 2C (Nebel zu schwach): Dichte 0,0013 -> 0,0017, Tiefenfaktor 1,4 -> 2,8 auf 380 m, dazu fleckiger Bodennebel fuer Lichtstrahlen",
+  "bodennebel": {
+   "dichte": 0.006,
+   "hoehe_abfall_m": 7.0,
+   "z0": 0.0,
+   "flecken_m": 45.0,
+   "flecken_min": 0.25
+  }
  },
  "rauch": {
-  "radius": 22.0,
+  "radius": 26.0,
   "hoehe": 230.0,
-  "dichte": 0.12,
+  "dichte": 0.3,
   "neigung_grad": 14,
   "wind_azimut": 45,
-  "farbe": "#77716A",
+  "farbe": "#5E5952",
   "noise": 3.5,
   "positionen": [
    [
@@ -89,7 +100,7 @@
   "nebel_tiefe": 650.0
  },
  "compositor": {
-  "nebel_mix": 0.05,
+  "nebel_mix": 0.1,
   "nebel_farbe": "#B4B2A8",
   "lift": [
    0.985,

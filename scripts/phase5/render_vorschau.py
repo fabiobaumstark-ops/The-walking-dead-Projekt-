@@ -1,6 +1,8 @@
 """Phase 5 – Vorschau der Hero-Shots mit den finalen Einstellungen (Licht, Dunst, Compositor), nur kleiner/weniger Samples.
 
-Aufruf:  blender -b viertel_v08.blend --python scripts/phase5/render_vorschau.py -- --prefix phase5 [--samples 128] [--prozent 50] [--nur 1,3] [--cpu]
+Aufruf:  blender -b viertel_v09.blend --python scripts/phase5/render_vorschau.py -- --prefix phase5 [--samples 128] [--prozent 50] [--nur 1,3] [--cpu] [--sparsam]
+--sparsam (Cloud, 16 GB RAM): Texturen max. 1024 px, Objekte ausserhalb des Kamerabilds weglassen (nicht Gebaeude/Gelaende), Compositor auf der CPU.
+Nur fuer Vorschauen - die .blend wird nicht veraendert.
 """
 import os
 import sys
@@ -23,6 +25,14 @@ else:
     p.get_devices()
     for d in p.devices:
         d.use = True
+if "--sparsam" in args:
+    sc.cycles.texture_limit_render = "1024"
+    sc.cycles.use_camera_cull, sc.cycles.camera_cull_margin = True, 0.25
+    for o in bpy.data.objects:
+        if not o.name.startswith(("BLD_", "GEO_", "FX_", "LGT_", "BOD_", "STR_")):
+            o.cycles.use_camera_cull = True
+    sc.render.compositor_device = "CPU"
+    sc.render.use_persistent_data = False
 sc.cycles.samples = samples
 sc.cycles.adaptive_threshold = 0.03
 sc.render.resolution_percentage = prozent
