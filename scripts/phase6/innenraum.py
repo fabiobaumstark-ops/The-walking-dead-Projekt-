@@ -48,13 +48,35 @@ class Bau3(G2.Bau2):
         self.plan = plan
         self.log = {"decken_geloch": 0, "kern_hohl": 0}
         self.tueren = []
+        self.oeffnungen = []
         self.ladentuer = None
+
+    def schiefe_platte(self, u0, u1, v0, z_v0, v1, z_v1, dicke, mat):
+        p = self.plan
+        if p is not None and p.get("parkhaus") and (u0, u1, v0, v1) == tuple(C["parkhaus"]["rampe"]):
+            z_v1 += C["parkhaus"]["rampe_hoeher"]  # Rampe endet auf der Deckenoberkante statt 30 cm darunter
+            p.setdefault("rampen", []).append((z_v0, z_v1))
+        return super().schiefe_platte(u0, u1, v0, z_v0, v1, z_v1, dicke, mat)
 
     def box(self, u0, v0, u1, v1, za, zb, mat=P1.F, top=None):
         p = self.plan
+        if p is not None and p.get("parkhaus"):
+            ru0, rv0, ru1, rv1 = C["parkhaus"]["rampe"][0], C["parkhaus"]["rampe"][2], C["parkhaus"]["rampe"][1], C["parkhaus"]["rampe"][3]
+            if abs((zb - za) - 0.3) < 1e-6 and mat == top and min(u0, u1) <= ru0 and max(u0, u1) >= ru1 \
+                    and min(v0, v1) <= rv0 and max(v0, v1) >= rv1:
+                p.setdefault("decken", []).append(zb)
+                fs = []
+                for (a, c, d_, e_) in ((u0, v0, ru0, v1), (ru1, v0, u1, v1), (ru0, v0, ru1, rv0), (ru0, rv1, ru1, v1)):
+                    if d_ - a > 0.01 and e_ - c > 0.01:
+                        fs += G2.Bau2.box(self, a, c, d_, e_, za, zb, mat, top)
+                return fs
+            return super().box(u0, v0, u1, v1, za, zb, mat, top)
         if p is not None:
             if p.get("kern") and _ist_kern(self, p, u0, v0, u1, v1, za, zb, mat, top):
                 return kern_hohl(self, p, u0, v0, u1, v1, za, zb)
+            if _ist_dachraum(self, p, u0, v0, u1, v1, za, zb, mat):
+                p["dachraum"] = (min(u0, u1), min(v0, v1), max(u0, u1), max(v0, v1), za, zb)
+                return []  # wird in treppenhaus() hohl gebaut (Treppe endet darin)
             if p.get("loch") and _ist_decke(self, p, u0, v0, u1, v1, za, zb, mat):
                 return decke_mit_loch(self, p, u0, v0, u1, v1, za, zb, mat, top)
         return super().box(u0, v0, u1, v1, za, zb, mat, top)
@@ -109,8 +131,12 @@ def erzeugen(cfg, g, plan_fn=None, masten=None):
         b.plan["ladentuer_geschnitten"] = eingang_schneiden(b, w_, ta, tc, b.z0, sfz + 0.07)
     FD.fassade(b, g, rnd, masten if masten is not None else G2._mastpunkte())
     FD.innenraum(b, g, rnd)
-    if b.plan:
+    if b.plan and b.plan.get("parkhaus"):
+        b.plan["ebenen"] = sorted(b.plan.get("decken", []))
+    if b.plan and b.plan.get("achse"):
         treppenhaus(b, b.plan)
+        b.plan["durchgang_weg"] = durchgaenge_frei(b)
+        b.plan["stufen_neu"] = stufen_ergaenzen(b)
     orig = Vector((x0, y0, z0))
     bmesh.ops.translate(b.bm, verts=b.bm.verts, vec=-orig)
     bmesh.ops.remove_doubles(b.bm, verts=b.bm.verts, dist=0.0005)
@@ -140,6 +166,8 @@ def _tuer_getrennt(b, w, s0, s1, z0, z1, rnd, offen=None):
     for (a, c, d, e) in [(s0, s0 + 0.08, z0, z1), (s1 - 0.08, s1, z0, z1), (s0, s1, z1 - 0.08, z1)]:
         G2.FA.box_welt(b.bm, w, a, c, 0.12, 0.2, d, e, S["Rahmen"])
     G2.FA.box_welt(b.bm, w, s0, s1, -0.06, w.d + 0.02, z0 - 0.2, z0, S["Beton"])  # Schwelle (Boden in der Wanddicke)
+    en = (w.welt(0, 1, 0) - w.welt(0, 0, 0)).normalized()
+    b.oeffnungen.append((w.welt((s0 + s1) / 2, 0, z0), -en, s1 - s0))  # auch ohne Tuerblatt ein Zugang
     zust = offen or rnd.choice(["zu", "offen", "offen", "fehlt"])
     if zust == "fehlt":
         return
@@ -350,6 +378,91 @@ def eingang_typ2(b):
     return {"fliegengitter_flaechen": n}
 
 
+def zugaenge(b):
+    """Aussentueren als (Mitte, Richtung nach aussen, Breite, Schwellenhoehe)."""
+    out = list(b.oeffnungen)
+    if getattr(b, "ladentuer", None):
+        w, ta, tc, _ = b.ladentuer
+        o, en = w.welt(0, 0, 0), (w.welt(0, 1, 0) - w.welt(0, 0, 0)).normalized()
+        m = w.welt((ta + tc) / 2, 0, b.z0)
+        out.append((m, -en, tc - ta))
+    if b.g["typ"] == 5:
+        w = b.wand("vorne")
+        en = (w.welt(0, 1, 0) - w.welt(0, 0, 0)).normalized()
+        out.append((w.welt(b.r.W / 2, 0, b.z0), -en, 2.4))
+    return out
+
+
+def durchgaenge_frei(b):
+    """Kleine Anbauteile (Kaesten, Schilder), die in einen Tuerdurchgang ragen, entfernen."""
+    weg, gesehen = [], set()
+    bereiche = []
+    for mitte, d, breite in zugaenge(b):
+        d = Vector((d.x, d.y, 0)).normalized()
+        bereiche.append((mitte, d, Vector((-d.y, d.x, 0)), breite))
+    for f in b.bm.faces:
+        if f in gesehen:
+            continue
+        teil, stapel = [], [f]
+        gesehen.add(f)
+        while stapel:
+            ff = stapel.pop()
+            teil.append(ff)
+            for e in ff.edges:
+                for nf in e.link_faces:
+                    if nf not in gesehen:
+                        gesehen.add(nf)
+                        stapel.append(nf)
+        if len(teil) > 30:
+            continue
+        for mitte, d, q, breite in bereiche:
+            if any(abs((v.co - mitte).dot(q)) < breite / 2 - 0.1 and -0.45 <= (v.co - mitte).dot(d) <= 0.6
+                   and mitte.z + 0.1 <= v.co.z <= mitte.z + 2.05 for ff in teil for v in ff.verts):
+                weg += teil
+                break
+    bmesh.ops.delete(b.bm, geom=weg, context="FACES")
+    return len(weg)
+
+
+def stufen_ergaenzen(b):
+    """Vor jeder Aussentuer nach aussen laufen bis zum Fuss der vorhandenen Treppe; liegt der Fuss hoeher als
+    das Gelaende, Stufen ergaenzen (Steigung <= 0,17 m, Auftritt 0,30 m) bis auf das Gelaende."""
+    from mathutils.bvhtree import BVHTree
+    bvh = BVHTree.FromBMesh(b.bm)
+    T = C["aussentreppe"]
+    neu = 0
+    for mitte, d, breite in zugaenge(b):
+        d = Vector((d.x, d.y, 0)).normalized()
+        q = Vector((-d.y, d.x, 0))
+        z = mitte.z
+        p = mitte.copy()
+        a = 0.0
+        while a < 8.0:  # vorhandene Flaechen (Schwelle, Podest, Veranda, Stufen) entlang gehen
+            a += 0.1
+            pp = mitte + d * a
+            h = bvh.ray_cast(Vector((pp.x, pp.y, z + 0.3)), Vector((0, 0, -1)), 0.3 + T["steigung"] + 0.03)
+            if h[0] is None or h[1].z < 0.7:
+                break
+            z, p = h[0].z, pp
+        boden = V.h(p.x, p.y)
+        if z - boden <= T["steigung"] + 0.02:
+            continue
+        n = math.ceil((z - boden) / T["steigung"])
+        st = (z - boden) / n
+        fuss = p + d * 0.05  # Kante der letzten vorhandenen Flaeche
+        for i in range(1, n):
+            a0, a1 = (i - 1) * T["auftritt"], i * T["auftritt"]
+            ecken = [fuss + d * aa + q * qq for aa in (a0, a1) for qq in (-breite / 2 - 0.2, breite / 2 + 0.2)]
+            xs, ys = [e.x for e in ecken], [e.y for e in ecken]
+            zb = z - i * st
+            zg = min(V.h(e.x, e.y) for e in ecken) - 0.25
+            fs = V.box(b.bm, min(xs), min(ys), zg, max(xs), max(ys), zb)
+            for f in fs:
+                f.material_index = S["Beton"]
+            neu += 1
+    return neu
+
+
 def eingang_typ5(b):
     """Buero: massiver Drehtuer-Zylinder weg, Glasfassade in der Mitte 2,4 m breit bis zum Boden offen, Kaempfer."""
     W = b.r.W
@@ -416,6 +529,9 @@ def plan_erstellen(b, g):
     """Lage des Treppenhauses im lokalen (u, v)-System; None = Gebaeude bleibt unveraendert."""
     if g["id"] in C.get("ausnahmen", {}):
         return None
+    if g["typ"] == 7 and C.get("parkhaus"):
+        return {"parkhaus": True, "loch": False, "kern": False, "tueren": [],
+                "rnd": random.Random(C["seed"] * 1000 + int(g["id"][1:]))}
     if g["typ"] not in C["typen"]:
         return None
     W, D = b.r.W, b.r.D
@@ -454,7 +570,7 @@ def _rechteck(p):
         loch = (r[0], r[1] + C["treppe"]["podest"], r[2], r[3])
     else:
         r = (p["u0"], p["v0"], p["u0"] + p["laenge"], p["v0"] + p["breite"])
-        loch = (r[0] + C["treppe"]["podest"], r[1], r[2], r[3])
+        loch = (r[0], r[1], r[2] - C["treppe"]["podest"], r[3])  # Antritt liegt bei u1 (Laeufe laufen nach -u)
     return r, loch
 
 
@@ -462,6 +578,15 @@ def _rechteck(p):
 def _ist_kern(b, p, u0, v0, u1, v1, za, zb, mat, top):
     e = p["e"]
     return mat == S["InnenWand"] and top == S["InnenDecke"] and abs(u0 - e) < 1e-6 and abs(v0 - e) < 1e-6 and zb - za > 2.5
+
+
+def _ist_dachraum(b, p, u0, v0, u1, v1, za, zb, mat):
+    """Massiver Dachaufbau (Maschinenraum), der ueber dem Treppenhaus steht."""
+    info = b.info or {}
+    if mat != S["Beton"] or info.get("top") is None or abs(za - info["top"]) > 0.01 or zb - za < 2.0:
+        return False
+    (ru0, rv0, ru1, rv1), _ = _rechteck(p)
+    return min(u0, u1) < ru1 and max(u0, u1) > ru0 and min(v0, v1) < rv1 and max(v0, v1) > rv0
 
 
 def _ist_decke(b, p, u0, v0, u1, v1, za, zb, mat):
@@ -569,7 +694,8 @@ def treppenhaus(b, p):
     r, loch = _rechteck(p)
     u0, v0, u1, v1 = r
     stufen_mat, wand_mat = S["Beton"], S["InnenWand"]
-    dach = C["dachausstieg"] and b.g["typ"] != 2
+    # Dach nur, wenn die Dachplatte wirklich ein Loch bekommen hat (eingestuerzte Daecher: Platte in Teilen)
+    dach = C["dachausstieg"] and b.g["typ"] != 2 and any(abs(z - top) < 0.01 for z in p.get("decken", []))
     hoch = sorted(set([round(z, 4) for z in ebenen] + ([round(top, 4)] if dach else [])))
     if len(hoch) < 2:
         return
@@ -631,7 +757,18 @@ def treppenhaus(b, p):
                 p["tueren"].append((seite, za))
         # Kerndach wie vorher (Oberseite war InnenDecke)
     # Dachausstieg: kleines Treppenhaus-Haus ueber dem Loch mit Tuer zum Dach
-    if dach and p.get("decken") and any(abs(z - top) < 0.01 for z in p["decken"]):
+    if dach and p.get("dachraum"):  # Maschinenraum hohl: Huelle um Aufbau + Treppenhaus, Tuer zum Dach
+        du0, dv0, du1, dv1, za, zb = p["dachraum"]
+        ru0, rv0, ru1, rv1 = min(du0, u0 - 0.25), min(dv0, v0 - 0.25), max(du1, u1 + 0.25), max(dv1, v1 + 0.25)
+        dk = 0.25
+        m = (ru0 + ru1) / 2
+        _wand_mit_tueren(b, "u", rv0, ru0, ru1, dk, za, zb, [(m - 0.5, m + 0.5, T["tuer_hoehe"])], S["Beton"])
+        _box(b, ru0, rv1 - dk, ru1, rv1, za, zb, S["Beton"])
+        _box(b, ru0, rv0 + dk, ru0 + dk, rv1 - dk, za, zb, S["Beton"])
+        _box(b, ru1 - dk, rv0 + dk, ru1, rv1 - dk, za, zb, S["Beton"])
+        _box(b, ru0, rv0, ru1, rv1, zb - 0.25, zb, S["InnenDecke"], top=S["Dach"])
+        p["dachhaus"] = "maschinenraum"
+    elif dach and p.get("decken") and any(abs(z - top) < 0.01 for z in p["decken"]):
         hk, dk = T["dachhaus_hoehe"], 0.2
         za, zb = top, top + hk
         if p["achse"] == "v":
@@ -695,7 +832,8 @@ def main():
         ebenen = p.get("ebenen") or list((b.info or {}).get("geschosse", []))
         if ebenen:
             ob["ebenen_z"] = [round(z, 3) for z in ebenen]  # Weltkoordinaten (Mesh ist bei orig verankert, z identisch)
-        ergebnis.append((g["id"], name, bool(b.plan), b.log, p.get("achse"), p.get("moebel_weg"), p.get("dachhaus", False), "tueren", n_t))
+        ergebnis.append((g["id"], name, bool(b.plan), b.log, p.get("achse"), p.get("moebel_weg"), p.get("dachhaus", False), "tueren", n_t,
+                         "stufen", p.get("stufen_neu"), "durchgang", p.get("durchgang_weg")))
     for e in ergebnis:
         print("GEB", *e, flush=True)
     if PRUEFEN or "--pruefen-zufall" in args:

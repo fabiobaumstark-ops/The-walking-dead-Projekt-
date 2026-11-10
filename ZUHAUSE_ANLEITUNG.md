@@ -37,7 +37,7 @@ Das lädt etwa 1,7 GB nach `assets/`. Mit `python3 download_assets.py --pruefen`
 
 ## 4. Datei öffnen und GPU einschalten
 
-1. Blender starten → Datei → Öffnen → `twd/viertel_v10.blend` (immer die höchste Nummer nehmen).
+1. Blender starten → Datei → Öffnen → `twd/viertel_v11.blend` (immer die höchste Nummer nehmen).
 2. Bearbeiten → Einstellungen → System → Cycles Render Devices → **Metal** wählen und deinen Mac (M4 Pro) anhaken.
 3. Rechts im Eigenschaften-Fenster, Reiter Render (Kamera-Symbol): **Device = GPU Compute** muss eingestellt sein (ist schon gespeichert).
 
@@ -105,7 +105,7 @@ Alle Zahlen stehen in `scripts/configs/` (JSON-Dateien, mit jedem Texteditor bea
 Danach den passenden Teil neu bauen, z. B. Licht und Dunst:
 
 ```bash
-/Applications/Blender-5.2.3.app/Contents/MacOS/Blender -b viertel_v10.blend --python scripts/phase5/build_phase5.py -- --version 11 --nur Licht,Atmosphaere
+/Applications/Blender-5.2.3.app/Contents/MacOS/Blender -b viertel_v11.blend --python scripts/phase5/build_phase5.py -- --version 12 --nur Licht,Atmosphaere
 ```
 
 Die Reihenfolge aller Skripte steht in `UEBERGABE.md` unter „Ausgeführte Skripte“.

@@ -1201,7 +1201,8 @@ Teilphasen (nach jeder STOPP):
     Richtwert 30+ fps auf dem M4 Pro – wird gemessen, nicht versprochen)
 6.3 Look in Unreal: Mastermaterial mit Verwitterung (Staub, Schmutz, Moos, Kanten), Lumen, Nebel, Rauch/Feuer (Niagara),
     Abgleich mit den Blender-Hero-Shots
-6.4 Begehbare Gebäude: Generator für Innenräume (Geschossdecken, Treppenhäuser, Räume, Türen, Möbel, Dächer) in Blender,
+6.4 Begehbare Gebäude (Vorgabe Nutzer 2026-11-10: „Selber Realismus wie außen“ – Innenräume
+    nach demselben Maßstab D2 wie die Außenansicht): Generator für Innenräume (Geschossdecken, Treppenhäuser, Räume, Türen, Möbel, Dächer) in Blender,
     Matratzen/Kartons durch bessere Modelle ersetzen
 6.5 Spieler (C++, Xcode nötig): Ego-Steuerung, Leben, Ausdauer, Inventar, Gegenstände aufheben, Türen
 6.6 Gegner: Figuren mit Skelett (MPFB-Rig), Animationen (nur freie Lizenzen), KI (Umherirren, Hören/Sehen, Verfolgen)

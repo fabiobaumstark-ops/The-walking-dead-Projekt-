@@ -6,6 +6,8 @@
  "kern_einzug": 4.2,
  "moebel_abstand": 0.4,
  "dachausstieg": true,
+ "parkhaus": {"_info": "Phase-1-Rampen (u0, u1, v0, v1) enden 0,3 m unter der naechsten Decke und haben kein Deckenloch -> korrigiert", "rampe": [10.5, 15.5, 8.0, 22.0], "rampe_hoeher": 0.3},
+ "aussentreppe": {"steigung": 0.17, "auftritt": 0.30},
  "treppe": {
   "steigung_max": 0.18,
   "auftritt": 0.28,

@@ -1,8 +1,8 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 6.1 Unreal-Pipeline-Test gebaut (2026-11-10) – wartet auf den Test des Nutzers auf dem Mac (UNREAL_ANLEITUNG.md). 5.8 Teil 1 fertig, 5.6 Animation gestrichen
+- **Aktuelle Phase:** Phase 6.4 Teil 1 fertig (begehbare Gebäude, 39/41) – als Nächstes 6.4 Teil 2 (Innen-Realismus); 6.1 Unreal-Test wartet weiter auf den Mac
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
-- **.blend-Version:** `viertel_v10.blend` (5.8 Teil 1, 89,7 MB – Ziel unter 90 MB fast ausgeschöpft); Vorversion `viertel_v09.blend`
+- **.blend-Version:** `viertel_v11.blend` (6.4 Teil 1, 88,5 MB); Vorversion `viertel_v10.blend`
 - **Branch:** `claude/zealous-ride-c12e2z` (neu ab 2026-11-10; gleicher Stand wie zuvor `claude/zen-meitner-53hxe1`)
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 - **Lokal (Mac, 2026-11-05):** Blender 5.2.3 LTS unter /Applications/Blender-5.2.3.app, Metal-GPU (M4 Pro, 16 Kerne) erkannt, Assets geladen (356 Dateien, 1,7 GB)
@@ -57,6 +57,7 @@
   - Kirche und Lagerhalle noch ohne echte Fensteröffnungen
 
 ## Nächster konkreter Schritt
+0. 6.4 Teil 2: Innen-Realismus (Nutzer: „Selber Realismus wie außen“) – siehe PROTOKOLL Phase 6.4 „Noch offen“. Gebäude immer mit `scripts/phase6/innenraum.py` aus v10 neu bauen (nicht aus v11), danach `begehbar.py` laufen lassen.
 1. Rückmeldung zum Unreal-Test abwarten (Screenshots Draufsicht/Spiel, fps, Output Log „VIERTEL“). Danach:
    - falls gespiegelt/gedreht: KONV in scripts/phase6/export_unreal.py anpassen (Achsen-Konvention ist eine ANNAHME, ungeprüft)
    - falls Import-Fehler: ue_import.py nach den Log-Zeilen korrigieren (Unreal-Python-API nicht getestet, nur Syntax geprüft)
@@ -71,6 +72,7 @@
 - 5.8 Teil 1: Nebelstärke, neue CAM 4, Panzerturm in Ordnung?
 
 ## Bisherige Antworten/Freigaben
+- 2026-11-10: iPad – Unreal-Installation durch Claude nicht möglich (kein Zugriff auf den Mac); Antwort A: Innenräume zuerst. Vorgabe: Innen „selber Realismus wie außen“
 - Unreal (2026-11-10): B begehbares Level → genauer: C richtiges Spiel, Blender-Animation gestrichen (A), Unreal 5.8 neu installieren (A), möglichst alles begehbar (C)
 - Meldung 2026-11-10: „Datei kaum zu öffnen auf dem Mac“ → v09/v10 entlastet (Instanzen, Fenster-Anzeige); Bestätigung steht aus
 - Phase 5 (2026-11-10): 1A CAM 1 am besten, CAM 4 am schwächsten (neu komponieren), 2C Nebel zu schwach → mehr Dunst in der Tiefe, 3A final 1080p, 4B Animation ja, aber erst nach der Qualitätsrunde
@@ -138,3 +140,6 @@
 27. Phase 6.1: `blender -b viertel_v10.blend --python scripts/phase6/export_unreal.py -- --test` → export/unreal_test (1034 Formen, 46.178 Platzierungen, 205 Materialien, 55 s, 739 MB; nicht im Repo)
 28. `blender -b viertel_v10.blend --python scripts/phase6/referenz_draufsicht.py` → renders/test/phase6_referenz_draufsicht.png
 29. Auf dem Mac in Unreal 5.8: Tools → Execute Python Script → scripts/phase6/ue_import.py (noch nicht ausgeführt)
+30. Phase 6.4: `blender -b viertel_v10.blend --python scripts/phase6/innenraum.py -- --pruefen` (41/41 identisch) und `-- --pruefen-zufall` (41/41)
+31. `blender -b viertel_v10.blend --python scripts/phase6/innenraum.py -- --version 11` → viertel_v11.blend
+32. `blender -b viertel_v11.blend --python scripts/phase6/begehbar.py` → renders/test/phase6_begehbar.json (39/41)

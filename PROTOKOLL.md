@@ -609,3 +609,28 @@
 - Unreal-Seite (scripts/phase6/ue_import.py): Texturen, 2 Mastermaterialien (Basis, Maske), Materialinstanzen, FBX-Import, Kollision je Kategorie (Gebäude/Fahrzeuge „complex as simple“, Pflanzen ohne), Nanite ab 50.000 Flächen, Level mit Einzel-Actors bzw. HISM ab 9 gleichen Formen, Sonne/Himmel/Nebel/Feuerlicht/PlayerStart
 - Ehrlich: ue_import.py ist nur auf Python-Syntax geprüft. Die Unreal-Python-Aufrufe stammen aus meinem Wissen zur UE-5-API und sind ungetestet; Fehler sind wahrscheinlich und werden nach dem Output Log des Nutzers korrigiert
 - Bekannte Grenzen des Tests: Verwitterungs-Look fehlt in Unreal noch (6.3), Glas undurchsichtig, Volumen-Dunst/Rauch nicht übertragen (in Unreal: Höhennebel), Figuren ohne Skelett, Gebäude innen nicht begehbar (6.4)
+
+## Phase 6.4 – Begehbare Gebäude, Teil 1 (2026-11-10, Cloud-Sitzung)
+- Nutzer: Antwort A (Innenräume zuerst, ohne Unreal-Test), Vorgabe „Selber Realismus wie außen“ (→ Teil 2)
+- Verfahren (scripts/phase6/innenraum.py, Parameter scripts/configs/innenraum.json):
+  - Gebäude werden mit dem freigegebenen Generator (gebaeude2.py, gleiche Seeds) neu erzeugt; nur die Mesh-Daten der BLD_-Objekte werden ersetzt (Modifier, Eigenschaften, Panzer-B-Wandloch bleiben)
+  - Eingriff an einer Stelle: Bau.box() → Geschossdecken und Dachplatten mit Treppenloch, massiver Kern → Wände 0,2 m mit Tür je Seite und Geschoss
+  - Prüfung 1: Neubau ohne Änderung = 41 von 41 Meshes identisch (Hash der Koordinaten)
+  - Prüfung 2: Zufallsgenerator nach dem Umbau im gleichen Zustand wie ohne Umbau = 41 von 41 → Fassaden, Fenster, Schäden unverändert
+- Treppen: U-Treppe mit Zwischenpodest, Steigung ≤ 0,18 m, Auftritt 0,28 m, Lauf 1,1 m, Laufplatte 0,2 m, Brüstung im Treppenauge, Geländer an der offenen Lochseite; Dachausstieg als Treppenhaus-Aufbau mit Tür; bei B13 endet die Treppe im (jetzt hohlen) Maschinenraum
+- Türen: Türblätter sind eigene Objekte (Collection 03_Gebaeude/Tueren, Ursprung im Scharnier, Eigenschaften zustand/oeffnung_grad) → im Spiel öffnbar. Offene Türen öffnen jetzt nach innen (vorher nach außen, haben den Eingang versperrt). Gleiche Zufallszahlen wie vorher (Kopie von _tuer/_schaufenster)
+- Gefundene Fehler aus Phase 1/2 (vom Begehbarkeits-Test aufgedeckt) und Korrektur:
+  - Ladentür mit 0,5 m Brüstung + Sockelpaneel unter dem Türfeld → Wand nachträglich aufgeschnitten, Schwelle
+  - Büro: massive gläserne Drehtür (Zylinder) → entfernt, Glasfassade 2,4 m breit bis zum Boden offen, Kämpfer
+  - Holzhaus: geschlossene Fliegengittertür → eigenes Objekt (halb offen); Pfosten + Geländer direkt vor der Verandatreppe → aufgeschnitten, neue Pfosten an der Öffnung
+  - Häuser am Hang: Außentreppen enden bis 0,86 m über dem Gelände → Stufen bis aufs Gelände ergänzt (≤ 0,17 m)
+  - Türen ohne Boden in der Wanddicke → Schwellen
+  - Möbel/Betten aus dem Möbel-Generator über dem Treppenloch → entfernt (Abstand 0,4 m)
+  - kleiner Metallkasten vor einer Hintertür (B22) → kleine Anbauteile in Türdurchgängen entfernt
+  - ungerade Stufenzahl (Geschoss 4,0 m) → Lücke am Austritt → Auftritt des 2. Laufs gestreckt
+  - Parkhaus: Rampen enden 0,3 m unter der nächsten Decke, Decke ohne Öffnung → Rampe bis Deckenoberkante, Deckenöffnung
+- Begehbarkeits-Test (scripts/phase6/begehbar.py): Figur 1,76 m, Radius 0,30 m, Stufe 0,45 m (Annahme: Unreal-Standard-Charakter), Raster 0,2 m, Start von allen Geländepunkten rund ums Gebäude
+  - eigene Test-Fehler gefunden und behoben: Rasterpunkte genau auf Kanten (Raster versetzt), zu kleiner Rand (3 → 6 m), Sockel als Erdgeschoss erkannt (Ebenen jetzt aus dem Generator)
+  - Ergebnis viertel_v11.blend: **39 von 41 Gebäuden in allen Ebenen begehbar** (inkl. Dach, wo es ein Flachdach gibt). Nicht begehbar: Kirche (B31) und Tankstellen-Shop (B34) – beide sind innen massive Blockout-Körper
+- Datei: viertel_v11.blend 88,5 MB; v09 entfernt (A3)
+- Noch offen (Teil 2, Vorgabe „Realismus wie außen“): Innenwände/Räume (Wohnungen, Flure), echte Innenmaterialien (Putz mit Schäden, Tapete, Fliesen, Holzböden), Möbel als Scans statt Kästen, Licht durch Fenster prüfen, Kirche und Tankstellen-Shop neu modellieren mit Innenraum

@@ -6,7 +6,7 @@
   "laufen": 5,
   "springen": 5,
   "dach": true,
-  "zeit_s": 2.9
+  "zeit_s": 2.7
  },
  {
   "id": "B02",
@@ -24,7 +24,7 @@
   "laufen": 6,
   "springen": 6,
   "dach": true,
-  "zeit_s": 2.1
+  "zeit_s": 2.0
  },
  {
   "id": "B04",
@@ -33,7 +33,7 @@
   "laufen": 4,
   "springen": 4,
   "dach": true,
-  "zeit_s": 1.7
+  "zeit_s": 1.8
  },
  {
   "id": "B05",
@@ -42,7 +42,7 @@
   "laufen": 5,
   "springen": 5,
   "dach": true,
-  "zeit_s": 1.5
+  "zeit_s": 1.9
  },
  {
   "id": "B06",
@@ -51,7 +51,7 @@
   "laufen": 6,
   "springen": 6,
   "dach": true,
-  "zeit_s": 2.2
+  "zeit_s": 2.7
  },
  {
   "id": "B07",
@@ -60,7 +60,7 @@
   "laufen": 5,
   "springen": 5,
   "dach": true,
-  "zeit_s": 1.8
+  "zeit_s": 2.0
  },
  {
   "id": "B08",
@@ -78,7 +78,7 @@
   "laufen": 9,
   "springen": 9,
   "dach": true,
-  "zeit_s": 13.2
+  "zeit_s": 12.7
  },
  {
   "id": "B10",
@@ -87,7 +87,7 @@
   "laufen": 3,
   "springen": 3,
   "dach": true,
-  "zeit_s": 3.0
+  "zeit_s": 3.2
  },
  {
   "id": "B11",
@@ -96,7 +96,7 @@
   "laufen": 5,
   "springen": 5,
   "dach": true,
-  "zeit_s": 1.9
+  "zeit_s": 2.0
  },
  {
   "id": "B12",
@@ -105,16 +105,16 @@
   "laufen": 6,
   "springen": 6,
   "dach": true,
-  "zeit_s": 3.1
+  "zeit_s": 3.6
  },
  {
   "id": "B13",
   "name": "BLD_Buero_4",
   "ebenen": 8,
-  "laufen": 7,
-  "springen": 7,
-  "dach": false,
-  "zeit_s": 6.7
+  "laufen": 8,
+  "springen": 8,
+  "dach": true,
+  "zeit_s": 7.5
  },
  {
   "id": "B14",
@@ -123,7 +123,7 @@
   "laufen": 5,
   "springen": 5,
   "dach": true,
-  "zeit_s": 1.8
+  "zeit_s": 2.0
  },
  {
   "id": "B15",
@@ -132,25 +132,25 @@
   "laufen": 7,
   "springen": 7,
   "dach": true,
-  "zeit_s": 59.5
+  "zeit_s": 58.9
  },
  {
   "id": "B16",
   "name": "BLD_Parkhaus",
-  "ebenen": 5,
-  "laufen": 0,
-  "springen": 0,
-  "dach": false,
-  "zeit_s": 4.7
+  "ebenen": 3,
+  "laufen": 3,
+  "springen": 3,
+  "dach": true,
+  "zeit_s": 8.2
  },
  {
   "id": "B17",
   "name": "BLD_Wohnhaus_Ziegel_04",
   "ebenen": 6,
-  "laufen": 0,
-  "springen": 0,
-  "dach": false,
-  "zeit_s": 2.8
+  "laufen": 6,
+  "springen": 6,
+  "dach": true,
+  "zeit_s": 3.2
  },
  {
   "id": "B18",
@@ -159,7 +159,7 @@
   "laufen": 6,
   "springen": 6,
   "dach": true,
-  "zeit_s": 2.2
+  "zeit_s": 2.0
  },
  {
   "id": "B19",
@@ -168,16 +168,16 @@
   "laufen": 7,
   "springen": 7,
   "dach": true,
-  "zeit_s": 6.7
+  "zeit_s": 6.8
  },
  {
   "id": "B20",
   "name": "BLD_Wohnhaus_Ziegel_05",
-  "ebenen": 5,
+  "ebenen": 4,
   "laufen": 4,
   "springen": 4,
-  "dach": false,
-  "zeit_s": 2.0
+  "dach": true,
+  "zeit_s": 2.1
  },
  {
   "id": "B21",
@@ -186,16 +186,16 @@
   "laufen": 5,
   "springen": 5,
   "dach": true,
-  "zeit_s": 4.5
+  "zeit_s": 4.4
  },
  {
   "id": "B22",
   "name": "BLD_Geschaeftshaus_10",
   "ebenen": 6,
-  "laufen": 0,
-  "springen": 0,
-  "dach": false,
-  "zeit_s": 3.3
+  "laufen": 6,
+  "springen": 6,
+  "dach": true,
+  "zeit_s": 3.6
  },
  {
   "id": "B23",
@@ -204,7 +204,7 @@
   "laufen": 11,
   "springen": 11,
   "dach": true,
-  "zeit_s": 11.4
+  "zeit_s": 11.3
  },
  {
   "id": "B24",
@@ -213,7 +213,7 @@
   "laufen": 6,
   "springen": 6,
   "dach": true,
-  "zeit_s": 3.0
+  "zeit_s": 2.8
  },
  {
   "id": "B25",
@@ -222,7 +222,7 @@
   "laufen": 3,
   "springen": 3,
   "dach": true,
-  "zeit_s": 7.8
+  "zeit_s": 7.9
  },
  {
   "id": "B26",
@@ -249,7 +249,7 @@
   "laufen": 1,
   "springen": 1,
   "dach": true,
-  "zeit_s": 0.6
+  "zeit_s": 0.7
  },
  {
   "id": "B29",
@@ -258,7 +258,7 @@
   "laufen": 5,
   "springen": 5,
   "dach": true,
-  "zeit_s": 2.3
+  "zeit_s": 2.0
  },
  {
   "id": "B30",
@@ -267,7 +267,7 @@
   "laufen": 6,
   "springen": 6,
   "dach": true,
-  "zeit_s": 1.5
+  "zeit_s": 1.6
  },
  {
   "id": "B31",
@@ -276,7 +276,7 @@
   "laufen": 0,
   "springen": 0,
   "dach": false,
-  "zeit_s": 0.4
+  "zeit_s": 0.5
  },
  {
   "id": "B32",
@@ -285,7 +285,7 @@
   "laufen": 2,
   "springen": 2,
   "dach": true,
-  "zeit_s": 1.1
+  "zeit_s": 1.0
  },
  {
   "id": "B33",
@@ -294,7 +294,7 @@
   "laufen": 2,
   "springen": 2,
   "dach": true,
-  "zeit_s": 1.2
+  "zeit_s": 1.0
  },
  {
   "id": "B34",
@@ -303,7 +303,7 @@
   "laufen": 1,
   "springen": 1,
   "dach": false,
-  "zeit_s": 1.5
+  "zeit_s": 1.4
  },
  {
   "id": "B35",
@@ -318,28 +318,28 @@
   "id": "B36",
   "name": "BLD_Holzhaus_Veranda_07",
   "ebenen": 1,
-  "laufen": 0,
+  "laufen": 1,
   "springen": 1,
-  "dach": false,
+  "dach": true,
   "zeit_s": 0.5
  },
  {
   "id": "B37",
   "name": "BLD_Holzhaus_Veranda_08",
   "ebenen": 1,
-  "laufen": 0,
-  "springen": 0,
-  "dach": false,
-  "zeit_s": 0.5
+  "laufen": 1,
+  "springen": 1,
+  "dach": true,
+  "zeit_s": 0.6
  },
  {
   "id": "B38",
   "name": "BLD_Wohnhaus_Ziegel_09",
   "ebenen": 4,
-  "laufen": 0,
-  "springen": 0,
-  "dach": false,
-  "zeit_s": 1.6
+  "laufen": 4,
+  "springen": 4,
+  "dach": true,
+  "zeit_s": 1.8
  },
  {
   "id": "B39",
@@ -348,7 +348,7 @@
   "laufen": 4,
   "springen": 4,
   "dach": true,
-  "zeit_s": 1.4
+  "zeit_s": 1.5
  },
  {
   "id": "B40",
@@ -357,7 +357,7 @@
   "laufen": 6,
   "springen": 6,
   "dach": true,
-  "zeit_s": 4.4
+  "zeit_s": 3.7
  },
  {
   "id": "B41",
@@ -366,6 +366,6 @@
   "laufen": 6,
   "springen": 6,
   "dach": true,
-  "zeit_s": 3.3
+  "zeit_s": 2.9
  }
 ]

@@ -92,8 +92,7 @@ def pruefen(ob, g):
             x, y = x0 + i * R, y0 + j * R
             innen = rahmen_x0 < x < rahmen_x1 and rahmen_y0 < y < rahmen_y1
             zs = flaechen(bvh, x, y, ztop, zmin)
-            if not innen:
-                zs.append(V.h(x, y))  # Gelaende ausserhalb (nicht im Gebaeude-Mesh)
+            zs.append(V.h(x, y))  # Gelaende (nicht im Gebaeude-Mesh); unter Bodenplatten faellt es durch die Kopfhoehe raus
             zs = [z for z in zs if frei(bvh, (x, y), z)]
             if zs:
                 knoten[(i, j)] = zs

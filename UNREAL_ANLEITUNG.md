@@ -39,10 +39,10 @@ Xcode brauchst du erst später (Phase 6.5, wenn das Spiel in C++ programmiert wi
 Dauert in der Cloud etwa 1 Minute und belegt etwa 0,7 GB in `twd/export/unreal_test`:
 
 ```bash
-/Applications/Blender-5.2.3.app/Contents/MacOS/Blender -b viertel_v10.blend --python scripts/phase6/export_unreal.py -- --test
+/Applications/Blender-5.2.3.app/Contents/MacOS/Blender -b viertel_v11.blend --python scripts/phase6/export_unreal.py -- --test
 ```
 
-Am Ende muss eine Zeile mit `EXPORT {'formen': 1034, ...` stehen.
+Am Ende muss eine Zeile beginnend mit `EXPORT {'formen': ...` stehen (etwa 1000 Formen).
 
 ## 5. In Unreal importieren
 
