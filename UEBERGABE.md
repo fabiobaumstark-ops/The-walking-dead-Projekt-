@@ -1,8 +1,8 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 6.4 Teil 1 fertig (begehbare Gebäude, 39/41) – als Nächstes 6.4 Teil 2 (Innen-Realismus); 6.1 Unreal-Test wartet weiter auf den Mac
+- **Aktuelle Phase:** Phase 6.4 Teil 2 – Muster B11/B05 ausgebaut, wartet auf Rückmeldung des Nutzers zu den Innenbildern; Unreal pausiert (IS-0007)
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
-- **.blend-Version:** `viertel_v11.blend` (6.4 Teil 1, 90,7 MB – knapp über dem Ziel 90 MB); Vorversion `viertel_v10.blend`
+- **.blend-Version:** `viertel_v12.blend` (6.4 Teil 2 Muster, 91,0 MB). `viertel_v10.blend` bleibt als Bau-Basis im Repo (alle Umbauten werden aus v10 erzeugt); v11 entfernt
 - **Branch:** `claude/zealous-ride-c12e2z` (neu ab 2026-11-10; gleicher Stand wie zuvor `claude/zen-meitner-53hxe1`)
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 - **Lokal (Mac, 2026-11-05):** Blender 5.2.3 LTS unter /Applications/Blender-5.2.3.app, Metal-GPU (M4 Pro, 16 Kerne) erkannt, Assets geladen (356 Dateien, 1,7 GB)
@@ -57,7 +57,8 @@
   - Kirche und Lagerhalle noch ohne echte Fensteröffnungen
 
 ## Nächster konkreter Schritt
-0. 6.4 Teil 2: Innen-Realismus (Nutzer: „Selber Realismus wie außen“) – siehe PROTOKOLL Phase 6.4 „Noch offen“. Gebäude immer mit `scripts/phase6/innenraum.py` aus v10 neu bauen (nicht aus v11), danach `begehbar.py` laufen lassen.
+0. Rückmeldung zu renders/test/phase64_innen_bogen.png abwarten, dann Punkte aus PROTOKOLL „6.4 Teil 2 … Offen“. Bau immer: `blender -b viertel_v10.blend --python scripts/phase6/innenraum.py -- --version NN`.
+0b. 6.4 Teil 2: Innen-Realismus (Nutzer: „Selber Realismus wie außen“) – siehe PROTOKOLL Phase 6.4 „Noch offen“. Gebäude immer mit `scripts/phase6/innenraum.py` aus v10 neu bauen (nicht aus v11), danach `begehbar.py` laufen lassen.
 1. Rückmeldung zum Unreal-Test abwarten (Screenshots Draufsicht/Spiel, fps, Output Log „VIERTEL“). Danach:
    - falls gespiegelt/gedreht: KONV in scripts/phase6/export_unreal.py anpassen (Achsen-Konvention ist eine ANNAHME, ungeprüft)
    - falls Import-Fehler: ue_import.py nach den Log-Zeilen korrigieren (Unreal-Python-API nicht getestet, nur Syntax geprüft)

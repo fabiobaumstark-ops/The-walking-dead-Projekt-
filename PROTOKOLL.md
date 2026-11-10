@@ -641,3 +641,14 @@
 - Wohnhäuser (Typ 1) haben einen Hinterausgang zum Hof (Rückwand, Erdgeschoss, wo kein Fenster ist) – nötig, weil die Haustür von B17 hinter Panzer B liegt (der Boolean-Wanddurchbruch schneidet mit korrekten Normalen jetzt auch die Eingangsstufen weg)
 - Ergebnis: weiterhin 39 von 41 begehbar (Dach jetzt über Leiter; Leiter klettern kommt mit dem Spieler in 6.5). Datei 90,7 MB (Ziel 90 MB knapp überschritten, GitHub-Grenze 100 MB) → Möbel in Teil 2 als verlinkte Instanzen, nicht in die .blend kopieren
 - Neue Assets (Poly Haven, CC0) für Teil 2: 9 Innen-Texturen (Tapete, abblätternde Farbe, rissiger/alter Putz, alte Dielen, Linoleum, Fliesen, Betonboden, Laminat) und 21 Möbel-Scans; Manifest 117 Assets, LIZENZEN.txt aktualisiert
+
+## Phase 6.4 Teil 2 – Innenausbau, Muster B11 + B05 (2026-11-10, Cloud-Sitzung)
+- Antworten: 1B Dachluke + Leiter, 2A Räume + Material + Scan-Möbel (erst 2 Gebäude zeigen), 3A Kirche/Tankstelle in Teil 2
+- Unreal-Installation des Nutzers scheitert mit IS-0007 (Epic Launcher) → pausiert; Godot als Alternative angeboten, nicht gewählt
+- scripts/phase6/innenausbau.py (Parameter innenraum.json → "innenausbau"): je Wohngeschoss Flur entlang der Treppe + Zimmer (Wohnen, Küche, Bad, Schlafen …), Querwände zwischen den Fenstern, Trennwände aus zwei Hälften (je Raum eigenes Material), Bodenbelag je Raum, Zimmertüren als Objekte (zu/offen/fehlt), alte Kasten-Möbel entfernt; Laden im EG mit Stahlregalen (Scans)
+- 10 zusätzliche Material-Slots (Tapete, abblätternde Farbe, Putz rissig/alt, Dielen, Linoleum, Fliesen, Beton, Laminat, Teppich); Decke → rissiger Putz, Außenwand-Innenseite → alter Putz
+- Möbel: 24 Poly-Haven-Scans als Collection-Instanzen (00_Prototypen/PROTO_Moebel_*, Materialien lokal + Verwitterung), 12_Innenraum/Moebel; B11: 73, B05: 66 Möbel; teils verdreht/umgekippt; Raumgrenzen als Eigenschaft raeume_json
+- Innen-Vorschau (scripts/phase6/innen_vorschau.py): Außendunst ausgeblendet (Volumen-Würfel füllte sonst die Zimmer → blaues Rauschen), kein Außen-Grading, Belichtung +6 (Innenräume ca. 5–7 Blenden dunkler als draußen); Renderzeit ca. 170 s je Bild (CPU, 960 × 540, 48 Samples)
+- Datei viertel_v12.blend 91,0 MB (Möbel verlinkt); weiterhin 39/41 begehbar
+- Ehrliche Bewertung der Muster (renders/test/phase64_innen_*.png): Schlafzimmer gut (Putzschäden, Scan-Schrank), Wohnzimmer zu leer, Küchen-Kamera schaut auf eine Wand, Laden zu dunkel; insgesamt noch nicht „wie außen“ (D2 Innen geschätzt 5–6)
+- Offen: Raumgrößen kleiner/gemischter, mehr Kleinkram und Schutt (Papier, Scherben, Laub durch Fenster), Wandschäden/Schimmel an Ecken, Lichtfall prüfen, Küche/Bad-Einrichtung (keine passenden Scans für WC/Waschbecken/Küchenzeile → selbst modellieren), Kirche + Tankstelle, dann Übertragung auf alle Gebäude (Kern-Gebäude brauchen eigenen Grundriss)

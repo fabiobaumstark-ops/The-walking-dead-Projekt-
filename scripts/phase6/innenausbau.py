@@ -393,6 +393,7 @@ def ausbauen(b, p, C, S, G2, V, VB):
     X = {m: slot(C, S, m) for m in extra_materialien(C)}
     R = K["raeume"]
     b.moebel = []
+    b.raeume = []
     bericht = {"geschosse": 0, "zimmer": 0, "moebel": 0, "kasten_weg": 0}
     for zf in wohn:
         i = stufen.index(zf)
@@ -425,6 +426,7 @@ def ausbauen(b, p, C, S, G2, V, VB):
         fv, fh, fr = (_fenster(b, s_, zf, zf + hz) for s_ in ("vorne", "hinten", "rechts"))
         for art, za_v, zb_v in gr["zimmer"]:
             rect = (uw + 0.12, za_v + 0.06, W - d, zb_v - 0.06)
+            b.raeume.append({"z": round(zf, 3), "art": art, "rect": [round(c, 3) for c in rect]})
             bel = Belegung(rect)
             wand_info = {"v0": {"aussen": za_v <= d + 0.01, "fenster": fv}, "v1": {"aussen": zb_v >= D - d - 0.01, "fenster": fh},
                          "u1": {"aussen": True, "fenster": fr}, "u0": {"aussen": False}}
@@ -436,6 +438,7 @@ def ausbauen(b, p, C, S, G2, V, VB):
         hz = ge[1] - zf - 0.25 if len(ge) > 1 else top - zf - 0.3
         bericht["kasten_weg"] += kasten_moebel_weg(b, S, (d, 2.1, W - d, D - d), zf, zf + 2.2)
         rect = (d + 0.05, 2.4, W - d - 0.05, p["v0"] - 0.3)
+        b.raeume.append({"z": round(zf, 3), "art": "laden", "rect": [round(c, 3) for c in rect]})
         bel = Belegung(rect)
         bel.besetzt.append(((d + W - d) / 2 - 0.6, rect[1], (d + W - d) / 2 + 0.6, rect[3]))  # Mittelgang
         b.moebel += moebel_raum(b, "laden", rect, {"u0": {"aussen": False}, "u1": {"aussen": False}}, bel, C, rnd, masse, zf - 0.012)

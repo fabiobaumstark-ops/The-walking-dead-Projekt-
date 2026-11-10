@@ -954,6 +954,8 @@ def main():
             bpy.data.meshes.remove(alt)
         p = b.plan or {}
         n_t = tueren_bauen(b, g["id"], name, orig, ob)
+        if getattr(b, "raeume", None):
+            ob["raeume_json"] = json.dumps(b.raeume)  # Raumgrenzen (lokal u, v) fuer Vorschau/Spiel
         if b.moebel:
             p["moebel_gesetzt"] = IA.moebel_setzen(V, VB, g["id"], b, b.moebel, "12_Innenraum/Moebel")
         ebenen = p.get("ebenen") or list((b.info or {}).get("geschosse", []))

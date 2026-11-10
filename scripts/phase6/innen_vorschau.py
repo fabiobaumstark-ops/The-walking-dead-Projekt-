@@ -24,13 +24,13 @@ SAMPLES = int(args[args.index("--samples") + 1]) if "--samples" in args else 64
 PREFIX = args[args.index("--prefix") + 1] if "--prefix" in args else "phase64_innen"
 
 ANSICHTEN = {
-    # Name: (Gebaeude, Geschoss-Index, Kamera (u, v), Ziel (u, v), Brennweite)
-    "B11_wohnen": ("B11", 1, (9.9, 4.9), (4.0, 0.6), 18),
-    "B11_kueche": ("B11", 1, (9.9, 7.9), (4.0, 5.9), 18),
-    "B11_schlafen": ("B11", 2, (9.8, 15.0), (4.5, 11.5), 18),
-    "B11_flur": ("B11", 1, (1.6, 1.0), (1.6, 12.0), 18),
-    "B05_laden": ("B05", 0, (5.2, 1.2), (1.5, 12.0), 18),
-    "B05_wohnen": ("B05", 1, (5.3, 4.8), (3.2, 0.5), 16),
+    # Name: (Gebaeude, Raumart, n-tes Vorkommen, Brennweite) - Kamera in der hinteren Ecke, Blick diagonal durch den Raum
+    "B11_wohnen": ("B11", "wohnen", 1, 16),
+    "B11_kueche": ("B11", "kueche", 1, 16),
+    "B11_schlafen": ("B11", "schlafen", 2, 16),
+    "B11_bad": ("B11", "bad", 1, 14),
+    "B05_laden": ("B05", "laden", 0, 16),
+    "B05_wohnen": ("B05", "wohnen", 0, 16),
 }
 
 
@@ -53,19 +53,30 @@ def main():
         if not o.name.startswith(("BLD_", "GEO_", "FX_", "LGT_", "BOD_", "STR_", "TUER_", "MOB_")):
             o.cycles.use_camera_cull = True
     sc.render.compositor_device = "CPU"
+    # Innen: kein Aussendunst/Rauch im Raum (Volumen-Wuerfel fuellt sonst die Zimmer), kein Aussen-Grading
+    for o in bpy.data.objects:
+        if o.name.startswith(("FX_Dunst", "FX_Rauch")):
+            o.hide_render = True
+    sc.render.use_compositing = "--grading" in args
     sc.render.resolution_x, sc.render.resolution_y, sc.render.resolution_percentage = 1920, 1080, 50
     sc.render.image_settings.media_type, sc.render.image_settings.file_format = "IMAGE", "PNG"
-    sc.view_settings.exposure = 1.3  # Innenraum: wie ein Fotograf laenger belichten
+    sc.view_settings.exposure = float(args[args.index("--belichtung") + 1]) if "--belichtung" in args else 4.5  # Innenraum: ca. 5 Blenden dunkler als draussen
     zeiten = {}
-    for name, (gid, k, (cu, cv), (zu, zv), f) in ANSICHTEN.items():
+    import json
+    for name, (gid, art, k, f) in ANSICHTEN.items():
         if NUR and name not in NUR:
             continue
         ob = next(o for o in bpy.data.objects if o.name.startswith("BLD_") and o.get("id") == gid and not o.name.endswith("_Decals"))
-        ebenen = list(ob.get("ebenen_z", []))
-        zf = ebenen[k]
+        raeume = [rm for rm in json.loads(ob.get("raeume_json", "[]")) if rm["art"] == art]
+        if len(raeume) <= k:
+            print("INNEN fehlt", name, flush=True)
+            continue
+        rm = raeume[k]
+        zf = rm["z"]
+        u0, v0, u1, v1 = rm["rect"]
         r = P1.Rahmen(geb[gid]["rechteck"], geb[gid]["front"])
-        p = Vector((*r.p(cu, cv), zf + 1.6))
-        z = Vector((*r.p(zu, zv), zf + 1.2))
+        p = Vector((*r.p(u1 - 0.35, v1 - 0.35), zf + 1.6))  # hintere Ecke (zur Aussenwand)
+        z = Vector((*r.p(u0 + 0.3, v0 + 0.3), zf + 1.1))
         cam.location = p
         cam.rotation_euler = (z - p).to_track_quat("-Z", "Y").to_euler()
         cd.lens = f
