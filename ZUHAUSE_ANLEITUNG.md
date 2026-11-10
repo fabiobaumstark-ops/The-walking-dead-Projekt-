@@ -37,9 +37,13 @@ Das lädt etwa 1,7 GB nach `assets/`. Mit `python3 download_assets.py --pruefen`
 
 ## 4. Datei öffnen und GPU einschalten
 
-1. Blender starten → Datei → Öffnen → `twd/viertel_v09.blend` (immer die höchste Nummer nehmen).
+1. Blender starten → Datei → Öffnen → `twd/viertel_v10.blend` (immer die höchste Nummer nehmen).
 2. Bearbeiten → Einstellungen → System → Cycles Render Devices → **Metal** wählen und deinen Mac (M4 Pro) anhaken.
 3. Rechts im Eigenschaften-Fenster, Reiter Render (Kamera-Symbol): **Device = GPU Compute** muss eingestellt sein (ist schon gespeichert).
+
+### Die Datei öffnet langsam oder ruckelt?
+
+Ab Version 09 zeigt das Fenster Gras, Efeu und den Hintergrundwald nicht mehr an und die Bäume nur als Kästen. Im gerenderten Bild ist trotzdem alles da. Stelle das 3D-Fenster nicht auf „Rendered“ (Kugel-Symbol ganz rechts oben), sonst lädt Blender wieder alles. Willst du eine Pflanzen-Ebene im Fenster sehen: Objekt anklicken → Schraubenschlüssel-Reiter → beim Modifier das Monitor-Symbol einschalten.
 
 ## 5. Die 4 Hero-Shots rendern
 
@@ -62,7 +66,7 @@ Vorschau mit 128 Samples und halber Größe dauerte auf dem M4 Pro etwa 1–3 Mi
 
 - **Rosa/pinke Flächen (Textur fehlt):** Datei → Externe Daten → **Fehlende Dateien suchen** → den Ordner `twd/assets` wählen. Oder Schritt 3 nochmal ausführen.
 - **Blender stürzt ab:** Mac neu starten, nur Blender offen lassen. Unter Render → Leistung → „Persistent Data“ ausschalten. Hilft das nicht, unter Render → Light Paths die Volume Bounces auf 1 senken.
-- **Speicher voll:** Andere Programme schließen. Im Outliner die Collection `Baeume_Hintergrund` für den Render ausschalten (Kamera-Symbol) – die Hero-Objekte nie.
+- **Speicher voll:** Die Szene braucht beim Rendern geschätzt 13–16 GB. Andere Programme schließen. Im Outliner die Collection `Baeume_Hintergrund` für den Render ausschalten (Kamera-Symbol) – die Hero-Objekte nie.
 - **Render zu langsam:** Render → Sampling → Max Samples auf 512 senken oder Noise Threshold auf 0.02. Für einen Test die Auflösung auf 50 % stellen (Ausgabe-Reiter).
 
 ## 8. Figuren durch fertige Charaktere ersetzen
@@ -101,7 +105,7 @@ Alle Zahlen stehen in `scripts/configs/` (JSON-Dateien, mit jedem Texteditor bea
 Danach den passenden Teil neu bauen, z. B. Licht und Dunst:
 
 ```bash
-/Applications/Blender-5.2.3.app/Contents/MacOS/Blender -b viertel_v09.blend --python scripts/phase5/build_phase5.py -- --version 10 --nur Licht,Atmosphaere
+/Applications/Blender-5.2.3.app/Contents/MacOS/Blender -b viertel_v10.blend --python scripts/phase5/build_phase5.py -- --version 11 --nur Licht,Atmosphaere
 ```
 
 Die Reihenfolge aller Skripte steht in `UEBERGABE.md` unter „Ausgeführte Skripte“.

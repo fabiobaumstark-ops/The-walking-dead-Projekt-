@@ -1,8 +1,8 @@
 # UEBERGABE – aktueller Stand
 
-- **Aktuelle Phase:** Phase 5 freigegeben (2026-11-10) – 5.8 Qualitätsrunde läuft (Cloud-Sitzung)
+- **Aktuelle Phase:** 5.8 Qualitätsrunde, Teil 1 fertig (2026-11-10) – wartet auf Rückmeldung; danach Teil 2 und Animation 5.6
 - **Blender-Version:** 5.2.3 LTS (Linux: /opt/blender-5.2.3-linux-x64, Befehl `blender`)
-- **.blend-Version:** `viertel_v08.blend` (Phase 5, 88,2 MB, finale Render-Einstellungen gespeichert); Vorversion `viertel_v07.blend`
+- **.blend-Version:** `viertel_v10.blend` (5.8 Teil 1, 89,7 MB – Ziel unter 90 MB fast ausgeschöpft); Vorversion `viertel_v09.blend`
 - **Branch:** `claude/zealous-ride-c12e2z` (neu ab 2026-11-10; gleicher Stand wie zuvor `claude/zen-meitner-53hxe1`)
 - **Netzwerk:** FULL (siehe AUFTRAG.md, A1b)
 - **Lokal (Mac, 2026-11-05):** Blender 5.2.3 LTS unter /Applications/Blender-5.2.3.app, Metal-GPU (M4 Pro, 16 Kerne) erkannt, Assets geladen (356 Dateien, 1,7 GB)
@@ -57,13 +57,16 @@
   - Kirche und Lagerhalle noch ohne echte Fensteröffnungen
 
 ## Nächster konkreter Schritt
-1. Phase-5-Antworten einarbeiten, dann 5.8 Qualitätsrunde (Panzer-Form, Kartons/Matratzen, Flamme, Rauchsäulen, CAM 4).
-2. Ausgangsdatei: `viertel_v08.blend`. Phase 5 neu bauen immer aus v07: `build_phase5.py` (siehe Skriptliste). Lokal auf dem Mac: `/Applications/Blender-5.2.3.app/Contents/MacOS/Blender`, Assets liegen in assets/.
-3. Licht steckt jetzt in der .blend. Vorschau: `scripts/phase5/render_vorschau.py -- --cpu` (Metal-GPU kompiliert bei jedem Start neu, für kleine Bilder ist die CPU schneller).
-4. Bekannt offen (Qualitätsrunde): Panzer A zu kastenförmig, Kartons/Matratzen klotzig (siehe PROTOKOLL Phase 4.3); Hügel > 750 m kahl → Dunst in Phase 5.
+1. Rückmeldung abwarten: Öffnet `viertel_v10.blend` auf dem Mac flüssig? Passt der stärkere Nebel, passt die neue CAM 4?
+2. 5.8 Teil 2 (offen): Matratzen/Kartons (Scans cardboard_box_01 und trashbag liegen in assets/models), Sandsack-Material, Flachdächer, Lichtstrahlen, CAM 4 aufhellen. Danach 5.6 Animation (freigegeben mit Antwort 4B).
+3. Ausgangsdatei: `viertel_v10.blend`. Reihenfolge nach einem Neubau älterer Phasen: nacharbeit_militaer.py → build_phase4.py --nur Konsistenz → build_phase5.py → qualitaet.py (macht Bäume zu Instanzen, Pfade relativ, Fenster leicht).
+4. Vorschau in der Cloud (16 GB RAM): `render_vorschau.py -- --cpu --sparsam --nur <Nr>`, jede Kamera in einem eigenen Blender-Aufruf. Zwei Blender-Prozesse gleichzeitig sprengen den Speicher.
+5. Speicher: Render-Szene braucht ohne Texturen ca. 11,7 GB (gemessen), mit Texturen geschätzt 13–16 GB. Auf dem Mac (24 GB) beim finalen Render andere Programme schließen.
+6. MPFB-Paket: Server sehr langsam; bei Bedarf in Teilstücken parallel laden (Range-Anfragen), Zielgröße 280.737.770 Byte.
 
 ## Offene Fragen an den Nutzer
-- keine
+- Öffnet v10 auf dem Mac? (falls nein: was passiert genau)
+- 5.8 Teil 1: Nebelstärke, neue CAM 4, Panzerturm in Ordnung?
 
 ## Bisherige Antworten/Freigaben
 - Phase 5 (2026-11-10): 1A CAM 1 am besten, CAM 4 am schwächsten (neu komponieren), 2C Nebel zu schwach → mehr Dunst in der Tiefe, 3A final 1080p, 4B Animation ja, aber erst nach der Qualitätsrunde
@@ -125,3 +128,6 @@
 21. `blender -b viertel_v07.blend --python scripts/phase3/render_nah.py -- --prefix phase4 --nur konsistenz_auto,konsistenz_panzer,konsistenz_baum_fassade,konsistenz_wandfuss`; Hero-Kameras: `render_blockout.py -- --prefix phase4 --nur CAM_Hero_01,CAM_Hero_02,CAM_Hero_03,CAM_Hero_04,draufsicht` (aus v06, Konsistenz-Änderungen dort nur minimal)
 22. Phase 5: `blender -b viertel_v07.blend --python scripts/phase5/build_phase5.py -- --version 08` → viertel_v08.blend (Parameter licht.json)
 23. `blender -b viertel_v08.blend --python scripts/phase5/render_vorschau.py -- --prefix phase5 --samples 64 --prozent 50 --cpu` → renders/test/phase5_cam1–4.png
+24. 5.8: `blender -b viertel_v08.blend --python scripts/phase5/qualitaet.py -- --version 09` (Instanzen, Pfade), dann `build_phase5.py -- --version 09 --nur Licht,Atmosphaere,Compositor` und `--nur Kameras,Atmosphaere`, `qualitaet.py -- --version 09 --nur Ansicht,Pfade`
+25. Panzer: `blender -b viertel_v09.blend --python scripts/phase3/nacharbeit_militaer.py -- --version 10`, dann auf v10: `build_phase4.py -- --version 10 --nur Konsistenz`, `build_phase5.py -- --version 10 --nur Kameras,Atmosphaere`, `qualitaet.py -- --version 10`
+26. Vorschau: je Kamera `blender -b viertel_v10.blend --python scripts/phase5/render_vorschau.py -- --prefix phase58 --samples 64 --prozent 50 --cpu --sparsam --nur <1-4>` (CAM 2 und 3 stammen aus v09, dort identisch bis auf den Panzer)

@@ -552,3 +552,43 @@
 | Licht & Stimmung | 7 | warme Südwestsonne, Tiefendunst; es fehlen noch Lichtstrahlen |
 | Komposition | 6 | CAM 1–3 gut, CAM 4 schwach |
 | Glaubwürdigkeit der Geschichte | 8 | Feuertonne, Rauch, Krähen ergänzen die Erzählung |
+- Freigabe (2026-11-10): 1A CAM 1 am besten / CAM 4 am schwächsten, 2C Nebel zu schwach, 3A final 1080p, 4B Animation ja, nach der Qualitätsrunde
+
+## Phase 5.8 – Qualitätsrunde, Teil 1 (2026-11-10, Cloud-Sitzung)
+- Umgebung: Linux, 4 Kerne, 16 GB RAM, keine GPU; Blender 5.2.3 LTS; Assets neu geladen (MakeHuman-Server sehr langsam, ca. 15 KB/s je Verbindung → in 28 Teilstücken parallel geladen, Größe geprüft)
+- Skripte: scripts/phase5/qualitaet.py (Teile Instanzen, Pfade, Ansicht); build_phase5.py erweitert (Bodennebel, Flamme aus licht.json, Kameras mit `neu_setzen`); render_vorschau.py `--sparsam`; viertel_lib.pfade_relativ()
+- Befund 1 – Speicher (wichtigster Fund):
+  - Die 36 Bäume teilten sich zwar das verlinkte Mesh, Cycles lud sie aber je Objekt einzeln (Material am Objekt statt am Mesh): ca. 24 Mio. Flächen statt 3,7 Mio.
+  - Messung (Render ohne Texturen, Spitzenwert): mit allen Bäumen > 14 GB (Abbruch), mit je einem Baum pro Mesh 10,6 GB
+  - Lösung: 7 Vorlagen in 00_Prototypen/PROTO_Baum_Instanzen_*, die 36 Bäume sind jetzt Collection-Instanzen (gleicher Name, gleiche Lage) → 19,2 Mio. Flächen weniger, Spitzenwert 11,7 GB
+  - Die Angabe „ca. 5,5 GB“ aus Phase 5 (Mac) war zu niedrig; realistisch sind mit Texturen etwa 13–16 GB (Schätzung, auf dem Mac nicht nachgemessen)
+- Befund 2 – Datei öffnet auf dem Mac kaum (Meldung des Nutzers): Teil „Ansicht“ – 28 Pflanzen-Generatoren (Gras, Efeu, Wald) nur noch im Render aktiv, 50 schwere Objekte im Fenster als Kästen, Simplify fürs Fenster. Render unverändert. Auf dem Mac noch nicht bestätigt.
+- Befund 3 – 12 absolute Mac-Pfade (LeafSet017/024/029, Verstoß A3) → relativ; build_phase4/5 rufen jetzt vor jedem Speichern pfade_relativ() auf
+- Nebel (Antwort 2C): Dichte 0,0013 → 0,0017, Tiefenfaktor 1,4 → 2,8 auf 380 m, Anisotropie 0,45 → 0,6, Mist-Anteil im Compositor 5 → 10 %; neu fleckiger Bodennebel (0,006, Abfall 7 m, Flecken 45 m) für Lichtstrahlen
+- Feuertonne: Flamme 0,8 m hoch, Emission 14 → 90, Punktlicht 260 → 420 W → in CAM 3 jetzt klar sichtbar. Rauchsäulen: Dichte 0,12 → 0,3, Radius 26 m, dunkler
+- CAM 4 neu: Standort (37 / −1,5), Blick nach Westen gegen das Licht auf (30,3 / −5,4), 20 mm, Shift 0,5. Rumpf, Heckausleger, Leitwerk und Rotorblätter stehen als Silhouette vor dem Himmel. 20 statt 28 mm, weil ein quer stehender Bus (x 38–48) den Abstand begrenzt (Hinderniskarte per Strahlen erstellt; 5 getestete Standorte lagen in Fahrzeugen)
+- Panzer (2A aus Phase 4): Turm als Keil – Front 42° geneigt, Seiten 15°, Keil-Zusatzpanzerung an den Wangen, Keilblende, Seitenmodule und Staukästen folgen der schrägen Wand, Optik und Nebelwurfbecher versetzt. Militär neu gebaut (nacharbeit_militaer.py), danach Konsistenz (Phase 4.3) und Kameras erneut
+- Vorschau in der Cloud nur mit `--sparsam` möglich (Texturen max. 1024 px, Objekte außerhalb des Bildes weggelassen), jede Kamera in einem eigenen Prozess (sonst Speicherabbruch beim Kamerawechsel)
+- Renderzeiten Cloud (4 Kerne CPU, 960 × 540, 64 Samples, Dunst): CAM 1 405 s, CAM 2 300 s, CAM 3 385 s, CAM 4 194 s
+- Dateien: viertel_v10.blend 89,7 MB (knapp unter dem Ziel 90 MB); v07 und v08 entfernt (A3), Vorversion v09
+
+### D1-Checkliste 5.8 Teil 1
+- [x] Dunst nimmt mit der Tiefe stärker zu, Rauchsäule in CAM 1/2 sichtbar
+- [x] Feuertonne: Flamme sichtbar, warmer Akzent in CAM 3
+- [x] CAM 4: Hubschrauber vor dem Himmel
+- [~] CAM 4: Hubschrauber sehr dunkel (reine Silhouette), Details im Rumpf kaum erkennbar
+- [~] CAM 3: Sandsäcke im Vordergrund wirken glatt (wenig Gewebestruktur)
+- [~] CAM 2: Flachdächer wirken gleichförmig
+- [ ] Matratzen/Kartons noch klotzig (nicht bearbeitet)
+- [ ] Lichtstrahlen durch Ruinen/Baumkronen in den Vorschauen noch nicht klar erkennbar
+
+### D2-Qualitätsbewertung 5.8 Teil 1 (ehrlich)
+| Kriterium | Note | Begründung |
+|---|---|---|
+| Realismus Geometrie | 7 | Panzerturm besser (Keilform), Kleinkram unverändert |
+| Realismus Materialien | 7 | unverändert; Sandsäcke und Dächer fallen auf |
+| Einheitlicher Look | 8 | stärkerer Dunst verbindet Vorder- und Hintergrund |
+| Licht & Stimmung | 7–8 | Tiefe besser, Flamme wirkt; Lichtstrahlen fehlen noch |
+| Komposition | 7 | CAM 4 jetzt mit klarem Motiv vor dem Himmel, aber sehr dunkel |
+| Glaubwürdigkeit der Geschichte | 8 | unverändert |
+- Ziel 8–9 je Kriterium ist noch nicht erreicht.

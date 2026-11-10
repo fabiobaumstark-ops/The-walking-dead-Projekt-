@@ -5,8 +5,8 @@
     {"name": "CAM_Hero_01", "titel": "Die Strasse", "pos": [-30.0, -2.5, 1.7], "ziel": [60.0, -1.0], "brennweite": 35, "blende": 4.0, "fokus_m": 25.0, "shift_y": 0.06},
     {"name": "CAM_Hero_02", "titel": "Ueberblick", "pos": [-50.45, 11.75, 1.8], "auf_dach": "B09", "ziel": [115.0, -5.0], "brennweite": 24, "blende": 8.0, "fokus_m": 120.0, "shift_y": -0.2},
     {"name": "CAM_Hero_03", "titel": "Checkpoint", "pos": [76.0, 3.5, 1.5], "ziel": [-20.0, 0.0], "brennweite": 50, "blende": 2.8, "fokus_m": 4.0, "shift_y": 0.0},
-    {"name": "CAM_Hero_04", "titel": "Absturz", "pos": [37.0, -1.5, 0.7], "ziel": [30.0, -6.4], "brennweite": 24, "blende": 5.6, "fokus_m": 9.0, "shift_y": 0.45, "neu_setzen": true,
-     "_info": "5.8: neu komponiert (vorher [27, 2, 0.8] -> [31, -11.35], 28 mm: Hubschrauber dunkel vor der Fassade). Jetzt von Osten gegen das Licht, Rumpf/Heckausleger/Rotorblaetter vor dem Himmel. 24 statt 28 mm, weil der quer stehende Bus (x 38-48) den Abstand begrenzt."}
+    {"name": "CAM_Hero_04", "titel": "Absturz", "pos": [37.0, -1.5, 0.7], "ziel": [30.3, -5.4], "brennweite": 20, "blende": 5.6, "fokus_m": 9.0, "shift_y": 0.5, "neu_setzen": true,
+     "_info": "5.8: neu komponiert (vorher [27, 2, 0.8] -> [31, -11.35], 28 mm: Hubschrauber dunkel vor der Fassade). Jetzt von Osten gegen das Licht, Rumpf/Heckausleger/Rotorblaetter vor dem Himmel. 20 statt 28 mm, weil der quer stehende Bus (x 38-48) den Abstand begrenzt."}
   ],
   "uebersicht": {"name": "CAM_Draufsicht", "mitte": [10.0, -2.0], "ortho_skala": 230.0}
 }

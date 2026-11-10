@@ -1,5 +1,0 @@
-00:00.413  blend            | Read blend: "/home/user/The-walking-dead-Projekt-/viertel_v09.blend"
-00:01.350  reports          | Read library: '/home/user/The-walking-dead-Projekt-/assets/models/island_tree_01/island_tree_01_2k.blend', '//assets/models/island_tree_01/island_tree_01_2k.blend', parent '<direct>'
-Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:35:05)
-00:01.554  reports          | Read library: '/home/user/The-walking-dead-Projekt-/assets/models/island_tree_02/island_tree_02_2k.blend', '//assets/models/island_tree_02/island_tree_02_2k.blend', parent '<direct>'
-00:01.689  reports          | Read library: '/home/user/The-walking-dead-Projekt-/assets/models/tree_small_02/tree_small_02_2k.blend', '//assets/models/tree_small_02/tree_small_02_2k.blend', parent '<direct>'
