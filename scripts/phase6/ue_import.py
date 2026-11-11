@@ -27,6 +27,7 @@ NANITE = True                   # Nanite auf dem Mac ist bei Epic "Beta" (Apple 
 NANITE_AB_FLAECHEN = 50000      # schwere Formen (Baeume, Gras, grosse Gebaeude)
 EINZEL_BIS = 8                  # bis zu so vielen Platzierungen: einzelne Actors, darueber Instanzen
 GRAS_AUSBLENDEN_CM = 9000       # Pflanzen-Instanzen ab dieser Entfernung ausblenden (Leistung)
+NUR_UMGEBUNG = globals().get("NUR_UMGEBUNG", False)  # True (ueber ue_umgebung.py): nur Sonne/Himmel/Dunst/Start neu setzen
 
 try:
     REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
@@ -307,7 +308,24 @@ def einzel_actor(eas, sm, form, t):
     return a
 
 
+def setze(komp, *werte):
+    """Eigenschaft setzen; der erste passende Name gewinnt (Namen aendern sich zwischen Unreal-Versionen)."""
+    namen, wert = werte[:-1], werte[-1]
+    for n in namen:
+        try:
+            komp.set_editor_property(n, wert)
+            return True
+        except Exception:  # noqa: BLE001
+            continue
+    warn("Eigenschaft fehlt", type(komp).__name__, "/".join(namen))
+    return False
+
+
 def umgebung(eas, sz):
+    for a in eas.get_all_level_actors():  # alter (evtl. halber) Stand
+        if str(a.get_folder_path()) == "Viertel/Umgebung":
+            eas.destroy_actor(a)
+
     def spawn(klasse, ort=(0, 0, 0), rot=(0, 0, 0), label=None):
         a = eas.spawn_actor_from_class(klasse, unreal.Vector(*ort), unreal.Rotator(roll=rot[0], pitch=rot[1], yaw=rot[2]))
         if label:
@@ -318,35 +336,26 @@ def umgebung(eas, sz):
         if L["typ"] == "SUN":
             a = spawn(unreal.DirectionalLight, (0, 0, 2000), L["blick"], "Sonne")
             c = a.get_component_by_class(unreal.DirectionalLightComponent)
-            c.set_editor_property("intensity", 8.0)
-            c.set_editor_property("use_temperature", True)
-            c.set_editor_property("temperature", float(L.get("kelvin") or 5000))
-            c.set_editor_property("source_angle", float(L.get("winkel", 1.0)))
-            try:
-                c.set_editor_property("atmosphere_sun_light", True)
-            except Exception:  # noqa: BLE001
-                pass
+            setze(c, "intensity", 8.0)
+            setze(c, "use_temperature", True)
+            setze(c, "temperature", float(L.get("kelvin") or 5000))
+            setze(c, "light_source_angle", "source_angle", float(L.get("winkel", 1.0)))
+            setze(c, "atmosphere_sun_light", True)
         elif L["typ"] == "POINT":
             a = spawn(unreal.PointLight, L["t"][:3], (0, 0, 0), L["name"])
             c = a.get_component_by_class(unreal.PointLightComponent)
-            c.set_editor_property("intensity", 8000.0)
-            c.set_editor_property("attenuation_radius", 1500.0)
-            c.set_editor_property("use_temperature", True)
-            c.set_editor_property("temperature", float(L.get("kelvin") or 2000))
+            setze(c, "intensity", 8000.0)
+            setze(c, "attenuation_radius", 1500.0)
+            setze(c, "use_temperature", True)
+            setze(c, "temperature", float(L.get("kelvin") or 2000))
     spawn(unreal.SkyAtmosphere, label="Himmel")
     sl = spawn(unreal.SkyLight, (0, 0, 500), label="Himmelslicht")
-    try:
-        sl.get_component_by_class(unreal.SkyLightComponent).set_editor_property("real_time_capture", True)
-    except Exception:  # noqa: BLE001
-        pass
+    setze(sl.get_component_by_class(unreal.SkyLightComponent), "real_time_capture", True)
     nb = spawn(unreal.ExponentialHeightFog, (0, 0, 0), label="Dunst")
     fc = nb.get_component_by_class(unreal.ExponentialHeightFogComponent)
     for k, v in (("fog_density", 0.06), ("fog_height_falloff", 0.15), ("volumetric_fog", True),
                  ("volumetric_fog_scattering_distribution", 0.6)):
-        try:
-            fc.set_editor_property(k, v)
-        except Exception as e:  # noqa: BLE001
-            warn("Nebel", k, e)
+        setze(fc, k, v)
     st = sz["start"]
     spawn(unreal.PlayerStart, (st["pos"][0], st["pos"][1], st["pos"][2] + 20), (0, 0, st["blick"][2]), "Start_CAM_Hero_01")
 
@@ -354,6 +363,12 @@ def umgebung(eas, sz):
 # ------------------------------------------------------------------ Ablauf
 def main():
     sz = json.load(open(os.path.join(QUELLE, "szene.json")))
+    if NUR_UMGEBUNG:
+        les = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
+        umgebung(unreal.get_editor_subsystem(unreal.EditorActorSubsystem), sz)
+        les.save_current_level()
+        log("FERTIG Umgebung neu gesetzt")
+        return
     log("Quelle", QUELLE, "Formen", len(sz["formen"]), "Platzierungen", sum(len(v) for v in sz["platzierungen"].values()))
     standard_texturen()
     masters = {False: master("M_Viertel_Basis", False), True: master("M_Viertel_Maske", True)}
