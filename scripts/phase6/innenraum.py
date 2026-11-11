@@ -945,9 +945,9 @@ def main():
             me.materials.append(m)
         if (b.plan or {}).get("ausbau"):  # Zusatz-Slots (Innenmaterialien) + Tausch der Innen-Slots
             for mn in IA.extra_materialien(C):
-                me.materials.append(V.material(mn))
+                me.materials.append(IA.material_aufloesen(V, mn, g))
             for sl, mn in C["innenausbau"].get("slot_tausch", {}).items():
-                me.materials[S[sl]] = V.material(mn)
+                me.materials[S[sl]] = IA.material_aufloesen(V, mn, g)
         alt = ob.data
         ob.data = me
         if alt.users == 0:

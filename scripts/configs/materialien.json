@@ -364,28 +364,32 @@
     0.5,
     0.8,
     0.95
-   ]
+   ],
+   "lokal": 0.25
   },
   "MAT_Innen_Farbe_Abblaetternd": {
    "hsv": [
     0.5,
     0.85,
     1.0
-   ]
+   ],
+   "lokal": 0.25
   },
   "MAT_Innen_Putz_Rissig": {
    "hsv": [
     0.5,
     0.8,
     1.0
-   ]
+   ],
+   "lokal": 0.25
   },
   "MAT_Innen_Putz_Alt": {
    "hsv": [
     0.5,
     0.8,
     0.95
-   ]
+   ],
+   "lokal": 0.25
   },
   "MAT_Boden_Dielen_Alt": {
    "hsv": [
@@ -393,14 +397,16 @@
     0.8,
     0.9
    ],
-   "antitiling": true
+   "antitiling": true,
+   "lokal": 0.25
   },
   "MAT_Boden_Linoleum": {
    "hsv": [
     0.5,
     0.8,
     0.95
-   ]
+   ],
+   "lokal": 0.25
   },
   "MAT_Boden_Fliesen_Alt": {
    "hsv": [
@@ -408,7 +414,8 @@
     0.8,
     1.0
    ],
-   "rauheit_min": 0.3
+   "rauheit_min": 0.3,
+   "lokal": 0.25
   },
   "MAT_Boden_Beton_Alt": {
    "hsv": [
@@ -416,15 +423,42 @@
     0.8,
     1.0
    ],
-   "antitiling": true
+   "antitiling": true,
+   "lokal": 0.25
   },
   "MAT_Boden_Laminat": {
    "hsv": [
     0.5,
     0.8,
     0.95
-   ]
-  }
+   ],
+   "lokal": 0.25
+  },
+  "MAT_Innen_Raufaser": {
+   "hsv": [
+    0.5,
+    0.9,
+    1.0
+   ],
+   "lokal": 0.25
+  },
+  "MAT_Innen_Raufaser_Schimmel": {
+   "hsv": [
+    0.5,
+    0.9,
+    1.0
+   ],
+   "lokal": 0.25
+  },
+  "MAT_Innen_Decke_Putz": {
+   "hsv": [
+    0.5,
+    0.6,
+    1.05
+   ],
+   "lokal": 0.25
+  },
+  "_info_innen": "Phase 6.4: Innenmaterialien mit lokal 0,25; Flechten 0 setzt innenausbau.py"
  },
  "verwitterung": {
   "_info": "Zentrale Regler (werden als Szenen-Eigenschaften verw_* angelegt, aendern: Szene > Benutzerdefinierte Eigenschaften).",

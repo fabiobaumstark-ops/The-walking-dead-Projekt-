@@ -1,8 +1,8 @@
 {
  "_info": "Liste aller externen Assets. Laden mit: python3 download_assets.py",
- "erstellt": "2026-11-10",
- "groesse_gesamt_mb": 2573,
- "groesse_basis_mb": 2390,
+ "erstellt": "2026-11-11",
+ "groesse_gesamt_mb": 2623,
+ "groesse_basis_mb": 2440,
  "selbst_gebaut": [
   "Asphaltschindeln (keine CC0-Fototextur gefunden: prozedurale Schindel-Geometrie + Fotobasis tarred_gravel)",
   "Betontruemmer",
@@ -2458,6 +2458,110 @@
      "ziel": "assets/textures/laminate_floor_02/laminate_floor_02_ao_2k.jpg",
      "size": 1845680,
      "md5": "0d3d97745fa659cce852caf5e3a3046b"
+    }
+   ]
+  },
+  {
+   "name": "MAT_Innen_Raufaser",
+   "typ": "textur",
+   "quelle": "ambientCG",
+   "asset_id": "Wallpaper001B",
+   "seite": "https://ambientcg.com/view?id=Wallpaper001B",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "ambientCG (Lennart Demes)"
+   ],
+   "zielpfad": "assets/textures/Wallpaper001B",
+   "masse_m": [
+    2.0,
+    2.0
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://ambientcg.com/get?file=Wallpaper001B_2K-JPG.zip",
+     "ziel": "assets/textures/Wallpaper001B/Wallpaper001B_2K-JPG.zip",
+     "size": 20146326,
+     "md5": null,
+     "entpacken": true
+    }
+   ]
+  },
+  {
+   "name": "MAT_Innen_Raufaser_Schimmel",
+   "typ": "textur",
+   "quelle": "ambientCG",
+   "asset_id": "Wallpaper002C",
+   "seite": "https://ambientcg.com/view?id=Wallpaper002C",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "ambientCG (Lennart Demes)"
+   ],
+   "zielpfad": "assets/textures/Wallpaper002C",
+   "masse_m": [
+    2.0,
+    2.0
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://ambientcg.com/get?file=Wallpaper002C_2K-JPG.zip",
+     "ziel": "assets/textures/Wallpaper002C/Wallpaper002C_2K-JPG.zip",
+     "size": 21203147,
+     "md5": null,
+     "entpacken": true
+    }
+   ]
+  },
+  {
+   "name": "MAT_Innen_Decke_Putz",
+   "typ": "textur",
+   "quelle": "Poly Haven",
+   "asset_id": "plastered_wall_04",
+   "seite": "https://polyhaven.com/a/plastered_wall_04",
+   "aufloesung": "2k",
+   "lizenz": "CC0 1.0",
+   "autoren": [
+    "Rob Tuytel"
+   ],
+   "zielpfad": "assets/textures/plastered_wall_04",
+   "masse_m": [
+    3.2,
+    3.2
+   ],
+   "gruppe": "basis",
+   "dateien": [
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/plastered_wall_04/plastered_wall_04_diff_2k.jpg",
+     "ziel": "assets/textures/plastered_wall_04/plastered_wall_04_diff_2k.jpg",
+     "size": 1465312,
+     "md5": "895416a6d0f0b41c8a53a3436bed5a05"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/plastered_wall_04/plastered_wall_04_rough_2k.jpg",
+     "ziel": "assets/textures/plastered_wall_04/plastered_wall_04_rough_2k.jpg",
+     "size": 1236406,
+     "md5": "f471836a79416eecb11b9863e7f79160"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/plastered_wall_04/plastered_wall_04_nor_gl_2k.jpg",
+     "ziel": "assets/textures/plastered_wall_04/plastered_wall_04_nor_gl_2k.jpg",
+     "size": 1760685,
+     "md5": "119d0993d303caadcfe73003db001c42"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/plastered_wall_04/plastered_wall_04_disp_2k.png",
+     "ziel": "assets/textures/plastered_wall_04/plastered_wall_04_disp_2k.png",
+     "size": 4299063,
+     "md5": "6e2b0f7fe8bb9bece837332ab6c82530"
+    },
+    {
+     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/plastered_wall_04/plastered_wall_04_ao_2k.jpg",
+     "ziel": "assets/textures/plastered_wall_04/plastered_wall_04_ao_2k.jpg",
+     "size": 49574,
+     "md5": "42a6322a2e98b3e061ba1bf7bd3ab4c4"
     }
    ]
   },

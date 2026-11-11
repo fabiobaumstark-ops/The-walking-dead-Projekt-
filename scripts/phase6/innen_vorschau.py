@@ -75,8 +75,19 @@ def main():
         zf = rm["z"]
         u0, v0, u1, v1 = rm["rect"]
         r = P1.Rahmen(geb[gid]["rechteck"], geb[gid]["front"])
-        p = Vector((*r.p(u1 - 0.35, v1 - 0.35), zf + 1.6))  # hintere Ecke (zur Aussenwand)
-        z = Vector((*r.p(u0 + 0.3, v0 + 0.3), zf + 1.1))
+        # Ecke mit freier Sicht auf die gegenueberliegende Ecke (Moebel/Schraenke stehen oft in Ecken)
+        ecken = [((u1 - 0.35, v1 - 0.35), (u0 + 0.3, v0 + 0.3)), ((u0 + 0.35, v1 - 0.35), (u1 - 0.3, v0 + 0.3)),
+                 ((u1 - 0.35, v0 + 0.35), (u0 + 0.3, v1 - 0.3)), ((u0 + 0.35, v0 + 0.35), (u1 - 0.3, v1 - 0.3))]
+        moebel = [o.matrix_world.translation for o in bpy.data.objects
+                   if o.name.startswith("MOB_") and o.get("gebaeude") == gid and abs(o.matrix_world.translation.z - zf) < 1.0]
+        beste = None
+        for (cu, cv), (tu, tv) in ecken:  # ohne Szenen-Auswertung (Speicher): Ecke mit groesstem Abstand zu Moebeln
+            pc = Vector((*r.p(cu, cv), zf + 1.6))
+            zc = Vector((*r.p(tu, tv), zf + 1.1))
+            frei = min([((m - pc) * Vector((1, 1, 0))).length for m in moebel] or [99.0])
+            if beste is None or frei > beste[0]:
+                beste = (frei, pc, zc)
+        _, p, z = beste
         cam.location = p
         cam.rotation_euler = (z - p).to_track_quat("-Z", "Y").to_euler()
         cd.lens = f

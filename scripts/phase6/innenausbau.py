@@ -34,6 +34,65 @@ def extra_materialien(C):
     return list(_cfg(C)["extra_materialien"])
 
 
+PALETTE = [("#CDBB90", "#A8966C"), ("#A3B29C", "#83977F"), ("#BFA6A2", "#9E8682"), ("#AAB6C2", "#8B98A7")]
+TINT = ["#D8CDB4", "#AFC0A6", "#C9B9A0", "#B4C2C9"]
+
+
+def _flechten_aus(m):
+    for nd in m.node_tree.nodes:
+        if nd.type == "GROUP" and nd.node_tree and "Verwitterung" in nd.node_tree.name and "Flechten" in nd.inputs:
+            nd.inputs["Flechten"].default_value = 0.0  # innen keine Flechten
+    return m
+
+
+def tapete_muster(V, idx):
+    """Verblasste Streifentapete: Raufaser (beschaedigt, ambientCG) x Streifen (Wave-Textur in Metern, UV = Welt-Meter)."""
+    name = f"MAT_Innen_Tapete_Muster_{idx}"
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    m = V.material("MAT_Innen_Raufaser").copy()
+    m.name = name
+    m.use_fake_user = True
+    nt = m.node_tree
+    hsv = nt.nodes["HSV_Basis"]
+    ziele = [l.to_socket for l in hsv.outputs["Color"].links]
+    uv = nt.nodes.new("ShaderNodeUVMap")
+    wv = nt.nodes.new("ShaderNodeTexWave")
+    wv.wave_type, wv.bands_direction = "BANDS", "X"
+    wv.inputs["Scale"].default_value = 6.0 + 1.5 * (idx % 3)  # Streifen ca. 12-17 cm
+    wv.inputs["Distortion"].default_value = 0.4
+    wv.inputs["Detail"].default_value = 1.0
+    nt.links.new(uv.outputs["UV"], wv.inputs["Vector"])
+    cr = nt.nodes.new("ShaderNodeValToRGB")
+    a, b_ = PALETTE[idx % len(PALETTE)]
+    cr.color_ramp.elements[0].position, cr.color_ramp.elements[1].position = 0.45, 0.55
+    cr.color_ramp.elements[0].color = (*V.hex_lin(a)[:3], 1)
+    cr.color_ramp.elements[1].color = (*V.hex_lin(b_)[:3], 1)
+    nt.links.new(wv.outputs["Fac"], cr.inputs["Fac"])
+    mx = nt.nodes.new("ShaderNodeMix")
+    mx.data_type, mx.blend_type = "RGBA", "MULTIPLY"
+    mx.inputs[0].default_value = 0.85
+    nt.links.new(hsv.outputs["Color"], mx.inputs[6])
+    nt.links.new(cr.outputs["Color"], mx.inputs[7])
+    # Raufaser ist hell -> Muster sichtbar halten: Ergebnis aufhellen
+    hl = nt.nodes.new("ShaderNodeHueSaturation")
+    hl.inputs["Value"].default_value = 1.6
+    nt.links.new(mx.outputs[2], hl.inputs["Color"])
+    for z in ziele:
+        nt.links.new(hl.outputs["Color"], z)
+    return _flechten_aus(m)
+
+
+def material_aufloesen(V, name, g):
+    """Platzhalter je Gebaeude: TAPETE_MUSTER / FARBE_VARIANTE (Farbvariante nach Gebaeude), sonst Bibliotheks-Material."""
+    idx = g.get("farbe", 0) + int(g["id"][1:])
+    if name == "TAPETE_MUSTER":
+        return tapete_muster(V, idx)
+    if name == "FARBE_VARIANTE":
+        return _flechten_aus(V.mat_variante("MAT_Innen_Farbe_Abblaetternd", 1 + idx % 3, TINT[idx % len(TINT)]))
+    return _flechten_aus(V.material(name))
+
+
 def slot(C, S, name):
     return len(S) + extra_materialien(C).index(name)
 

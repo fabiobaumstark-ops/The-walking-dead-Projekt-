@@ -56,6 +56,9 @@ MAT_Boden_Linoleum           textur  Poly Haven CC0 1.0 Charlotte Baglioni / htt
 MAT_Boden_Fliesen_Alt        textur  Poly Haven CC0 1.0 Dimitrios Savva / https://polyhaven.com/a/worn_tile_floor
 MAT_Boden_Beton_Alt          textur  Poly Haven CC0 1.0 Dimitrios Savva, Rico Cilliers / https://polyhaven.com/a/concrete_floor_worn_001
 MAT_Boden_Laminat            textur  Poly Haven CC0 1.0 Dario Barresi, Charlotte Baglioni / https://polyhaven.com/a/laminate_floor_02
+MAT_Innen_Raufaser           textur  ambientCG  CC0 1.0 ambientCG (Lennart Demes) / https://ambientcg.com/view?id=Wallpaper001B
+MAT_Innen_Raufaser_Schimmel  textur  ambientCG  CC0 1.0 ambientCG (Lennart Demes) / https://ambientcg.com/view?id=Wallpaper002C
+MAT_Innen_Decke_Putz         textur  Poly Haven CC0 1.0 Rob Tuytel / https://polyhaven.com/a/plastered_wall_04
 HDRI_Haupt                   hdri    Poly Haven CC0 1.0 Greg Zaal, Jenelle van Heerden / https://polyhaven.com/a/kloofendal_28d_misty_puresky
 HDRI_Haupt                   hdri    Poly Haven CC0 1.0 Greg Zaal, Jenelle van Heerden / https://polyhaven.com/a/kloofendal_28d_misty_puresky
 HDRI_Alternative             hdri    Poly Haven CC0 1.0 Greg Zaal, Jarod Guest / https://polyhaven.com/a/kloofendal_38d_partly_cloudy_puresky

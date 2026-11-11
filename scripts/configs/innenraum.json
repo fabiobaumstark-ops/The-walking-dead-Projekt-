@@ -53,20 +53,25 @@
    "B05"
   ],
   "extra_materialien": [
-   "MAT_Innen_Tapete",
-   "MAT_Innen_Farbe_Abblaetternd",
-   "MAT_Innen_Putz_Rissig",
-   "MAT_Innen_Putz_Alt",
+   "TAPETE_MUSTER",
+   "FARBE_VARIANTE",
+   "MAT_Innen_Raufaser",
+   "MAT_Innen_Raufaser_Schimmel",
+   "MAT_Innen_Decke_Putz",
    "MAT_Boden_Dielen_Alt",
    "MAT_Boden_Linoleum",
    "MAT_Boden_Fliesen_Alt",
    "MAT_Boden_Beton_Alt",
    "MAT_Boden_Laminat",
-   "MAT_Teppich"
+   "MAT_Teppich",
+   "MAT_Innen_Putz_Alt"
   ],
   "slot_tausch": {
-   "InnenDecke": "MAT_Innen_Putz_Rissig",
-   "InnenWand": "MAT_Innen_Putz_Alt"
+   "InnenDecke": "MAT_Innen_Decke_Putz",
+   "InnenWand": "MAT_Innen_Raufaser",
+   "Fliesen": "MAT_Boden_Fliesen_Alt",
+   "InnenBoden": "MAT_Boden_Dielen_Alt",
+   "Teppich": "MAT_Teppich"
   },
   "raumfolge": [
    "wohnen",
@@ -91,15 +96,15 @@
   "verdreht_grad": 6,
   "raeume": {
    "flur": {
-    "wand": "MAT_Innen_Putz_Rissig",
+    "wand": "MAT_Innen_Raufaser",
     "boden": "MAT_Boden_Linoleum"
    },
    "wohnen": {
-    "wand": "MAT_Innen_Tapete",
+    "wand": "TAPETE_MUSTER",
     "boden": "MAT_Boden_Dielen_Alt"
    },
    "kueche": {
-    "wand": "MAT_Innen_Farbe_Abblaetternd",
+    "wand": "FARBE_VARIANTE",
     "boden": "MAT_Boden_Linoleum"
    },
    "bad": {
@@ -107,7 +112,7 @@
     "boden": "MAT_Boden_Fliesen_Alt"
    },
    "schlafen": {
-    "wand": "MAT_Innen_Putz_Alt",
+    "wand": "MAT_Innen_Raufaser_Schimmel",
     "boden": "MAT_Teppich"
    }
   },
@@ -200,6 +205,7 @@
   ],
   "laden": {
    "aktiv": true
-  }
+  },
+  "_info_material": "Nutzer 2026-11-11: 'Texturen innen kacke' -> Raufaser (ambientCG), Streifentapete (Shader), Deckenputz, Innen-Verwitterung lokal 0,25 ohne Flechten"
  }
 }

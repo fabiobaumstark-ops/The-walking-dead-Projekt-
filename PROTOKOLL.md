@@ -652,3 +652,11 @@
 - Datei viertel_v12.blend 91,0 MB (Möbel verlinkt); weiterhin 39/41 begehbar
 - Ehrliche Bewertung der Muster (renders/test/phase64_innen_*.png): Schlafzimmer gut (Putzschäden, Scan-Schrank), Wohnzimmer zu leer, Küchen-Kamera schaut auf eine Wand, Laden zu dunkel; insgesamt noch nicht „wie außen“ (D2 Innen geschätzt 5–6)
 - Offen: Raumgrößen kleiner/gemischter, mehr Kleinkram und Schutt (Papier, Scherben, Laub durch Fenster), Wandschäden/Schimmel an Ecken, Lichtfall prüfen, Küche/Bad-Einrichtung (keine passenden Scans für WC/Waschbecken/Küchenzeile → selbst modellieren), Kirche + Tankstelle, dann Übertragung auf alle Gebäude (Kern-Gebäude brauchen eigenen Grundriss)
+
+### 6.4 Teil 2 – Innentexturen überarbeitet (2026-11-11)
+- Nutzer: „Innenräume sind schlecht, die Texturen sind schlecht“
+- Ursachen (Testraum-Vergleich): (1) Innenmaterialien liefen mit voller Außen-Verwitterung (Moos, Flechten, Regenstreifen, Bleichen) → Böden grün, Dielen unsichtbar; (2) „decrepit_wallpaper“ ist musterlos grau (wirkt wie Beton); (3) „worn_cracked_plaster“ an der Decke wirkt wie Kopfsteinpflaster
+- Änderungen: Innen-Verwitterung lokal 0,25 und ohne Flechten; neue CC0-Texturen: Raufaser beschädigt/Schimmel (ambientCG Wallpaper001B/002C), Deckenputz (Poly Haven plastered_wall_04); Streifentapete als Shader über Raufaser (4 verblasste Farbvarianten); abblätternde Farbe in 3 Tönen; alle Innen-Slots (Boden, Teppich, Fliesen, Wand, Decke) auf Innenmaterialien
+- Ergebnis (renders/test/phase64b_innen_bogen.png): Laden deutlich besser, Wohnzimmer besser (Tapete und Dielen sichtbar), Küche ohne Fenster → schwarz
+- Problem: Innen-Renders liegen an der Speichergrenze der Cloud (16 GB); Schlafzimmer-Render wurde beendet. Auf dem Mac (24 GB) unkritisch
+- Offen: Räume wirken leer/zu groß, Licht innen sehr dunkel, Küche/Bad-Einrichtung, Kleinkram/Schutt, Moos auf dem Ladenboden (Slot-Tausch jetzt eingetragen, Render steht aus)

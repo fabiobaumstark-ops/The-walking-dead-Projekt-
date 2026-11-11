@@ -315,6 +315,27 @@
    "id": "laminate_floor_02",
    "res": "2k",
    "_info": "Phase 6.4 Innenraeume"
+  },
+  {
+   "mat": "MAT_Innen_Raufaser",
+   "quelle": "ambientcg",
+   "id": "Wallpaper001B",
+   "res": "2k",
+   "_info": "Phase 6.4 Innen (Nutzer: Texturen innen schlecht)"
+  },
+  {
+   "mat": "MAT_Innen_Raufaser_Schimmel",
+   "quelle": "ambientcg",
+   "id": "Wallpaper002C",
+   "res": "2k",
+   "_info": "Phase 6.4 Innen (Nutzer: Texturen innen schlecht)"
+  },
+  {
+   "mat": "MAT_Innen_Decke_Putz",
+   "quelle": "polyhaven",
+   "id": "plastered_wall_04",
+   "res": "2k",
+   "_info": "Phase 6.4 Innen (Nutzer: Texturen innen schlecht)"
   }
  ],
  "hdris": [
