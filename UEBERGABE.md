@@ -57,6 +57,7 @@
   - Kirche und Lagerhalle noch ohne echte Fensteröffnungen
 
 ## Nächster konkreter Schritt
+- Nutzer macht auf dem Mac weiter: siehe WEITERMACHEN_MAC.md (Unreal 5.8 läuft, Metal-Toolchain installiert, Projekt „Viertel“ Blueprint angelegt; erster Import steht aus)
 0. Rückmeldung zu renders/test/phase64_innen_bogen.png abwarten, dann Punkte aus PROTOKOLL „6.4 Teil 2 … Offen“. Bau immer: `blender -b viertel_v10.blend --python scripts/phase6/innenraum.py -- --version NN`.
 0b. 6.4 Teil 2: Innen-Realismus (Nutzer: „Selber Realismus wie außen“) – siehe PROTOKOLL Phase 6.4 „Noch offen“. Gebäude immer mit `scripts/phase6/innenraum.py` aus v10 neu bauen (nicht aus v11), danach `begehbar.py` laufen lassen.
 1. Rückmeldung zum Unreal-Test abwarten (Screenshots Draufsicht/Spiel, fps, Output Log „VIERTEL“). Danach:
