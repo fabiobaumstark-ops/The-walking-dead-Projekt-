@@ -27,6 +27,7 @@ NANITE = True                   # Nanite auf dem Mac ist bei Epic "Beta" (Apple 
 NANITE_AB_FLAECHEN = 50000      # schwere Formen (Baeume, Gras, grosse Gebaeude)
 EINZEL_BIS = 8                  # bis zu so vielen Platzierungen: einzelne Actors, darueber Instanzen
 GRAS_AUSBLENDEN_CM = 9000       # Pflanzen-Instanzen ab dieser Entfernung ausblenden (Leistung)
+NEU_MESHES = globals().get("NEU_MESHES", NEU_IMPORT)  # True (ueber ue_meshes_neu.py): nur Meshes neu, Texturen/Materialien bleiben
 NUR_UMGEBUNG = globals().get("NUR_UMGEBUNG", False)  # True (ueber ue_umgebung.py): nur Sonne/Himmel/Dunst/Start neu setzen
 
 try:
@@ -53,9 +54,9 @@ def asset_name(s):
 
 
 # ------------------------------------------------------------------ Import-Hilfen
-def importieren(datei, ordner, name, optionen=None):
+def importieren(datei, ordner, name, optionen=None, neu=None):
     pfad = f"{ordner}/{name}"
-    if EAL.does_asset_exist(pfad) and not NEU_IMPORT:
+    if EAL.does_asset_exist(pfad) and not (NEU_IMPORT if neu is None else neu):
         return EAL.load_asset(pfad)
     t = unreal.AssetImportTask()
     t.set_editor_property("filename", datei)
@@ -393,7 +394,7 @@ def main():
                 return
             st.enter_progress_frame(1, name)
             try:
-                sm = importieren(os.path.join(QUELLE, form["datei"]), f"{ZIEL}/Meshes/{form['kategorie']}", name, opt)
+                sm = importieren(os.path.join(QUELLE, form["datei"]), f"{ZIEL}/Meshes/{form['kategorie']}", name, opt, NEU_MESHES)
                 if sm is None:
                     warn("Mesh-Import fehlgeschlagen", name)
                     continue

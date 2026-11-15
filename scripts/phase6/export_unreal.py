@@ -38,7 +38,8 @@ ZIEL = os.path.join(ROOT, args[args.index("--ziel") + 1]) if "--ziel" in args el
     os.path.join(ROOT, "export", "unreal_test" if TEST else "unreal")
 
 KONV = {"skala": 100.0, "spiegel_y": True, "roll": 1, "pitch": -1, "yaw": -1}
-WEG = ("FX_Dunst", "FX_Rauch", "FX_Flamme", "CAM_", "LGT_")  # Volumen/Kameras/Lichter nicht als Mesh
+WEG = ("FX_Dunst", "FX_Rauch", "FX_Flamme", "CAM_", "LGT_",  # Volumen/Kameras/Lichter nicht als Mesh
+       "BOD_Moosflaechen")  # Deckung nur prozedural (Rauschen) -> in Unreal volle gruene Flaechen; Moos spaeter im Mastermaterial
 MIN_FLAECHEN = 1
 
 
@@ -277,9 +278,12 @@ def main():
                 bmesh.ops.triangulate(bm, faces=[f for f in bm.faces if len(f.verts) > 4])
                 bm.to_mesh(me)
                 bm.free()
+            idx = [0] * len(me.polygons)  # materials.clear() setzt alle Flaechen auf Material 0 -> sichern
+            me.polygons.foreach_get("material_index", idx)
             me.materials.clear()
             for s in o.material_slots:
                 me.materials.append(s.material)
+            me.polygons.foreach_set("material_index", idx)
             nm = "SM_" + name_ue(key.split("|")[0][2:])
             basis, k = nm, 2
             while any(f and f["name"] == nm for f in formen.values()):
